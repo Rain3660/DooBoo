@@ -4,6 +4,7 @@
 	<div class="row-md-6">
 		<form>
 			<input type="text" placeholder="아이디">
+			<input type="password" placeholder="비밀번호">
 		</form>
 	</div>
 </div>
