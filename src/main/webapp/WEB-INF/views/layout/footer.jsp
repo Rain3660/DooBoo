@@ -1,3 +1,4 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <footer id="footer">
         <div class="container">
             <div class="row">
@@ -47,7 +48,7 @@
                         <p><a href="mailto:info@themewagon.com">info@themewagon.com</a></p>
                     </div>
                     <div class="col-md-6">
-                        <p class="text-right">© 2021 <a href="https://themewagon.com/">ThemeWagon.com</a></p>
+                        <p class="text-right">Â© 2021 <a href="https://themewagon.com/">ThemeWagon.com</a></p>
                     </div>
                 </div>
             </div>

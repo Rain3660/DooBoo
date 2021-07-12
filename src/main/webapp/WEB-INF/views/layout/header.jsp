@@ -1,5 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page session="false"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <html>
 <head>
 <!--[if lt IE 9]>
@@ -121,13 +122,13 @@
 <link rel="dns-prefetch" href="//fonts.googleapis.com">
 <link rel="dns-prefetch" href="//s.w.org">
 <link rel="alternate" type="application/rss+xml"
-	title="Free Bootstrap Themes &amp; Templates for Responsive HTML5 Websites » Feed"
+	title="Free Bootstrap Themes &amp; Templates for Responsive HTML5 Websites Â» Feed"
 	href="https://themewagon.com/feed/">
 <link rel="alternate" type="application/rss+xml"
-	title="Free Bootstrap Themes &amp; Templates for Responsive HTML5 Websites » Comments Feed"
+	title="Free Bootstrap Themes &amp; Templates for Responsive HTML5 Websites Â» Comments Feed"
 	href="https://themewagon.com/comments/feed/">
 <link rel="alternate" type="application/rss+xml"
-	title="Free Bootstrap Themes &amp; Templates for Responsive HTML5 Websites » Free HTML5 Theme Tag Feed"
+	title="Free Bootstrap Themes &amp; Templates for Responsive HTML5 Websites Â» Free HTML5 Theme Tag Feed"
 	href="https://themewagon.com/theme_tag/free/feed/">
 <script type="text/javascript">
 			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/themewagon.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.7.2"}};
@@ -1557,25 +1558,32 @@ iframe#_hjRemoteVarsFrame {
 					<meta itemprop="url" content="https://themewagon.com">
 					<form class="site-search" role="search" method="get"
 						action="https://themewagon.com/">
-						<input itemprop="query-input" type="search" name="s"
-							placeholder="" value="" required="">
-						<button type="submit" value="Search">
-						</button>
+						<div class="input-group mb-3">
+							<input type="text" class="form-control"
+								placeholder="검색어를 입력하세요"
+								aria-label="Recipient's username"
+								aria-describedby="button-addon2">
+							<button class="btn btn-outline-secondary" type="button"
+								id="button-addon2">Button</button>
+						</div>
 					</form>
 				</div>
 
 				<ul class="nav navbar-nav navbar-left">
-					<li class=""><a href="https://themewagon.com/submit-template/">Submit
-							a free template</a></li>
+					<li class="">
+						
+					</li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 
-					<li class=""><a href="/wagon_tickets"><i
-							class="fa fa-heart"></i>&nbsp;&nbsp;Support</a></li>
-					<li><a href="/blog">Blog</a></li>
-
-					<li class="login_menu"><a href="/user-login"><i
-							class="fa fa-lock"></i> Login</a></li>
+					<li class="">
+					<a href="/wagon_tickets"><i class="fa fa-heart"></i>회원가입</a>
+					</li>
+					<li>
+					<a href="/blog">로그인</a>
+					</li>
+					<li class="login_menu"><a href="/user-login"><i class="fa fa-lock"></i> 마이페이지</a>
+					</li>
 				</ul>
 			</div>
 			<!-- /.navbar-collapse -->
@@ -1588,40 +1596,24 @@ iframe#_hjRemoteVarsFrame {
 			<div class="container header-second-menu">
 				<ul class="nav nav-pills nav-centered">
 					<li id="menu-item-1769"
-						class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1769"><a
-						href="https://themewagon.com/themes/">All Templates</a></li>
-					<li id="menu-item-18800"
-						class="menu-item menu-item-type-taxonomy menu-item-object-theme_tag current-menu-item menu-item-18800"><a
-						href="https://themewagon.com/theme_tag/free/">Free</a></li>
+						class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1769">
+						<a href="https://themewagon.com/themes/">상품</a>
+					</li>
+					<li id="menu-item-1769"
+						class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1769">
+						<a href="https://themewagon.com/themes/">자유게시판</a>
+					</li>					
 					<li id="menu-item-1775"
 						class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1775"><a
-						href="https://themewagon.com/theme_tag/quality-checked/?ref=topNav">Quality
-							Checked</a></li>
+						href="https://themewagon.com/theme_tag/quality-checked/?ref=topNav">New</a></li>
 					<li id="menu-item-10166"
 						class="menu-item menu-item-type-taxonomy menu-item-object-theme_category menu-item-10166"><a
 						href="https://themewagon.com/theme-categories/premium-templates/">Popular
-							Items</a></li>
+							</a></li>
 					<li id="menu-item-49758"
 						class="menu-item menu-item-type-custom menu-item-object-custom menu-item-49758"><a
-						href="https://themewagon.com/themes/?sortby=download">Most
-							Downloaded</a></li>
-					<li id="menu-item-89792"
-						class="menu-item menu-item-type-taxonomy menu-item-object-theme_tag menu-item-89792"><a
-						href="https://themewagon.com/theme_tag/bootstrap-5/">Bootstrap
-							5</a></li>
-					<li id="menu-item-1779"
-						class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1779"><a
-						href="https://themewagon.com/theme_tag/tailwind-css/">Tailwind</a></li>
-					<li id="menu-item-47894"
-						class="menu-item menu-item-type-taxonomy menu-item-object-theme_category menu-item-47894"><a
-						href="https://themewagon.com/theme-categories/admin-dashboard/">Admin
-							&amp; Dashboard</a></li>
-					<li id="menu-item-1780"
-						class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1780"><a
-						href="https://themewagon.com/theme-categories/personal/">Personal</a></li>
-					<li id="menu-item-70048"
-						class="badge menu-item menu-item-type-custom menu-item-object-custom menu-item-70048"><a
-						href="https://themewagon.com/themes/bundle/">Bundle – 80% OFF</a></li>
+						href="https://themewagon.com/themes/?sortby=download">F&Q
+							</a></li>
 				</ul>
 			</div>
 		</div>
