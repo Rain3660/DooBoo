@@ -91,8 +91,7 @@
 
 
 <!-- This site is optimized with the Yoast SEO plugin v4.3 - https://yoast.com/wordpress/plugins/seo/ -->
-<title>1000+ Free Bootstrap HTML5 CSS3 Website Templates | High
-	Quality Web Templates</title>
+<title>Welcome DooBoo-Market</title>
 <meta name="description"
 	content="Searching for high-quality free demo HTML5 website templates? Download responsive HTML5 CSS3 website templates &amp; Bootstrap themes. Free for commercial use.">
 <meta name="robots" content="noodp">
@@ -1578,12 +1577,12 @@ iframe#_hjRemoteVarsFrame {
 				<ul class="nav navbar-nav navbar-right">
 
 					<li class="">
-					<a href="/wagon_tickets"><i class="fa fa-heart"></i>회원가입</a>
+					<a href="#"><i class="fa fa-heart"></i>회원가입</a>
 					</li>
 					<li>
-					<a href="/blog">로그인</a>
+					<a href="#">로그인</a>
 					</li>
-					<li class="login_menu"><a href="/user-login"><i class="fa fa-lock"></i> 마이페이지</a>
+					<li class="login_menu"><a href="#"><i class="fa fa-lock"></i> 마이페이지</a>
 					</li>
 				</ul>
 			</div>
@@ -1598,22 +1597,22 @@ iframe#_hjRemoteVarsFrame {
 				<ul class="nav nav-pills nav-centered">
 					<li id="menu-item-1769"
 						class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1769">
-						<a href="https://themewagon.com/themes/">상품</a>
+						<a href="#">상품</a>
 					</li>
 					<li id="menu-item-1769"
 						class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1769">
-						<a href="https://themewagon.com/themes/">자유게시판</a>
+						<a href="#">자유게시판</a>
 					</li>					
 					<li id="menu-item-1775"
 						class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1775"><a
-						href="https://themewagon.com/theme_tag/quality-checked/?ref=topNav">New</a></li>
+						href="#">New</a></li>
 					<li id="menu-item-10166"
 						class="menu-item menu-item-type-taxonomy menu-item-object-theme_category menu-item-10166"><a
-						href="https://themewagon.com/theme-categories/premium-templates/">Popular
+						href="#">Popular
 							</a></li>
 					<li id="menu-item-49758"
 						class="menu-item menu-item-type-custom menu-item-object-custom menu-item-49758"><a
-						href="https://themewagon.com/themes/?sortby=download">F&Q
+						href="#">F&Q
 							</a></li>
 					<li id="menu-item-49758"
 						class="menu-item menu-item-type-custom menu-item-object-custom menu-item-49758"><a
