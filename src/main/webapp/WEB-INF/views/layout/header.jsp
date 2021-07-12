@@ -177,8 +177,9 @@ img.wp-smiley, img.emoji {
 <link rel="stylesheet" id="rich-reviews-css"
 	href="https://themewagon.com/wp-content/plugins/rich-reviews/css/rich-reviews.css?ver=4.7.2"
 	type="text/css" media="all">
-<script type="text/javascript"
-	src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js?ver=2.1.3"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+	integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+	crossorigin="anonymous"></script>
 <script type="text/javascript">
 /* <![CDATA[ */
 var edd_scripts = {"ajaxurl":"https:\/\/themewagon.com\/wp-admin\/admin-ajax.php","position_in_cart":"","has_purchase_links":"","already_in_cart_message":"You have already added this item to your cart","empty_cart_message":"Your cart is empty","loading":"Loading","select_option":"Please select an option","ajax_loader":"\/wp-content\/plugins\/easy-digital-downloads\/assets\/images\/loading.gif","is_checkout":"0","default_gateway":"stripe_checkout","redirect_to_checkout":"0","checkout_page":"https:\/\/themewagon.com\/checkout\/","permalinks":"1","quantities_enabled":"","taxes_enabled":"0"};
@@ -1613,6 +1614,10 @@ iframe#_hjRemoteVarsFrame {
 					<li id="menu-item-49758"
 						class="menu-item menu-item-type-custom menu-item-object-custom menu-item-49758"><a
 						href="https://themewagon.com/themes/?sortby=download">F&Q
+							</a></li>
+					<li id="menu-item-49758"
+						class="menu-item menu-item-type-custom menu-item-object-custom menu-item-49758"><a
+						 href="#" onclick="location.href = 'chat'">1:1대화함
 							</a></li>
 				</ul>
 			</div>
