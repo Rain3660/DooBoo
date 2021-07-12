@@ -5,4 +5,129 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="com.koreait.dooboo.communityboard.dao.CommunityBoardDAO">
 
+<sql id="boardColumns">
+		  COMMUNITYBOARD_NO
+		, COMMUNITYBOARD_TITLE
+		, COMMUNITYBOARD_CONTENT
+		, MEMBER_NO
+		, REGDATE
+		, LASTMODIFIED
+		, HIT
+		, NICKNAME
+	</sql>
+
+	<insert id="insertBoard" parameterType="com.koreait.dooboo.communityboard.dao.CommunityBoardDAO">
+		INSERT INTO COMMUNITYBOARD (
+			  COMMUNITYBOARD_TITLE
+			, COMMUNITYBOARD_CONTENT
+			, MEMBER_NO
+			, REGDATE
+			, LASTMODIFIED
+			, HIT
+			, NICKNAME
+		) VALUES (
+			  #{communityboardTitle}
+			, #{communityboardContent}
+			, #{memberNo}
+			, NOW()
+			, NOW()
+			, 0
+			, #{nickname}
+		)
+	</insert>
+
+	<select id="selectBoardDetail" parameterType="integer" resultType="com.koreait.dooboo.communityboard.dao.CommunityBoardDAO">
+		SELECT
+			  COMMUNITYBOARD_NO
+			, COMMUNITYBOARD_TITLE
+			, COMMUNITYBOARD_CONTENT
+			, MEMBER_NO
+			, REGDATE
+			, LASTMODIFIED
+			, HIT
+			, NICKNAME
+			
+		FROM
+			COMMUNITYBOARD
+		WHERE
+			COMMUNITYBOARD_NO = #{communityboardNo}
+	</select>
+
+	<update id="updateBoard" parameterType="com.koreait.dooboo.communityboard.dao.CommunityBoardDAO">
+		UPDATE COMMUNITYBOARD
+		SET
+			  LASTMODIFIED = NOW()
+			, COMMUNITYBOARD_TITLE = #{communityboardTitle}
+			, COMMUNITYBOARD_CONTENT = #{communityboardContent}
+			, NICKNAME = #{nickname}
+		WHERE
+			COMMUNITYBOARD_NO = #{communityboardNo}
+	</update>
+
+	<delete id="deleteBoard" parameterType="com.koreait.dooboo.communityboard.dao.CommunityBoardDAO">
+		DELETE 	COMMUNITYBOARD
+		  FROM
+			 	COMMUNITYBOARD
+		 WHERE
+				COMMUNITYBOARD_NO = #{communityboardNo}
+	</delete>
+
+	<select id="selectBoardList" parameterType="com.koreait.dooboo.communityboard.dao.CommunityBoardDAO" resultType="com.koreait.dooboo.communityboard.dao.CommunityBoardDAO">
+		SELECT
+			row_number() over(order by COMMUNITYBOARD_NO asc) as rownum , b.*
+		FROM
+			COMMUNITYBOARD b
+		WHERE
+			<if test="searchType != '' and searchType != null">
+				<if test="searchKeyword != '' and searchKeyword != null">
+					<if test="searchType == 'title' ">
+					 	AND COMMUNITYBOARD_TITLE like concat('%',#{searchKeyword},'%')
+					 </if>
+					<if test="searchType == 'regId' ">
+						AND NICKNAME like concat('%',#{searchKeyword},'%')
+					</if>
+					<if test="searchType == 'redDate' ">
+						AND REGDATE like concat('%',#{searchKeyword},'%')
+					</if>
+				</if>
+			</if>
+		ORDER BY
+			COMMUNITYBOARD_NO DESC,
+			REGDATE DESC
+		LIMIT
+			#{startPage}, #{recordsPerPage}
+	</select>
+
+	
+	<update id="updateHit" parameterType="Integer">
+		UPDATE
+			COMMUNITYBOARD 
+		SET 
+			HIT = HIT + 1
+		WHERE
+			COMMUNITYBOARD_NO = #{communityboardNo}
+	</update>
+
+	<select id="selectBoardTotalCount" parameterType="com.koreait.dooboo.communityboard.dao.CommunityBoardDAO" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			COMMUNITYBOARD
+		WHERE
+			<if test="searchType != '' and searchType != null">
+				<if test="searchKeyword != '' and searchKeyword != null">
+					<if test="searchType == 'title' ">
+					 	AND COMMUNITYBOARD_TITLE like concat('%',#{searchKeyword},'%')
+					 </if>
+					<if test="searchType == 'regId' ">
+						AND NICKNAME like concat('%',#{searchKeyword},'%')
+					</if>
+					<if test="searchType == 'redDate' ">
+						AND REGDATE like concat('%',#{searchKeyword},'%')
+					</if>
+				</if>
+			</if>
+	</select>
+
+
 </mapper>

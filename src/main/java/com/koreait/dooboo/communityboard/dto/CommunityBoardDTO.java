@@ -1,92 +1,94 @@
 package com.koreait.dooboo.communityboard.dto;
-
 import java.sql.Date;
 
 public class CommunityBoardDTO {
-	private long communityBoardNo;
-	private String communityBoardTitle;
-	private String communityBoardContent;
-	private long memberNo;
-	private Date regdate;
-	private Date lastmodified;
-	private int hit;
-	private String nickname;
-	
-	public CommunityBoardDTO() {
-		// TODO Auto-generated constructor stub
-	}
 
-	public long getCommunityBoardNo() {
-		return communityBoardNo;
-	}
+    // 게시판번호 1부터 시작
+    private long boardNo;
 
-	public void setCommunityBoardNo(long communityBoardNo) {
-		this.communityBoardNo = communityBoardNo;
-	}
+    // 글제목 
+    private String title;
 
-	public String getCommunityBoardTitle() {
-		return communityBoardTitle;
-	}
+    // 내용 
+    private String content;
 
-	public void setCommunityBoardTitle(String communityBoardTitle) {
-		this.communityBoardTitle = communityBoardTitle;
-	}
+    // 조회수 
+    private int hit;
 
-	public String getCommunityBoardContent() {
-		return communityBoardContent;
-	}
+    // 등록자 
+    private int regNo;
 
-	public void setCommunityBoardContent(String communityBoardContent) {
-		this.communityBoardContent = communityBoardContent;
-	}
+    // 수정자 
+    private int modNo;
 
-	public long getMemberNo() {
-		return memberNo;
-	}
+    // 등록일 
+    private Date regDate;
 
-	public void setMemberNo(long memberNo) {
-		this.memberNo = memberNo;
-	}
+    // 수정일 
+    private Date modDate;
 
-	public Date getRegdate() {
-		return regdate;
-	}
+    public long getBoardNo() {
+        return boardNo;
+    }
 
-	public void setRegdate(Date regdate) {
-		this.regdate = regdate;
-	}
+    public void setBoardNo(long boardNo) {
+        this.boardNo = boardNo;
+    }
 
-	public Date getLastmodified() {
-		return lastmodified;
-	}
+    public String getTitle() {
+        return title;
+    }
 
-	public void setLastmodified(Date lastmodified) {
-		this.lastmodified = lastmodified;
-	}
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-	public int getHit() {
-		return hit;
-	}
+    public String getContent() {
+        return content;
+    }
 
-	public void setHit(int hit) {
-		this.hit = hit;
-	}
+    public void setContent(String content) {
+        this.content = content;
+    }
 
-	public String getNickname() {
-		return nickname;
-	}
+    public int getHit() {
+        return hit;
+    }
 
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
-	}
+    public void setHit(int hit) {
+        this.hit = hit;
+    }
 
-	@Override
-	public String toString() {
-		return "CommunityBoardDTO [communityBoardNo=" + communityBoardNo + ", communityBoardTitle="
-				+ communityBoardTitle + ", communityBoardContent=" + communityBoardContent + ", memberNo=" + memberNo
-				+ ", regdate=" + regdate + ", lastmodified=" + lastmodified + ", hit=" + hit + ", nickname=" + nickname
-				+ "]";
-	}
-	
-	
+    public int getRegNo() {
+        return regNo;
+    }
+
+    public void setRegNo(int regNo) {
+        this.regNo = regNo;
+    }
+
+    public int getModNo() {
+        return modNo;
+    }
+
+    public void setModNo(int modNo) {
+        this.modNo = modNo;
+    }
+
+    public Date getRegDate() {
+        return regDate;
+    }
+
+    public void setRegDate(Date regDate) {
+        this.regDate = regDate;
+    }
+
+    public Date getModDate() {
+        return modDate;
+    }
+
+    public void setModDate(Date modDate) {
+        this.modDate = modDate;
+    }
+
 }

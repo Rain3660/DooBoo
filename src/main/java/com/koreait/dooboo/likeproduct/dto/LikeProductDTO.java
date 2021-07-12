@@ -1,43 +1,39 @@
 package com.koreait.dooboo.likeproduct.dto;
+import java.sql.Date;
 
+// 좋아요 테이블
 public class LikeProductDTO {
-	private long likeProductNo;
-	private long productNo;
-	private long memberNo;
-	
-	public LikeProductDTO() {
-		// TODO Auto-generated constructor stub
-	}
 
-	public long getLikeProductNo() {
-		return likeProductNo;
-	}
+    // 상품번호 
+    private long productNo;
 
-	public void setLikeProductNo(long likeProductNo) {
-		this.likeProductNo = likeProductNo;
-	}
+    // 등록자 회원번호
+    private long regNo;
 
-	public long getProductNo() {
-		return productNo;
-	}
+    // 등록일 등록일
+    private Date regDate;
 
-	public void setProductNo(long productNo) {
-		this.productNo = productNo;
-	}
+    public long getProductNo() {
+        return productNo;
+    }
 
-	public long getMemberNo() {
-		return memberNo;
-	}
+    public void setProductNo(long productNo) {
+        this.productNo = productNo;
+    }
 
-	public void setMemberNo(long memberNo) {
-		this.memberNo = memberNo;
-	}
+    public long getRegNo() {
+        return regNo;
+    }
 
-	@Override
-	public String toString() {
-		return "LikeProductDTO [likeProductNo=" + likeProductNo + ", productNo=" + productNo + ", memberNo=" + memberNo
-				+ "]";
-	}
-	
-	
+    public void setRegNo(long regNo) {
+        this.regNo = regNo;
+    }
+
+    public Date getRegDate() {
+        return regDate;
+    }
+
+    public void setRegDate(Date regDate) {
+        this.regDate = regDate;
+    }
 }

@@ -3,126 +3,147 @@ package com.koreait.dooboo.product.dto;
 import java.sql.Date;
 
 public class ProductDTO {
-	private long productNo;
-	private String productTitle;
-	private int price;
-	private int hit;
-	private String productContent;
-	private String nickname;
-	private Date postdate;
-	private Date lastmodified;
-	private int productOnsale;
-	private String productCity;
-	private String productRegion;
-	private String productLocation;
-	
-	public ProductDTO() {
-		// TODO Auto-generated constructor stub
-	}
 
-	public long getProductNo() {
-		return productNo;
-	}
+    // 상품번호 100 부터 시작
+    private long productNo;
 
-	public void setProductNo(long productNo) {
-		this.productNo = productNo;
-	}
+    // 상품제목 
+    private String title;
 
-	public String getProductTitle() {
-		return productTitle;
-	}
+    // 상품가격 
+    private int price;
 
-	public void setProductTitle(String productTitle) {
-		this.productTitle = productTitle;
-	}
+    // 조회수 
+    private int hit;
 
-	public int getPrice() {
-		return price;
-	}
+    // 상품내용 
+    private String content;
 
-	public void setPrice(int price) {
-		this.price = price;
-	}
+    // 상품상태 1 : 판매중 , 0 : 판매완료
+    private int status;
 
-	public int getHit() {
-		return hit;
-	}
+    // 상품위치(시) ex)서울특별시
+    private String city;
 
-	public void setHit(int hit) {
-		this.hit = hit;
-	}
+    // 상품위치(구) ex)마포구
+    private String region;
 
-	public String getProductContent() {
-		return productContent;
-	}
+    // 상품위치(상세주소) ex)서강로136 3층
+    private String location;
 
-	public void setProductContent(String productContent) {
-		this.productContent = productContent;
-	}
+    // 등록자 회원번호
+    private long regNo;
 
-	public String getNickname() {
-		return nickname;
-	}
+    // 수정자 회원번호
+    private long modNo;
 
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
-	}
+    // 등록일 등록일
+    private Date regDate;
 
-	public Date getPostdate() {
-		return postdate;
-	}
+    // 수정일 수정일
+    private Date modDate;
 
-	public void setPostdate(Date postdate) {
-		this.postdate = postdate;
-	}
+    public long getProductNo() {
+        return productNo;
+    }
 
-	public Date getLastmodified() {
-		return lastmodified;
-	}
+    public void setProductNo(long productNo) {
+        this.productNo = productNo;
+    }
 
-	public void setLastmodified(Date lastmodified) {
-		this.lastmodified = lastmodified;
-	}
+    public String getTitle() {
+        return title;
+    }
 
-	public int getProductOnsale() {
-		return productOnsale;
-	}
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-	public void setProductOnsale(int productOnsale) {
-		this.productOnsale = productOnsale;
-	}
+    public int getPrice() {
+        return price;
+    }
 
-	public String getProductCity() {
-		return productCity;
-	}
+    public void setPrice(int price) {
+        this.price = price;
+    }
 
-	public void setProductCity(String productCity) {
-		this.productCity = productCity;
-	}
+    public int getHit() {
+        return hit;
+    }
 
-	public String getProductRegion() {
-		return productRegion;
-	}
+    public void setHit(int hit) {
+        this.hit = hit;
+    }
 
-	public void setProductRegion(String productRegion) {
-		this.productRegion = productRegion;
-	}
+    public String getContent() {
+        return content;
+    }
 
-	public String getProductLocation() {
-		return productLocation;
-	}
+    public void setContent(String content) {
+        this.content = content;
+    }
 
-	public void setProductLocation(String productLocation) {
-		this.productLocation = productLocation;
-	}
+    public int getStatus() {
+        return status;
+    }
 
-	@Override
-	public String toString() {
-		return "ProductDTO [productNo=" + productNo + ", productTitle=" + productTitle + ", price=" + price + ", hit="
-				+ hit + ", productContent=" + productContent + ", nickname=" + nickname + ", postdate=" + postdate
-				+ ", lastmodified=" + lastmodified + ", productOnsale=" + productOnsale + ", productCity=" + productCity
-				+ ", productRegion=" + productRegion + ", productLocation=" + productLocation + "]";
-	}
-	
-	
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getRegion() {
+        return region;
+    }
+
+    public void setRegion(String region) {
+        this.region = region;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public long getRegNo() {
+        return regNo;
+    }
+
+    public void setRegNo(long regNo) {
+        this.regNo = regNo;
+    }
+
+    public long getModNo() {
+        return modNo;
+    }
+
+    public void setModNo(long modNo) {
+        this.modNo = modNo;
+    }
+
+    public Date getRegDate() {
+        return regDate;
+    }
+
+    public void setRegDate(Date regDate) {
+        this.regDate = regDate;
+    }
+
+    public Date getModDate() {
+        return modDate;
+    }
+
+    public void setModDate(Date modDate) {
+        this.modDate = modDate;
+    }
 }
