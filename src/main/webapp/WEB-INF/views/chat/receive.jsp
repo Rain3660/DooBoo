@@ -1,37 +1,57 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width">
-        <title>구매자와 대화하기</title>
-        
-    </head>
-    <body>
-        <table class="display">
-            <tr>
-                <td class="title">Status:</td>
-                <td class="title">Messages:</td>
-            </tr>
-            <tr>
-                <td>
-                    <div id="receiver-id" style="font-weight: bold;" title="Copy this ID to the input on send.html.">ID:</div>
-                </td>
-                <td>
-                    <input type="text" id="sendMessageBox" placeholder="Enter a message..." autofocus="true" />
-                    <button type="button" id="sendButton">Send</button>
-                    <button type="button" id="clearMsgsButton">대화내역 초기화</button>
-                </td>
-            </tr>
-            <tr>
-                <td><div id="status" class="status"></div></td>
-                <td><div class="message" id="message"></div></td>
-            </tr>
-        </table>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width">
+<title>구매자와 대화하기</title>
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+	integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+	crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+	integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+	integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"
+	integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF"
+	crossorigin="anonymous"></script>
+</head>
+<body>
+	<table class="display">
+		<tr>
+			<td class="title">Status:</td>
+			<td class="title">Messages:</td>
+		</tr>
+		<tr>
+			<td>
+				<div id="receiver-id" style="font-weight: bold;"
+					title="Copy this ID to the input on send.html.">ID:</div>
+			</td>
+			<td><input type="text" id="sendMessageBox"
+				placeholder="Enter a message..." autofocus="true" />
+				<button type="button" id="sendButton">Send</button>
+				<button type="button" id="clearMsgsButton">대화내역 초기화</button></td>
+		</tr>
+		<tr>
+			<td><div id="status" class="status"></div></td>
+			<td><div class="message" id="message"></div></td>
+		</tr>
+	</table>
+		<div class="container bg-light">
+			<h1>대화를 진행해 보세요 !</h1>
+			<div id="chat_box">
+				
+			</div>
+		</div>
 
-        <script src="https://unpkg.com/peerjs@1.3.1/dist/peerjs.min.js"></script>
-        <script type="text/javascript">
+	<script src="https://unpkg.com/peerjs@1.3.1/dist/peerjs.min.js"></script>
+	<script type="text/javascript">
             (function () {
 
                 var lastPeerId = null;
@@ -55,9 +75,10 @@
                  * Sets up callbacks that handle any events related to our
                  * peer object.
                  */
+                 // (receive) peer 를 생성한다. null 자리에 판매자 아이디
                  function initialize() {
                     // Create own peer object with connection to shared PeerJS server
-                   		peer = new Peer(null, {
+                   		peer = new Peer('seller', {
                         debug: 2
                     });
 
@@ -92,7 +113,7 @@
                     peer.on('disconnected', function () {
                         status.innerHTML = "Connection lost. Please reconnect";
                         console.log('Connection lost. Please reconnect');
-
+	
                         // Workaround for peer.reconnect deleting previous id
                         peer.id = lastPeerId;
                         peer._lastServerId = lastPeerId;
@@ -136,6 +157,9 @@
                                 break;
                             default:
                                 addMessage("<span class=\"peerMsg\">Peer: </span>" + data);
+                            	// 상대방이 보낸 메세지가 왼쪽에 떠야한다!!!!
+                          		$('#chat_box').append('<div class="float-left">' + conn.peer + ':'  + data +  '</div>');
+                          		$('#chat_box').append('<br>');
                                 break;
                         };
                     });
@@ -195,12 +219,13 @@
                     };
 
                     message.innerHTML = "<br><span class=\"msg-time\">" + h + ":" + m + ":" + s + "</span>  -  " + msg + message.innerHTML;
+                  
                 }
 
                 function clearMessages() {
                     message.innerHTML = "";
                     addMessage("Msgs cleared");
-                }
+                } 
 
                 // Listen for enter in message box
                 sendMessageBox.addEventListener('keypress', function (e) {
@@ -217,6 +242,9 @@
                         conn.send(msg);
                         console.log("Sent: " + msg)
                         addMessage("<span class=\"selfMsg\">Self: </span>" + msg);
+                        // 내가 보낸 메세지가 오른쪽에 떠야한다 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                        $('#chat_box').append('<div class="float-right">' + peer.id + ':' + msg +  '</div>');
+                        $('#chat_box').append('<br>');                        
                     } else {
                         console.log('Connection is closed');
                     }
@@ -228,5 +256,5 @@
                 initialize();
             })();
         </script>
-    </body>
+</body>
 </html>
