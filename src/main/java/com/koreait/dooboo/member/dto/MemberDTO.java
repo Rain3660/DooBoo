@@ -3,182 +3,194 @@ package com.koreait.dooboo.member.dto;
 import java.sql.Date;
 
 public class MemberDTO {
-	private long memberNo;
-	private String memberName;
-	private String memberPhone;
-	private String memberId;
-	private String memberPw;
-	private String memberEmail;
-	private String nickname;
-	private char memberGender;
-	private Date regdate;
-	private Date memberOutdate;
-	private int memberStatus;
-	private String memberCity;
-	private String memberRegion;
-	private String memberLocation;
-	private Date lastmodified;
-	private String birthDay;
-	private String birthMonth;
-	private String birthYear;
-	
-	public MemberDTO() {
-		// TODO Auto-generated constructor stub
-	}
+	public class Member {
 
-	public long getMemberNo() {
-		return memberNo;
-	}
+	    // 회원번호 1000부터 시작
+	    private long memberNo;
 
-	public void setMemberNo(long memberNo) {
-		this.memberNo = memberNo;
-	}
+	    // 이름 
+	    private String name;
 
-	public String getMemberName() {
-		return memberName;
-	}
+	    // 연락처 
+	    private String phone;
 
-	public void setMemberName(String memberName) {
-		this.memberName = memberName;
-	}
+	    // 아이디 
+	    private String memberId;
 
-	public String getMemberPhone() {
-		return memberPhone;
-	}
+	    // 비밀번호 
+	    private String password;
 
-	public void setMemberPhone(String memberPhone) {
-		this.memberPhone = memberPhone;
-	}
+	    // 이메일 
+	    private String email;
 
-	public String getMemberId() {
-		return memberId;
-	}
+	    // 닉네임 
+	    private String nickname;
 
-	public void setMemberId(String memberId) {
-		this.memberId = memberId;
-	}
+	    // 성별 
+	    private String gender;
 
-	public String getMemberPw() {
-		return memberPw;
-	}
+	    // 가입일자 
+	    private Date regdate;
 
-	public void setMemberPw(String memberPw) {
-		this.memberPw = memberPw;
-	}
+	    // 탈퇴날짜 
+	    private Date outdate;
 
-	public String getMemberEmail() {
-		return memberEmail;
-	}
+	    // 회원상태 탈퇴 여부
+	    private int status;
 
-	public void setMemberEmail(String memberEmail) {
-		this.memberEmail = memberEmail;
-	}
+	    // 주소(시) ex)서울특별시
+	    private String city;
 
-	public String getNickname() {
-		return nickname;
-	}
+	    // 주소(구) ex)마포구
+	    private String region;
 
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
-	}
+	    // 상세주소 ex)서강로136 3층
+	    private String location;
 
-	public char getMemberGender() {
-		return memberGender;
-	}
+	    // 생일 문자열입니다
+	    private String birthday;
 
-	public void setMemberGender(char memberGender) {
-		this.memberGender = memberGender;
-	}
+	    // 등록일 
+	    private Date regDate;
 
-	public Date getRegdate() {
-		return regdate;
-	}
+	    // 수정일 
+	    private Date modDate;
 
-	public void setRegdate(Date regdate) {
-		this.regdate = regdate;
-	}
+		public long getMemberNo() {
+			return memberNo;
+		}
 
-	public Date getMemberOutdate() {
-		return memberOutdate;
-	}
+		public void setMemberNo(long memberNo) {
+			this.memberNo = memberNo;
+		}
 
-	public void setMemberOutdate(Date memberOutdate) {
-		this.memberOutdate = memberOutdate;
-	}
+		public String getName() {
+			return name;
+		}
 
-	public int getMemberStatus() {
-		return memberStatus;
-	}
+		public void setName(String name) {
+			this.name = name;
+		}
 
-	public void setMemberStatus(int memberStatus) {
-		this.memberStatus = memberStatus;
-	}
+		public String getPhone() {
+			return phone;
+		}
 
-	public String getMemberCity() {
-		return memberCity;
-	}
+		public void setPhone(String phone) {
+			this.phone = phone;
+		}
 
-	public void setMemberCity(String memberCity) {
-		this.memberCity = memberCity;
-	}
+		public String getMemberId() {
+			return memberId;
+		}
 
-	public String getMemberRegion() {
-		return memberRegion;
-	}
+		public void setMemberId(String memberId) {
+			this.memberId = memberId;
+		}
 
-	public void setMemberRegion(String memberRegion) {
-		this.memberRegion = memberRegion;
-	}
+		public String getPassword() {
+			return password;
+		}
 
-	public String getMemberLocation() {
-		return memberLocation;
-	}
+		public void setPassword(String password) {
+			this.password = password;
+		}
 
-	public void setMemberLocation(String memberLocation) {
-		this.memberLocation = memberLocation;
-	}
+		public String getEmail() {
+			return email;
+		}
 
-	public Date getLastmodified() {
-		return lastmodified;
-	}
+		public void setEmail(String email) {
+			this.email = email;
+		}
 
-	public void setLastmodified(Date lastmodified) {
-		this.lastmodified = lastmodified;
-	}
+		public String getNickname() {
+			return nickname;
+		}
 
-	public String getBirthDay() {
-		return birthDay;
-	}
+		public void setNickname(String nickname) {
+			this.nickname = nickname;
+		}
 
-	public void setBirthDay(String birthDay) {
-		this.birthDay = birthDay;
-	}
+		public String getGender() {
+			return gender;
+		}
 
-	public String getBirthMonth() {
-		return birthMonth;
-	}
+		public void setGender(String gender) {
+			this.gender = gender;
+		}
 
-	public void setBirthMonth(String birthMonth) {
-		this.birthMonth = birthMonth;
-	}
+		public Date getRegdate() {
+			return regdate;
+		}
 
-	public String getBirthYear() {
-		return birthYear;
-	}
+		public void setRegdate(Date regdate) {
+			this.regdate = regdate;
+		}
 
-	public void setBirthYear(String birthYear) {
-		this.birthYear = birthYear;
-	}
+		public Date getOutdate() {
+			return outdate;
+		}
 
-	@Override
-	public String toString() {
-		return "MemberDTO [memberNo=" + memberNo + ", memberName=" + memberName + ", memberPhone=" + memberPhone
-				+ ", memberId=" + memberId + ", memberPw=" + memberPw + ", memberEmail=" + memberEmail + ", nickname="
-				+ nickname + ", memberGender=" + memberGender + ", regdate=" + regdate + ", memberOutdate="
-				+ memberOutdate + ", memberStatus=" + memberStatus + ", memberCity=" + memberCity + ", memberRegion="
-				+ memberRegion + ", memberLocation=" + memberLocation + ", lastmodified=" + lastmodified + ", birthDay="
-				+ birthDay + ", birthMonth=" + birthMonth + ", birthYear=" + birthYear + "]";
-	}
-	
-	
+		public void setOutdate(Date outdate) {
+			this.outdate = outdate;
+		}
+
+		public int getStatus() {
+			return status;
+		}
+
+		public void setStatus(int status) {
+			this.status = status;
+		}
+
+		public String getCity() {
+			return city;
+		}
+
+		public void setCity(String city) {
+			this.city = city;
+		}
+
+		public String getRegion() {
+			return region;
+		}
+
+		public void setRegion(String region) {
+			this.region = region;
+		}
+
+		public String getLocation() {
+			return location;
+		}
+
+		public void setLocation(String location) {
+			this.location = location;
+		}
+
+		public String getBirthday() {
+			return birthday;
+		}
+
+		public void setBirthday(String birthday) {
+			this.birthday = birthday;
+		}
+
+		public Date getRegDate() {
+			return regDate;
+		}
+
+		public void setRegDate(Date regDate) {
+			this.regDate = regDate;
+		}
+
+		public Date getModDate() {
+			return modDate;
+		}
+
+		public void setModDate(Date modDate) {
+			this.modDate = modDate;
+		}
+
+	}   
 }
