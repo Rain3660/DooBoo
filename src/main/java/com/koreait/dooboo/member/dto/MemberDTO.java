@@ -50,168 +50,147 @@ public class MemberDTO {
 	    // 생일 문자열입니다
 	    private String birthday;
 
-	    // 생월 
-	    private String birthMonth;
-
-	    // 생년 
-	    private String birthYear;
-
 	    // 등록일 
 	    private Date regDate;
 
 	    // 수정일 
 	    private Date modDate;
 
-	    public long getMemberNo() {
-	        return memberNo;
-	    }
+		public long getMemberNo() {
+			return memberNo;
+		}
 
-	    public void setMemberNo(long memberNo) {
-	        this.memberNo = memberNo;
-	    }
+		public void setMemberNo(long memberNo) {
+			this.memberNo = memberNo;
+		}
 
-	    public String getName() {
-	        return name;
-	    }
+		public String getName() {
+			return name;
+		}
 
-	    public void setName(String name) {
-	        this.name = name;
-	    }
+		public void setName(String name) {
+			this.name = name;
+		}
 
-	    public String getPhone() {
-	        return phone;
-	    }
+		public String getPhone() {
+			return phone;
+		}
 
-	    public void setPhone(String phone) {
-	        this.phone = phone;
-	    }
+		public void setPhone(String phone) {
+			this.phone = phone;
+		}
 
-	    public String getMemberId() {
-	        return memberId;
-	    }
+		public String getMemberId() {
+			return memberId;
+		}
 
-	    public void setMemberId(String memberId) {
-	        this.memberId = memberId;
-	    }
+		public void setMemberId(String memberId) {
+			this.memberId = memberId;
+		}
 
-	    public String getPassword() {
-	        return password;
-	    }
+		public String getPassword() {
+			return password;
+		}
 
-	    public void setPassword(String password) {
-	        this.password = password;
-	    }
+		public void setPassword(String password) {
+			this.password = password;
+		}
 
-	    public String getEmail() {
-	        return email;
-	    }
+		public String getEmail() {
+			return email;
+		}
 
-	    public void setEmail(String email) {
-	        this.email = email;
-	    }
+		public void setEmail(String email) {
+			this.email = email;
+		}
 
-	    public String getNickname() {
-	        return nickname;
-	    }
+		public String getNickname() {
+			return nickname;
+		}
 
-	    public void setNickname(String nickname) {
-	        this.nickname = nickname;
-	    }
+		public void setNickname(String nickname) {
+			this.nickname = nickname;
+		}
 
-	    public String getGender() {
-	        return gender;
-	    }
+		public String getGender() {
+			return gender;
+		}
 
-	    public void setGender(String gender) {
-	        this.gender = gender;
-	    }
+		public void setGender(String gender) {
+			this.gender = gender;
+		}
 
-	    public Date getRegdate() {
-	        return regdate;
-	    }
+		public Date getRegdate() {
+			return regdate;
+		}
 
-	    public void setRegdate(Date regdate) {
-	        this.regdate = regdate;
-	    }
+		public void setRegdate(Date regdate) {
+			this.regdate = regdate;
+		}
 
-	    public Date getOutdate() {
-	        return outdate;
-	    }
+		public Date getOutdate() {
+			return outdate;
+		}
 
-	    public void setOutdate(Date outdate) {
-	        this.outdate = outdate;
-	    }
+		public void setOutdate(Date outdate) {
+			this.outdate = outdate;
+		}
 
-	    public int getStatus() {
-	        return status;
-	    }
+		public int getStatus() {
+			return status;
+		}
 
-	    public void setStatus(int status) {
-	        this.status = status;
-	    }
+		public void setStatus(int status) {
+			this.status = status;
+		}
 
-	    public String getCity() {
-	        return city;
-	    }
+		public String getCity() {
+			return city;
+		}
 
-	    public void setCity(String city) {
-	        this.city = city;
-	    }
+		public void setCity(String city) {
+			this.city = city;
+		}
 
-	    public String getRegion() {
-	        return region;
-	    }
+		public String getRegion() {
+			return region;
+		}
 
-	    public void setRegion(String region) {
-	        this.region = region;
-	    }
+		public void setRegion(String region) {
+			this.region = region;
+		}
 
-	    public String getLocation() {
-	        return location;
-	    }
+		public String getLocation() {
+			return location;
+		}
 
-	    public void setLocation(String location) {
-	        this.location = location;
-	    }
+		public void setLocation(String location) {
+			this.location = location;
+		}
 
-	    public String getBirthday() {
-	        return birthday;
-	    }
+		public String getBirthday() {
+			return birthday;
+		}
 
-	    public void setBirthday(String birthday) {
-	        this.birthday = birthday;
-	    }
+		public void setBirthday(String birthday) {
+			this.birthday = birthday;
+		}
 
-	    public String getBirthMonth() {
-	        return birthMonth;
-	    }
+		public Date getRegDate() {
+			return regDate;
+		}
 
-	    public void setBirthMonth(String birthMonth) {
-	        this.birthMonth = birthMonth;
-	    }
+		public void setRegDate(Date regDate) {
+			this.regDate = regDate;
+		}
 
-	    public String getBirthYear() {
-	        return birthYear;
-	    }
+		public Date getModDate() {
+			return modDate;
+		}
 
-	    public void setBirthYear(String birthYear) {
-	        this.birthYear = birthYear;
-	    }
+		public void setModDate(Date modDate) {
+			this.modDate = modDate;
+		}
 
-	    public Date getRegDate() {
-	        return regDate;
-	    }
-
-	    public void setRegDate(Date regDate) {
-	        this.regDate = regDate;
-	    }
-
-	    public Date getModDate() {
-	        return modDate;
-	    }
-
-	    public void setModDate(Date modDate) {
-	        this.modDate = modDate;
-	    }
-	}
+	}   
 }
