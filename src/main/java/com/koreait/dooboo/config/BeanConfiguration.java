@@ -14,6 +14,16 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
+
+import com.koreait.dooboo.api.NaverLoginBO;
+import com.koreait.dooboo.member.command.DeleteCommand;
+
+
+import com.koreait.dooboo.member.command.DeleteCommand;
+import com.koreait.dooboo.api.NaverLoginBO;
+
+import com.koreait.dooboo.member.command.JoinCommand;
+import com.koreait.dooboo.member.command.LoginCommand;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
@@ -69,4 +79,25 @@ public class BeanConfiguration {
 		multipartResolver.setMaxUploadSize(1024 * 1024 * 10);
 		return multipartResolver;
 	}
+	@Bean
+	public JoinCommand joinCommand() {
+		return new JoinCommand();
+	}
+	@Bean
+	public LoginCommand loginCommand() {
+		return new LoginCommand();
+	}
+
+	@Bean
+	public DeleteCommand deleteCommand() {
+		return new DeleteCommand();
+
+	}
+
+	@Bean
+	public NaverLoginBO naverLoginBO() {
+		return new NaverLoginBO();
+
+	}
+
 }

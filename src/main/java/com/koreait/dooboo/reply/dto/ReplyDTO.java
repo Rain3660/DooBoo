@@ -28,7 +28,10 @@ public class ReplyDTO {
 
     // 수정날짜 
     private Date modDate;
-
+    
+    public ReplyDTO() {
+		// TODO Auto-generated constructor stub
+	}
     public long getReplyNo() {
         return replyNo;
     }

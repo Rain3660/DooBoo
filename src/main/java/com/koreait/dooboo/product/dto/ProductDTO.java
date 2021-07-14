@@ -42,7 +42,10 @@ public class ProductDTO {
 
     // 수정일 수정일
     private Date modDate;
-
+    
+    public ProductDTO() {
+		// TODO Auto-generated constructor stub
+	}
     public long getProductNo() {
         return productNo;
     }

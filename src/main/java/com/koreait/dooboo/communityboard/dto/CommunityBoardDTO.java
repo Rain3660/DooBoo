@@ -50,7 +50,7 @@ public class CommunityBoardDTO extends ListPagingDTO{
 		this.nickname = nickname;
 	}
 
-	public long getBoardNo() {
+    public long getBoardNo() {
         return boardNo;
     }
 
