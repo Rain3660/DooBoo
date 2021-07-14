@@ -18,7 +18,7 @@
 			생년월일<br>
 			${loginUser.birthday}<br>
 			
-			<input type="button" id="nameNickname_btn" value="수정">
+			<input type="button" id="update_info" value="수정">
 		</form>
 		
 		
@@ -35,23 +35,19 @@
 			
 			비밀번호 확인<br>
 			<input type="password" name="pw2" id="pw2">
-			<input type="button" id="password_btn" value="수정" ><br><br>
+			<input type="button" id="update_pw" value="수정" ><br><br>
 		</form>
 		
 		
-		<h3>연락처 및 알림</h3>
-		<form id="phoneEmail" method="post">
+		<h3>연락처 및 주소</h3>
+		<form id="contect" method="post">
 			연락처<br>
 			<input type="text" name="phone" value="${loginUser.phone}" ><br>
 			
 			이메일<br>
-			<input type="text" name="email" value="${loginUser.email}" ><br>
-			<input type="button" id="phoneEmail_btn" value="수정">
-		</form>
-		
-		
-		<h3>주소</h3>
-		<form id="address" method="post">
+			${loginUser.email}<br>
+			<input type="button" id="update_contect" value="수정">
+			
 			시<br>
 			<input type="text" name="city" value="${loginUser.city}" ><br>
 			구<br>
