@@ -1477,10 +1477,16 @@ iframe#_hjRemoteVarsFrame {
 					<li class=""></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-
-					<li class="">
-						<a href="m.joinPage"><i class="fa fa-heart"></i>회원가입</a>
-					</li>
+					<c:if test="${empty loginUser }">
+						<li class="">
+							<a href="m.joinPage"><i class="fa fa-heart"></i>회원가입</a>
+						</li>
+					</c:if>
+					<c:if test="${not empty loginUser }">
+						<li class="">
+							<a href="m.joinPage"><i class="fa fa-heart"></i>${loginUser.nickname } 님 환영합니다 !</a>
+						</li>
+					</c:if>
 					<li>
 						<a href="m.loginPage">로그인</a>
 					</li>
