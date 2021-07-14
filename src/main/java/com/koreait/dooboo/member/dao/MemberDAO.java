@@ -7,4 +7,6 @@ public interface MemberDAO {
 	public int join(MemberDTO memberDTO);
 	// 로그인
 	public MemberDTO login(MemberDTO memberDTO);
+	// 개인정보 수정
+	public int updateInfo(MemberDTO memberDTO);
 }

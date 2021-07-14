@@ -26,7 +26,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	<select id="login" resultType="com.koreait.dooboo.member.dto.MemberDTO">
-		SELECT * FROM MEMBER WHERE MEMBER_ID = #{memberId} AND PASSWORD= #{password}
+		SELECT * FROM MEMBER WHERE MEMBER_ID = #{memberId} AND PASSWORD= #{password} AND STATUS = 0
 	</select>
+	<update id="updateInfo">
+		UPDATE MEMBER SET NAME = #{name} , NICKNAME = #{nickname} WHERE MEMBERNO = #{memberNo}
+	</update>
 	
 </mapper>
