@@ -72,7 +72,12 @@
 <div class="container">
 	<div class="row-md-6">
 		<h3>회원 프로필</h3>
+<<<<<<< Updated upstream
 		<form id="f1" method="post">
+=======
+		<h3>회원 프로필</h3>
+		<form id="profile" method="post">
+>>>>>>> Stashed changes
 			이름<br>
 			${Member_NAME}<br><br>
 			닉네임<br>
@@ -80,8 +85,14 @@
 			성별<br>
 			${Member_GENDER}<br><br>
 			생년월일<br>
+<<<<<<< Updated upstream
 			${Member_BIRTHDAY}<br><br>
 			<input type="button" id="update_btn" value="수정">
+=======
+			${loginUser.birthday}<br>
+			
+			<input type="button" id="update_info" value="수정">
+>>>>>>> Stashed changes
 		</form>
 	
 		<h3>연락처 및 알림</h3>
@@ -103,6 +114,7 @@
 			<input type="password" name="pw" id="pw"><br>
 			비밀번호 확인<br>
 			<input type="password" name="pw2" id="pw2">
+<<<<<<< Updated upstream
 			<input type="button" id="update_btn" value="수정">
 		</form>
 		
@@ -115,6 +127,28 @@
 			<input type="text" name="location" value="${loginUser_LOCATION}">
 			<br><br>
 			<input type="button" id="update_btn" value="수정">	
+=======
+			<input type="button" id="update_pw" value="수정" ><br><br>
+		</form>
+		
+		
+		<h3>연락처 및 주소</h3>
+		<form id="contect" method="post">
+			연락처<br>
+			<input type="text" name="phone" value="${loginUser.phone}" ><br>
+			
+			이메일<br>
+			${loginUser.email}<br>
+			<input type="button" id="update_contect" value="수정">
+			
+			시<br>
+			<input type="text" name="city" value="${loginUser.city}" ><br>
+			구<br>
+			<input type="text" name="region" value="${loginUser.region}" ><br>
+			상세주소<br>
+			<input type="text" name="location" value="${loginUser.location}" ><br>
+			<input type="button" id="address_btn" value="수정">
+>>>>>>> Stashed changes
 		</form>
 		
 		<div>
