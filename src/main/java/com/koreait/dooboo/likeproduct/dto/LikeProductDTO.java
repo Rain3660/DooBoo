@@ -12,7 +12,9 @@ public class LikeProductDTO {
 
     // 등록일 등록일
     private Date regDate;
-
+    public LikeProductDTO() {
+		// TODO Auto-generated constructor stub
+	}
     public long getProductNo() {
         return productNo;
     }

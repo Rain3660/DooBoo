@@ -22,7 +22,10 @@ public class ProductImageDTO {
 	
 	 // 등록일 등록일
 	 private Date regDate;
-	
+	 
+	 public ProductImageDTO() {
+		// TODO Auto-generated constructor stub
+	}
 	 public long getProductNo() {
 	     return productNo;
 	 }

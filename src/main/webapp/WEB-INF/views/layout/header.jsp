@@ -1,5 +1,4 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page session="false"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <html>
 <head>
@@ -16,7 +15,7 @@
 <meta name="p:domain_verify" content="68d35eb0ac63d3477701ce6c902bd227">
 
 <!-- favicon -->
-<link rel="apple-touch-icon" sizes="57x57"
+<!-- <link rel="apple-touch-icon" sizes="57x57"
 	href="/icons/apple-icon-57x57.png">
 <link rel="apple-touch-icon" sizes="60x60"
 	href="/icons/apple-icon-60x60.png">
@@ -45,46 +44,24 @@
 <link rel="manifest" href="/manifest.json">
 <meta name="msapplication-TileColor" content="#ffffff">
 <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
-<meta name="theme-color" content="#ffffff">
+<meta name="theme-color" content="#ffffff"> -->
 
 <!-- Wordpress -->
-<link rel="profile" href="https://gmpg.org/xfn/11">
-<link rel="pingback" href="https://themewagon.com/xmlrpc.php">
-<meta property="fb:app_id" content="894999323927740">
 
 
-<script type="text/javascript" async=""
-	src="https://www.google-analytics.com/plugins/ua/ec.js"></script>
-<script
-	src="https://connect.facebook.net/signals/config/146499149130432?v=2.9.43&amp;r=stable"
-	async=""></script>
-<script async="" src="https://connect.facebook.net/en_US/fbevents.js"></script>
-<script async="" src="//www.google-analytics.com/analytics.js"></script>
-<script type="text/javascript">
-        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-        ga('create', 'UA-55162400-1', 'auto');
-        ga('require', 'ec');
-    </script>
+
+
+
+
+
+
+
 
 
 <!-- Facebook Pixel Code -->
-<script>
-    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
-    n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
-    document,'script','https://connect.facebook.net/en_US/fbevents.js');
 
-    fbq('init', '146499149130432');
-    fbq('track', "PageView");</script>
-<noscript>
-	<img height="1" width="1" style="display: none"
-		src="https://www.facebook.com/tr?id=146499149130432&ev=PageView&noscript=1" />
-</noscript>
+
 <!-- End Facebook Pixel Code -->
 
 
@@ -92,137 +69,68 @@
 
 <!-- This site is optimized with the Yoast SEO plugin v4.3 - https://yoast.com/wordpress/plugins/seo/ -->
 <title>Welcome DooBoo-Market</title>
-<meta name="description"
-	content="Searching for high-quality free demo HTML5 website templates? Download responsive HTML5 CSS3 website templates &amp; Bootstrap themes. Free for commercial use.">
-<meta name="robots" content="noodp">
-<link rel="canonical"
-	href="https://themewagon.com/theme_tag/free/page/2/">
-<link rel="prev" href="https://themewagon.com/theme_tag/free/">
-<link rel="next" href="https://themewagon.com/theme_tag/free/page/3/">
-<meta property="og:locale" content="en_US">
-<meta property="og:type" content="object">
-<meta property="og:title"
-	content="1000+ Free Bootstrap HTML5 CSS3 Website Templates | High Quality Web Templates">
-<meta property="og:description"
-	content="Searching for high-quality free demo HTML5 website templates? Download responsive HTML5 CSS3 website templates &amp; Bootstrap themes. Free for commercial use.">
-<meta property="og:url"
-	content="https://themewagon.com/theme_tag/free/page/2/">
-<meta property="og:site_name"
-	content="Free Bootstrap Themes &amp; Templates for Responsive HTML5 Websites">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:description"
-	content="Searching for high-quality free demo HTML5 website templates? Download responsive HTML5 CSS3 website templates &amp; Bootstrap themes. Free for commercial use.">
-<meta name="twitter:title"
-	content="1000+ Free Bootstrap HTML5 CSS3 Website Templates | High Quality Web Templates">
-<meta name="twitter:site" content="@themewagon">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <!-- / Yoast SEO plugin. -->
 
-<link rel="dns-prefetch" href="//ajax.googleapis.com">
-<link rel="dns-prefetch" href="//fonts.googleapis.com">
-<link rel="dns-prefetch" href="//s.w.org">
-<link rel="alternate" type="application/rss+xml"
-	title="Free Bootstrap Themes &amp; Templates for Responsive HTML5 Websites Â» Feed"
-	href="https://themewagon.com/feed/">
-<link rel="alternate" type="application/rss+xml"
-	title="Free Bootstrap Themes &amp; Templates for Responsive HTML5 Websites Â» Comments Feed"
-	href="https://themewagon.com/comments/feed/">
-<link rel="alternate" type="application/rss+xml"
-	title="Free Bootstrap Themes &amp; Templates for Responsive HTML5 Websites Â» Free HTML5 Theme Tag Feed"
-	href="https://themewagon.com/theme_tag/free/feed/">
-<script type="text/javascript">
-			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/themewagon.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.7.2"}};
-			!function(a,b,c){function d(a){var b,c,d,e,f=String.fromCharCode;if(!k||!k.fillText)return!1;switch(k.clearRect(0,0,j.width,j.height),k.textBaseline="top",k.font="600 32px Arial",a){case"flag":return k.fillText(f(55356,56826,55356,56819),0,0),!(j.toDataURL().length<3e3)&&(k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,65039,8205,55356,57096),0,0),b=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,55356,57096),0,0),c=j.toDataURL(),b!==c);case"emoji4":return k.fillText(f(55357,56425,55356,57341,8205,55357,56507),0,0),d=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55357,56425,55356,57341,55357,56507),0,0),e=j.toDataURL(),d!==e}return!1}function e(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g,h,i,j=b.createElement("canvas"),k=j.getContext&&j.getContext("2d");for(i=Array("flag","emoji4"),c.supports={everything:!0,everythingExceptFlag:!0},h=0;h<i.length;h++)c.supports[i[h]]=d(i[h]),c.supports.everything=c.supports.everything&&c.supports[i[h]],"flag"!==i[h]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[i[h]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
-		</script>
-<script
-	src="https://themewagon.com/wp-includes/js/wp-emoji-release.min.js?ver=4.7.2"
-	type="text/javascript" defer=""></script>
-<style type="text/css">
-img.wp-smiley, img.emoji {
-	display: inline !important;
-	border: none !important;
-	box-shadow: none !important;
-	height: 1em !important;
-	width: 1em !important;
-	margin: 0 .07em !important;
-	vertical-align: -0.1em !important;
-	background: none !important;
-	padding: 0 !important;
-}
-</style>
-<link rel="stylesheet" id="contact-form-7-css"
-	href="https://themewagon.com/wp-content/plugins/contact-form-7/includes/css/styles.css?ver=4.6.1"
-	type="text/css" media="all">
-<link rel="stylesheet" id="edd-styles-css"
-	href="https://themewagon.com/wp-content/plugins/easy-digital-downloads/templates/edd.min.css?ver=2.6.17"
-	type="text/css" media="all">
-<link rel="stylesheet" id="wp-postratings-css"
-	href="https://themewagon.com/wp-content/plugins/wp-postratings/css/postratings-css.css?ver=1.84"
-	type="text/css" media="all">
-<link rel="stylesheet" id="us-plugin-styles-css"
-	href="https://themewagon.com/wp-content/plugins/ultimate-social-deux/public/assets/css/style.css?ver=6.0.7"
-	type="text/css" media="all">
-<link rel="stylesheet" id="framework-css"
-	href="https://themewagon.com/wp-content/themes/wagoncore/css/framework.css?ver=4.7.2"
-	type="text/css" media="all">
-<link rel="stylesheet" id="wagoncore-style-css"
-	href="https://themewagon.com/wp-content/themes/wagoncore/style.css?ver=4.7.2"
-	type="text/css" media="all">
-<link rel="stylesheet" id="child-style-css"
-	href="https://themewagon.com/wp-content/themes/themewagon/style.css?ver=1.0.0"
-	type="text/css" media="all">
-<link rel="stylesheet" id="font-roboto-css"
-	href="//fonts.googleapis.com/css?family=Roboto%3A300%2C400%2C700&amp;ver=4.7.2"
-	type="text/css" media="all">
-<link rel="stylesheet" id="rich-reviews-css"
-	href="https://themewagon.com/wp-content/plugins/rich-reviews/css/rich-reviews.css?ver=4.7.2"
-	type="text/css" media="all">
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"
-	integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
-	crossorigin="anonymous"></script>
-<script type="text/javascript">
-/* <![CDATA[ */
-var edd_scripts = {"ajaxurl":"https:\/\/themewagon.com\/wp-admin\/admin-ajax.php","position_in_cart":"","has_purchase_links":"","already_in_cart_message":"You have already added this item to your cart","empty_cart_message":"Your cart is empty","loading":"Loading","select_option":"Please select an option","ajax_loader":"\/wp-content\/plugins\/easy-digital-downloads\/assets\/images\/loading.gif","is_checkout":"0","default_gateway":"stripe_checkout","redirect_to_checkout":"0","checkout_page":"https:\/\/themewagon.com\/checkout\/","permalinks":"1","quantities_enabled":"","taxes_enabled":"0"};
-/* ]]> */
-</script>
-<script type="text/javascript"
-	src="https://themewagon.com/wp-content/plugins/easy-digital-downloads/assets/js/edd-ajax.min.js?ver=2.6.17"></script>
-<script type="text/javascript"
-	src="https://themewagon.com/wp-content/plugins/themewagon_extended/assets/js/pjax.min.js?ver=1"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" id="framework-css" href="https://themewagon.com/wp-content/themes/wagoncore/css/framework.css?ver=4.7.2" type="text/css" media="all">
+<link rel="stylesheet" id="wagoncore-style-css" href="https://themewagon.com/wp-content/themes/wagoncore/style.css?ver=4.7.2" type="text/css" media="all">
+<link rel="stylesheet" id="child-style-css" href="https://themewagon.com/wp-content/themes/themewagon/style.css?ver=1.0.0" type="text/css" media="all">
+<link rel="stylesheet" id="font-roboto-css" href="//fonts.googleapis.com/css?family=Roboto%3A300%2C400%2C700&amp;ver=4.7.2" type="text/css" media="all">
+<link rel="stylesheet" id="rich-reviews-css" href="https://themewagon.com/wp-content/plugins/rich-reviews/css/rich-reviews.css?ver=4.7.2" type="text/css" media="all">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+<script type="text/javascript" src="https://themewagon.com/wp-content/plugins/easy-digital-downloads/assets/js/edd-ajax.min.js?ver=2.6.17"></script>
+<script type="text/javascript" src="https://themewagon.com/wp-content/plugins/themewagon_extended/assets/js/pjax.min.js?ver=1"></script>
 <script type="text/javascript">
 /* <![CDATA[ */
 var us_script = {"ajaxurl":"https:\/\/themewagon.com\/wp-admin\/admin-ajax.php","tweet_via":"themewagon","success":"Great work! Your message was sent.","trying":"Trying to send email...","total_shares_text":"","facebook_height":"500","facebook_width":"900","twitter_height":"500","twitter_width":"900","googleplus_height":"500","googleplus_width":"900","delicious_height":"550","delicious_width":"550","stumble_height":"550","stumble_width":"550","linkedin_height":"550","linkedin_width":"550","pinterest_height":"320","pinterest_width":"720","buffer_height":"500","buffer_width":"900","reddit_height":"500","reddit_width":"900","vkontakte_height":"500","vkontakte_width":"900","printfriendly_height":"500","printfriendly_width":"1045","pocket_height":"500","pocket_width":"900","tumblr_height":"500","tumblr_width":"900","flipboard_height":"500","flipboard_width":"900","weibo_height":"500","weibo_width":"900","xing_height":"500","xing_width":"900","ok_height":"500","ok_width":"900","managewp_height":"500","managewp_width":"900","meneame_height":"500","meneame_width":"900","digg_height":"500","digg_width":"900","home_url":"https:\/\/themewagon.com","B":"B","M":"M","k":"k","nonce":"3cf4a67926","already_loved_message":"You have already loved this item.","error_message":"Sorry, there was a problem processing your request.","logged_in":"false","bitly":"true"};
 /* ]]> */
 </script>
-<script type="text/javascript"
-	src="https://themewagon.com/wp-content/plugins/ultimate-social-deux/public/assets/js/min/us.script-min.js?ver=6.0.7"></script>
+<script type="text/javascript" src="https://themewagon.com/wp-content/plugins/ultimate-social-deux/public/assets/js/min/us.script-min.js?ver=6.0.7"></script>
 <script type="text/javascript">
 /* <![CDATA[ */
 var us_native_script = {"vkontakte_appid":"","facebook_appid":"376429102482150"};
 /* ]]> */
 </script>
-<script type="text/javascript"
-	src="https://themewagon.com/wp-content/plugins/ultimate-social-deux/public/assets/js/min/us.native-min.js?ver=6.0.7"></script>
-<script type="text/javascript"
-	src="https://themewagon.com/wp-content/plugins/ultimate-social-deux/public/assets/js/min/jquery.cookie-min.js?ver=1.0"></script>
-<script type="text/javascript"
-	src="https://themewagon.com/wp-content/plugins/ultimate-social-deux/public/assets/js/min/jquery.magnific-popup-min.js?ver=1.0"></script>
-<script type="text/javascript"
-	src="https://themewagon.com/wp-content/plugins/ultimate-social-deux/public/assets/js/min/jquery.sticky-min.js?ver=1.0"></script>
-<script type="text/javascript"
-	src="https://themewagon.com/wp-content/plugins/ultimate-social-deux/public/assets/js/min/jquery.fittext-min.js?ver=1.2"></script>
-<script type="text/javascript"
-	src="https://themewagon.com/wp-content/plugins/ultimate-social-deux/public/assets/js/min/jquery.tooltipster-min.js?ver=3.3"></script>
-<script type="text/javascript"
-	src="https://themewagon.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1"></script>
-<script type="text/javascript"
-	src="https://themewagon.com/wp-content/themes/wagoncore/js/framework.js?ver=1"></script>
-<script type="text/javascript"
-	src="https://themewagon.com/wp-content/plugins/rich-reviews/js/rich-reviews.min.js?ver=4.7.2"></script>
+<script type="text/javascript" src="https://themewagon.com/wp-content/plugins/ultimate-social-deux/public/assets/js/min/us.native-min.js?ver=6.0.7"></script>
+<script type="text/javascript" src="https://themewagon.com/wp-content/plugins/ultimate-social-deux/public/assets/js/min/jquery.cookie-min.js?ver=1.0"></script>
+<script type="text/javascript" src="https://themewagon.com/wp-content/plugins/ultimate-social-deux/public/assets/js/min/jquery.magnific-popup-min.js?ver=1.0"></script>
+<script type="text/javascript" src="https://themewagon.com/wp-content/plugins/ultimate-social-deux/public/assets/js/min/jquery.sticky-min.js?ver=1.0"></script>
+<script type="text/javascript" src="https://themewagon.com/wp-content/plugins/ultimate-social-deux/public/assets/js/min/jquery.fittext-min.js?ver=1.2"></script>
+<script type="text/javascript" src="https://themewagon.com/wp-content/plugins/ultimate-social-deux/public/assets/js/min/jquery.tooltipster-min.js?ver=3.3"></script>
+<script type="text/javascript" src="https://themewagon.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1"></script>
+<script type="text/javascript" src="https://themewagon.com/wp-content/themes/wagoncore/js/framework.js?ver=1"></script>
+<script type="text/javascript" src="https://themewagon.com/wp-content/plugins/rich-reviews/js/rich-reviews.min.js?ver=4.7.2"></script>
 <link rel="https://api.w.org/" href="https://themewagon.com/wp-json/">
-<link rel="EditURI" type="application/rsd+xml" title="RSD"
-	href="https://themewagon.com/xmlrpc.php?rsd">
-<link rel="wlwmanifest" type="application/wlwmanifest+xml"
-	href="https://themewagon.com/wp-includes/wlwmanifest.xml">
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://themewagon.com/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://themewagon.com/wp-includes/wlwmanifest.xml">
 <meta name="generator" content="WordPress 4.7.2">
 <meta name="generator" content="Easy Digital Downloads v2.6.17">
 <script type="text/javascript">
@@ -889,8 +797,7 @@ var us_native_script = {"vkontakte_appid":"","facebook_appid":"376429102482150"}
 	width: 70px;
 }
 </style>
-<script id="_carbonads_projs" type="text/javascript"
-	src="https://srv.carbonads.net/ads/CK7I4KJL.json?segment=placement:themewagoncom&amp;callback=_carbonads_go"></script>
+<script id="_carbonads_projs" type="text/javascript" src="https://srv.carbonads.net/ads/CK7I4KJL.json?segment=placement:themewagoncom&amp;callback=_carbonads_go"></script>
 <script async="" src="//static.hotjar.com/c/hotjar-276128.js?sv=5"></script>
 <script async="" src="https://call.chatra.io/chatra.js"></script>
 <style>
@@ -1516,9 +1423,7 @@ left
 	background: #fff
 }
 </style>
-<script async=""
-	src="https://script.hotjar.com/modules.c057a0a680ba2bae7796.js"
-	charset="utf-8"></script>
+<script async="" src="https://script.hotjar.com/modules.c057a0a680ba2bae7796.js" charset="utf-8"></script>
 <style type="text/css">
 iframe#_hjRemoteVarsFrame {
 	display: none !important;
@@ -1559,8 +1464,7 @@ iframe#_hjRemoteVarsFrame {
 					<form class="site-search" role="search" method="get"
 						action="https://themewagon.com/">
 						<div class="input-group mb-3">
-							<input type="text" class="form-control"
-								placeholder="검색어를 입력하세요"
+							<input type="text" class="form-control" placeholder="검색어를 입력하세요"
 								aria-label="Recipient's username"
 								aria-describedby="button-addon2">
 							<button class="btn btn-outline-secondary" type="button"
@@ -1570,19 +1474,19 @@ iframe#_hjRemoteVarsFrame {
 				</div>
 
 				<ul class="nav navbar-nav navbar-left">
-					<li class="">
-						
-					</li>
+					<li class=""></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 
 					<li class="">
-					<a href="m.join"><i class="fa fa-heart"></i>회원가입</a>
+						<a href="m.joinPage"><i class="fa fa-heart"></i>회원가입</a>
 					</li>
 					<li>
-					<a href="m.login">로그인</a>
+						<a href="m.loginPage">로그인</a>
 					</li>
-					<li class="login_menu"><a href="m.mypage"><i class="fa fa-lock"></i> 마이페이지</a>
+					<li class="login_menu">
+					<a href="m.myPage">
+						<i class="fa fa-lock"></i> 마이페이지</a>
 					</li>
 				</ul>
 			</div>
@@ -1602,22 +1506,19 @@ iframe#_hjRemoteVarsFrame {
 					<li id="menu-item-1769"
 						class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1769">
 						<a href="#">자유게시판</a>
-					</li>					
+					</li>
 					<li id="menu-item-1775"
 						class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1775"><a
 						href="#">New</a></li>
 					<li id="menu-item-10166"
 						class="menu-item menu-item-type-taxonomy menu-item-object-theme_category menu-item-10166"><a
-						href="#">Popular
-							</a></li>
+						href="#">Popular </a></li>
 					<li id="menu-item-49758"
 						class="menu-item menu-item-type-custom menu-item-object-custom menu-item-49758"><a
-						href="#">F&Q
-							</a></li>
+						href="#">F&Q </a></li>
 					<li id="menu-item-49758"
 						class="menu-item menu-item-type-custom menu-item-object-custom menu-item-49758"><a
-						 href="#" onclick="location.href = 'chat'">1:1대화함
-							</a></li>
+						href="#" onclick="location.href = 'chat'">1:1대화함 </a></li>
 				</ul>
 			</div>
 		</div>

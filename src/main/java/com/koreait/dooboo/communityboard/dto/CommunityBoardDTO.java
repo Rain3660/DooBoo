@@ -26,7 +26,9 @@ public class CommunityBoardDTO {
 
     // 수정일 
     private Date modDate;
-
+    public CommunityBoardDTO() {
+		// TODO Auto-generated constructor stub
+	}
     public long getBoardNo() {
         return boardNo;
     }

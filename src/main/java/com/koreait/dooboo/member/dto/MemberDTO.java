@@ -28,6 +28,8 @@ public class MemberDTO {
 	// 성별
 	private String gender;
 
+
+
 	// 가입일자
 	private Date regdate;
 
@@ -49,11 +51,12 @@ public class MemberDTO {
 	// 생일 문자열입니다
 	private String birthday;
 
-	// 등록일
-	private Date regDate;
-
 	// 수정일
 	private Date modDate;
+	
+	public MemberDTO() {
+		// TODO Auto-generated constructor stub
+	}
 
 	public long getMemberNo() {
 		return memberNo;
@@ -175,14 +178,6 @@ public class MemberDTO {
 		this.birthday = birthday;
 	}
 
-	public Date getRegDate() {
-		return regDate;
-	}
-
-	public void setRegDate(Date regDate) {
-		this.regDate = regDate;
-	}
-
 	public Date getModDate() {
 		return modDate;
 	}
@@ -191,4 +186,17 @@ public class MemberDTO {
 		this.modDate = modDate;
 	}
 
+	@Override
+	public String toString() {
+		return "MemberDTO [memberNo=" + memberNo + ", name=" + name + ", phone=" + phone + ", memberId=" + memberId
+				+ ", password=" + password + ", email=" + email + ", nickname=" + nickname + ", gender=" + gender
+				+ ", regdate=" + regdate + ", outdate=" + outdate + ", status=" + status + ", city=" + city
+				+ ", region=" + region + ", location=" + location + ", birthday=" + birthday + ", modDate=" + modDate
+				+ "]";
+	}
+	
+	
+	
+
+	
 }

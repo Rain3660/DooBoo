@@ -8,6 +8,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
+import com.koreait.dooboo.member.command.JoinCommand;
+import com.koreait.dooboo.member.command.LoginCommand;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
@@ -49,5 +51,13 @@ public class BeanConfiguration {
 		multipartResolver.setDefaultEncoding("utf-8");
 		multipartResolver.setMaxUploadSize(1024 * 1024 * 10);
 		return multipartResolver;
+	}
+	@Bean
+	public JoinCommand joinCommand() {
+		return new JoinCommand();
+	}
+	@Bean
+	public LoginCommand loginCommand() {
+		return new LoginCommand();
 	}
 }
