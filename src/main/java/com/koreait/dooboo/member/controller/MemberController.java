@@ -1,10 +1,13 @@
 package com.koreait.dooboo.member.controller;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,14 +44,18 @@ public class MemberController {
 		model.addAttribute("memberDTO", memberDTO);
 		model.addAttribute("response", response);
 		joinCommand.execute(sqlSession, model);
-		
 	}
 	@PostMapping("m.login")
 	public void login(Model model , MemberDTO memberDTO , HttpServletRequest request , HttpServletResponse response) {
 		model.addAttribute("request", request);
 		model.addAttribute("response", response);
 		model.addAttribute("memberDTO", memberDTO);
-		
 		loginCommand.execute(sqlSession, model);
+	}
+	@PostMapping("m.updateInfo")
+	public void updateInfo(Model model , HttpServletResponse response , HttpServletRequest request , MemberDTO memberDTO){
+		model.addAttribute("request", request);
+		model.addAttribute("response", response);
+		model.addAttribute("memberDTO", memberDTO);
 	}
 }
