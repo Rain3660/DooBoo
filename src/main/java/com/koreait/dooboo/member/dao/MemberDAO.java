@@ -9,4 +9,7 @@ public interface MemberDAO {
 	public MemberDTO login(MemberDTO memberDTO);
 	// 개인정보 수정
 	public int updateInfo(MemberDTO memberDTO);
+	//회원탈퇴
+	public int delete(long no);
+	
 }

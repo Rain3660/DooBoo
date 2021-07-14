@@ -1,27 +1,32 @@
 package com.koreait.dooboo.member.controller;
 
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-<<<<<<< Updated upstream
 
-=======
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+
+import com.koreait.dooboo.member.command.DeleteCommand;
+
+import com.koreait.dooboo.api.Kakao_RestApi;
+import com.koreait.dooboo.api.NaverLoginBO;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.koreait.dooboo.api.Kakao_RestApi;
 import com.koreait.dooboo.api.NaverLoginBO;
 import com.koreait.dooboo.member.command.DeleteCommand;
->>>>>>> Stashed changes
+
 import com.koreait.dooboo.member.command.JoinCommand;
 import com.koreait.dooboo.member.command.LoginCommand;
 import com.koreait.dooboo.member.dto.MemberDTO;
@@ -35,28 +40,37 @@ public class MemberController {
 	private JoinCommand joinCommand;
 	@Autowired
 	private LoginCommand loginCommand;
-<<<<<<< Updated upstream
-=======
+
 	@Autowired
 	private DeleteCommand deleteCommand;
 	@Autowired
 	private NaverLoginBO naverLoginBO;
 
->>>>>>> Stashed changes
+
+	@Autowired
+
+	private DeleteCommand deleteCommand;
+
+	private NaverLoginBO naverLoginBO;
+
+
 	
 	@GetMapping("m.joinPage")
 	public String joinPage() {
 		return "member/join";
 	}
-<<<<<<< Updated upstream
+
 	@GetMapping("m.loginPage")
 	public String loginPage() {
 		return "member/login";
-=======
-	
+
 	@RequestMapping(value = "m.loginPage", method = { RequestMethod.GET, RequestMethod.POST })
 	public String login(Model model, HttpSession session) {
 		System.out.println(session);
+
+	@RequestMapping(value = "m.loginPage", method = { RequestMethod.GET, RequestMethod.POST })
+	public String login(Model model, HttpSession session) {
+
 	/* 네이버아이디로 인증 URL을 생성하기 위하여 naverLoginBO클래스의 getAuthorizationUrl메소드 호출 */
 	String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
 	//https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=sE***************&
@@ -67,8 +81,9 @@ public class MemberController {
 	model.addAttribute("naverurl", naverAuthUrl);
 	model.addAttribute("kakaourl", kakaourl);
 	return "member/login";
->>>>>>> Stashed changes
+
 	}
+	
 	@GetMapping("m.myPage")
 	public String mypage() {
 		return "member/myPage";
@@ -92,4 +107,20 @@ public class MemberController {
 		model.addAttribute("response", response);
 		model.addAttribute("memberDTO", memberDTO);
 	}
+	
+	@GetMapping(value="m.leave.do")
+	   public String leave(HttpSession session,
+	                  Model model) {
+	      model.addAttribute("session",session);
+	      deleteCommand.execute(sqlSession, model);
+	      return "redirect:/";
+	   }
+	
+	@GetMapping(value="m.logout")
+	public String logOut(HttpSession session,
+						 Model model) {
+		model.addAttribute("session",session);
+		return "redirect:index";
+	}
+	   
 }
