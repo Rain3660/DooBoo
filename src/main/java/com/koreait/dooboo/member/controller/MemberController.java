@@ -13,8 +13,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+
+import com.koreait.dooboo.member.command.DeleteCommand;
+
 import com.koreait.dooboo.api.Kakao_RestApi;
 import com.koreait.dooboo.api.NaverLoginBO;
+
 import com.koreait.dooboo.member.command.JoinCommand;
 import com.koreait.dooboo.member.command.LoginCommand;
 import com.koreait.dooboo.member.dto.MemberDTO;
@@ -29,7 +33,11 @@ public class MemberController {
 	@Autowired
 	private LoginCommand loginCommand;
 	@Autowired
+
+	private DeleteCommand deleteCommand;
+
 	private NaverLoginBO naverLoginBO;
+
 	
 	@GetMapping("m.joinPage")
 	public String joinPage() {
@@ -73,4 +81,20 @@ public class MemberController {
 		model.addAttribute("response", response);
 		model.addAttribute("memberDTO", memberDTO);
 	}
+	
+	@GetMapping(value="m.leave.do")
+	   public String leave(HttpSession session,
+	                  Model model) {
+	      model.addAttribute("session",session);
+	      deleteCommand.execute(sqlSession, model);
+	      return "redirect:/";
+	   }
+	
+	@GetMapping(value="m.logout")
+	public String logOut(HttpSession session,
+						 Model model) {
+		model.addAttribute("session",session);
+		return "redirect:index";
+	}
+	   
 }
