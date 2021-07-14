@@ -1,4 +1,4 @@
-package com.koreait.dooboo.util;
+package com.koreait.dooboo.communityboard.dto;
 
 public class ListPagingDTO{
 	private int currentPageNo=1; // 현재 페이지 번호

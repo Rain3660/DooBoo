@@ -2,12 +2,11 @@ package com.koreait.dooboo.member.dto;
 
 import java.sql.Date;
 
-public class MemberDTO {
-	public class Member {
+public class MemberDTO{
 
 	    // 회원번호 1000부터 시작
 	    private long memberNo;
-
+	    
 	    // 이름 
 	    private String name;
 
@@ -190,7 +189,5 @@ public class MemberDTO {
 
 		public void setModDate(Date modDate) {
 			this.modDate = modDate;
-		}
-
-	}   
+		} 
 }

@@ -1601,7 +1601,7 @@ iframe#_hjRemoteVarsFrame {
 					</li>
 					<li id="menu-item-1769"
 						class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1769">
-						<a href="#">자유게시판</a>
+						<a href="CommunityBoard/board_sample">자유게시판</a>
 					</li>					
 					<li id="menu-item-1775"
 						class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1775"><a
