@@ -92,6 +92,9 @@
 			${loginUser.birthday}<br>
 			
 			<input type="button" id="update_info" value="수정">
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 		</form>
 	
@@ -115,7 +118,11 @@
 			비밀번호 확인<br>
 			<input type="password" name="pw2" id="pw2">
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 			<input type="button" id="update_btn" value="수정">
+=======
+			<input type="button" id="update_pw" value="수정" ><br><br>
+>>>>>>> Stashed changes
 		</form>
 		
 		<h3>지역설정</h3>
@@ -131,7 +138,10 @@
 			<input type="button" id="update_pw" value="수정" ><br><br>
 		</form>
 		
+<<<<<<< Updated upstream
 		
+=======
+>>>>>>> Stashed changes
 		<h3>연락처 및 주소</h3>
 		<form id="contect" method="post">
 			연락처<br>
