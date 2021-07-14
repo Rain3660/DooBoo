@@ -14,6 +14,13 @@
 		<org.slf4j-version>1.7.25</org.slf4j-version>
 	</properties>
 	<dependencies>
+	<!-- 암호화 처리 -->
+		<!-- https://mvnrepository.com/artifact/commons-codec/commons-codec -->
+		<dependency>
+		    <groupId>commons-codec</groupId>
+		    <artifactId>commons-codec</artifactId>
+		    <version>1.15</version>
+		</dependency>
 	<!-- email 인증 -->
 		<!-- https://mvnrepository.com/artifact/javax.mail/mail -->
 		<dependency>

@@ -1577,12 +1577,12 @@ iframe#_hjRemoteVarsFrame {
 				<ul class="nav navbar-nav navbar-right">
 
 					<li class="">
-					<a href="#"><i class="fa fa-heart"></i>회원가입</a>
+					<a href="m.join"><i class="fa fa-heart"></i>회원가입</a>
 					</li>
 					<li>
-					<a href="#">로그인</a>
+					<a href="m.login">로그인</a>
 					</li>
-					<li class="login_menu"><a href="#"><i class="fa fa-lock"></i> 마이페이지</a>
+					<li class="login_menu"><a href="m.mypage"><i class="fa fa-lock"></i> 마이페이지</a>
 					</li>
 				</ul>
 			</div>
