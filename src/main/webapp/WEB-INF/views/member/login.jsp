@@ -13,5 +13,13 @@
 		비밀번호 <input type="password" name="password">  
 		<button>로그인</button>
 	</form>
+	
+	<a href="${naverurl}">
+	<img width="223" src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png"/>
+	</a>
+	<br>
+	<a href ="${kakaourl }">
+	<img src="resources/image/kakaologo.png">
+	</a>
 </body>
 </html>
