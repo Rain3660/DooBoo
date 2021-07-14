@@ -4,6 +4,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.koreait.dooboo.member.command.DeleteCommand;
 import com.koreait.dooboo.member.command.JoinCommand;
 import com.koreait.dooboo.member.command.LoginCommand;
 import com.koreait.dooboo.member.dto.MemberDTO;
@@ -26,6 +28,8 @@ public class MemberController {
 	private JoinCommand joinCommand;
 	@Autowired
 	private LoginCommand loginCommand;
+	@Autowired
+	private DeleteCommand deleteCommand;
 	
 	@GetMapping("m.joinPage")
 	public String joinPage() {
@@ -58,4 +62,20 @@ public class MemberController {
 		model.addAttribute("response", response);
 		model.addAttribute("memberDTO", memberDTO);
 	}
+	
+	@GetMapping(value="m.leave.do")
+	   public String leave(HttpSession session,
+	                  Model model) {
+	      model.addAttribute("session",session);
+	      deleteCommand.execute(sqlSession, model);
+	      return "redirect:/";
+	   }
+	
+	@GetMapping(value="m.logout")
+	public String logOut(HttpSession session,
+						 Model model) {
+		model.addAttribute("session",session);
+		return "redirect:index";
+	}
+	   
 }

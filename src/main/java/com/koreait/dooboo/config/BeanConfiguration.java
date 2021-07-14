@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
+import com.koreait.dooboo.member.command.DeleteCommand;
 import com.koreait.dooboo.member.command.JoinCommand;
 import com.koreait.dooboo.member.command.LoginCommand;
 import com.zaxxer.hikari.HikariConfig;
@@ -59,5 +60,9 @@ public class BeanConfiguration {
 	@Bean
 	public LoginCommand loginCommand() {
 		return new LoginCommand();
+	}
+	@Bean
+	public DeleteCommand deleteCommand() {
+		return new DeleteCommand();
 	}
 }
