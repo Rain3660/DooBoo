@@ -1,10 +1,16 @@
 package com.koreait.dooboo.config;
 
+import java.util.Properties;
+
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
+import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
@@ -22,8 +28,12 @@ import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
 @Configuration
+@MapperScan(basePackages = {"com.koreait.dooboo.*.dao"}) // mapper 스캔
 public class BeanConfiguration {
 
+	@Autowired
+	private ApplicationContext applicationContext;
+	
 	@Bean
 	public HikariConfig hikariConfig() {
 		HikariConfig hikariConfig = new HikariConfig();
@@ -39,12 +49,21 @@ public class BeanConfiguration {
 		return new HikariDataSource(hikariConfig());
 
 	}
+
+	
 	@Bean
 	public SqlSessionFactory sqlSessionFactory() throws Exception {
+		
+		Properties properties = new Properties();
+		properties.put("mapUnderscoreToCamelCase", true);
 		SqlSessionFactoryBean sqlSessionFactory = new SqlSessionFactoryBean();
+		sqlSessionFactory.setConfigurationProperties(properties); //카멜케이스 설정 
 		sqlSessionFactory.setDataSource(hikariDataSource());
-		sqlSessionFactory.setMapperLocations(
-				new PathMatchingResourcePatternResolver().getResources("classpath:com/koreait/dooboo/mapper/*.xml"));
+		sqlSessionFactory.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath:com/koreait/dooboo/mapper/*.xml"));
+		//카멜케이스 설정
+		Resource myBatisConfig = new PathMatchingResourcePatternResolver().getResource("classpath:mybatis-config.xml");
+		sqlSessionFactory.setConfigLocation(myBatisConfig);		
+		
 		return sqlSessionFactory.getObject();
 	}
 
@@ -52,7 +71,7 @@ public class BeanConfiguration {
 	public SqlSessionTemplate sqlSession() throws Exception {
 		return new SqlSessionTemplate(sqlSessionFactory());
 	}
-
+	
 	@Bean
 	public CommonsMultipartResolver multipartResolver() {
 		CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();

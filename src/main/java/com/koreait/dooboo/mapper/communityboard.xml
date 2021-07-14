@@ -5,97 +5,94 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="com.koreait.dooboo.communityboard.dao.CommunityBoardDAO">
 
-<sql id="boardColumns">
-		  COMMUNITYBOARD_NO
-		, COMMUNITYBOARD_TITLE
-		, COMMUNITYBOARD_CONTENT
-		, MEMBER_NO
-		, REGDATE
-		, LASTMODIFIED
+<sql id="communityBoardColumns">
+		  BOARD_NO
+		, TITLE
+		, CONTENT
 		, HIT
-		, NICKNAME
+		, REG_NO
+		, MOD_NO
+		, REG_DATE
+		, MOD_DATE
 	</sql>
 
-	<insert id="insertBoard" parameterType="com.koreait.dooboo.communityboard.dao.CommunityBoardDAO">
-		INSERT INTO COMMUNITYBOARD (
-			  COMMUNITYBOARD_TITLE
-			, COMMUNITYBOARD_CONTENT
-			, MEMBER_NO
-			, REGDATE
-			, LASTMODIFIED
-			, HIT
-			, NICKNAME
+	<insert id="insertBoard" parameterType="com.koreait.dooboo.communityboard.dto.CommunityBoardDTO">
+<!-- 	   	<selectKey resultType="int" keyProperty="memberNo" order="BEFORE">
+        	SELECT MEMBER_NO FROM MEMBER WHERE MEMBER_ID = #{memberId} 
+    	</selectKey>
+ -->	INSERT INTO COMMUNITYBOARD (
+					  TITLE
+					, CONTENT
+					, HIT
+					, REG_NO
+					, MOD_NO
+					, REG_DATE
+					, MOD_DATE
 		) VALUES (
-			  #{communityboardTitle}
-			, #{communityboardContent}
-			, #{memberNo}
-			, NOW()
-			, NOW()
+			  #{TITLE}
+			, #{CONTENT}
 			, 0
-			, #{nickname}
+			, #{member.getMemberNo}
+			, #{member.getMemberNo}
+			, SYSDATE
+			, SYSDATE
 		)
 	</insert>
 
-	<select id="selectBoardDetail" parameterType="integer" resultType="com.koreait.dooboo.communityboard.dao.CommunityBoardDAO">
+	<select id="selectBoardDetail" parameterType="integer" resultType="com.koreait.dooboo.communityboard.dto.CommunityBoardDTO">
 		SELECT
-			  COMMUNITYBOARD_NO
-			, COMMUNITYBOARD_TITLE
-			, COMMUNITYBOARD_CONTENT
-			, MEMBER_NO
-			, REGDATE
-			, LASTMODIFIED
+			  BOARD_NO
+			, TITLE
+			, CONTENT
 			, HIT
-			, NICKNAME
-			
+			, REG_NO
+			, REG_DATE
+			, MOD_DATE
 		FROM
 			COMMUNITYBOARD
 		WHERE
-			COMMUNITYBOARD_NO = #{communityboardNo}
+			BOARD_NO = #{boardNo}
 	</select>
 
-	<update id="updateBoard" parameterType="com.koreait.dooboo.communityboard.dao.CommunityBoardDAO">
+	<update id="updateBoard" parameterType="com.koreait.dooboo.communityboard.dto.CommunityBoardDTO">
 		UPDATE COMMUNITYBOARD
 		SET
-			  LASTMODIFIED = NOW()
-			, COMMUNITYBOARD_TITLE = #{communityboardTitle}
-			, COMMUNITYBOARD_CONTENT = #{communityboardContent}
-			, NICKNAME = #{nickname}
+			  MOD_DATE = SYSDATE
+			, TITLE = #{title}
+			, CONTENT = #{content}
 		WHERE
-			COMMUNITYBOARD_NO = #{communityboardNo}
+			BOARD_NO = #{boardNo}
 	</update>
 
-	<delete id="deleteBoard" parameterType="com.koreait.dooboo.communityboard.dao.CommunityBoardDAO">
-		DELETE 	COMMUNITYBOARD
-		  FROM
-			 	COMMUNITYBOARD
-		 WHERE
-				COMMUNITYBOARD_NO = #{communityboardNo}
-	</delete>
-
-	<select id="selectBoardList" parameterType="com.koreait.dooboo.communityboard.dao.CommunityBoardDAO" resultType="com.koreait.dooboo.communityboard.dao.CommunityBoardDAO">
-		SELECT
-			row_number() over(order by COMMUNITYBOARD_NO asc) as rownum , b.*
-		FROM
-			COMMUNITYBOARD b
+	<update id="deleteBoard" parameterType="com.koreait.dooboo.communityboard.dto.CommunityBoardDTO">
+		UPDATE COMMUNITYBOARD
+		SET
+			  DEL_YN = 'Y'
+			, MOD_DATE = SYSDATE
 		WHERE
-			<if test="searchType != '' and searchType != null">
-				<if test="searchKeyword != '' and searchKeyword != null">
-					<if test="searchType == 'title' ">
-					 	AND COMMUNITYBOARD_TITLE like concat('%',#{searchKeyword},'%')
-					 </if>
-					<if test="searchType == 'regId' ">
-						AND NICKNAME like concat('%',#{searchKeyword},'%')
-					</if>
-					<if test="searchType == 'redDate' ">
-						AND REGDATE like concat('%',#{searchKeyword},'%')
-					</if>
-				</if>
-			</if>
+			BOARD_NO = #{BOARDNO}
+	</update>
+
+	<select id="selectBoardList" parameterType="com.koreait.dooboo.communityboard.dto.CommunityBoardDTO" resultType="com.koreait.dooboo.communityboard.dto.CommunityBoardDTO">
+		SELECT
+			ROWNUM ,
+			COM.BOARD_NO ,
+			COM.TITLE ,
+			COM.CONTENT ,
+			COM.HIT ,
+			COM.REG_NO,
+			COM.MOD_NO,
+			COM.REG_DATE,
+			COM.MOD_DATE,
+			M.NICKNAME
+		FROM
+			COMMUNITYBOARD COM 
+			LEFT OUTER JOIN MEMBER M
+            ON REG_NO = M.MEMBER_NO
+		WHERE DEL_YN = 'N'
 		ORDER BY
-			COMMUNITYBOARD_NO DESC,
-			REGDATE DESC
-		LIMIT
-			#{startPage}, #{recordsPerPage}
+			COM.BOARD_NO DESC,
+			COM.REG_DATE DESC
 	</select>
 
 	
@@ -105,28 +102,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SET 
 			HIT = HIT + 1
 		WHERE
-			COMMUNITYBOARD_NO = #{communityboardNo}
+			BOARD_NO = #{boardNo}
 	</update>
 
-	<select id="selectBoardTotalCount" parameterType="com.koreait.dooboo.communityboard.dao.CommunityBoardDAO" resultType="int">
+	<select id="selectBoardTotalCount" parameterType="com.koreait.dooboo.communityboard.dto.CommunityBoardDTO" resultType="int">
 		SELECT
 			COUNT(*)
 		FROM
 			COMMUNITYBOARD
 		WHERE
-			<if test="searchType != '' and searchType != null">
+			del_yn = 'N'
+			<!-- <if test="searchType != '' and searchType != null">
 				<if test="searchKeyword != '' and searchKeyword != null">
 					<if test="searchType == 'title' ">
-					 	AND COMMUNITYBOARD_TITLE like concat('%',#{searchKeyword},'%')
+					 	AND TITLE like concat('%',#{searchKeyword},'%')
 					 </if>
-					<if test="searchType == 'regId' ">
-						AND NICKNAME like concat('%',#{searchKeyword},'%')
-					</if>
-					<if test="searchType == 'redDate' ">
-						AND REGDATE like concat('%',#{searchKeyword},'%')
-					</if>
+					<if test="searchType == 'content' ">
+					 	AND CONTENT like concat('%',#{searchKeyword},'%')
+					 </if>
 				</if>
-			</if>
+			</if> -->
 	</select>
 
 

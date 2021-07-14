@@ -1,11 +1,20 @@
 package com.koreait.dooboo.communityboard.dto;
 import java.sql.Date;
 
-public class CommunityBoardDTO {
+import org.springframework.stereotype.Repository;
+
+@Repository
+public class CommunityBoardDTO extends ListPagingDTO{
+	
+/*	 @SuppressWarnings("unused")
+	private static final long serialVersionUID = 362498820763181265L; */
 
     // 게시판번호 1부터 시작
     private long boardNo;
 
+    // 게시판 rownum
+    private int rownum;
+    
     // 글제목 
     private String title;
 
@@ -26,9 +35,21 @@ public class CommunityBoardDTO {
 
     // 수정일 
     private Date modDate;
-    public CommunityBoardDTO() {
-		// TODO Auto-generated constructor stub
+    
+    // 삭제여부
+    private String delYn;
+    
+    // 닉네임
+    private String nickname;
+    
+	public String getNickname() {
+		return nickname;
 	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+
     public long getBoardNo() {
         return boardNo;
     }
@@ -37,7 +58,15 @@ public class CommunityBoardDTO {
         this.boardNo = boardNo;
     }
 
-    public String getTitle() {
+    public int getRownum() {
+		return rownum;
+	}
+
+	public void setRownum(int rownum) {
+		this.rownum = rownum;
+	}
+
+	public String getTitle() {
         return title;
     }
 
@@ -93,4 +122,11 @@ public class CommunityBoardDTO {
         this.modDate = modDate;
     }
 
+	public String getDelYn() {
+		return delYn;
+	}
+
+	public void setDelYn(String delYn) {
+		this.delYn = delYn;
+	}
 }
