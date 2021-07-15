@@ -11,6 +11,12 @@ public interface MemberDAO {
 	public int updateInfo(String name , String nickname , long memberNo);
 	//회원탈퇴
 	public int delete(long no);
+
 	//회원번호에 해당하는 멤버 선택
 	public MemberDTO selectMemberByMemberNo(long memberNo);
+
+	
+	public MemberDTO apiLoginCheck(MemberDTO memberDTO);
+	
+
 }
