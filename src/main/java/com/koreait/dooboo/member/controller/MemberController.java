@@ -40,7 +40,7 @@ public class MemberController {
 		return "member/join";
 	}
 
-	@RequestMapping(value = "m.loginPage", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = {"m.loginPage","api/m.loginPage"}, method = { RequestMethod.GET, RequestMethod.POST })
 	public String login(Model model, HttpSession session) {
 		/* 네이버아이디로 인증 URL을 생성하기 위하여 naverLoginBO클래스의 getAuthorizationUrl메소드 호출 */
 		String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
@@ -60,7 +60,7 @@ public class MemberController {
 		return "member/myPage";
 	}
 
-	@PostMapping("m.join")
+	@PostMapping(value= {"m.join","api/m.join"})
 	public void join(Model model, MemberDTO memberDTO, HttpServletResponse response) {
 		model.addAttribute("memberDTO", memberDTO);
 		model.addAttribute("response", response);

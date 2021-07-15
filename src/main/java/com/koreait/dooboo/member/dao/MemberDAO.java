@@ -12,4 +12,6 @@ public interface MemberDAO {
 	//회원탈퇴
 	public int delete(long no);
 	
+	public MemberDTO apiLoginCheck(MemberDTO memberDTO);
+	
 }
