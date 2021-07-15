@@ -16,27 +16,41 @@
 				<input type="hidden" name="boardNo" id="boardNo" value="${board.getBoardNo()}"></input>
 			</c:if>
 		  <!-- Text Input -->
-		  <div>
-		    <label>제목</label>
-		    <input id="inputGroup1_1" type="text" name="title"value="${board.getTitle()}" >
-		    <small>제목을 입력하세요</small>
-		  </div>
-		  <!-- End Text Input -->
-		  <!-- Textarea Resizable -->
-		  <div>
-		    <label>내용</label>
-		    <textarea id="inputGroup2_2" name="contents" rows="10">${board.getContents()}</textarea>
-		    <small>내용을 입력하세요</small>
-		  </div>
-		  <!-- End Textarea Resizable -->
+		 	<div>
+			    <label>제목</label>
+			    <input value="${board.getTitle()}">
+			    <small>수정할 제목을 입력하세요</small>
+		    </div>
+		  	<div>
+			    <label>작성자</label>
+			    <input value="${member.getNickname()}" readonly >
+		    </div>
+    		<div>
+		    	<label>내용</label>
+		    	<textarea>${board.getContent()}</textarea>
+			    <small>수정할 내용을 입력하세요</small>
+		    </div>
+		  	<div>
+			    <label>등록일</label>
+			    <input value="${board.getRegDate()}" readonly >
+		    </div>
+		  	<div>
+			    <label>수정일</label>
+			    <input value="${board.getModDate()}" readonly >
+		    </div>
+		  	<div>
+			    <label>조회수</label>
+			    <input value="${board.getHit()}" readonly >
+		    </div>
+
 		</form>			
 		<c:if test="${not empty board}"> 
-				<a href="javascript:boardSave()">수정하기</a>
-			</c:if>
-			<c:if test="${empty board}"> 
-				<a href="javascript:boardSave()">저장하기</a>
-			</c:if>
-			<button><a href="/board/list">목록보기</a></button>
+			<a href="javascript:boardSave()">수정하기</a>
+		</c:if>
+		<c:if test="${empty board}"> 
+			<a href="javascript:boardSave()">저장하기</a>
+		</c:if>
+		<button><a href="b.list">목록보기</a></button>
 	</div>
 	<script>
 		function boardSave(){
@@ -45,13 +59,13 @@
 			if(confirm(saveTxt+'하시겠습니까?')){
 				var formData = $("#frm").serializeArray();
 				$.ajax({
-				    url: "/board/save", // 클라이언트가 요청을 보낼 서버의 URL 주소
+				    url: "b.save", // 클라이언트가 요청을 보낼 서버의 URL 주소
 				    data: formData,                // HTTP 요청과 함께 서버로 보낼 데이터
 				    type: "POST",                             // HTTP 요청 방식(GET, POST)
 				    dataType: "json",                         // 서버에서 보내줄 데이터의 타입
 			        success : function(data) {
 			        	alert('저장 되었습니다.');
-			       		location.href='/board/list'
+			       		location.href='b.list'
 			        	console.log(data);
 			        	var jsonObj = JSON.parse(data);
 			        }, // success 

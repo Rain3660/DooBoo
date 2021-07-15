@@ -122,7 +122,7 @@
 					</li>
 					<li id="menu-item-1769"
 						class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1769">
-						<a href="#">자유게시판</a>
+						<a href="b.list">자유게시판</a>
 					</li>
 					<li id="menu-item-1775"
 						class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1775"><a

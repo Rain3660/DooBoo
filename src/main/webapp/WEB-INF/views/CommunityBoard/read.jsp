@@ -17,19 +17,35 @@
 				<input type="hidden" name="boardNo" id="boardNo" value="${board.getBoardNo()}"></input>
 			</c:if>
 		  	<div>
-			    <label>제목</label>
-			    <input id="inputGroup1_1" value="${board.getTitle()}" readonly >
-			    <small>제목을 입력하세요</small>
+			    <label>번호</label>
+			    <input type="text"  name="rownum" value="${board.getRownum()}" readonly>
 		    </div>
-		  <!-- Textarea Resizable -->
-		  <div>
-		    <label>내용</label>
-		    <textarea id="inputGroup2_2">${board.getContents()}</textarea>
-		    <small>내용을 입력하세요</small>
-		  </div>
-		  <!-- End Textarea Resizable -->
+		  	<div>
+			    <label>제목</label>
+			    <input type="text"  name="title" value="${board.getTitle()}" readonly >
+		    </div>
+		  	<div>
+			    <label>작성자</label>
+			    <input name="nickname" value="${member.getNickname()}" readonly >
+		    </div>
+    		<div>
+		    	<label>내용</label>
+		    	<textarea name="content" id="inputGroup2_2" readonly>${board.getContent()}</textarea>
+		    </div>
+		  	<div>
+			    <label>등록일</label>
+			    <input name="regdate" value="${board.getRegDate()}" readonly >
+		    </div>
+		  	<div>
+			    <label>수정일</label>
+			    <input name="moddate" value="${board.getModDate()}" readonly >
+		    </div>
+		  	<div>
+			    <label>조회수</label>
+			    <input name="hit" value="${board.getHit()}" readonly >
+		    </div>
 		</form>
-		<a href="/board/list" class="btn btn-md u-btn-inset u-btn-indigo g-mr-10 g-mb-15">목록보기</a>
+		<a href="b.list">목록보기</a>
 	</div>
      <!-- Footer -->
         <jsp:include page="../layout/footer.jsp"></jsp:include>

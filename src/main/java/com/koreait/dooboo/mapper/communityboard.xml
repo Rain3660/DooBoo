@@ -17,11 +17,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</sql>
 
 	<insert id="insertBoard" parameterType="com.koreait.dooboo.communityboard.dto.CommunityBoardDTO">
-<!-- 	   	<selectKey resultType="int" keyProperty="memberNo" order="BEFORE">
-        	SELECT MEMBER_NO FROM MEMBER WHERE MEMBER_ID = #{memberId} 
-    	</selectKey>
- -->	INSERT INTO COMMUNITYBOARD (
-					  TITLE
+	INSERT INTO COMMUNITYBOARD (
+					  BOARD_NO
+					, TITLE
 					, CONTENT
 					, HIT
 					, REG_NO
@@ -29,29 +27,35 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 					, REG_DATE
 					, MOD_DATE
 		) VALUES (
-			  #{TITLE}
-			, #{CONTENT}
+			  COMMUNITYBOARD_SEQ.NEXTVAL
+			, #{title}
+			, #{content}
 			, 0
-			, #{member.getMemberNo}
-			, #{member.getMemberNo}
+			, #{regNo}
+			, #{modNo}
 			, SYSDATE
 			, SYSDATE
 		)
 	</insert>
 
-	<select id="selectBoardDetail" parameterType="integer" resultType="com.koreait.dooboo.communityboard.dto.CommunityBoardDTO">
+	<select id="selectBoardDetail" parameterType="long" resultType="com.koreait.dooboo.communityboard.dto.CommunityBoardDTO">
 		SELECT
-			  BOARD_NO
-			, TITLE
-			, CONTENT
-			, HIT
-			, REG_NO
-			, REG_DATE
-			, MOD_DATE
+			ROWNUM ,
+			COM.BOARD_NO ,
+			COM.TITLE ,
+			COM.CONTENT ,
+			COM.HIT ,
+			COM.REG_NO,
+			COM.MOD_NO,
+			COM.REG_DATE,
+			COM.MOD_DATE,
+			M.NICKNAME
 		FROM
-			COMMUNITYBOARD
+			COMMUNITYBOARD COM 
+			LEFT OUTER JOIN MEMBER M
+            ON REG_NO = M.MEMBER_NO
 		WHERE
-			BOARD_NO = #{boardNo}
+			BOARD_NO = #{board_no}
 	</select>
 
 	<update id="updateBoard" parameterType="com.koreait.dooboo.communityboard.dto.CommunityBoardDTO">
@@ -70,7 +74,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			  DEL_YN = 'Y'
 			, MOD_DATE = SYSDATE
 		WHERE
-			BOARD_NO = #{BOARDNO}
+			BOARD_NO = #{boardNo}
 	</update>
 
 	<select id="selectBoardList" parameterType="com.koreait.dooboo.communityboard.dto.CommunityBoardDTO" resultType="com.koreait.dooboo.communityboard.dto.CommunityBoardDTO">
@@ -96,7 +100,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	
-	<update id="updateHit" parameterType="Integer">
+	<update id="updateHit" parameterType="long">
 		UPDATE
 			COMMUNITYBOARD 
 		SET 
@@ -112,7 +116,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			COMMUNITYBOARD
 		WHERE
 			del_yn = 'N'
-			<!-- <if test="searchType != '' and searchType != null">
+			<if test="searchType != '' and searchType != null">
 				<if test="searchKeyword != '' and searchKeyword != null">
 					<if test="searchType == 'title' ">
 					 	AND TITLE like concat('%',#{searchKeyword},'%')
@@ -121,7 +125,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 					 	AND CONTENT like concat('%',#{searchKeyword},'%')
 					 </if>
 				</if>
-			</if> -->
+			</if>
 	</select>
 
 
