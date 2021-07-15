@@ -25,7 +25,9 @@ import com.koreait.dooboo.member.command.DeleteCommand;
 import com.koreait.dooboo.member.command.JoinCommand;
 import com.koreait.dooboo.member.command.LogOutCommand;
 import com.koreait.dooboo.member.command.LoginCommand;
+import com.koreait.dooboo.member.command.UpdateContactCommand;
 import com.koreait.dooboo.member.command.UpdateInfoCommand;
+import com.koreait.dooboo.member.command.UpdatePasswordCommand;
 import com.koreait.dooboo.member.dto.MemberDTO;
 
 @Controller
@@ -47,6 +49,10 @@ public class MemberController {
 	private UpdateInfoCommand updateInfoCommand;
 	@Autowired
 	private CurrentPasswordCheckCommand currentPasswordCheckCommand;
+	@Autowired
+	private UpdatePasswordCommand updatePasswordCommand;
+	@Autowired
+	private UpdateContactCommand updateContactCommand;
 	@GetMapping("m.joinPage")
 	public String joinPage() {
 		return "member/join";
@@ -115,6 +121,21 @@ public class MemberController {
 		
 		model.addAttribute("memberDTO", memberDTO);
 		return currentPasswordCheckCommand.execute(sqlSession, model);
+	}
+	@PostMapping(value="m.updatePassword")
+	public void updatePassword(Model model , HttpServletRequest request , HttpServletResponse response) {
+		model.addAttribute("request", request);
+		model.addAttribute("response", response);
+		
+		updatePasswordCommand.execute(sqlSession, model);
+	}
+	@PostMapping(value="m.updateContact")
+	public void updateContact(Model model , HttpServletRequest request , HttpServletResponse response) {
+		model.addAttribute("request", request);
+		model.addAttribute("response", response);
+		
+		updateContactCommand.execute(sqlSession, model);
+
 	}
 
 }
