@@ -1,23 +1,31 @@
 package com.koreait.dooboo.member.controller;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.koreait.dooboo.api.Kakao_RestApi;
 import com.koreait.dooboo.api.NaverLoginBO;
+import com.koreait.dooboo.member.command.CurrentPasswordCheckCommand;
 import com.koreait.dooboo.member.command.DeleteCommand;
 import com.koreait.dooboo.member.command.JoinCommand;
+import com.koreait.dooboo.member.command.LogOutCommand;
 import com.koreait.dooboo.member.command.LoginCommand;
+import com.koreait.dooboo.member.command.UpdateInfoCommand;
 import com.koreait.dooboo.member.dto.MemberDTO;
 
 @Controller
@@ -29,12 +37,16 @@ public class MemberController {
 	private JoinCommand joinCommand;
 	@Autowired
 	private LoginCommand loginCommand;
-
+	@Autowired
+	private LogOutCommand logOutCommand;
 	@Autowired
 	private DeleteCommand deleteCommand;
 	@Autowired
 	private NaverLoginBO naverLoginBO;
-
+	@Autowired
+	private UpdateInfoCommand updateInfoCommand;
+	@Autowired
+	private CurrentPasswordCheckCommand currentPasswordCheckCommand;
 	@GetMapping("m.joinPage")
 	public String joinPage() {
 		return "member/join";
@@ -62,6 +74,7 @@ public class MemberController {
 
 	@PostMapping(value= {"m.join","api/m.join"})
 	public void join(Model model, MemberDTO memberDTO, HttpServletResponse response) {
+		
 		model.addAttribute("memberDTO", memberDTO);
 		model.addAttribute("response", response);
 		joinCommand.execute(sqlSession, model);
@@ -80,6 +93,7 @@ public class MemberController {
 		model.addAttribute("request", request);
 		model.addAttribute("response", response);
 		model.addAttribute("memberDTO", memberDTO);
+		updateInfoCommand.execute(sqlSession, model);
 	}
 
 	@GetMapping(value = "m.leave.do")
@@ -92,7 +106,15 @@ public class MemberController {
 	@GetMapping(value = "m.logout")
 	public String logOut(HttpSession session, Model model) {
 		model.addAttribute("session", session);
-		return "redirect:index";
+		logOutCommand.execute(sqlSession, model);
+		return "home";
+	}
+	@PostMapping(value="m.currentPwCheck" , produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ResponseBody
+	public Map<String, Integer> currentPwCheck(@RequestBody MemberDTO memberDTO , Model model){
+		
+		model.addAttribute("memberDTO", memberDTO);
+		return currentPasswordCheckCommand.execute(sqlSession, model);
 	}
 
 }

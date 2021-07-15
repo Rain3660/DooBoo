@@ -18,7 +18,7 @@ public class UpdateInfoCommand implements MemberCommand{
 	@Override
 	public void execute(SqlSession sqlSession, Model model) {
 		
-		// Session , response
+		// Session , response , request
 		HttpSession session = ((HttpServletRequest)model.asMap().get("request")).getSession();
 		HttpServletResponse response = (HttpServletResponse)model.asMap().get("response");
 		
@@ -26,12 +26,14 @@ public class UpdateInfoCommand implements MemberCommand{
 		// 수정할 정보가 담김 회원
 		MemberDTO memberDTO = (MemberDTO)model.asMap().get("memberDTO");
 		
+		String name = memberDTO.getName();
+		String nickname = memberDTO.getNickname();
 		// 세션에 올라가 있는 회원 , 회원번호
 		MemberDTO loginUser = (MemberDTO)session.getAttribute("loginUser");		
 		long memberNo = loginUser.getMemberNo();
 		
 		// 수정 하고,
-		int result = sqlSession.getMapper(MemberDAO.class).updateInfo(memberDTO);
+		int result = sqlSession.getMapper(MemberDAO.class).updateInfo(name , nickname , memberNo);
 		
 		PrintWriter out = null;
 		response.setContentType("text/html; charset=utf-8");
@@ -40,8 +42,8 @@ public class UpdateInfoCommand implements MemberCommand{
 			out = response.getWriter();
 			
 			if(result >0) { // 수정 성공하면
-				loginUser.setName(memberDTO.getName());
-				loginUser.setNickname(memberDTO.getNickname());
+				loginUser.setName(name);
+				loginUser.setNickname(nickname);
 				out.println("<script>");
 				out.println("alert('개인정보를 수정하였습니다.')");
 				out.println("location.href='m.myPage'");
