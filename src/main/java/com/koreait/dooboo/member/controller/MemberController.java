@@ -1,5 +1,7 @@
 package com.koreait.dooboo.member.controller;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -12,13 +14,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 
 import com.koreait.dooboo.member.command.DeleteCommand;
 
 import com.koreait.dooboo.api.Kakao_RestApi;
 import com.koreait.dooboo.api.NaverLoginBO;
+<<<<<<< Updated upstream
 
+=======
+import com.koreait.dooboo.member.command.DeleteCommand;
+import com.koreait.dooboo.member.command.IdCheckCommand;
+>>>>>>> Stashed changes
 import com.koreait.dooboo.member.command.JoinCommand;
 import com.koreait.dooboo.member.command.LoginCommand;
 import com.koreait.dooboo.member.dto.MemberDTO;
@@ -37,6 +45,8 @@ public class MemberController {
 	private DeleteCommand deleteCommand;
 
 	private NaverLoginBO naverLoginBO;
+	@Autowired
+	private IdCheckCommand idCheckCommand;
 
 	
 	@GetMapping("m.joinPage")
@@ -96,5 +106,18 @@ public class MemberController {
 		model.addAttribute("session",session);
 		return "redirect:index";
 	}
+<<<<<<< Updated upstream
 	   
+=======
+	
+	@GetMapping(value="m.idCheck",
+			produces="application/json; charset=utf-8")
+	@ResponseBody
+	public Map<String, Integer> idCheck(HttpServletRequest request,
+										Model model) {
+		model.addAttribute("request", request);
+		return idCheckCommand.execute(sqlSession, model);
+	}
+
+>>>>>>> Stashed changes
 }

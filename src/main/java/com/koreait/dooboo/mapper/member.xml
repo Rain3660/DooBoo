@@ -32,4 +32,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		UPDATE MEMBER SET NAME = #{name} , NICKNAME = #{nickname} WHERE MEMBERNO = #{memberNo}
 	</update>
 	
+	
+	
+	<select id="idCheck" resultType="int">
+		SELECT COUNT(MEMBER_ID) FROM MEMBER WHERE MEMBER_ID = #{memberId}
+	</select>	
+	
+	
 </mapper>

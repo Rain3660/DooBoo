@@ -11,5 +11,7 @@ public interface MemberDAO {
 	public int updateInfo(MemberDTO memberDTO);
 	//회원탈퇴
 	public int delete(long no);
+	//아이디체크
+	public int  idCheck(String id);
 	
 }
