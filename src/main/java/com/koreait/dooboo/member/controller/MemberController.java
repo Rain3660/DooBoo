@@ -86,7 +86,7 @@ public class MemberController {
 		joinCommand.execute(sqlSession, model);
 	}
 
-	@PostMapping("m.login")
+	@PostMapping(value={"m.login","api/m.login"})
 	public void login(Model model, MemberDTO memberDTO, HttpServletRequest request, HttpServletResponse response) {
 		model.addAttribute("request", request);
 		model.addAttribute("response", response);
