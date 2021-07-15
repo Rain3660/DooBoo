@@ -16,6 +16,8 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 
 import com.koreait.dooboo.api.NaverLoginBO;
+import com.koreait.dooboo.map.command.MapCheckLocationCommand;
+import com.koreait.dooboo.map.command.MapInsertLocationCommand;
 import com.koreait.dooboo.member.command.CurrentPasswordCheckCommand;
 import com.koreait.dooboo.member.command.DeleteCommand;
 
@@ -123,5 +125,14 @@ public class BeanConfiguration {
 	@Bean
 	public UpdateContactCommand updateContactCommand() {
 		return new UpdateContactCommand();
+	}
+	@Bean
+	public MapCheckLocationCommand mapCheckLocationCommand() {
+		return new MapCheckLocationCommand();
+	}
+	
+	@Bean
+	public MapInsertLocationCommand mapInsertLocationCommand() {
+		return new MapInsertLocationCommand();
 	}
 }
