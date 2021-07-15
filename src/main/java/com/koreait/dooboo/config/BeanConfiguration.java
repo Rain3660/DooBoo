@@ -16,6 +16,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 
 import com.koreait.dooboo.api.NaverLoginBO;
+import com.koreait.dooboo.member.command.CurrentPasswordCheckCommand;
 import com.koreait.dooboo.member.command.DeleteCommand;
 
 
@@ -23,7 +24,9 @@ import com.koreait.dooboo.member.command.DeleteCommand;
 import com.koreait.dooboo.api.NaverLoginBO;
 
 import com.koreait.dooboo.member.command.JoinCommand;
+import com.koreait.dooboo.member.command.LogOutCommand;
 import com.koreait.dooboo.member.command.LoginCommand;
+import com.koreait.dooboo.member.command.UpdateInfoCommand;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
@@ -99,5 +102,16 @@ public class BeanConfiguration {
 		return new NaverLoginBO();
 
 	}
-
+	@Bean
+	public LogOutCommand logOutCommand() {
+		return new LogOutCommand();
+	}
+	@Bean
+	public UpdateInfoCommand updateInfoCommand() {
+		return new UpdateInfoCommand();
+	}
+	@Bean
+	public CurrentPasswordCheckCommand currentPasswordCheckCommand() {
+		return new CurrentPasswordCheckCommand();
+	}
 }

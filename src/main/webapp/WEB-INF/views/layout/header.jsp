@@ -50,7 +50,8 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="https://themewagon.com/"
+				
+				<a class="navbar-brand" href="<c:url value="/"></c:url>"
 					title="Free Responsive Bootstrap Themes"> <img
 					src="https://d2zav2bjdlctd5.cloudfront.net/themes/themewagon/img/logo.png"
 					alt="ThemeWagon Logo">
@@ -97,12 +98,12 @@
 					</c:if>
 					<c:if test="${not empty loginUser }">
 						<li>
-							<a href="m.logout">로그아웃</a>
+							<a href="m.logout" id="logout">로그아웃</a>
 						</li>						
 					</c:if>
 					<li class="login_menu">
-					<a href="m.myPage">
-						<i class="fa fa-lock"></i> 마이페이지</a>
+					<a href="#" id="mypage">
+						<i class="fa fa-lock" ></i> 마이페이지</a>
 					</li>
 				</ul>
 			</div>
@@ -139,3 +140,18 @@
 			</div>
 		</div>
 	</div>
+	<script type="text/javascript">
+	$(document).ready(function(){
+		
+		$('#mypage').on('click' , function(){
+			if('${loginUser.memberNo}' == ''){
+				if(confirm('로그인이 필요합니다 ,로그인 페이지로 이동할까요 ?')){
+					location.href = 'm.loginPage';	
+				}
+			}else{
+				location.href = 'm.myPage';
+			}
+			
+		})		
+	})
+	</script>
