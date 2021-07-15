@@ -55,7 +55,7 @@ public class NaverLoginController {
 	//4.파싱 닉네임 세션으로 저장
 	model.addAttribute("result", apiResult);
 	
-	String naverno = (String)response_obj.get("id");
+	String apiMemberNo = (String)response_obj.get("id");
 	String age = (String) response_obj.get("age");
 	String gender = (String) response_obj.get("gender");
 	String email  = (String) response_obj.get("email");
@@ -76,23 +76,28 @@ public class NaverLoginController {
 	model.addAttribute("email",email);
 	model.addAttribute("name",name);
 	model.addAttribute("birthday",birthday);
+	model.addAttribute("apiMemberNo",apiMemberNo);
+	model.addAttribute("apiNumber",1);
 	String loginApi = "1";
 	model.addAttribute("loginApi",loginApi);
 	model.addAttribute("phone",phone);
 	System.out.println("생년월일 : "+birthday);
-	System.out.println("id : "+naverno);
+	System.out.println("id : "+apiMemberNo);
 	System.out.println("age : "+age);
 	System.out.println("gender : "+gender);
 	System.out.println("email : "+email);
 	System.out.println("name : "+name);	
     String view = "member/join";
-/*	    MemberDAO memberDAO = sqlSession.getMapper(MemberDAO.class);
-	    MemberDTO loginDTO = memberDAO.navernoCheck(naverno);
-	    if(loginDTO!= null) {
-	    	session.setAttribute("loginDTO",loginDTO );
-	    	view = "redirect:/";
-	    }*/
-	    
+	    MemberDAO memberDAO = sqlSession.getMapper(MemberDAO.class);
+	    MemberDTO memberDTO = new MemberDTO();
+	    memberDTO.setApiNumber(1);
+	    memberDTO.setApiMemberNo(apiMemberNo);
+	    MemberDTO loginUser = memberDAO.apiLoginCheck(memberDTO);
+	    if(loginUser!= null) {
+	    	session.setAttribute("loginUser",loginUser );
+	    	view = "map/apiBeforeLogin";
+	    }
+	    System.out.println("이동할곳:"+view);
 	    return view;
 	}
 	//로그아웃

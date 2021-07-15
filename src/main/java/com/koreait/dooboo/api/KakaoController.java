@@ -45,7 +45,7 @@ public class KakaoController {
         JsonNode userInfo = Kakao_RestApi.getKakaoUserInfo(access_token);
         
         // Get id
-        String kakaono = userInfo.path("id").asText();
+        String apiMemberNo = userInfo.path("id").asText();
         String name = null;
         String email = null;
         String gender = null;
@@ -56,7 +56,7 @@ public class KakaoController {
         name = properties.path("nickname").asText();
         email = kakao_account.path("email").asText();
         gender = kakao_account.path("gender").asText();
-        System.out.println("유저 아이디 : "+kakaono);//기본키
+        System.out.println("유저 아이디 : "+apiMemberNo);//기본키
         System.out.println("유저 이름 : "+name);//닉네임 == 이름
         System.out.println("유저 이메일 : "+email); //이메일
         System.out.println("유저 성별 : "+gender); //성별
@@ -66,13 +66,19 @@ public class KakaoController {
         model.addAttribute("name",name);
         model.addAttribute("email",email);
         model.addAttribute("gender",gender);
+    	model.addAttribute("apiMemberNo",apiMemberNo);
+    	model.addAttribute("apiNumber",2);
+        
         String view = "member/join";
-/*        MemberDAO memberDAO = sqlSession.getMapper(MemberDAO.class);
-        MemberDTO loginDTO = memberDAO.kakaonoCheck(kakaono);
-        if(loginDTO!= null) {
-        	session.setAttribute("loginDTO",loginDTO );
-        	view = "redirect:/";
-        }*/
+        MemberDAO memberDAO = sqlSession.getMapper(MemberDAO.class);
+	    MemberDTO memberDTO = new MemberDTO();
+	    memberDTO.setApiNumber(2);
+	    memberDTO.setApiMemberNo(apiMemberNo);
+	    MemberDTO loginUser = memberDAO.apiLoginCheck(memberDTO);
+	    if(loginUser!= null) {
+	    	session.setAttribute("loginUser",loginUser );
+	    	view = "map/apiBeforeLogin";
+	    }
         
         return view;
     }

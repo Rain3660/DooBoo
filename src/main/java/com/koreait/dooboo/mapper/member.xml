@@ -22,14 +22,36 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		#{region}, 
 		#{location},
 		#{birthday},
-		null) <!-- status 0 = 정상   , 1= 삭제 -->
+		null,
+		#{apiNumber},
+		#{apiMemberNo}) <!-- status 0 = 정상   , 1= 삭제 -->
 	</insert>
-	
+	<!-- 아이디와 비밀번호가 일치하고 status 가 0 인 회원 -->
 	<select id="login" resultType="com.koreait.dooboo.member.dto.MemberDTO">
 		SELECT * FROM MEMBER WHERE MEMBER_ID = #{memberId} AND PASSWORD= #{password} AND STATUS = 0
 	</select>
 	<update id="updateInfo">
-		UPDATE MEMBER SET NAME = #{name} , NICKNAME = #{nickname} WHERE MEMBERNO = #{memberNo}
+		UPDATE MEMBER SET NAME = #{param1} , NICKNAME = #{param2} , MOD_DATE = SYSDATE WHERE MEMBER_NO = #{param3} AND STATUS = 0
+	</update>
+
+	<select id="selectMemberByMemberNo" resultType="com.koreait.dooboo.member.dto.MemberDTO">
+		SELECT * FROM MEMBER WHERE MEMBER_NO = #{param1} AND STATUS = 0
+	</select>
+
+	
+	<select id="apiLoginCheck" resultType="com.koreait.dooboo.member.dto.MemberDTO">
+		SELECT * 
+		  FROM MEMBER
+		 WHERE APINUMBER = #{apiNumber} AND APIMEMBERNO = #{apiMemberNo}
+	</select>
+	
+	<update id="updatePassword">
+		UPDATE MEMBER SET PASSWORD = #{param1} , MOD_DATE = SYSDATE WHERE STATUS = 0 AND MEMBER_NO = #{param2}
+	</update>
+	<update id="updateContact">
+		UPDATE MEMBER SET PHONE = #{param1} , CITY = #{param2} , REGION = #{param3} , LOCATION = #{param4} , MOD_DATE = SYSDATE WHERE STATUS = 0 AND MEMBER_NO = #{param5} 
 	</update>
 	
+	
+
 </mapper>

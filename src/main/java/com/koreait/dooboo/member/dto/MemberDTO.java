@@ -54,6 +54,30 @@ public class MemberDTO {
 	// 수정일
 	private Date modDate;
 	
+	private String apiMemberNo;
+	
+	private int apiNumber;
+	
+	
+	
+
+
+	public String getApiMemberNo() {
+		return apiMemberNo;
+	}
+
+	public void setApiMemberNo(String apiMemberNo) {
+		this.apiMemberNo = apiMemberNo;
+	}
+
+	public int getApiNumber() {
+		return apiNumber;
+	}
+
+	public void setApiNumber(int apiNumber) {
+		this.apiNumber = apiNumber;
+	}
+
 	public MemberDTO() {
 		// TODO Auto-generated constructor stub
 	}
@@ -192,8 +216,10 @@ public class MemberDTO {
 				+ ", password=" + password + ", email=" + email + ", nickname=" + nickname + ", gender=" + gender
 				+ ", regdate=" + regdate + ", outdate=" + outdate + ", status=" + status + ", city=" + city
 				+ ", region=" + region + ", location=" + location + ", birthday=" + birthday + ", modDate=" + modDate
-				+ "]";
+				+ ", apiMemberNo=" + apiMemberNo + ", apiNumber=" + apiNumber + "]";
 	}
+
+
 	
 	
 	

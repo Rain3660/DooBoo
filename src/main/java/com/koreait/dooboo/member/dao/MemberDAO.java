@@ -8,8 +8,16 @@ public interface MemberDAO {
 	// 로그인
 	public MemberDTO login(MemberDTO memberDTO);
 	// 개인정보 수정
-	public int updateInfo(MemberDTO memberDTO);
+	public int updateInfo(String name , String nickname , long memberNo);
 	//회원탈퇴
 	public int delete(long no);
+
+	//회원번호에 해당하는 멤버 선택
+	public MemberDTO selectMemberByMemberNo(long memberNo);
+
 	
+	public MemberDTO apiLoginCheck(MemberDTO memberDTO);
+	
+	public int updatePassword(String password , long memberNo);
+	public int updateContact(String phone ,String city , String region , String location , long memberNo);
 }
