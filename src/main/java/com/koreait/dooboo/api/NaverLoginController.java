@@ -95,9 +95,9 @@ public class NaverLoginController {
 	    MemberDTO loginUser = memberDAO.apiLoginCheck(memberDTO);
 	    if(loginUser!= null) {
 	    	session.setAttribute("loginUser",loginUser );
-	    	view = "redirect:/";
+	    	view = "map/apiBeforeLogin";
 	    }
-	    
+	    System.out.println("이동할곳:"+view);
 	    return view;
 	}
 	//로그아웃
