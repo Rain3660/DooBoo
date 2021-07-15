@@ -26,7 +26,9 @@ import com.koreait.dooboo.api.NaverLoginBO;
 import com.koreait.dooboo.member.command.JoinCommand;
 import com.koreait.dooboo.member.command.LogOutCommand;
 import com.koreait.dooboo.member.command.LoginCommand;
+import com.koreait.dooboo.member.command.UpdateContactCommand;
 import com.koreait.dooboo.member.command.UpdateInfoCommand;
+import com.koreait.dooboo.member.command.UpdatePasswordCommand;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
@@ -113,5 +115,13 @@ public class BeanConfiguration {
 	@Bean
 	public CurrentPasswordCheckCommand currentPasswordCheckCommand() {
 		return new CurrentPasswordCheckCommand();
+	}
+	@Bean
+	public UpdatePasswordCommand updatePasswordCommand() {
+		return new UpdatePasswordCommand();
+	}
+	@Bean
+	public UpdateContactCommand updateContactCommand() {
+		return new UpdateContactCommand();
 	}
 }

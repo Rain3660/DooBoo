@@ -18,5 +18,6 @@ public interface MemberDAO {
 	
 	public MemberDTO apiLoginCheck(MemberDTO memberDTO);
 	
-
+	public int updatePassword(String password , long memberNo);
+	public int updateContact(String phone ,String city , String region , String location , long memberNo);
 }
