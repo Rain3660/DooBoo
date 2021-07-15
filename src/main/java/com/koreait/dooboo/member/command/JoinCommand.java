@@ -21,12 +21,13 @@ public class JoinCommand implements MemberCommand{
 		MemberDTO newMember = (MemberDTO)model.asMap().get("memberDTO");
 		// 초기 작성한 비밀번호
 		String orgPw = newMember.getPassword();
+		System.out.println(newMember.getPassword());
 		// 비밀번호의 암호화 작업
 		String password = SecurityUtils.encodeBase64(orgPw);		
 		newMember.setPassword(password);
 		// 회원가입
 		int result = sqlSession.getMapper(MemberDAO.class).join(newMember);
-		
+		System.out.println(newMember);
 		PrintWriter out = null;
 		response.setContentType("text/html; charset=utf-8"); 
 		
