@@ -14,14 +14,8 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
-
 import com.koreait.dooboo.api.NaverLoginBO;
 import com.koreait.dooboo.member.command.DeleteCommand;
-
-
-import com.koreait.dooboo.member.command.DeleteCommand;
-import com.koreait.dooboo.api.NaverLoginBO;
-
 import com.koreait.dooboo.member.command.JoinCommand;
 import com.koreait.dooboo.member.command.LoginCommand;
 import com.zaxxer.hikari.HikariConfig;
