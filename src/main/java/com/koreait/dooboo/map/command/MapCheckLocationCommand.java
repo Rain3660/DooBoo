@@ -18,14 +18,15 @@ public class MapCheckLocationCommand {
 		Map<String, Object> map = model.asMap();
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
 		Long mapno = Long.parseLong(request.getParameter("mapno"));
-		System.out.println(mapno);
+		
 		MapLocationCheckDTO mapLocationCheckDTO = new MapLocationCheckDTO(mapno, 1);
 		MapDAO mapDAO = sqlSession.getMapper(MapDAO.class);
-		int result = mapDAO.CheckLocation(mapLocationCheckDTO);
+		int result = mapDAO.mapUpdateResult(mapLocationCheckDTO);
 		Map<String, Object> resultMap = new HashMap<String,Object>();
 		if(result > 0) {
 			resultMap.put("result", result);			
 		}
+		System.out.println("결과"+result);
 		return resultMap;
 	}
 

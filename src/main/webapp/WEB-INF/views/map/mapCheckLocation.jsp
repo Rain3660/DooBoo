@@ -113,6 +113,7 @@ function displayCenterInfo(result, status) {
                   dataType : 'json',
                   success : function(resultMap){
                       if(resultMap.result > 0){
+                    	  
                           alert('인증되었습니다');
                           location.href='index';
                       }

@@ -30,7 +30,7 @@ public class MapController {
 		this.mapInsertLocationCommand = mapInsertLocationCommand;
 	}
 
-	@GetMapping(value= {"m.mapInsertLocatinPage","api/m.mapInsertLocationPage"})
+	@GetMapping(value= {"m.mapInsertLocationPage","api/m.mapInsertLocationPage"})
 	public String inserLocationPage() {
 		return "map/mapInsertLocation";
 	}
