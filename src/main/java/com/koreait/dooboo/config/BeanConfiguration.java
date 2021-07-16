@@ -11,6 +11,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import com.koreait.dooboo.api.NaverLoginBO;
 import com.koreait.dooboo.member.command.DeleteCommand;
 import com.koreait.dooboo.member.command.JoinCommand;
+import com.koreait.dooboo.member.command.LogOutCommand;
 import com.koreait.dooboo.member.command.LoginCommand;
 import com.koreait.dooboo.member.command.IdCheckCommand;
 import com.zaxxer.hikari.HikariConfig;
@@ -62,6 +63,10 @@ public class BeanConfiguration {
 	@Bean
 	public LoginCommand loginCommand() {
 		return new LoginCommand();
+	}
+	@Bean
+	public LogOutCommand logoutCommand() {
+		return new LogOutCommand();
 	}
 
 	@Bean

@@ -20,7 +20,13 @@
 			fn_nicknameCheck();
 			fn_nameCheck();
 			fn_phoneCheck();
+			fn_birthDay();
+			fn_gender();
+			fn_city();
+			fn_region();
+			fn_location();
 			fn_join();
+			
 			
 		
 			
@@ -193,13 +199,13 @@
 					
 				}
 				if(!regname.test( $('#phone').val())){
-					$('#phone_result').text('숫자, -을 포함해 휴대전화 형식에 맞게 입력해주세요.')
+					$('#phone_result').text('숫자, -을 포함해 휴대전화 형식에 맞게 입력해주세요.');
 					phonePass = false;
 				     return false;
 					
 							
 				}
-				$('#phone_result').text('적합한 번호입니다.')
+				$('#phone_result').text('적합한 번호입니다.');
 				phonePass = true;
 				return true;
 				
@@ -209,11 +215,79 @@
 
 			
 		}
-				
-
+		
+		var birthDayPass = false 
+		function fn_birthDay(){
+			$('#birthday').click(function(){
+			if($('#birthday').val() == ''){
+				$('#birthday_result').html('생년월일을입력 하세요');
+			     return false
+			}
+			 if($('#birthday').val() != ''){
+			$('#birthday_result').html('확인')
+			birthDayPass = true
+			return true
+			}
+			 
+			})
+		}
+		
+		var genderPass = false 
+		function fn_gender(){
+			$('#gender').click(function(){
+			if($('#gender').val() == ''){
+				$('#gender_result').text('성별을 입력 하세요');
+				return false;
+			}
+			$('#gender_result').text('확인');
+			genderPass = true;
+			return true;
 			
-				
+			})
+		}
+		
+		var cityPass = false 
+		function fn_city(){
+			$('#city').keyup(function(){
+			if($('#city').val() == ''){
+				$('#city_result').text('도시를 입력 하세요');
+				return false;
+			}
+			$('#city_result').text('확인');
+			cityPass = true;
+			return true;
+			})
+		}
+		
+		var regionPass = false 
+		function fn_region(){
+			$('#region').keyup(function(){
+			if($('#region').val() == ''){
+				$('#region_result').text('지역을 입력 하세요');
+				return false;
+			}
+			$('#region_result').text('확인');
+			regionPass = true;
+			return true;
+			
+			})
+		}
+		
+		var locationPass = false 
+		function fn_location(){
+			$('#location').keyup(function(){
+			if($('#location').val() == ''){
+				$('#location_result').text('상세주소을 입력 하세요');
+				return false;
+			}
+			$('#location_result').text('확인');
+			locationPass = true;
+			return true;
+			
+			})
+		}
 
+	
 			
 		
 		
@@ -224,29 +298,64 @@
 			if(!idPass && !fn_idCheck() == true){
 				alert('아이디 확인')
 				return false;
-			}else if(!pwPass || !pwPass2){
+			}
+			if(!pwPass || !pwPass2){
 				alert('비밀번호 확인')
-			}else if(!emailPass){
+				return false;
+			}
+		    if(!emailPass){
 				alert('이메일 확인 ')
-			}else if(!nicknamePass){
+				return false;
+			}
+		     if(!nicknamePass){
 				alert('닉네임 확인')
+				return false;
 			}
-			else if(!namePass){
+			 if(!namePass){
 				alert('이름 확인')
+				return false;
 			}
-			else if(!phonePass){
+			 if(!phonePass){
 				alert('연락처  확인')
+				return false;
 			}
+			 if(!birthDayPass){
+					alert('생년월일  확인')
+					return false;
+				}
+			 if(!cityPass){
+					alert('주소 확인')
+					$('#city').focus()
+					return false;
+				}
+			 if(!regionPass){
+					alert('주소 확인')
+					$('#region').focus()
+					return false;
+				}
+			 if(!locationPass){
+					alert('주소 확인')
+					$('#location').focus()
+					return false;
+				}
+			 if(!genderPass){
+				 alert('성별 체크 확인')
+					return false;
+			 }
+			 
+			 
+			 
 			
-			else{
 			$('#f').attr('action','m.join');
 			$('#f').submit();
 			alert('가입 완료')
 			
-			}
+			})
+			
+			
+			
 			
 				
-			})
 			
 			
 		}
@@ -282,28 +391,33 @@
 	<form id="f" method="post" >
 
 		아이디<br> <input type="text" name="memberId"  id="id"><br>
-			<span  id="id_result" style aria-live="assertive"></span>
+			<span  id="id_result" style aria-live="assertive"></span><br>
 		비밀번호<br> <input type="text" name="password" id="pw"><br>
-				<span  id="pw_result" style aria-live="assertive"></span>
+				<span  id="pw_result" style aria-live="assertive"></span><br>
 		비밀번호 재확인<br> <input type="text" name="pw2" id="pw2"><br>
-				<span  id="pw_result2" style aria-live="assertive"></span>
+				<span  id="pw_result2" style aria-live="assertive"></span><br>
 		닉네임<br> <input type="text" name="nickname" id="nickname" placeholder="닉네임"><br>
-				<span  id="nickname_result" style aria-live="assertive"></span>
+				<span  id="nickname_result" style aria-live="assertive"></span><br>
 		이름<br> <input type="text"name="name" id="name" placeholder="이름"><br> 
-			   <span  id="name_result" style aria-live="assertive"></span>
+			   <span  id="name_result" style aria-live="assertive"></span><br>
 		생년월일<br> <input type="text" name="birthday" id="birthday"><br> 
+		  <span  id="birthday_result" style aria-live="assertive"></span><br>
 				
 		성별<br>
-		<select name="gender">
+		<select name="gender" id="gender">
 			<option value="">성별</option>
 			<option value="M">남</option>
 			<option value="F">여</option>
 		</select><br> 
+			 <span  id="gender_result" style aria-live="assertive"></span><br>
 		주소<br> 시/도<input type="text" name="city" id="city"><br>
+		 <span  id="city_result" style aria-live="assertive"></span><br>
 		구/군<input type="text" name="region" id="region"><br>
+		 <span  id="region_result" style aria-live="assertive"></span><br>
 		상세주소<input	type="text" name="location" id="location"><br>
+		 <span  id="location_result" style aria-live="assertive"></span><br>
 	     연락처<br> <input type="text" name="phone" id="phone"><br>
-	     <span  id="phone_result" style aria-live="assertive"></span>
+	     <span  id="phone_result" style aria-live="assertive"></span><br>
 	     이메일<br> <input type="text" name="email" id="email"><br> 
 	     
 	  <p  id="email_result" style aria-live="assertive"></p><br>
