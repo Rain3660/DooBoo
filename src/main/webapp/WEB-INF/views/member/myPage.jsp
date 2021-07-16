@@ -1,50 +1,50 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <jsp:include page="../layout/header.jsp"></jsp:include>
+<!-- 다음 주소검색 API -->
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 <div class="container">
 	<div class="row">
 		<h1 class="text-center">마이 페이지</h1>
 		<div class="col-md-6">
 			<h3>회원 프로필</h3>
-		<form id="updateInfo" method="post">
-			이름<br> <input type="text" name="name" value="${loginUser.name}"
-				id="name"><br> 닉네임<br> <input type="text"
-				name="nickname" value="${loginUser.nickname}" id="nickname"><br>
-
-			성별<br> ${loginUser.gender}<br> 생년월일<br>
-			${loginUser.birthday}<br> <input type="button"
-				id="update_info_btn" value="수정">
-		</form>			
+			<form id="updateInfo" method="post">
+				이름<br>
+				<input type="text" name="name" value="${loginUser.name}" id="name">
+				<br> 닉네임<br>
+				<input type="text" name="nickname" value="${loginUser.nickname}" id="nickname">
+				<br> 성별<br> ${loginUser.gender}<br> 생년월일<br> ${loginUser.birthday}<br>
+				<input type="button" id="update_info_btn" value="수정">
+			</form>
 		</div>
 
-	<div class="col-md-6">
+		<div class="col-md-6">
 			<h3>아이디, 비밀번호</h3>
-		<form id="updatePassword" method="post">
-			아이디<br> ${loginUser.memberId}<br> 현재 비밀번호<br> <input
-				type="password" id="pw0"><br> <span id="currPw_msg"></span>
-			새 비밀번호<br> <input type="password" name="password" id="pw"><br>
-			비밀번호 확인<br> <input type="password" id="pw2"> <input
-				type="button" id="update_pw_btn" value="수정"><br> <br>
-		</form>
-	</div>
+			<form id="updatePassword" method="post">
+				아이디<br> ${loginUser.memberId}<br> 현재 비밀번호<br>
+				<input type="password" id="pw0">
+				<br> <span id="currPw_msg"></span> 새 비밀번호<br>
+				<input type="password" name="password" id="pw">
+				<br> 비밀번호 확인<br>
+				<input type="password" id="pw2">
+				<input type="button" id="update_pw_btn" value="수정">
+				<br> <br>
+			</form>
+		</div>
 
 
-	<div class="col-md-12">
+		<div class="col-md-12">
 			<h3>연락처 및 주소</h3>
-		<form id="updateContact" method="post">
-			연락처<br> <input type="text" name="phone" id=""
-				phone""
-				value="${loginUser.phone}"><br> 이메일<br>
-			${loginUser.email}<br> 시<br> <input type="text" name="city"
-				id="city" value="${loginUser.city}"><br> 구<br> <input
-				type="text" name="region" id="region" value="${loginUser.region}"><br>
-			상세주소<br> <input type="text" name="location" id="region"
-				value="${loginUser.location}"><br> <input type="button"
-				id="update_contact_btn" value="수정">
-		</form>
-	</div>
+			<form id="updateContact" method="post">
+				연락처<br>
+				<input type="text" name="phone" id="phone" value="${loginUser.phone}">
+				<br> 이메일<br> ${loginUser.email}<br>
+				<input type="button" value="주소 검색" onclick="findAddr()">
+				<input type="text" id="address" name="address" value="${loginUser.address }">
+				<input type="button" id="update_contact_btn" value="수정">
+			</form>
+		</div>
 
 		<div>
 			<h1>내가 올린 게시글</h1>
@@ -124,31 +124,43 @@
 			$('#updatePassword').submit();
 		})
 		$('#update_contact_btn').on('click' , function(){
-			// phone , city , region , location
+			// phone ,address
 			if($('#phone').val() == ''){
 				alert('필수입력 사항입니다.');
 				$('#phone').focus();
 				return false;
 			}
-			if($('#city').val() == ''){
+			if($('#address').val() == ''){
 				alert('필수입력 사항입니다.');
-				$('#city').focus();
+				$('#address').focus();
 				return false;
 			}
-			if($('#region').val() == ''){
-				alert('필수입력 사항입니다.');
-				$('#region').focus();
-				return false;
-			}
-			if($('#location').val() == ''){
-				alert('필수입력 사항입니다.');
-				$('#location').focus();
+			if($('#phone').val() == '${loginUser.phone}' && $('#address').val() == '${loginUser.address}' ){
+				alert('변경사항이 없습니다.');
 				return false;
 			}
 			$('#updateContact').attr('action' , 'm.updateContact');
 			$('#updateContact').submit();
 		})
 	})
+	function findAddr() {
+	$('#address').val('');
+	new daum.Postcode({
+		oncomplete : function(data) {
+
+			console.log(data);
+
+			// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+			// 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+			// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+
+			var address = data.address;
+
+			$('#address').val(address);
+
+		}
+	}).open();
+}
 
 </script>
 <jsp:include page="../layout/footer.jsp"></jsp:include>

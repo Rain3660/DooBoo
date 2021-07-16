@@ -23,16 +23,15 @@ public class UpdateContactCommand implements MemberCommand {
 		HttpSession session = request.getSession();
 		HttpServletResponse response = (HttpServletResponse) model.asMap().get("response");
 		String phone = request.getParameter("phone");
-		String city = request.getParameter("city");
-		String region = request.getParameter("region");
-		String location = request.getParameter("location");
+		String address = request.getParameter("address");
+
 		
 		// session에 저장된 로그인 정보
 		MemberDTO loginUser = (MemberDTO)session.getAttribute("loginUser");
 		long memberNo = loginUser.getMemberNo();
 		
 		// DB 수정
-		int result = sqlSession.getMapper(MemberDAO.class).updateContact(phone ,city, region, location, memberNo);
+		int result = sqlSession.getMapper(MemberDAO.class).updateContact(phone ,address, memberNo);
 		
 		PrintWriter out = null;
 		response.setContentType("text/html; chatset=utf-8"); 
@@ -41,9 +40,7 @@ public class UpdateContactCommand implements MemberCommand {
 			out = response.getWriter();
 			if(result > 0) {// 수정 됨
 				loginUser.setPhone(phone);
-				loginUser.setCity(city);
-				loginUser.setRegion(region);
-				loginUser.setLocation(location);
+				loginUser.setAddress(address);
 				
 				out.println("<script>");
 				out.println("alert('연락처와 주소를 수정하였습니다.')");

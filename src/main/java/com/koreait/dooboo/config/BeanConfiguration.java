@@ -19,9 +19,12 @@ import com.koreait.dooboo.map.command.MapCheckLocationCommand;
 import com.koreait.dooboo.map.command.MapInsertLocationCommand;
 import com.koreait.dooboo.member.command.CurrentPasswordCheckCommand;
 import com.koreait.dooboo.member.command.DeleteCommand;
+import com.koreait.dooboo.member.command.FindIdCommand;
+import com.koreait.dooboo.member.command.IdCheckCommand;
 import com.koreait.dooboo.member.command.JoinCommand;
 import com.koreait.dooboo.member.command.LogOutCommand;
 import com.koreait.dooboo.member.command.LoginCommand;
+import com.koreait.dooboo.member.command.SendTempPasswordEmailCommand;
 import com.koreait.dooboo.member.command.UpdateContactCommand;
 import com.koreait.dooboo.member.command.UpdateInfoCommand;
 import com.koreait.dooboo.member.command.UpdatePasswordCommand;
@@ -128,5 +131,17 @@ public class BeanConfiguration {
 	@Bean
 	public MapInsertLocationCommand mapInsertLocationCommand() {
 		return new MapInsertLocationCommand();
+	}
+	@Bean
+	public FindIdCommand findIdCommand() {
+		return new FindIdCommand();
+	}
+	@Bean
+	public SendTempPasswordEmailCommand sendTempPasswordEmailCommand() {
+		return new SendTempPasswordEmailCommand();
+	}
+	@Bean
+	public IdCheckCommand idCheckCommand() {
+		return new IdCheckCommand();
 	}
 }
