@@ -16,18 +16,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-
-import com.koreait.dooboo.member.command.DeleteCommand;
-
 import com.koreait.dooboo.api.Kakao_RestApi;
 import com.koreait.dooboo.api.NaverLoginBO;
-<<<<<<< Updated upstream
-
-=======
 import com.koreait.dooboo.member.command.DeleteCommand;
 import com.koreait.dooboo.member.command.IdCheckCommand;
->>>>>>> Stashed changes
 import com.koreait.dooboo.member.command.JoinCommand;
+import com.koreait.dooboo.member.command.LogOutCommand;
 import com.koreait.dooboo.member.command.LoginCommand;
 import com.koreait.dooboo.member.dto.MemberDTO;
 
@@ -40,10 +34,13 @@ public class MemberController {
 	private JoinCommand joinCommand;
 	@Autowired
 	private LoginCommand loginCommand;
+	
+	@Autowired
+	private LogOutCommand logOutCommand;
 	@Autowired
 
 	private DeleteCommand deleteCommand;
-
+	@Autowired
 	private NaverLoginBO naverLoginBO;
 	@Autowired
 	private IdCheckCommand idCheckCommand;
@@ -106,9 +103,7 @@ public class MemberController {
 		model.addAttribute("session",session);
 		return "redirect:index";
 	}
-<<<<<<< Updated upstream
-	   
-=======
+
 	
 	@GetMapping(value="m.idCheck",
 			produces="application/json; charset=utf-8")
@@ -119,5 +114,4 @@ public class MemberController {
 		return idCheckCommand.execute(sqlSession, model);
 	}
 
->>>>>>> Stashed changes
 }
