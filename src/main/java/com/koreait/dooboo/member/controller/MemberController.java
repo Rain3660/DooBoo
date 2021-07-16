@@ -22,9 +22,12 @@ import com.koreait.dooboo.api.Kakao_RestApi;
 import com.koreait.dooboo.api.NaverLoginBO;
 import com.koreait.dooboo.member.command.CurrentPasswordCheckCommand;
 import com.koreait.dooboo.member.command.DeleteCommand;
+import com.koreait.dooboo.member.command.FindIdCommand;
+import com.koreait.dooboo.member.command.IdCheckCommand;
 import com.koreait.dooboo.member.command.JoinCommand;
 import com.koreait.dooboo.member.command.LogOutCommand;
 import com.koreait.dooboo.member.command.LoginCommand;
+import com.koreait.dooboo.member.command.SendTempPasswordEmailCommand;
 import com.koreait.dooboo.member.command.UpdateContactCommand;
 import com.koreait.dooboo.member.command.UpdateInfoCommand;
 import com.koreait.dooboo.member.command.UpdatePasswordCommand;
@@ -53,6 +56,12 @@ public class MemberController {
 	private UpdatePasswordCommand updatePasswordCommand;
 	@Autowired
 	private UpdateContactCommand updateContactCommand;
+	@Autowired
+	private FindIdCommand findIdCommand;
+	@Autowired
+	private SendTempPasswordEmailCommand sendTempPasswordEmailCommand;
+	@Autowired
+	private IdCheckCommand idCheckCommand;
 	@GetMapping("m.joinPage")
 	public String joinPage() {
 		return "member/join";
@@ -109,7 +118,7 @@ public class MemberController {
 		return "redirect:/";
 	}
 
-	@GetMapping(value = "m.logout")
+	@GetMapping(value = {"m.logout" , "api/m.logout"})
 	public String logOut(HttpSession session, Model model) {
 		model.addAttribute("session", session);
 		logOutCommand.execute(sqlSession, model);
@@ -137,5 +146,30 @@ public class MemberController {
 		updateContactCommand.execute(sqlSession, model);
 
 	}
-
+	
+	@GetMapping("m.findInfoPage")
+	public String findInfoPage() {
+		return "member/findInfoPage";
+	}
+	@PostMapping(value="m.findId" , produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ResponseBody
+	public Map<String, Object> findId(Model model , @RequestBody MemberDTO member){
+		
+		model.addAttribute("member", member);
+		return findIdCommand.execute(sqlSession, model);
+	}
+	@PostMapping(value="m.findPw" , produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ResponseBody
+	public Map<String, Object> findPw(Model model , @RequestBody MemberDTO memberDTO){
+		model.addAttribute("memberDTO", memberDTO);
+		return sendTempPasswordEmailCommand.execute(sqlSession, model);
+	}
+	
+	@PostMapping(value= {"m.idCheck", "api/m.idCheck"})
+	@ResponseBody
+	public Map<String, Integer> idCheck(Model model , @RequestBody MemberDTO memberDTO){
+		
+		model.addAttribute("memberDTO", memberDTO);
+		return idCheckCommand.execute(sqlSession, model);
+	}
 }
