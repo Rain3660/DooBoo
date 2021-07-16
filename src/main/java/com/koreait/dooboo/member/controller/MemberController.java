@@ -73,7 +73,7 @@ public class MemberController {
 
 	}
 
-	@GetMapping("m.myPage")
+	@GetMapping(value= {"m.myPage","api/m.myPage"})
 	public String mypage() {
 		return "member/myPage";
 	}

@@ -20,6 +20,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		VALUES(#{mapNo},#{result})
 	</insert>
 	
+	<update id="mapUpdateResult">
+		UPDATE MAPLOCATIONCHECK
+		   SET RESULT = #{result}
+		 WHERE MAP_NO = #{mapNo} 
+	</update>
+	
+	
 	<select id="getLocation" parameterType="long" resultType="com.koreait.dooboo.map.dto.MapDTO">
 		SELECT * 
 		  FROM MAP

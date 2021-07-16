@@ -28,8 +28,7 @@ public class LoginCommand implements MemberCommand {
 
 		// 로그인 시도한 아이디
 		MemberDTO memberDTO = (MemberDTO) model.asMap().get("memberDTO");
-		System.out.println("적은아이디: "+memberDTO.getMemberId());
-		System.out.println("적은비밀번호: "+memberDTO.getPassword());
+
 		// 비밀번호 암호화
 		int apiNumber = memberDTO.getApiNumber();
 		System.out.println(apiNumber);
@@ -41,9 +40,7 @@ public class LoginCommand implements MemberCommand {
 		
 		PrintWriter out = null;
 		MemberDTO loginUser = sqlSession.getMapper(MemberDAO.class).login(memberDTO);
-		System.out.println("확인된 아이디: "+loginUser.getMemberId());
-		System.out.println("확인된 회원번호 : "+loginUser.getMemberNo());
-		
+
 	
 		try {
 			out = response.getWriter();
