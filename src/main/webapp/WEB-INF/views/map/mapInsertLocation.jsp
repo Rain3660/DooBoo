@@ -41,6 +41,8 @@
                 <option value="강서구">강서구</option>
                 <option value="덕양구">덕양구</option>
             </select>
+            <input type="hidden" value="0"  name="ajax">
+            <input type="hidden" value="0" name="nowLocation">
             <input type="button" value="저장하기" id="save_location_btn">
         </form>
 <jsp:include page="../layout/footer.jsp"></jsp:include>

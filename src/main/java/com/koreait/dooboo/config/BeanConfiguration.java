@@ -15,8 +15,12 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import com.koreait.dooboo.api.NaverLoginBO;
+import com.koreait.dooboo.map.command.ChangeLocationCommand;
+import com.koreait.dooboo.map.command.ChangeToNowLocation;
+import com.koreait.dooboo.map.command.DeleteLocationCommand;
 import com.koreait.dooboo.map.command.MapCheckLocationCommand;
 import com.koreait.dooboo.map.command.MapInsertLocationCommand;
+import com.koreait.dooboo.map.command.SaveLocationCommand;
 import com.koreait.dooboo.member.command.CurrentPasswordCheckCommand;
 import com.koreait.dooboo.member.command.DeleteCommand;
 import com.koreait.dooboo.member.command.FindIdCommand;
@@ -132,6 +136,26 @@ public class BeanConfiguration {
 	public MapInsertLocationCommand mapInsertLocationCommand() {
 		return new MapInsertLocationCommand();
 	}
+	
+	@Bean
+	public SaveLocationCommand saveLocationCommand() {
+		return new SaveLocationCommand();
+	}
+	@Bean
+	public ChangeLocationCommand changeLocationCommand() {
+		return new ChangeLocationCommand();
+	}
+	
+	@Bean
+	public ChangeToNowLocation changeToNowLocation() {
+		return new ChangeToNowLocation();
+	}
+	
+	@Bean
+	public DeleteLocationCommand deleteLocationCommand() {
+		return new DeleteLocationCommand();
+	}
+
 	@Bean
 	public FindIdCommand findIdCommand() {
 		return new FindIdCommand();

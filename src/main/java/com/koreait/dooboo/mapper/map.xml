@@ -33,9 +33,33 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		 WHERE MEMBER_NO = #{loginUserNo}
 	</select>
 	
+	<select id="getOneLocation" parameterType="long" resultType="com.koreait.dooboo.map.dto.MapDTO">
+		SELECT *
+		  FROM MAP
+		 WHERE MAP_NO = #{mapNo}
+	</select>
+	
 	<select id="isChecked" resultType="int">
 		SELECT RESULT
 		  FROM MAPLOCATIONCHECK
 		 WHERE MAP_NO = #{mapNo}
 	</select>
+	
+	<update id="changelocation">
+		UPDATE MAP
+		   SET LOCATION = #{location}
+		 WHERE MAP_NO = #{mapNo}
+	</update>
+	
+	
+	<delete id="deleteMapLocationCheck">
+		DELETE MAPLOCATIONCHECK
+		 WHERE MAP_NO = #{mapNo}
+	</delete>
+	
+	<delete id="deleteMap">
+		DELETE MAP
+		 WHERE MAP_NO = #{mapNo}
+	</delete>
+	
 </mapper>
