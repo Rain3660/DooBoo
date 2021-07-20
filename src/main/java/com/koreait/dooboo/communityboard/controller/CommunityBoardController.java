@@ -1,17 +1,22 @@
 package com.koreait.dooboo.communityboard.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.koreait.dooboo.communityboard.command.BoardCommand;
 import com.koreait.dooboo.communityboard.dto.CommunityBoardDTO;
+import com.koreait.dooboo.util.FileUpload;
 
 @Controller
 /*@RequestMapping("/CommunityBoard")*/
@@ -71,7 +76,17 @@ public class CommunityBoardController {
 	 
 	@PostMapping(value ="b.save")
 	@ResponseBody
-	public Map<String,Object> openBoardSave(CommunityBoardDTO boardDTO) {
+	public Map<String,Object> openBoardSave(CommunityBoardDTO boardDTO,@RequestParam("uploadFile") MultipartFile[] uploadFiles) {
+		
+		List<FileUpload> files = new ArrayList<FileUpload>(); 
+		if(null != uploadFiles) {
+			for(MultipartFile multiPartFile : uploadFiles) {
+				FileUpload file = new FileUpload(multiPartFile);
+				files.add(file);
+			}
+		
+		}
+		
 		boolean saveYn = boardCommand.registerBoard(boardDTO);
 		Map<String,Object> resultMap = new HashMap<String,Object>();
 		resultMap.put("saveYn", saveYn);

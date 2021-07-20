@@ -22,14 +22,8 @@ public class ProductDTO {
     // 상품상태 1 : 판매중 , 0 : 판매완료
     private int status;
 
-    // 상품위치(시) ex)서울특별시
-    private String city;
-
-    // 상품위치(구) ex)마포구
-    private String region;
-
-    // 상품위치(상세주소) ex)서강로136 3층
-    private String location;
+    // 상품주소 ex)서강로136 3층
+    private String address;
 
     // 등록자 회원번호
     private long regNo;
@@ -43,8 +37,11 @@ public class ProductDTO {
     // 수정일 수정일
     private Date modDate;
     
+    // 삭제여부
+    private String delYn;
+    
     public ProductDTO() {
-		// TODO Auto-generated constructor stub
+    	
 	}
     public long getProductNo() {
         return productNo;
@@ -94,28 +91,13 @@ public class ProductDTO {
         this.status = status;
     }
 
-    public String getCity() {
-        return city;
+   
+    public String getAddress() {
+        return address;
     }
 
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getRegion() {
-        return region;
-    }
-
-    public void setRegion(String region) {
-        this.region = region;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public long getRegNo() {
@@ -133,7 +115,7 @@ public class ProductDTO {
     public void setModNo(long modNo) {
         this.modNo = modNo;
     }
-
+ 
     public Date getRegDate() {
         return regDate;
     }
@@ -149,4 +131,13 @@ public class ProductDTO {
     public void setModDate(Date modDate) {
         this.modDate = modDate;
     }
+    
+	public String getDelYn() {
+		return delYn;
+	}
+	public void setDelYn(String delYn) {
+		this.delYn = delYn;
+	}
+    
+    
 }

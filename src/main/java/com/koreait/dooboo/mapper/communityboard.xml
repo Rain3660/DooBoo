@@ -5,6 +5,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="com.koreait.dooboo.communityboard.dao.CommunityBoardDAO">
 
+<sql id="startPaging">
+  	 	SELECT
+	  	 	PAGE_B.*
+  	 	FROM(
+	  	 	SELECT
+		  	 	ROWNUM AS RNUM
+		  	 	,PAGE_A.*
+	  	 	FROM(  	 	
+</sql>
+<sql id="endPaging">
+			) PAGE_A
+			WHERE ROWNUM <![CDATA[<=]]> #{endPage}
+		) PAGE_B
+		WHERE RNUM <![CDATA[>=]]> #{startPage}
+</sql>
 <sql id="communityBoardColumns">
 		  BOARD_NO
 		, TITLE
@@ -78,25 +93,40 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 
 	<select id="selectBoardList" parameterType="com.koreait.dooboo.communityboard.dto.CommunityBoardDTO" resultType="com.koreait.dooboo.communityboard.dto.CommunityBoardDTO">
-		SELECT
-			ROWNUM ,
-			COM.BOARD_NO ,
-			COM.TITLE ,
-			COM.CONTENT ,
-			COM.HIT ,
-			COM.REG_NO,
-			COM.MOD_NO,
-			COM.REG_DATE,
-			COM.MOD_DATE,
-			M.NICKNAME
-		FROM
-			COMMUNITYBOARD COM 
+	
+			
+  	 	<include refid="startPaging"/>
+	  		SELECT
+	  			ROWNUM,
+				COM.BOARD_NO ,
+				COM.TITLE ,
+				COM.CONTENT ,
+				COM.HIT ,
+				COM.REG_NO,
+				COM.MOD_NO,
+				COM.REG_DATE,
+				COM.MOD_DATE,
+				M.NICKNAME
+			FROM
+				COMMUNITYBOARD COM 
 			LEFT OUTER JOIN MEMBER M
             ON REG_NO = M.MEMBER_NO
-		WHERE DEL_YN = 'N'
-		ORDER BY
-			COM.BOARD_NO DESC,
-			COM.REG_DATE DESC
+			WHERE DEL_YN = 'N'
+			<if test="searchType != '' and searchType != null">
+				<if test="searchKeyword != '' and searchKeyword != null">
+					<if test="searchType == 'title' ">
+					 	AND TITLE like '%'|| #{searchKeyword} ||'%'
+					 </if>
+					<if test="searchType == 'content' ">
+					 	AND CONTENT like '%'|| #{searchKeyword} ||'%'
+					 </if>
+				</if>
+			</if>
+			
+			ORDER BY
+				COM.BOARD_NO DESC,
+				COM.REG_DATE DESC 
+		<include refid="endPaging"/>				
 	</select>
 
 	
@@ -119,14 +149,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="searchType != '' and searchType != null">
 				<if test="searchKeyword != '' and searchKeyword != null">
 					<if test="searchType == 'title' ">
-					 	AND TITLE like concat('%',#{searchKeyword},'%')
+					 	AND TITLE like '%'|| #{searchKeyword} ||'%'
 					 </if>
 					<if test="searchType == 'content' ">
-					 	AND CONTENT like concat('%',#{searchKeyword},'%')
+					 	AND CONTENT like '%'|| #{searchKeyword} ||'%'
 					 </if>
 				</if>
 			</if>
 	</select>
-
-
 </mapper>

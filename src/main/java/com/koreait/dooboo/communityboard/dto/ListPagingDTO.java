@@ -2,14 +2,18 @@ package com.koreait.dooboo.communityboard.dto;
 
 public class ListPagingDTO{
 	private int currentPageNo=1; // 현재 페이지 번호
-	private int recordsPerPage=5; // 페이지당 출력할 데이터 개수
+	private int recordsPerPage=2; // 페이지당 출력할 데이터 개수
 	private int pageSize=10; // 화면 화단에 출력할 페이지 사이즈
 	private String searchKeyword; // 검색 키워드
 	private String searchType; // 검색 유형
 	
 	public int getStartPage() {
-		return(currentPageNo -1) * recordsPerPage;
+		return(currentPageNo -1) * recordsPerPage + 1;
 	}
+	
+	public int getEndPage() {
+		return currentPageNo * recordsPerPage;
+	}	
 
 	public int getCurrentPageNo() {
 		return currentPageNo;
