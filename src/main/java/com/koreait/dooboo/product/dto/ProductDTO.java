@@ -80,16 +80,6 @@ public class ProductDTO {
 		return content;
 	}
 
-<<<<<<< HEAD
-   
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-=======
 	public void setContent(String content) {
 		this.content = content;
 	}
@@ -113,8 +103,7 @@ public class ProductDTO {
 	public long getRegNo() {
 		return regNo;
 	}
->>>>>>> main
-
+	
 	public void setRegNo(long regNo) {
 		this.regNo = regNo;
 	}
@@ -127,15 +116,6 @@ public class ProductDTO {
 		this.modNo = modNo;
 	}
 
-<<<<<<< HEAD
-    public void setModNo(long modNo) {
-        this.modNo = modNo;
-    }
- 
-    public Date getRegDate() {
-        return regDate;
-    }
-=======
 	public Date getRegDate() {
 		return regDate;
 	}
@@ -143,7 +123,6 @@ public class ProductDTO {
 	public void setRegDate(Date regDate) {
 		this.regDate = regDate;
 	}
->>>>>>> main
 
 	public Date getModDate() {
 		return modDate;
@@ -152,11 +131,6 @@ public class ProductDTO {
 	public void setModDate(Date modDate) {
 		this.modDate = modDate;
 	}
-
-<<<<<<< HEAD
-    public void setModDate(Date modDate) {
-        this.modDate = modDate;
-    }
     
 	public String getDelYn() {
 		return delYn;
@@ -165,8 +139,6 @@ public class ProductDTO {
 		this.delYn = delYn;
 	}
     
-    
-=======
 	@Override
 	public String toString() {
 		return "ProductDTO [productNo=" + productNo + ", title=" + title + ", price=" + price + ", hit=" + hit
@@ -174,6 +146,4 @@ public class ProductDTO {
 				+ ", modNo=" + modNo + ", regDate=" + regDate + ", modDate=" + modDate + "]";
 	}
     
-	
->>>>>>> main
 }
