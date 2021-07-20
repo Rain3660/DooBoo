@@ -1,7 +1,11 @@
 package com.koreait.dooboo.communityboard.dto;
 import java.sql.Date;
+import java.util.List;
 
 import org.springframework.stereotype.Repository;
+
+import com.koreait.dooboo.productimage.dto.ProductImageDTO;
+import com.koreait.dooboo.util.FileUpload;
 
 @Repository
 public class CommunityBoardDTO extends ListPagingDTO{
@@ -42,6 +46,31 @@ public class CommunityBoardDTO extends ListPagingDTO{
     // 닉네임
     private String nickname;
     
+    // 첨부파일 
+    private List<ProductImageDTO> productImageList; 
+    
+    public List<ProductImageDTO> getProductImageList() {
+		return productImageList;
+	}
+
+
+	public void setProductImageList(List<ProductImageDTO> productImageList) {
+		this.productImageList = productImageList;
+	}
+
+	// 첨부파일 
+    private List<FileUpload> fileUploadList; 
+    
+
+	public List<FileUpload> getFileUploadList() {
+		return fileUploadList;
+	}
+
+
+	public void setFileUploadList(List<FileUpload> fileUploadList) {
+		this.fileUploadList = fileUploadList;
+	}
+
 
 	public CommunityBoardDTO() {}
     

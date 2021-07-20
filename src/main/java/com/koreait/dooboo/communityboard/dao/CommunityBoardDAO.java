@@ -24,5 +24,7 @@ public interface CommunityBoardDAO {
 	
 		public int updateHit(long boardNo);
 		
+		public int insertProductImage(CommunityBoardDTO params);
+		
 }
 

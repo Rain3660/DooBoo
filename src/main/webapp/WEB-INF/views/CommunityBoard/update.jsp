@@ -7,7 +7,6 @@
 <!-- head -->
 	<jsp:include page="../layout/header.jsp"></jsp:include>
 <!-- End head -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.min.js" integrity="sha512-YUkaLm+KJ5lQXDBdqBqk7EVhJAdxRnVdT2vtCzwPHSweCzyMgYV/tgGF4/dCyqtCC2eCphz0lRQgatGVdfR0ww==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <body>
 
     <h2>커뮤니티 게시판</h2>
@@ -33,7 +32,11 @@
 		    </div>
     		<div>
 		    	<label>파일</label>
-		    	<input type="file" name="uploadFile" id="fileUpload" title="첨부파일 추가">
+		    	<input type="file" name="uploadFile" id="fileUpload" title="첨부파일 추가1">
+		    	<label>파일2</label>
+		    	<input type="file" name="uploadFile" id="fileUpload2" title="첨부파일 추가2">
+		    	<label>파일3</label>
+		    	<input type="file" name="uploadFile" id="fileUpload3" title="첨부파일 추가3">
 		    </div>
 		  	<div>
 			    <label>등록일</label>
