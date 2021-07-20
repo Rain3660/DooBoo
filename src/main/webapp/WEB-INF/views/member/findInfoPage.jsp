@@ -1,12 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<jsp:include page="../layout/header.jsp">
-	<jsp:param value="Home" name="title"/>
-</jsp:include>
+<jsp:include page="../layout/header.jsp"></jsp:include>
 <!-- section -->
 <br><br>
 <div class="text-center container">
-	<div class="col-md-6" >
+	<div class="row">
+		<div class="col-md-6" >
 		<h3>아이디 찾기</h3>
 		<form id="f1">
   			<div class="form-group row">
@@ -41,6 +40,7 @@
   			</div>
   			<input type="button" class="btn btn-primary btn-lg btn-block" value="비밀번호 찾기" id="find_pw_btn">
 		</form>
+	</div>
 	</div>
 </div>
 <script>
