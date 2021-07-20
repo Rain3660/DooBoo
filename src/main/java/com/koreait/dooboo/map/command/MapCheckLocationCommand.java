@@ -14,54 +14,41 @@ import com.koreait.dooboo.map.dao.MapDAO;
 import com.koreait.dooboo.map.dto.MapDTO;
 import com.koreait.dooboo.map.dto.MapLocationCheckDTO;
 import com.koreait.dooboo.map.dto.MapSessionDTO;
-
+import com.koreait.dooboo.util.GetMidLocation;
+//완료
 public class MapCheckLocationCommand {
 
 	
 	public Map<String, Object> execute(SqlSession sqlSession, Model model) {
 		Map<String, Object> map = model.asMap();
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
-		HttpSession session = request.getSession();
-		Long mapno = Long.parseLong(request.getParameter("mapno"));
-		MapLocationCheckDTO mapLocationCheckDTO = new MapLocationCheckDTO(mapno, 1);
-		MapDAO mapDAO = sqlSession.getMapper(MapDAO.class);
-		int result = mapDAO.mapUpdateResult(mapLocationCheckDTO); //1로바꿈
-		Map<String, Object> resultMap = new HashMap<String,Object>();
+		MapSessionDTO mapSessionDTO = (MapSessionDTO) map.get("mapSessionDTO"); //session에 필요한 컬럼들만 모은 dto
+		HttpSession session = request.getSession(); //세션에 등록하기위해 준비
+		long mapNo = mapSessionDTO.getMapNo(); //이곳에 들어왔다는것 == 이미 인증이 되어 업데이트만 진행하면됨
+		MapLocationCheckDTO mapLocationCheckDTO = new MapLocationCheckDTO(mapNo, 1); //mapNo를 꺼내 인증이됬다는 result값을 dto에 담는다
+		MapDAO mapDAO = sqlSession.getMapper(MapDAO.class); //DB에 저장하기위해 DAO호출
+		Map<String, Object> resultMap = new HashMap<String,Object>(); //ajax에 반환을 위해 만든 HashMap
+		String fullLocation = mapSessionDTO.getLocation(); //미리 저장해둔 현재위치를 파라미터를 통해 받는다 ex)서울시 은평구 녹번동
+		String midLocation = GetMidLocation.getMidLocation(fullLocation); //미리만들어둔 util을 통해 spit을 진행하여 중간에 '구' 만 가져온다.
 		
-		if(result > 0) {
-			resultMap.put("result", result);			
-		}
+		int result1 = mapDAO.mapUpdateResult(mapLocationCheckDTO); //인증됬다는 result값을 DAO를 통해 DB로 저장
 		
-		long memberNo = Long.parseLong(request.getParameter("memberNo")); //멤버기본키를받아온다
-		List<MapDTO> maps = mapDAO.getLocation(memberNo); //멤버기본키가 포함된 map들을 list로 가져온다
-		if(maps.size() == 1) { //거래지역을 1개 또는 2개로 정할수있기때문에 size로 걸러준다
-			MapDTO location = maps.get(0);  //맵을 꺼낸다 (어느지역인지 알기위해)ex)마포구인지 은평구인지
-			String locationName = location.getLocation(); //locationName 변수에 저장
-			long mapNo = location.getMapNo(); //맵의 고유번호를 꺼낸다
-			int checked = mapDAO.isChecked(mapNo); //맵의 고유번호가 포함된 maplocationCheck 테이블을 찾아 인증유무(result)를 꺼낸다
-			MapSessionDTO mapSessionDTO = new MapSessionDTO(locationName, memberNo, mapNo, checked); //세션용 dto를 만들어 저장하고 세션에 올린다
-			session.setAttribute("mapSessionDTO", mapSessionDTO);
-		}else if(maps.size()==2) {
+		if(result1 > 0) {
+			long memberNo = mapSessionDTO.getMemberNo(); //멤버기본키를받아온다
+			MapDTO mapDTO = new MapDTO();//인증이 된곳은 풀네임으로 데이터에 올려준다.
+			mapDTO.setLocation(fullLocation);
+			mapDTO.setMapNo(mapNo);
+			int result2 = mapDAO.updateLocation(mapDTO); //풀네임 정보를 DB에 올리기위한 DAO
+			if(result2 > 0) {
+				resultMap.put("result", result2);		 //업데이트가 잘되었다면 ajax의 반환을 위해 hashMap에 저장	
+				int locatioOrd = mapSessionDTO.getLocationOrd(); //지역 1번 2번을 구분하기위한 변수
+				mapSessionDTO.setIsChecked(mapLocationCheckDTO.getIsChecked());	//인증이되었고 업데이트도 되었기때문에 dto에 isChecked만 1로 set하여 session에 올린다.
+				mapSessionDTO.setLocation(midLocation);//서울시 은평구 녹번동 중 '은평구'만 세션에 올린다.
+				session.setAttribute("mapSession"+mapSessionDTO.getLocationOrd()+"DTO", mapSessionDTO);//중간에 locationOrd를 통해 지역중 몇번째인지 넣고 세션에 올린다.				
+			}
 			
-			MapDTO location1 = maps.get(0);
-			String location1Name = location1.getLocation();
-			long map1No = location1.getMapNo();
-			int checked1 = mapDAO.isChecked(map1No);
-			MapSessionDTO mapSessionDTO1 = new MapSessionDTO(location1Name, memberNo, map1No, checked1);
-			session.setAttribute("mapSessionDTO1", mapSessionDTO1);
-			
-			MapDTO location2 = maps.get(1);
-			String location2Name = location2.getLocation();
-			long map2No = location2.getMapNo();
-			int checked2 = mapDAO.isChecked(map2No);
-			MapSessionDTO mapSessionDTO2 = new MapSessionDTO(location2Name, memberNo, map2No, checked2);	
-			session.setAttribute("mapSessionDTO2", mapSessionDTO2);
+		
 		}
-		
-		
-		
-		
-		
 		return resultMap;
 	}
 

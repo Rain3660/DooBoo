@@ -4,18 +4,15 @@ public class MapDTO {
 	private long mapNo;
 	private long memberNo;
 	private String location;
+	private int locationOrd;
 	
 	public MapDTO() {}
-	
-	
 
-	public MapDTO( long memberNo, String location) {
+	public MapDTO(long memberNo, String location) {
 		super();
 		this.memberNo = memberNo;
 		this.location = location;
 	}
-
-
 
 	public long getMapNo() {
 		return mapNo;
@@ -41,12 +38,21 @@ public class MapDTO {
 		this.location = location;
 	}
 
-
-
-	@Override
-	public String toString() {
-		return "MapDTO [mapNo=" + mapNo + ", memberNo=" + memberNo + ", location=" + location + "]";
+	public int getLocationOrd() {
+		return locationOrd;
 	}
+
+	public void setLocationOrd(int locationOrd) {
+		this.locationOrd = locationOrd;
+	}
+	
+	
+
+
+
+	
+
+	
 
 	
 	

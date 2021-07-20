@@ -3,7 +3,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<head>
+<head profile="http://www.w3.org/2005/10/profile">
+<link rel="icon" type="image/png" href="http://example.com/myicon.png">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
@@ -17,6 +18,9 @@
             fn_checkLocation();
             fn_delete();
         })
+        var memberNo = '${loginUser.memberNo}';
+        var fullLocation = '${fullLocation}';
+        
         var result = false;
         function fn_IdChange(){
             $("#btnradio1").change(function(){
@@ -36,7 +40,6 @@
         }
         function fn_checking(){
             $('.location_btn').on('click',function(){
-                console.log(result);
                 if(!result){
                     alert('지역을 먼저 선택해주세요');
                 }
@@ -50,14 +53,23 @@
               	  $.ajax({
                       url:'m.checkLocation',
                       type : 'get',
-                      data : 'mapno='+$('#mapno1').val()+'&memberNo=${loginUser.memberNo}',
+                      data : 'mapNo='+$('#mapno1').val()+'&memberNo='+memberNo+'&location='+fullLocation+'&locationOrd=1',
                       dataType : 'json',
                       success : function(resultMap){
                           if(resultMap.result > 0){
                               alert('인증되었습니다');
-                              location.href='index';
+                             <c:if test="${firstVisit eq 1}">
+                          	window.location.assign('index');
+                          	</c:if>
+                          	 <c:if test="${firstVisit eq 0}">
+                         	window.location.assign('mapCheck');
+                         	</c:if>
+                          }else{
+                        	
                           }
                       },error(){
+                        	 
+                        
       
                       }
                   });
@@ -70,12 +82,17 @@
                  	  $.ajax({
                          url:'m.checkLocation',
                          type : 'get',
-                         data : 'mapno='+$('#mapno2').val()+'&memberNo=${loginUser.memberNo}',
+                         data : 'mapNo='+$('#mapno2').val()+'&memberNo='+memberNo+'&location='+fullLocation+'&locationOrd=2',
                          dataType : 'json',
                          success : function(resultMap){
                              if(resultMap.result > 0){
                                  alert('인증되었습니다');
-                                 location.href='index';
+                                 <c:if test="${firstVisit eq 1}">
+                             	window.location.assign('index');
+                             	</c:if>
+                             	 <c:if test="${firstVisit eq 0}">
+                             	window.location.assign('mapCheck');
+                             	</c:if>
                              }
                          },error(){
          
@@ -92,10 +109,14 @@
                 }else{
                     if(confirm('선택하신 지역은"'+location+'"입니다 변경하시겠습니까?')){
                     	if($('#btnradio1').is(':checked')){
+                    		if($('#btnradio2text').text()==location){
+                    			alert('이미 추가된 지역입니다 다른지역을 선택해주세요!');
+                    			return;
+                    		}else{		
                         	$.ajax({
-                        		url:'m.changeLocation',
+                        		url:'m.updateLocation',
                         		type : 'post',
-                        		data : 'location='+location+'&mapNo='+$('#mapno1').val()+'&memberNo='+$('#memberNo').val()+'&locationNo=1',
+                        		data : 'location='+location+'&mapNo='+$('#mapno1').val()+'&memberNo='+memberNo+'&locationOrd=1',
                         	    dataType : 'json',
                                 success : function(resultMap){
                                     if(resultMap.result > 0){
@@ -105,14 +126,19 @@
                                     	
                                     }
                                 },error(){
-                
+                                	
                                 }
                         	});
+                    		}
                         }else{
-                    	 	$.ajax({
-                        		url:'m.changeLocation',
+                        if($('#btnradio1text').text()==location){
+                        	alert('이미 추가된 지역입니다 다른지역을 선택해주세요!');
+                			return;
+                        }else{
+                  			$.ajax({
+                        		url:'m.updateLocation',
                         		type : 'post',
-                        		data : 'location='+location+'&mapNo='+$('#mapno2').val()+'&memberNo='+$('#memberNo').val()+'&locationNo=2',
+                        		data : 'location='+location+'&mapNo='+$('#mapno2').val()+'&memberNo='+memberNo+'&locationOrd=2',
                         	    dataType : 'json',
                                 success : function(resultMap){
                                     if(resultMap.result > 0){
@@ -122,7 +148,8 @@
                                 },error(){
                 
                                 }
-                        });             		
+                        });             		                        	
+                        }
                 	}
                     }
                     
@@ -146,14 +173,19 @@
                     			return;
                     		}else{
 	                        	$.ajax({
-	                        		url:'m.changeToNowLocation',
+	                        		url:'m.updateLocation',
 	                        		type : 'post',
-	                        		data : 'nowLocation=${nowLocation}&mapNo='+$('#mapno1').val()+'&memberNo='+$('#memberNo').val()+'&locationNo=1',
+	                        		data : 'location='+fullLocation+'&mapNo='+$('#mapno1').val()+'&memberNo='+memberNo+'&locationOrd=1',
 	                        	    dataType : 'json',
 	                                success : function(resultMap){
 	                                    if(resultMap.result > 0){
 	                                        alert('인증되었습니다');
+	                                        <c:if test="${firstVisit eq 1}">
+	                                    	window.location.assign('index');
+	                                    	</c:if>
+	                                        <c:if test="${firstVisit eq 0}">
 	                                    	window.location.assign('mapCheck');
+	                                    	</c:if>
 	                                    }
 	                                },error(){
 	                
@@ -166,19 +198,24 @@
 	                    			return;
 	                        	}else{
 		                    	 	$.ajax({
-		                        		url:'m.changeToNowLocation',
+		                        		url:'m.updateLocation',
 		                        		type : 'post',
-		                        		data : 'nowLocation=${nowLocation}&mapNo='+$('#mapno2').val()+'&memberNo='+$('#memberNo').val()+'&locationNo=2',
+		                        		data : 'location='+fullLocation+'&mapNo='+$('#mapno2').val()+'&memberNo='+memberNo+'&locationOrd=2',
 		                        	    dataType : 'json',
 		                                success : function(resultMap){
 		                                    if(resultMap.result > 0){
 		                                        alert('인증되었습니다');
-		                                    	window.location.assign('mapCheck');
+		                                        <c:if test="${firstVisit eq 1}">
+		                                    	window.location.assign('index');
+		                                    	</c:if>
+		                                    	 <c:if test="${firstVisit eq 0}">
+			                                    	window.location.assign('mapCheck');
+			                                    </c:if>
 		                                    }
 		                                },error(){
 		                
 		                                }
-		                        });             		
+		                       		 });             		
 	                        		
 	                        	}
                     	}
@@ -197,7 +234,7 @@
 		                			$.ajax({
 		                        		url:'m.deleteLocation',
 		                        		type : 'post',
-		                        		data : 'mapNo='+$('#mapno1').val()+'&locationNo=1',
+		                        		data : 'mapNo='+$('#mapno1').val()+'&locationOrd=1',
 		                        	    dataType : 'json',
 		                                success : function(resultMap){
 		                                    if(resultMap.result > 0){
@@ -216,7 +253,7 @@
 		                		 $.ajax({
 		                        		url:'m.deleteLocation',
 		                        		type : 'post',
-		                        		data : 'mapNo='+$('#mapno2').val()+'&locationNo=2',
+		                        		data : 'mapNo='+$('#mapno2').val()+'&locationOrd=2',
 		                        	    dataType : 'json',
 		                                success : function(resultMap){
 		                                    if(resultMap.result > 0){
@@ -237,9 +274,38 @@
             
             function fn_insertLocation1(location){
             	if(confirm('선택하신 지역은"'+location+'"입니다 추가 하시겠습니까?')){
+            		if($('#btnradio2text').text()==location){
+            			alert('이미 추가된 지역입니다 다른지역을 선택해주세요!');
+            			return;
+            		}else{
+		            	$.ajax({
+		            		url : 'm.insertLocation',
+		            		type : 'post',
+		            		data : 'location='+location+'&memberNo='+memberNo+'&locationOrd=1',
+		            		dataType : 'json',
+		            		success : function(resultMap){
+		            			if(resultMap.result > 0){
+		            				 alert('추가되었습니다');
+		                         	window.location.assign('mapCheck');
+		            			}
+		            		},error(){
+				                
+		                    }
+		            	});           		
+            		}
+            		
+            	}
+            }
+            function fn_insertLocation2(location){
+            if(confirm('선택하신 지역은"'+location+'"입니다 추가 하시겠습니까?')){
+            	if($('#btnradio1text').text()==location){
+        			alert('이미 추가된 지역입니다 다른지역을 선택해주세요!');
+        			return;
+        		}else{
 	            	$.ajax({
 	            		url : 'm.insertLocation',
-	            		data : 'location1='+location+'&ajax=1&memberNo=${loginUser.memberNo}&nowLocation=0',
+	            		type : 'post',
+	            		data : 'location='+location+'&memberNo='+memberNo+'&locationOrd=2',
 	            		dataType : 'json',
 	            		success : function(resultMap){
 	            			if(resultMap.result > 0){
@@ -249,24 +315,8 @@
 	            		},error(){
 			                
 	                    }
-	            	})            		
-            	}
-            }
-            function fn_insertLocation2(location){
-            if(confirm('선택하신 지역은"'+location+'"입니다 추가 하시겠습니까?')){
-            	$.ajax({
-            		url : 'm.insertLocation',
-            		data : 'location2='+location+'&ajax=1&memberNo=${loginUser.memberNo}&nowLocation=0',
-            		dataType : 'json',
-            		success : function(resultMap){
-            			if(resultMap.result > 0){
-            				 alert('추가되었습니다');
-                         	window.location.assign('mapCheck');
-            			}
-            		},error(){
-		                
-                    }
-            	})         	
+	            	})         	        			
+        		}
             }
             }
             function fn_cant_delete(){
@@ -276,8 +326,7 @@
             	if($('#btnradio2text').text()=='${nowLocation}'){
             		alert('현재 "${nowLocation}"는 이미 추가된 지역입니다 다른지역을 선택해주세요!');
             	}else{
-	            	 var location = '${nowLocation}';
-	            	 fn_InsertNowLocation1(location);            		
+	            	 fn_InsertNowLocation1('${nowLocation}');            		
             	}
             }
             
@@ -285,44 +334,62 @@
             	if(confirm('현재 위치하시는 지역은"'+location+'"입니다 추가하시겠습니까?(확인시 인증이 추가로 완료됩니다.)')){
 	            	$.ajax({
 	            		url : 'm.insertLocation',
-	            		data : 'location1='+location+'&ajax=1&memberNo=${loginUser.memberNo}&nowLocation=1',
+	            		type : 'post',
+	            		data : 'location='+fullLocation+'&memberNo='+memberNo+'&locationOrd=1',
 	            		dataType : 'json',
 	            		success : function(resultMap){
 	            			if(resultMap.result > 0){
 	            				 alert('추가되었습니다');
-	                         	window.location.assign('mapCheck');
+                                 <c:if test="${firstVisit eq 1}">
+                             		window.location.assign('index');
+                             	 </c:if>
+                             	 <c:if test="${firstVisit eq 0}">
+                                 	window.location.assign('mapCheck');
+                                 </c:if>
 	            			}
 	            		},error(){
-			                
+	            			
 	                    }
 	            	});         		
+            	}else{
+            		return;
             	}
             }
 			function fn_nowLocation2(){
 				if($('#btnradio1text').text()=='${nowLocation}'){
             		alert('현재 "${nowLocation}"는 이미 추가된 지역입니다 다른지역을 선택해주세요!');
             	}else{
-					 var location = '${nowLocation}';
-					 fn_InsertNowLocation2(location);            		
+					 fn_InsertNowLocation2('${nowLocation}');            		
             	}
             }
             function fn_InsertNowLocation2(location){
             	if(confirm('현재 위치하시는 지역은"'+location+'"입니다 추가하시겠습니까?(확인시 인증이 추가로 완료됩니다.)')){
 	            	$.ajax({
 	            		url : 'm.insertLocation',
-	            		data : 'location2='+location+'&ajax=1&memberNo=${loginUser.memberNo}&nowLocation=1',
+	            		type : 'post',
+	            		data : 'location='+fullLocation+'&memberNo='+memberNo+'&locationOrd=2',
 	            		dataType : 'json',
 	            		success : function(resultMap){
 	            			if(resultMap.result > 0){
 	            				 alert('추가되었습니다');
-	                         	window.location.assign('mapCheck');
+                                 <c:if test="${firstVisit eq 1}">
+                             		window.location.assign('index');
+                             	 </c:if>
+                             	 <c:if test="${firstVisit eq 0}">
+                                 	window.location.assign('mapCheck');
+                                 </c:if>
 	            			}
 	            		},error(){
-			                
+			                alert('안들어옴');
 	                    }
 	            	});         		
             	}
             }
+            
+
+            
+            
+            
             
     </script>
 <body>
@@ -332,13 +399,13 @@
           		 지역은 최소 1개이상 최대 2개이하 인증해야해요.
             
             <br>
-				<c:if test="${location1 ne null }">
+				<c:if test="${mapSession1DTO ne null }">
 		            <input type="radio" class="btn-check"  name="btnradio" id="btnradio1" autocomplete="off">
-		            <label class="btn btn-outline-primary" id="btnradio1text" for="btnradio1">${location1.location}</label>
-		            <c:if test="${location1IsChecked eq 1}">인증완료</c:if>				
-		            <c:if test="${location1IsChecked ne 1}">미인증</c:if>
+		            <label class="btn btn-outline-primary" id="btnradio1text" for="btnradio1">${mapSession1DTO.location}</label>
+		            <c:if test="${mapSession1DTO.isChecked eq 1}">인증완료</c:if>				
+		            <c:if test="${mapSession1DTO.isChecked ne 1}">미인증</c:if>
 				</c:if>
-				<c:if test="${location1 eq null }">
+				<c:if test="${mapSession1DTO eq null }">
 				<div class="btn-group">
                 <button type="button" class="btn btn-outline-primary" data-bs-toggle="dropdown" aria-expanded="false">
                 	새로운 지역 선택하기
@@ -374,13 +441,13 @@
               </div>
 				</c:if>
 	                &nbsp;
-				<c:if test="${location2 ne null }">
+				<c:if test="${mapSession2DTO ne null }">
 	                <input type="radio" class="btn-check"  name="btnradio" id="btnradio2" autocomplete="off">
-	                <label class="btn btn-outline-primary" id="btnradio2text" for="btnradio2">${location2.location}</label>
-	                <c:if test="${location2IsChecked eq 1}">인증완료</c:if>				
-		            <c:if test="${location2IsChecked ne 1}">미인증</c:if>
+	                <label class="btn btn-outline-primary" id="btnradio2text" for="btnradio2">${mapSession2DTO.location}</label>
+	                <c:if test="${mapSession2DTO.isChecked eq 1}">인증완료</c:if>				
+		            <c:if test="${mapSession2DTO.isChecked ne 1}">미인증</c:if>
 				</c:if>
-				<c:if test="${location2 eq null }">
+				<c:if test="${mapSession2DTO eq null }">
 				<div class="btn-group">
                 <button type="button" class="btn btn-outline-primary" data-bs-toggle="dropdown" aria-expanded="false">
                 	새로운 지역 선택하기
@@ -421,13 +488,14 @@
 
             <br>
           
-	            <input type="hidden" value="${location1.mapNo}" name="mapNo" id="mapno1">
-	            <input type="hidden" value="${location1.location}" id="location1">
-	            <input type="hidden" value="${location2.mapNo}" name="mapNo" id="mapno2">
-	            <input type="hidden" value="${location2.location}" id="location2">  
+	            <input type="hidden" value="${mapSession1DTO.mapNo}" name="mapNo" id="mapno1">
+	            <input type="hidden" value="${mapSession1DTO.location}" id="location1">
+	            <input type="hidden" value="${mapSession2DTO.mapNo}" name="mapNo" id="mapno2">
+	            <input type="hidden" value="${mapSession2DTO.location}" id="location2">  
 	            <input type="hidden" value="${loginUser.memberNo}" id="memberNo">              
-          
-            <input type="button" class="location_btn" value="지역인증하기" id="location_btn">
+          	
+          	<input type="button" class="location_btn btn btn-outline-secondary" value="지역인증하기" id="location_btn">
+            
             <br>
 
             <div class="btn-group">
@@ -463,16 +531,26 @@
                   <li><a class="dropdown-item" onclick="fn_updateLocation('동대문구')">동대문구 </a></li>
                 </ul>
               </div>
-              <c:if test="${location1 eq null && location2 ne null}">
+              <c:if test="${mapSession1DTO ne null && mapSession2DTO eq null}">
               	<button type="button" id="cant_delete_btn" class=" btn btn-danger" onclick="fn_cant_delete()">선택한 지역삭제</button>              
               </c:if>
-              <c:if test="${location2 eq null && location1 ne null}">
+              <c:if test="${mapSession2DTO ne null && mapSession1DTO eq null}">
               	<button type="button" id="cant_delete_btn" class=" btn btn-danger" onclick="fn_cant_delete()">선택한 지역삭제</button>                            
               </c:if>
-              <c:if test="${location1 ne null && location2 ne null }">
+              <c:if test="${mapSession1DTO ne null && mapSession2DTO ne null }">
               	<button type="button" id="delete_btn" class="delete_btn btn btn-danger">선택한 지역삭제</button>              
               </c:if>
         </div>
     </form>
+    
+    <c:if test="${firstVisit eq 0}">
+    	<input type="button" value="저장하기" onclick = "reload()">
+    </c:if>
+    <script>
+		function reload(){
+		    window.opener.location.reload();
+		    window.close();
+		}
+</script>
 </body>
 </html>

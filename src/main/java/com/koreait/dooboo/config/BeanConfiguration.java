@@ -15,9 +15,9 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import com.koreait.dooboo.api.NaverLoginBO;
-import com.koreait.dooboo.map.command.ChangeLocationCommand;
-import com.koreait.dooboo.map.command.ChangeToNowLocation;
+import com.koreait.dooboo.map.command.UpdateLocationCommand;
 import com.koreait.dooboo.map.command.DeleteLocationCommand;
+import com.koreait.dooboo.map.command.FirstInsertLocationCommand;
 import com.koreait.dooboo.map.command.MapCheckLocationCommand;
 import com.koreait.dooboo.map.command.MapInsertLocationCommand;
 import com.koreait.dooboo.map.command.SaveLocationCommand;
@@ -46,9 +46,9 @@ public class BeanConfiguration {
 	public HikariConfig hikariConfig() {
 		HikariConfig hikariConfig = new HikariConfig();
 		hikariConfig.setDriverClassName("oracle.jdbc.OracleDriver");
-		hikariConfig.setJdbcUrl("jdbc:oracle:thin:@sih8859.iptime.org:11521:XE");
-		hikariConfig.setUsername("dooboo");
-		hikariConfig.setPassword("qwer1234!@");
+		hikariConfig.setJdbcUrl("jdbc:oracle:thin:@localhost:1521:XE");
+		hikariConfig.setUsername("spring");
+		hikariConfig.setPassword("1234");
 		return hikariConfig;
 	}
 	
@@ -105,7 +105,6 @@ public class BeanConfiguration {
 	@Bean
 	public NaverLoginBO naverLoginBO() {
 		return new NaverLoginBO();
-
 	}
 	@Bean
 	public LogOutCommand logOutCommand() {
@@ -127,34 +126,6 @@ public class BeanConfiguration {
 	public UpdateContactCommand updateContactCommand() {
 		return new UpdateContactCommand();
 	}
-	@Bean
-	public MapCheckLocationCommand mapCheckLocationCommand() {
-		return new MapCheckLocationCommand();
-	}
-	
-	@Bean
-	public MapInsertLocationCommand mapInsertLocationCommand() {
-		return new MapInsertLocationCommand();
-	}
-	
-	@Bean
-	public SaveLocationCommand saveLocationCommand() {
-		return new SaveLocationCommand();
-	}
-	@Bean
-	public ChangeLocationCommand changeLocationCommand() {
-		return new ChangeLocationCommand();
-	}
-	
-	@Bean
-	public ChangeToNowLocation changeToNowLocation() {
-		return new ChangeToNowLocation();
-	}
-	
-	@Bean
-	public DeleteLocationCommand deleteLocationCommand() {
-		return new DeleteLocationCommand();
-	}
 
 	@Bean
 	public FindIdCommand findIdCommand() {
@@ -168,4 +139,5 @@ public class BeanConfiguration {
 	public IdCheckCommand idCheckCommand() {
 		return new IdCheckCommand();
 	}
+
 }

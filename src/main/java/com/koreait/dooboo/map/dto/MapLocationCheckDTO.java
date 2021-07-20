@@ -2,14 +2,14 @@ package com.koreait.dooboo.map.dto;
 
 public class MapLocationCheckDTO {
 	private long mapNo;
-	private int result;
+	private int isChecked;
 	
 	public MapLocationCheckDTO() {}
 
-	public MapLocationCheckDTO(long mapNo, int result) {
+	public MapLocationCheckDTO(long mapNo, int isChecked) {
 		super();
 		this.mapNo = mapNo;
-		this.result = result;
+		this.isChecked = isChecked;
 	}
 
 	public long getMapNo() {
@@ -20,13 +20,15 @@ public class MapLocationCheckDTO {
 		this.mapNo = mapNo;
 	}
 
-	public int getResult() {
-		return result;
+	public int getIsChecked() {
+		return isChecked;
 	}
 
-	public void setResult(int result) {
-		this.result = result;
+	public void setIsChecked(int isChecked) {
+		this.isChecked = isChecked;
 	}
+
+	
 
 	
 	

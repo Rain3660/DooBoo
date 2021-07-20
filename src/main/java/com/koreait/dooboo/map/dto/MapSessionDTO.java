@@ -1,35 +1,21 @@
 package com.koreait.dooboo.map.dto;
 
 public class MapSessionDTO {
-	private String location;
-	private long memberNo;
 	private long mapNo;
-	private int result;
+	private long memberNo;
+	private String location;
+	private int locationOrd;
+	private int isChecked;
 	
 	public MapSessionDTO() {}
 
-	public MapSessionDTO(String location, long memberNo, long mapNo, int result) {
+	public MapSessionDTO(long mapNo, long memberNo, String location, int locationOrd, int isChecked) {
 		super();
-		this.location = location;
-		this.memberNo = memberNo;
 		this.mapNo = mapNo;
-		this.result = result;
-	}
-
-	public String getLocation() {
-		return location;
-	}
-
-	public void setLocation(String location) {
-		this.location = location;
-	}
-
-	public long getMemberNo() {
-		return memberNo;
-	}
-
-	public void setMemberNo(long memberNo) {
 		this.memberNo = memberNo;
+		this.location = location;
+		this.locationOrd = locationOrd;
+		this.isChecked = isChecked;
 	}
 
 	public long getMapNo() {
@@ -40,13 +26,41 @@ public class MapSessionDTO {
 		this.mapNo = mapNo;
 	}
 
-	public int getResult() {
-		return result;
+	public long getMemberNo() {
+		return memberNo;
 	}
 
-	public void setResult(int result) {
-		this.result = result;
+	public void setMemberNo(long memberNo) {
+		this.memberNo = memberNo;
 	}
+
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
+	}
+
+	public int getLocationOrd() {
+		return locationOrd;
+	}
+
+	public void setLocationOrd(int locationOrd) {
+		this.locationOrd = locationOrd;
+	}
+
+	public int getIsChecked() {
+		return isChecked;
+	}
+
+	public void setIsChecked(int isChecked) {
+		this.isChecked = isChecked;
+	}
+
+
+	
+	
 	
 	
 	
