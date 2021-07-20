@@ -118,7 +118,7 @@
 				<ul class="nav nav-pills nav-centered">
 					<li id="menu-item-1769"
 						class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1769">
-						<a href="#">상품</a>
+						<a href="#" onclick="location.href='product'">상품</a>
 					</li>
 					<li id="menu-item-1769"
 						class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1769">
@@ -133,6 +133,9 @@
 					<li id="menu-item-49758"
 						class="menu-item menu-item-type-custom menu-item-object-custom menu-item-49758"><a
 						href="#">F&Q </a></li>
+					<li id="menu-item-49758"
+						class="menu-item menu-item-type-custom menu-item-object-custom menu-item-49758"><a
+						href="p.sellProductPage">판매하기 </a></li>
 					<li id="menu-item-49758"
 						class="menu-item menu-item-type-custom menu-item-object-custom menu-item-49758"><a
 						href="#" onclick="location.href = 'chat'">1:1대화함 </a></li>
