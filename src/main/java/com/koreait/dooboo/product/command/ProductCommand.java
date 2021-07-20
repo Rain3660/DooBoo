@@ -1,9 +1,13 @@
 package com.koreait.dooboo.product.command;
 
+
 import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,6 +18,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.koreait.dooboo.communityboard.dto.ListPagingDTO;
+import com.koreait.dooboo.communityboard.dto.ListPagingInfo;
 import com.koreait.dooboo.member.dto.MemberDTO;
 import com.koreait.dooboo.product.dao.ProductDAO;
 import com.koreait.dooboo.product.dto.ProductDTO;
@@ -25,6 +31,28 @@ public class ProductCommand {
 	@Autowired
 	private ProductDAO productDAO;
 	
+	@Autowired
+	private ListPagingDTO listpagingDTO;
+	
+	
+	public Map<String,Object> getBoardList(ProductDTO productDTO) {
+		Map<String,Object> resultMap = new HashMap<String, Object>();
+		List<ProductDTO> productList = Collections.emptyList();
+		int boardTotalCount = productDAO.selectProductTotalCount(productDTO);
+		
+		ListPagingInfo listPagingInfo = new ListPagingInfo();
+		listPagingInfo.setListPagingVo(listpagingDTO);
+		listPagingInfo.setTotalRecordCount(boardTotalCount);
+		resultMap.put("boardTotalCount", boardTotalCount);
+		if (boardTotalCount > 0) {
+			
+			productList = productDAO.selectProductList(productDTO);
+			resultMap.put("productList", productList);
+		}
+		resultMap.put("listPagingInfo", listPagingInfo);
+
+		return resultMap;
+	}
 	
 	// 판매할 상품을 등록한다 
 	public void sellProduct(ProductDTO productDTO , MultipartHttpServletRequest multipartRequest) {

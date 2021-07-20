@@ -18,7 +18,7 @@
 			</c:if>
 		  	<div>
 			    <label>번호</label>
-			    <input type="text"  name="rownum" value="${board.getRownum()}" readonly>
+			    <input type="text"  name="rownum" value="${board.getBoardNo()}" readonly>
 		    </div>
 		  	<div>
 			    <label>제목</label>

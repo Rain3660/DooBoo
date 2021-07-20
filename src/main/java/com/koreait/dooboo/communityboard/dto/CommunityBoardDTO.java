@@ -13,7 +13,7 @@ public class CommunityBoardDTO extends ListPagingDTO{
     private long boardNo;
 
     // 게시판 rownum
-    private long rownum;
+    private long rnum;
     
     // 글제목 
     private String title;
@@ -42,7 +42,8 @@ public class CommunityBoardDTO extends ListPagingDTO{
     // 닉네임
     private String nickname;
     
-    public CommunityBoardDTO() {}
+
+	public CommunityBoardDTO() {}
     
     
 	public String getNickname() {
@@ -61,12 +62,12 @@ public class CommunityBoardDTO extends ListPagingDTO{
         this.boardNo = boardNo;
     }
 
-    public long getRownum() {
-		return rownum;
+    public long getRnum() {
+		return rnum;
 	}
 
-	public void setRownum(long rownum) {
-		this.rownum = rownum;
+	public void setRnum(long rnum) {
+		this.rnum = rnum;
 	}
 
 	public String getTitle() {

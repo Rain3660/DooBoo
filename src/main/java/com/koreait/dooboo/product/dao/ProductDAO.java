@@ -5,10 +5,18 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.koreait.dooboo.product.dto.ProductDTO;
+
 import com.koreait.dooboo.productimage.dto.ProductImageDTO;
 
 @Mapper
 public interface ProductDAO {
+	
+	public List<ProductDTO> selectProductList(ProductDTO productDTO);
+	
+	public int selectProductTotalCount(ProductDTO productDTO);
+
+	public int updateHit(long productNo);
+	
 	// 상품을 판매등록 한다.
 	public int sellProduct(ProductDTO productDTO);
 	

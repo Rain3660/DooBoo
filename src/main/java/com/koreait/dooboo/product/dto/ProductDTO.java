@@ -37,8 +37,11 @@ public class ProductDTO {
     // 수정일 수정일
     private Date modDate;
     
+    // 삭제여부
+    private String delYn;
+    
     public ProductDTO() {
-		// TODO Auto-generated constructor stub
+    	
 	}
 
 	public long getProductNo() {
@@ -100,7 +103,7 @@ public class ProductDTO {
 	public long getRegNo() {
 		return regNo;
 	}
-
+	
 	public void setRegNo(long regNo) {
 		this.regNo = regNo;
 	}
@@ -128,7 +131,14 @@ public class ProductDTO {
 	public void setModDate(Date modDate) {
 		this.modDate = modDate;
 	}
-
+    
+	public String getDelYn() {
+		return delYn;
+	}
+	public void setDelYn(String delYn) {
+		this.delYn = delYn;
+	}
+    
 	@Override
 	public String toString() {
 		return "ProductDTO [productNo=" + productNo + ", title=" + title + ", price=" + price + ", hit=" + hit
@@ -136,5 +146,4 @@ public class ProductDTO {
 				+ ", modNo=" + modNo + ", regDate=" + regDate + ", modDate=" + modDate + "]";
 	}
     
-	
 }

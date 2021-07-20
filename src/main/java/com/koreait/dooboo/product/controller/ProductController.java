@@ -1,11 +1,16 @@
 package com.koreait.dooboo.product.controller;
 
+
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
@@ -18,7 +23,18 @@ public class ProductController {
 
 	@Autowired
 	private ProductCommand productCommand;
-
+	
+	@GetMapping(value = "ProductList")
+	public ModelAndView openBoardList(ProductDTO productDTO) {
+		ModelAndView mav = new ModelAndView();
+		
+		Map<String,Object> resultMap = productCommand.getBoardList(productDTO);
+		mav.addObject("resultMap", resultMap);
+		mav.addObject("params", productDTO);
+		mav.setViewName("CommunityBoard/prodcuctList");
+		return mav;
+	}
+	
 	@GetMapping("p.sellProductPage")
 	public ModelAndView sellProductPage(HttpServletRequest request) {
 
@@ -48,4 +64,5 @@ public class ProductController {
 		
 		return mav;
 	}
+
 }

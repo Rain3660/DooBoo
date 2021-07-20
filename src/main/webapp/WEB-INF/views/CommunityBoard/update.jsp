@@ -7,28 +7,33 @@
 <!-- head -->
 	<jsp:include page="../layout/header.jsp"></jsp:include>
 <!-- End head -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.min.js" integrity="sha512-YUkaLm+KJ5lQXDBdqBqk7EVhJAdxRnVdT2vtCzwPHSweCzyMgYV/tgGF4/dCyqtCC2eCphz0lRQgatGVdfR0ww==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <body>
 
     <h2>커뮤니티 게시판</h2>
 	<div>
-		<form id="frm">
+		<form id="frm" name="frm">
 			<c:if test="${not empty board.getBoardNo()}">
 				<input type="hidden" name="boardNo" id="boardNo" value="${board.getBoardNo()}"></input>
 			</c:if>
 		  <!-- Text Input -->
 		 	<div>
 			    <label>제목</label>
-			    <input value="${board.getTitle()}">
+			    <input name="title" value="${board.getTitle()}">
 			    <small>수정할 제목을 입력하세요</small>
 		    </div>
 		  	<div>
 			    <label>작성자</label>
-			    <input value="${member.getNickname()}" readonly >
+			    <input name="nickname" value="${member.getNickname()}" readonly >
 		    </div>
     		<div>
 		    	<label>내용</label>
-		    	<textarea>${board.getContent()}</textarea>
+		    	<textarea name="content">${board.getContent()}</textarea>
 			    <small>수정할 내용을 입력하세요</small>
+		    </div>
+    		<div>
+		    	<label>파일</label>
+		    	<input type="file" name="uploadFile" id="fileUpload" title="첨부파일 추가">
 		    </div>
 		  	<div>
 			    <label>등록일</label>
@@ -57,12 +62,16 @@
 			
 			var saveTxt = $("#boardNo").val() != null ? '수정' : '저장';
 			if(confirm(saveTxt+'하시겠습니까?')){
-				var formData = $("#frm").serializeArray();
+				//var formData = $("#frm").serializeArray();
+				console.log(document.frm)
+				var formData = new FormData(document.frm);
+				console.log('formdata',formData)
 				$.ajax({
+					processData: false,
+		            contentType: false,					
 				    url: "b.save", // 클라이언트가 요청을 보낼 서버의 URL 주소
 				    data: formData,                // HTTP 요청과 함께 서버로 보낼 데이터
 				    type: "POST",                             // HTTP 요청 방식(GET, POST)
-				    dataType: "json",                         // 서버에서 보내줄 데이터의 타입
 			        success : function(data) {
 			        	alert('저장 되었습니다.');
 			       		location.href='b.list'

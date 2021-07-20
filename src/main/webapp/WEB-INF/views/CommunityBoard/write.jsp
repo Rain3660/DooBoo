@@ -4,6 +4,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.min.js" integrity="sha512-YUkaLm+KJ5lQXDBdqBqk7EVhJAdxRnVdT2vtCzwPHSweCzyMgYV/tgGF4/dCyqtCC2eCphz0lRQgatGVdfR0ww==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <!-- head -->
 	<jsp:include page="../layout/header.jsp"></jsp:include>
 <!-- End head -->
@@ -38,7 +39,8 @@
 			
 			var saveTxt = $("#boardNo").val() != null ? '수정' : '저장';
 			if(confirm(saveTxt+'하시겠습니까?')){
-				var formData = $("#frm").serializeArray();
+				//var formData = $("#frm").serializeArray();
+				var formData = new FormData($("#frm"));				
 				$.ajax({
 				    url: "b.save", // 클라이언트가 요청을 보낼 서버의 URL 주소
 				    data: formData,                // HTTP 요청과 함께 서버로 보낼 데이터

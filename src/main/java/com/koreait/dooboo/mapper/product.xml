@@ -4,7 +4,81 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
 <mapper namespace="com.koreait.dooboo.product.dao.ProductDAO">
+
+<sql id="startPaging">
+  	 	SELECT
+	  	 	PAGE_B.*
+  	 	FROM(
+	  	 	SELECT
+		  	 	ROWNUM AS RNUM
+		  	 	,PAGE_A.*
+	  	 	FROM(  	 	
+</sql>
+<sql id="endPaging">
+			) PAGE_A
+			WHERE ROWNUM <![CDATA[<=]]> #{endPage}
+		) PAGE_B
+		WHERE RNUM <![CDATA[>=]]> #{startPage}
+</sql>
+<sql id="productColumns">
+		  PRODUCT_NO
+		, TITLE
+		, PRICE
+		, HIT
+		, CONTENT
+		, STATUS
+		, ADDRESS
+		, REG_NO
+		, MOD_NO
+		, REG_DATE
+		, MOD_DATE
+	</sql>
+
+<select id="selectProductList" parameterType="com.koreait.dooboo.product.dto.ProductDTO" resultType="com.koreait.dooboo.product.dto.ProductDTO">
 	
+  	 	<include refid="startPaging"/>
+	  		SELECT
+	  			 ROWNUM
+				, P.PRODUCT_NO
+				, P.TITLE
+				, P.PRICE
+				, P.HIT
+				, P.CONTENT
+				, P.STATUS
+				, P.ADDRESS
+				, P.REG_NO
+				, P.MOD_NO
+				, P.REG_DATE
+				, P.MOD_DATE
+			FROM
+				PRODUCT P
+			LEFT OUTER JOIN MEMBER M
+            ON REG_NO = M.MEMBER_NO
+			WHERE DEL_YN = 'N'
+			ORDER BY
+				P.PRODUCT_NO DESC,
+				P.REG_DATE DESC 
+		<include refid="endPaging"/>				
+	</select>
+	
+	<update id="updateHit" parameterType="long">
+		UPDATE
+			PRODUCT 
+		SET 
+			HIT = HIT + 1
+		WHERE
+			PRODUCT_NO = #{productNo}
+	</update>
+	
+	<select id="selectProductTotalCount" parameterType="com.koreait.dooboo.product.dto.ProductDTO" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			PRODUCT
+		WHERE
+			del_yn = 'N'
+	</select>
+
 	<!-- 판매상품을 등록한다 -->
 	<insert id="sellProduct">
 		INSERT INTO PRODUCT VALUES
@@ -30,4 +104,5 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="deleteProductImage">
 		DELETE FROM PRODUCTIMAGE WHERE PRODUCT_NO = #{param1}
 	</delete>
+
 </mapper>
