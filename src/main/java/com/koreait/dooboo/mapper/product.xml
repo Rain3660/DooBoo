@@ -78,4 +78,31 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE
 			del_yn = 'N'
 	</select>
+
+	<!-- 판매상품을 등록한다 -->
+	<insert id="sellProduct">
+		INSERT INTO PRODUCT VALUES
+		(PRODUCT_SEQ.NEXTVAL , #{title} , #{price} , 0 , #{content} , 1
+		<!-- 추후에 #{address} 로 변경 예정 -->
+		 , '경기도 고양시'
+		  , #{regNo} , null , SYSDATE , null)
+	</insert>
+	<!-- 업로드한 이미지 파일을 관리한다 -->
+	<insert id="uploadImageFile">
+		INSERT INTO PRODUCTIMAGE VALUES
+		(PRODUCT_SEQ.CURRVAL , PRODUCTIMAGE_SEQ.NEXTVAL , 
+		#{filePath} , #{fileName} , #{regNo} , SYSDATE)
+	</insert>
+	<!-- 판매등록한 상품을 삭제한다. -->
+	<delete id="deleteProduct">
+		DELETE FROM PRODUCT WHERE PRODUCT_NO = #{param1}
+	</delete>
+	<select id="selectProductImageByProductNo" resultType="com.koreait.dooboo.productimage.dto.ProductImageDTO">
+		SELECT * FROM PRODUCTIMAGE WHERE PRODUCT_NO = #{param1}
+	</select>
+	<!-- 판매등록한 상품을 삭제할 때 , 첨부한 이미지가 있다면 삭제한다. -->
+	<delete id="deleteProductImage">
+		DELETE FROM PRODUCTIMAGE WHERE PRODUCT_NO = #{param1}
+	</delete>
+
 </mapper>

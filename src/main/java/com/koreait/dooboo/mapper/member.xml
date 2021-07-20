@@ -18,9 +18,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SYSDATE, 
 		null , 
 		0 , 
-		#{city}, 
-		#{region}, 
-		#{location},
+		#{address}, 
 		#{birthday},
 		null,
 		#{apiNumber},
@@ -49,9 +47,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		UPDATE MEMBER SET PASSWORD = #{param1} , MOD_DATE = SYSDATE WHERE STATUS = 0 AND MEMBER_NO = #{param2}
 	</update>
 	<update id="updateContact">
-		UPDATE MEMBER SET PHONE = #{param1} , CITY = #{param2} , REGION = #{param3} , LOCATION = #{param4} , MOD_DATE = SYSDATE WHERE STATUS = 0 AND MEMBER_NO = #{param5} 
+		UPDATE MEMBER SET PHONE = #{param1} , ADDRESS = #{param2} , MOD_DATE = SYSDATE WHERE STATUS = 0 AND MEMBER_NO = #{param3} 
 	</update>
+	<!-- 이름과 이메일에 해당하는 회원의 아이디 찾기 -->
+	<select id="findIdByEmailAndName" resultType="com.koreait.dooboo.member.dto.MemberDTO">
+		SELECT * FROM MEMBER WHERE NAME = #{name} AND EMAIL = #{email} AND STATUS = 0
+	</select>
+	<!-- 비밀번호를 변경하기 위해 , 아이디와 이메일에 해당하는 회원의 아이디 찾기 -->
+	<select id="selectMemberByEmailAndId" resultType="com.koreait.dooboo.member.dto.MemberDTO">
+		SELECT * FROM MEMBER WHERE MEMBER_ID = #{memberId} AND EMAIL = #{email} AND STATUS = 0
+	</select>
 	
-	
+	<!-- 입력받은 아이디에 해당하는 회원이 있는지 조회 -->
+	<select id="searchByMemberId" resultType="int">
+		SELECT COUNT(MEMBER_ID) FROM MEMBER WHERE MEMBER_ID = #{param1}
+	</select>
 
 </mapper>

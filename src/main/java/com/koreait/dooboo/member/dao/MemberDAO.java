@@ -19,5 +19,14 @@ public interface MemberDAO {
 	public MemberDTO apiLoginCheck(MemberDTO memberDTO);
 	
 	public int updatePassword(String password , long memberNo);
-	public int updateContact(String phone ,String city , String region , String location , long memberNo);
+	public int updateContact(String phone , String address , long memberNo);
+	
+	// 아이디 찾기
+	public MemberDTO findIdByEmailAndName(MemberDTO memberDTO);
+	
+	// 비밀번호 찾기
+	public MemberDTO selectMemberByEmailAndId(MemberDTO memberDTO);
+	
+	// 아이디 존재 여부 조회
+	public int searchByMemberId(String memberId);
 }

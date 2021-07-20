@@ -13,12 +13,11 @@
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5ed12af5dc728fe381f7652e93c6b462&libraries=services"></script>
 <script>
 
-
-
 if (navigator.geolocation) {
   //--------------------------------------------------------------------------------------------------      
         // GeoLocation을 이용해서 접속 위치를 얻어옵니다
         navigator.geolocation.getCurrentPosition(function(position) {
+        	var locationname;
             
             var  lat = position.coords.latitude, // 위도
                 lon = position.coords.longitude; // 경도
@@ -79,58 +78,34 @@ function searchAddrFromCoords(coords, callback) {
     geocoder.coord2RegionCode(coords.getLng(), coords.getLat(), callback);         
 }
 
- 
 // 지도 좌측상단에 지도 중심좌표에 대한 주소정보를 표출하는 함수입니다
 function displayCenterInfo(result, status) {
-    $('#location1_btn').on('click',function(){
-        if(result[0].region_2depth_name != $('#location1').val()){
-            alert('인증에실패하였습니다');    
-        }else{
-        	  $.ajax({
-                  url:'m.checkLocation',
-                  type : 'get',
-                  data : 'mapno='+$('#mapno1').val(),
-                  dataType : 'json',
-                  success : function(resultMap){
-                      if(resultMap.result > 0){
-                          alert('인증되었습니다');
-                          location.href='index';
-                      }
-                  },error(){
-  
-                  }
-              });
-        }
-    })
-    $('#location2_btn').on('click',function(){
-        if(result[0].region_2depth_name != $('#location2').val()){
-        	alert('인증에실패하였습니다');  
-        }else{
-        	  $.ajax({
-                  url:'m.checkLocation',
-                  type : 'get',
-                  data : 'mapno='+$('#mapno2').val(),
-                  dataType : 'json',
-                  success : function(resultMap){
-                      if(resultMap.result > 0){
-                          alert('인증되었습니다');
-                          location.href='index';
-                      }
-                  },error(){
-  
-                  }
-            });
-        }
-    })
+	//var NowlocationName = result[0].region_2depth_name;
+	//location.href='mapCheck?location='+result[0].region_2depth_name;
+	$('#location').val(result[0].region_2depth_name);
+	//location.href='locationSave?location='+result[0].region_2depth_name;
+ 	$.ajax({
+		url:'locationSave',
+		type : 'post',
+		data:'location='+result[0].region_1depth_name+' '+result[0].region_2depth_name+' '+result[0].region_3depth_name,
+		dataType : 'json',
+		success : function(resultMap){
+			if(resultMap.result){
+				location.href='mapCheck';
+			}
+		}
+		
+	})  
+	//$('#f').attr('action','locationSave');
+	//$('#f').submit();
 
 }
-
 //--------------------------------------------------------------------------------------------------
 
 
 });
         
-    } else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
+   } else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
         
         var locPosition = new kakao.maps.LatLng(33.450701, 126.570667),    
             message = 'geolocation을 사용할수 없어요..'
@@ -139,18 +114,8 @@ function displayCenterInfo(result, status) {
     }
 
 </script>
-
-<form id="f">
-    <h3>${location1.location}</h3>
-    <h3>${location2.location}</h3>
-    <br>
-    <input type="hidden" value="${location1.mapNo}" name="mapNo" id="mapno1">
-    <input type="hidden" value="${location1.location}" id="location1">
-    <input type="hidden" value="${location2.mapNo}" name="mapNo" id="mapno2">
-    <input type="hidden" value="${location2.location}" id="location2">
-
-
-    <input type="button" value="${location1.location} 지역인증하기" id="location1_btn">
-    <input type="button" value="${location2.location} 지역인증하기" id="location2_btn">
+<form method="post" id="f">
+	<input type="hidden" id="location" name="location">
 </form>
+
 <jsp:include page="../layout/footer.jsp"></jsp:include>

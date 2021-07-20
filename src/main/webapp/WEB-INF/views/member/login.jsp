@@ -17,7 +17,7 @@
 			<label class="form-check-label" for="exampleCheck1">Check me out</label>
 		</div>
 		<button type="submit" class="btn btn-primary">로그인</button>
-		<input type="button" class="btn btn-primary" value="아이디/비밀번호 찾기">
+		<input type="button" class="btn btn-primary" value="아이디/비밀번호 찾기" onclick="location.href='m.findInfoPage'">
 		<div class="mb-3 form-check">
 			<a href="${naverurl}"> <img
 				src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png" />

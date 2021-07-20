@@ -22,9 +22,12 @@ import com.koreait.dooboo.api.Kakao_RestApi;
 import com.koreait.dooboo.api.NaverLoginBO;
 import com.koreait.dooboo.member.command.CurrentPasswordCheckCommand;
 import com.koreait.dooboo.member.command.DeleteCommand;
+import com.koreait.dooboo.member.command.FindIdCommand;
+import com.koreait.dooboo.member.command.IdCheckCommand;
 import com.koreait.dooboo.member.command.JoinCommand;
 import com.koreait.dooboo.member.command.LogOutCommand;
 import com.koreait.dooboo.member.command.LoginCommand;
+import com.koreait.dooboo.member.command.SendTempPasswordEmailCommand;
 import com.koreait.dooboo.member.command.UpdateContactCommand;
 import com.koreait.dooboo.member.command.UpdateInfoCommand;
 import com.koreait.dooboo.member.command.UpdatePasswordCommand;
@@ -53,6 +56,12 @@ public class MemberController {
 	private UpdatePasswordCommand updatePasswordCommand;
 	@Autowired
 	private UpdateContactCommand updateContactCommand;
+	@Autowired
+	private FindIdCommand findIdCommand;
+	@Autowired
+	private SendTempPasswordEmailCommand sendTempPasswordEmailCommand;
+	@Autowired
+	private IdCheckCommand idCheckCommand;
 	@GetMapping("m.joinPage")
 	public String joinPage() {
 		return "member/join";
@@ -62,9 +71,6 @@ public class MemberController {
 	public String login(Model model, HttpSession session) {
 		/* 네이버아이디로 인증 URL을 생성하기 위하여 naverLoginBO클래스의 getAuthorizationUrl메소드 호출 */
 		String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
-		// https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=sE***************&
-		// redirect_uri=http%3A%2F%2F211.63.89.90%3A8090%2Flogin_project%2Fcallback&state=e68c269c-5ba9-4c31-85da-54c16c658125
-		System.out.println("네이버:" + naverAuthUrl);
 		// 네이버
 		String kakaourl = Kakao_RestApi.getRedirectURL();
 		model.addAttribute("naverurl", naverAuthUrl);
@@ -73,14 +79,13 @@ public class MemberController {
 
 	}
 
-	@GetMapping("m.myPage")
+	@GetMapping(value= {"m.myPage","api/m.myPage"})
 	public String mypage() {
 		return "member/myPage";
 	}
 
 	@PostMapping(value= {"m.join","api/m.join"})
-	public void join(Model model, MemberDTO memberDTO, HttpServletResponse response) {
-		
+	public void join(Model model, MemberDTO memberDTO, HttpServletResponse response,HttpSession session) {
 		model.addAttribute("memberDTO", memberDTO);
 		model.addAttribute("response", response);
 		joinCommand.execute(sqlSession, model);
@@ -109,7 +114,7 @@ public class MemberController {
 		return "redirect:/";
 	}
 
-	@GetMapping(value = "m.logout")
+	@GetMapping(value = {"m.logout" , "api/m.logout"})
 	public String logOut(HttpSession session, Model model) {
 		model.addAttribute("session", session);
 		logOutCommand.execute(sqlSession, model);
@@ -137,5 +142,30 @@ public class MemberController {
 		updateContactCommand.execute(sqlSession, model);
 
 	}
-
+	
+	@GetMapping("m.findInfoPage")
+	public String findInfoPage() {
+		return "member/findInfoPage";
+	}
+	@PostMapping(value="m.findId" , produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ResponseBody
+	public Map<String, Object> findId(Model model , @RequestBody MemberDTO member){
+		
+		model.addAttribute("member", member);
+		return findIdCommand.execute(sqlSession, model);
+	}
+	@PostMapping(value="m.findPw" , produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ResponseBody
+	public Map<String, Object> findPw(Model model , @RequestBody MemberDTO memberDTO){
+		model.addAttribute("memberDTO", memberDTO);
+		return sendTempPasswordEmailCommand.execute(sqlSession, model);
+	}
+	
+	@PostMapping(value= {"m.idCheck", "api/m.idCheck"})
+	@ResponseBody
+	public Map<String, Integer> idCheck(Model model , @RequestBody MemberDTO memberDTO){
+		
+		model.addAttribute("memberDTO", memberDTO);
+		return idCheckCommand.execute(sqlSession, model);
+	}
 }

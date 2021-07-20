@@ -15,13 +15,20 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import com.koreait.dooboo.api.NaverLoginBO;
+import com.koreait.dooboo.map.command.UpdateLocationCommand;
+import com.koreait.dooboo.map.command.DeleteLocationCommand;
+import com.koreait.dooboo.map.command.FirstInsertLocationCommand;
 import com.koreait.dooboo.map.command.MapCheckLocationCommand;
 import com.koreait.dooboo.map.command.MapInsertLocationCommand;
+import com.koreait.dooboo.map.command.SaveLocationCommand;
 import com.koreait.dooboo.member.command.CurrentPasswordCheckCommand;
 import com.koreait.dooboo.member.command.DeleteCommand;
+import com.koreait.dooboo.member.command.FindIdCommand;
+import com.koreait.dooboo.member.command.IdCheckCommand;
 import com.koreait.dooboo.member.command.JoinCommand;
 import com.koreait.dooboo.member.command.LogOutCommand;
 import com.koreait.dooboo.member.command.LoginCommand;
+import com.koreait.dooboo.member.command.SendTempPasswordEmailCommand;
 import com.koreait.dooboo.member.command.UpdateContactCommand;
 import com.koreait.dooboo.member.command.UpdateInfoCommand;
 import com.koreait.dooboo.member.command.UpdatePasswordCommand;
@@ -98,7 +105,6 @@ public class BeanConfiguration {
 	@Bean
 	public NaverLoginBO naverLoginBO() {
 		return new NaverLoginBO();
-
 	}
 	@Bean
 	public LogOutCommand logOutCommand() {
@@ -120,13 +126,18 @@ public class BeanConfiguration {
 	public UpdateContactCommand updateContactCommand() {
 		return new UpdateContactCommand();
 	}
+
 	@Bean
-	public MapCheckLocationCommand mapCheckLocationCommand() {
-		return new MapCheckLocationCommand();
+	public FindIdCommand findIdCommand() {
+		return new FindIdCommand();
 	}
-	
 	@Bean
-	public MapInsertLocationCommand mapInsertLocationCommand() {
-		return new MapInsertLocationCommand();
+	public SendTempPasswordEmailCommand sendTempPasswordEmailCommand() {
+		return new SendTempPasswordEmailCommand();
 	}
+	@Bean
+	public IdCheckCommand idCheckCommand() {
+		return new IdCheckCommand();
+	}
+
 }

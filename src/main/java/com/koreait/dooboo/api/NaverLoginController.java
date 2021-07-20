@@ -34,7 +34,7 @@ public class NaverLoginController {
 	//네이버 로그인 성공시 callback호출 메소드
 	@RequestMapping(value = "/api/callback", method = { RequestMethod.GET, RequestMethod.POST })
 	public String callback(Model model, @RequestParam String code, @RequestParam String state, HttpSession session) throws IOException, ParseException {
-	System.out.println("여기는 callback");
+
 	OAuth2AccessToken oauthToken;
 	oauthToken = naverLoginBO.getAccessToken(session, code, state);
 	//1. 로그인 사용자 정보를 읽어온다.
@@ -81,12 +81,12 @@ public class NaverLoginController {
 	String loginApi = "1";
 	model.addAttribute("loginApi",loginApi);
 	model.addAttribute("phone",phone);
-	System.out.println("생년월일 : "+birthday);
+/*	System.out.println("생년월일 : "+birthday);
 	System.out.println("id : "+apiMemberNo);
 	System.out.println("age : "+age);
 	System.out.println("gender : "+gender);
 	System.out.println("email : "+email);
-	System.out.println("name : "+name);	
+	System.out.println("name : "+name);	*/
     String view = "member/join";
 	    MemberDAO memberDAO = sqlSession.getMapper(MemberDAO.class);
 	    MemberDTO memberDTO = new MemberDTO();
@@ -97,13 +97,11 @@ public class NaverLoginController {
 	    	session.setAttribute("loginUser",loginUser );
 	    	view = "map/apiBeforeLogin";
 	    }
-	    System.out.println("이동할곳:"+view);
 	    return view;
 	}
 	//로그아웃
 	@RequestMapping(value = "/logout", method = { RequestMethod.GET, RequestMethod.POST })
 	public String logout(HttpSession session)throws IOException {
-	System.out.println("여기는 logout");
 	session.invalidate();
 	return "redirect:index";
 	}

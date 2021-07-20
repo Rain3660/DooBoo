@@ -22,7 +22,7 @@ public class ProductDTO {
     // 상품상태 1 : 판매중 , 0 : 판매완료
     private int status;
 
-    // 상품주소 ex)서강로136 3층
+    // 상품위치(상세주소) ex)서강로136 3층
     private String address;
 
     // 등록자 회원번호
@@ -43,54 +43,44 @@ public class ProductDTO {
     public ProductDTO() {
     	
 	}
-    public long getProductNo() {
-        return productNo;
-    }
 
-    public void setProductNo(long productNo) {
-        this.productNo = productNo;
-    }
+	public long getProductNo() {
+		return productNo;
+	}
 
-    public String getTitle() {
-        return title;
-    }
+	public void setProductNo(long productNo) {
+		this.productNo = productNo;
+	}
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+	public String getTitle() {
+		return title;
+	}
 
-    public int getPrice() {
-        return price;
-    }
+	public void setTitle(String title) {
+		this.title = title;
+	}
 
-    public void setPrice(int price) {
-        this.price = price;
-    }
+	public int getPrice() {
+		return price;
+	}
 
-    public int getHit() {
-        return hit;
-    }
+	public void setPrice(int price) {
+		this.price = price;
+	}
 
-    public void setHit(int hit) {
-        this.hit = hit;
-    }
+	public int getHit() {
+		return hit;
+	}
 
-    public String getContent() {
-        return content;
-    }
+	public void setHit(int hit) {
+		this.hit = hit;
+	}
 
-    public void setContent(String content) {
-        this.content = content;
-    }
+	public String getContent() {
+		return content;
+	}
 
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
-
+<<<<<<< HEAD
    
     public String getAddress() {
         return address;
@@ -99,19 +89,45 @@ public class ProductDTO {
     public void setAddress(String address) {
         this.address = address;
     }
+=======
+	public void setContent(String content) {
+		this.content = content;
+	}
 
-    public long getRegNo() {
-        return regNo;
-    }
+	public int getStatus() {
+		return status;
+	}
 
-    public void setRegNo(long regNo) {
-        this.regNo = regNo;
-    }
+	public void setStatus(int status) {
+		this.status = status;
+	}
 
-    public long getModNo() {
-        return modNo;
-    }
+	public String getAddress() {
+		return address;
+	}
 
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public long getRegNo() {
+		return regNo;
+	}
+>>>>>>> main
+
+	public void setRegNo(long regNo) {
+		this.regNo = regNo;
+	}
+
+	public long getModNo() {
+		return modNo;
+	}
+
+	public void setModNo(long modNo) {
+		this.modNo = modNo;
+	}
+
+<<<<<<< HEAD
     public void setModNo(long modNo) {
         this.modNo = modNo;
     }
@@ -119,15 +135,25 @@ public class ProductDTO {
     public Date getRegDate() {
         return regDate;
     }
+=======
+	public Date getRegDate() {
+		return regDate;
+	}
 
-    public void setRegDate(Date regDate) {
-        this.regDate = regDate;
-    }
+	public void setRegDate(Date regDate) {
+		this.regDate = regDate;
+	}
+>>>>>>> main
 
-    public Date getModDate() {
-        return modDate;
-    }
+	public Date getModDate() {
+		return modDate;
+	}
 
+	public void setModDate(Date modDate) {
+		this.modDate = modDate;
+	}
+
+<<<<<<< HEAD
     public void setModDate(Date modDate) {
         this.modDate = modDate;
     }
@@ -140,4 +166,14 @@ public class ProductDTO {
 	}
     
     
+=======
+	@Override
+	public String toString() {
+		return "ProductDTO [productNo=" + productNo + ", title=" + title + ", price=" + price + ", hit=" + hit
+				+ ", content=" + content + ", status=" + status + ", address=" + address + ", regNo=" + regNo
+				+ ", modNo=" + modNo + ", regDate=" + regDate + ", modDate=" + modDate + "]";
+	}
+    
+	
+>>>>>>> main
 }
