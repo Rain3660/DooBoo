@@ -5,7 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.koreait.dooboo.product.dto.ProductDTO;
-
+import com.koreait.dooboo.product.dto.ProductimageDTO;
 import com.koreait.dooboo.productimage.dto.ProductImageDTO;
 
 @Mapper
@@ -21,7 +21,7 @@ public interface ProductDAO {
 	public int sellProduct(ProductDTO productDTO);
 	
 	// 판매등록할 때 업로드한 파일을 처리한다.
-	public int uploadImageFile(ProductImageDTO productImageDTO);
+	public int insertImageFile(ProductimageDTO productimageDTO);
 	
 	// 판매등록한 상품을 삭제한다.
 	public int deleteProduct(long productNo);

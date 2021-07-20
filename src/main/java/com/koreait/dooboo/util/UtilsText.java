@@ -5,6 +5,23 @@ import java.util.Date;
 import java.util.Locale;
 
 public class UtilsText {
+	
+
+	/***
+	 * 문자열을 연결 한다.
+	 *
+	 * @param arrStr
+	 * @return String
+	 */
+	public static String concat(String... arrStr) {
+		StringBuilder sb = new StringBuilder();
+		for (String concatStr : arrStr) {
+			sb.append(concatStr);
+		}
+
+		return sb.toString();
+	}
+	
 	/**
 	 * 현재 날짜, 시간으로 정해진 포맷을 리턴한다 파일 업로드시 리네임에 사용한다
 	 * 
@@ -32,7 +49,7 @@ public class UtilsText {
 	 * @param path
 	 * @return
 	 */
-	private String getFilePath(String... path) {
+	public static String getFilePath(String... path) {
 
 		String fileSeparator = "/";
 		StringBuilder sb = new StringBuilder();

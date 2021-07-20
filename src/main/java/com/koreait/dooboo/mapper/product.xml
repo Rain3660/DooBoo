@@ -88,10 +88,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		  , #{regNo} , null , SYSDATE , null)
 	</insert>
 	<!-- 업로드한 이미지 파일을 관리한다 -->
-	<insert id="uploadImageFile">
-		INSERT INTO PRODUCTIMAGE VALUES
-		(PRODUCT_SEQ.CURRVAL , PRODUCTIMAGE_SEQ.NEXTVAL , 
-		#{filePath} , #{fileName} , #{regNo} , SYSDATE)
+	<insert id="insertImageFile" parameterType="com.koreait.dooboo.product.dto.ProductimageDTO">
+		INSERT INTO PRODUCTIMAGE
+		(	
+			PRODUCT_NO
+			,FILE_NO
+			,FILE_PATH
+			,FILE_NAME
+			,REG_NO
+			,REG_DATE
+		)VALUES(
+			 #{productNo}
+			, PRODUCTIMAGE_SEQ.NEXTVAL 
+			, #{filePath} 
+			, #{fileName} 
+			, #{regNo} 
+			, SYSDATE
+		)
 	</insert>
 	<!-- 판매등록한 상품을 삭제한다. -->
 	<delete id="deleteProduct">

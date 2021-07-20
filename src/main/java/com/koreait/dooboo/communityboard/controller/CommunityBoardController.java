@@ -82,9 +82,11 @@ public class CommunityBoardController {
 		if(null != uploadFiles) {
 			for(MultipartFile multiPartFile : uploadFiles) {
 				FileUpload file = new FileUpload(multiPartFile);
+				System.out.println(file.getFileName());
+				System.out.println(file.getOrgFileName());
 				files.add(file);
 			}
-		
+			boardDTO.setFileUploadList(files);
 		}
 		
 		boolean saveYn = boardCommand.registerBoard(boardDTO);
