@@ -1,107 +1,61 @@
 package com.koreait.dooboo.map.command;
 
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
-import org.json.simple.JSONObject;
 import org.springframework.ui.Model;
 
 import com.koreait.dooboo.map.dao.MapDAO;
 import com.koreait.dooboo.map.dto.MapDTO;
 import com.koreait.dooboo.map.dto.MapLocationCheckDTO;
-import com.koreait.dooboo.member.command.MemberCommand;
+import com.koreait.dooboo.map.dto.MapSessionDTO;
+import com.koreait.dooboo.util.GetMidLocation;
 
-public class MapInsertLocationCommand implements MemberCommand {
+public class MapInsertLocationCommand {
 
-	@Override
-	public void execute(SqlSession sqlSession, Model model) {
+	public Map<String, Object> execute(SqlSession sqlSession, Model model) {
 		Map<String, Object> map = model.asMap();
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
-		HttpServletResponse response = (HttpServletResponse) map.get("response");
-		HttpSession session = request.getSession();
-		String location1 = request.getParameter("location1");
-		System.out.println("1번지역"+location1);
-		String location2 = request.getParameter("location2");
-		System.out.println("2번지역"+location2);
-		int nowLocation = Integer.parseInt(request.getParameter("nowLocation"));
-		System.out.println("들어왔니?:"+nowLocation);
-		long memberNo = Long.parseLong(request.getParameter("memberNo"));
-		MapDAO mapDAO = sqlSession.getMapper(MapDAO.class);
-		long mapno1 = 0;
-		long mapno2 = 0;
-		MapDTO mapDTO1 = null;
-		MapDTO mapDTO2 = null;
-		int result1 = 0;
+		MapSessionDTO mapSessionDTO = (MapSessionDTO) map.get("mapSessionDTO"); //session에 필요한 컬럼들만 모은 dto
+		HttpSession session = request.getSession(); //세션에 등록하기위해 준비
+		Map<String, Object> resultMap = new HashMap<String,Object>(); //ajax에 반환을 위해 만든 HashMap
+		MapDAO mapDAO = sqlSession.getMapper(MapDAO.class);//DB에 저장하기 위해 만든 DAO
+		long memberNo = mapSessionDTO.getMemberNo(); //어떤 클라이언트에 저장할지 알수있는 회원의 기본키		
+		String location = mapSessionDTO.getLocation();//새로 저장할 location
+		MapDTO mapDTO = new MapDTO(memberNo, location); //생성자로 만들어둔곳에 넣어준다	
+		mapDTO.setLocationOrd(mapSessionDTO.getLocationOrd());
+		int result1 = mapDAO.insertLocation(mapDTO); //DB에 저장해준다
 		int result2 = 0;
-		if(location1 != null) {
-			mapDTO1 = new MapDTO(memberNo, location1);
-			 result1 = mapDAO.insertLocation(mapDTO1);
+		long mapNo = mapDAO.getMapNo(mapDTO); //인증유무 DTO를 만들어 0으로 저장해준다
+		if(location.length() > 5) {
 			if(result1 > 0) {
-				mapno1 = mapDAO.getMapNo(mapDTO1);
-				mapDTO1.setMapNo(mapno1);
-				if(mapno1 > 0) {
-					MapLocationCheckDTO mapLocationCheckDTO = new MapLocationCheckDTO();
-					mapLocationCheckDTO.setMapNo(mapno1);
-					mapLocationCheckDTO.setResult(0);
-					mapDAO.CheckLocation(mapLocationCheckDTO);
-					session.setAttribute("location1", mapDTO1);
-					if(nowLocation > 0) {
-						mapLocationCheckDTO.setMapNo(mapno1);
-						mapLocationCheckDTO.setResult(1);
-						mapDAO.mapUpdateResult(mapLocationCheckDTO);
-						session.setAttribute("location1IsChecked", 1);
-					}
+				MapLocationCheckDTO mapLocationCheckDTO = new MapLocationCheckDTO(mapNo, 1);
+				result2 = mapDAO.CheckLocation(mapLocationCheckDTO); //DB에 저장한다
+				if(result2 > 0) { // 저장에 성공하였다면 세션에 저장
+					mapSessionDTO.setIsChecked(1);
+					mapSessionDTO.setMapNo(mapNo);
+					mapSessionDTO.setLocation(GetMidLocation.getMidLocation(mapSessionDTO.getLocation()));//인증이 끝난 지역은 풀 주소를 DB에 저장해두고 클라이언트에게는 '구'만 보여준다
+					session.setAttribute("mapSession"+mapSessionDTO.getLocationOrd()+"DTO", mapSessionDTO);//세션에 등록
 				}
 			}
-			
-		}
-		if(location2!= null) {
-			mapDTO2 = new MapDTO(memberNo, location2);			
-			result2 = mapDAO.insertLocation(mapDTO2);
-			if(result2 > 0) {
-				mapno2 = mapDAO.getMapNo(mapDTO2);
-				mapDTO2.setMapNo(mapno2);
-				if(mapno2 > 0) {
-					MapLocationCheckDTO mapLocationCheckDTO = new MapLocationCheckDTO();
-					mapLocationCheckDTO.setMapNo(mapno2);
-					mapLocationCheckDTO.setResult(0);
-					mapDAO.CheckLocation(mapLocationCheckDTO);
-					session.setAttribute("location2", mapDTO2);
-					if(nowLocation > 0) {
-						mapLocationCheckDTO.setMapNo(mapno2);
-						mapLocationCheckDTO.setResult(1);
-						mapDAO.mapUpdateResult(mapLocationCheckDTO);
-						session.setAttribute("location2IsChecked", 1);
-					}
+		}else {
+			if(result1 > 0) { //DB에 저장이 됬다면 
+				MapLocationCheckDTO mapLocationCheckDTO = new MapLocationCheckDTO(mapNo, 0);
+				result2 = mapDAO.CheckLocation(mapLocationCheckDTO); //DB에 저장한다
+				if(result2 > 0) { // 저장에 성공하였다면 세션에 저장
+					mapSessionDTO.setIsChecked(0);
+					mapSessionDTO.setMapNo(mapNo);
+					session.setAttribute("mapSession"+mapSessionDTO.getLocationOrd()+"DTO", mapSessionDTO);
 				}
-			}
+			}			
 		}
-		int ajax = Integer.parseInt(request.getParameter("ajax"));
-		if(ajax == 1) {		
-			JSONObject resultMap = new JSONObject();
-			int result = 0;
-			if(result1 == 1 || result2 == 1) {
-				result = 1;
-			}
-			
-			try {
-			resultMap.put("result", result);
-			response.setContentType("application/json; charset=utf-8");
-			PrintWriter out;
-			out = response.getWriter();
-			out.println(resultMap);
-			out.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			
-		}
+		
+		resultMap.put("result", result2);//모든것이 정상작동하였다면 ajax의 반환을 위해 반환값 저장	
+		return resultMap;
 	}
 
 }

@@ -87,7 +87,7 @@ function displayCenterInfo(result, status) {
  	$.ajax({
 		url:'locationSave',
 		type : 'post',
-		data:'location='+result[0].region_2depth_name,
+		data:'location='+result[0].region_1depth_name+' '+result[0].region_2depth_name+' '+result[0].region_3depth_name,
 		dataType : 'json',
 		success : function(resultMap){
 			if(resultMap.result){
@@ -95,7 +95,7 @@ function displayCenterInfo(result, status) {
 			}
 		}
 		
-	}) 
+	})  
 	//$('#f').attr('action','locationSave');
 	//$('#f').submit();
 

@@ -13,12 +13,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.koreait.dooboo.map.command.ChangeLocationCommand;
-import com.koreait.dooboo.map.command.ChangeToNowLocation;
+import com.koreait.dooboo.map.command.UpdateLocationCommand;
 import com.koreait.dooboo.map.command.DeleteLocationCommand;
+import com.koreait.dooboo.map.command.FirstInsertLocationCommand;
 import com.koreait.dooboo.map.command.MapCheckLocationCommand;
 import com.koreait.dooboo.map.command.MapInsertLocationCommand;
 import com.koreait.dooboo.map.command.SaveLocationCommand;
+import com.koreait.dooboo.map.dto.MapSessionDTO;
+
 
 @Controller
 public class MapController {
@@ -26,27 +28,82 @@ public class MapController {
 	private MapCheckLocationCommand mapCheckLocationCommand;
 	private MapInsertLocationCommand mapInsertLocationCommand;
 	private SaveLocationCommand saveLocationCommand;
-	private ChangeLocationCommand changeLocationCommand;
-	private ChangeToNowLocation changeToNowLocation;
+	private UpdateLocationCommand changeLocationCommand;
 	private DeleteLocationCommand deleteLocationCommand;
+	private FirstInsertLocationCommand firstInsertLocationCommand;
 
 	@Autowired	
 	public MapController(	SqlSession sqlSession,
 							MapCheckLocationCommand mapCheckLocationCommand,
 							MapInsertLocationCommand mapInsertLocationCommand,
 							SaveLocationCommand saveLocationCommand,
-							ChangeLocationCommand changeLocationCommand,
-							ChangeToNowLocation changeToNowLocation,
-							DeleteLocationCommand deleteLocationCommand) {
+							UpdateLocationCommand changeLocationCommand,
+							DeleteLocationCommand deleteLocationCommand,
+							FirstInsertLocationCommand firstInsertLocationCommand) {
 		super();
 		this.sqlSession = sqlSession;
 		this.mapCheckLocationCommand = mapCheckLocationCommand;
 		this.mapInsertLocationCommand = mapInsertLocationCommand;
 		this.saveLocationCommand = saveLocationCommand;
 		this.changeLocationCommand = changeLocationCommand;
-		this.changeToNowLocation = changeToNowLocation;
 		this.deleteLocationCommand = deleteLocationCommand;
+		this.firstInsertLocationCommand = firstInsertLocationCommand;
 	}
+	@GetMapping(value= {"m.checkLocation","api/m.checkLocation"})
+	@ResponseBody
+	public Map<String, Object> checkLocation(HttpServletRequest request,MapSessionDTO mapSessionDTO,Model model) {
+		model.addAttribute("request",request);
+		model.addAttribute("mapSessionDTO",mapSessionDTO);
+		return mapCheckLocationCommand.execute(sqlSession, model);
+	}
+	
+	@PostMapping(value= {"m.updateLocation","api/m.updateLocation"})
+	@ResponseBody
+	public Map<String, Object> changeLocation(HttpServletRequest request,MapSessionDTO mapSessionDTO,Model model){
+		model.addAttribute("request",request);
+		model.addAttribute("mapSessionDTO",mapSessionDTO);
+		return changeLocationCommand.execute(sqlSession, model);
+	}
+	
+	@PostMapping(value= {"m.deleteLocation","api/m.deleteLocation"})
+	@ResponseBody
+	public Map<String, Object> deleteLocation(HttpServletRequest request,MapSessionDTO mapSessionDTO,Model model){
+		model.addAttribute("request",request);
+		model.addAttribute("mapSessionDTO",mapSessionDTO);
+		return deleteLocationCommand.execute(sqlSession, model);
+	}
+	
+	@PostMapping(value= {"m.insertLocation","api/m.insertLocation"})
+	@ResponseBody
+	public Map<String, Object> insertLocation(HttpServletRequest request,HttpServletResponse response,MapSessionDTO mapSessionDTO,Model model) {
+		model.addAttribute("request",request);
+		model.addAttribute("response",response);
+		model.addAttribute("mapSessionDTO",mapSessionDTO);
+		return mapInsertLocationCommand.execute(sqlSession, model);
+		
+	}
+	@PostMapping(value= {"locationSave","api/locationSave"}, produces="application/json; charset=utf-8")
+	@ResponseBody
+	public Map<String, Object> locationSave(HttpServletRequest request ,MapSessionDTO mapSessionDTO, Model model) {
+		model.addAttribute("request",request);
+		model.addAttribute("mapSessionDTO",mapSessionDTO);
+		return saveLocationCommand.execute(sqlSession, model);
+	}
+	
+	@GetMapping(value= {"mapCheck","api/mapCheck"})
+	public String mapCheck() {
+		return"map/mapCheck";
+	}
+	
+	@PostMapping(value= {"m.firstInsertLocation","api/m.firstInsertLocation"})
+	public String firstInsertLocation(HttpServletRequest request,Model model) {
+		model.addAttribute("request",request);
+		firstInsertLocationCommand.execute(sqlSession, model);
+		return"map/mapCheckLocation";
+	}
+	
+	
+	
 
 	@GetMapping(value= {"m.mapInsertLocationPage","api/m.mapInsertLocationPage"})
 	public String inserLocationPage() {
@@ -56,34 +113,13 @@ public class MapController {
 	public String checkLocationPage() {
 		return "map/mapCheckLocation";
 	}
-	@PostMapping(value= {"locationSave","api/locationSave"})
-	@ResponseBody
-	public Map<String, Object> locationSave(HttpServletRequest request , Model model) {
-		model.addAttribute("request",request);
-		
-		return saveLocationCommand.execute(sqlSession, model);
-	}
-	@GetMapping(value= {"mapCheck","api/mapCheck"})
-	public String mapCheck() {
-		return"map/mapCheck";
-	}
 
-	@GetMapping(value= {"m.insertLocation","api/m.insertLocation"})
-	public String insertLocation(HttpServletRequest request,HttpServletResponse response,Model model) {
-		model.addAttribute("request",request);
-		model.addAttribute("response",response);
-		mapInsertLocationCommand.execute(sqlSession, model);
-		return"map/mapCheckLocation";
-	}
+
+
+
 	
 
 
-	@GetMapping(value= {"m.checkLocation","api/m.checkLocation"})
-	@ResponseBody
-	public Map<String, Object> checkLocation(HttpServletRequest request,Model model) {
-		model.addAttribute("request",request);
-		return mapCheckLocationCommand.execute(sqlSession, model);
-	}
 	
 	
 	@GetMapping(value="mainPage.do")
@@ -91,29 +127,6 @@ public class MapController {
 		return"map/mainPage";
 	}
 	
-	
-	
-	@PostMapping(value= {"m.changeLocation","api/m.changeLocation"})
-	@ResponseBody
-	public Map<String, Object> changeLocation(HttpServletRequest request,Model model){
-		model.addAttribute("request",request);
-		return changeLocationCommand.execute(sqlSession, model);
-	}
-	
-	@PostMapping(value= {"m.changeToNowLocation","api/m.changeToNowLocation"})
-	@ResponseBody
-	public Map<String, Object> changeToNowLocation(HttpServletRequest request,Model model){
-		model.addAttribute("request",request);
-		return changeToNowLocation.execute(sqlSession, model);
-	}
-	
-	
-	@PostMapping(value= {"m.deleteLocation","api/m.deleteLocation"})
-	@ResponseBody
-	public Map<String, Object> deleteLocation(HttpServletRequest request,Model model){
-		model.addAttribute("request",request);
-		return deleteLocationCommand.execute(sqlSession, model);
-	}
 
 	
 	

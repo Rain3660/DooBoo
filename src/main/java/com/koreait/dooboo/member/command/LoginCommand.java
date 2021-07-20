@@ -14,8 +14,10 @@ import org.springframework.ui.Model;
 
 import com.koreait.dooboo.map.dao.MapDAO;
 import com.koreait.dooboo.map.dto.MapDTO;
+import com.koreait.dooboo.map.dto.MapSessionDTO;
 import com.koreait.dooboo.member.dao.MemberDAO;
 import com.koreait.dooboo.member.dto.MemberDTO;
+import com.koreait.dooboo.util.GetMidLocation;
 import com.koreait.dooboo.util.SecurityUtils;
 
 public class LoginCommand implements MemberCommand {
@@ -31,7 +33,6 @@ public class LoginCommand implements MemberCommand {
 
 		// 비밀번호 암호화
 		int apiNumber = memberDTO.getApiNumber();
-		System.out.println(apiNumber);
 		if(apiNumber == 0) {
 			String orgPw = memberDTO.getPassword();		
 			String password = SecurityUtils.encodeBase64(orgPw);
@@ -40,7 +41,7 @@ public class LoginCommand implements MemberCommand {
 		
 		PrintWriter out = null;
 		MemberDTO loginUser = sqlSession.getMapper(MemberDAO.class).login(memberDTO);
-
+		
 	
 		try {
 			out = response.getWriter();
@@ -58,10 +59,16 @@ public class LoginCommand implements MemberCommand {
 					MapDTO map = list.get(0);
 					long mapNo = map.getMapNo();
 					int result = mapDAO.isChecked(mapNo);
+					MapSessionDTO mapSessionDTO = null;
+					String midLocation = GetMidLocation.getMidLocation(map.getLocation());
 					if(result > 0) {
+						mapSessionDTO = new MapSessionDTO(mapNo, loginUserNo, midLocation, map.getLocationOrd(), result);
+						session.setAttribute("mapSession"+mapSessionDTO.getLocationOrd()+"DTO", mapSessionDTO);
 						message = "로그인 성공!";
 						view="index";
 					}else {
+						mapSessionDTO = new MapSessionDTO(mapNo, loginUserNo, midLocation, map.getLocationOrd(), result);
+						session.setAttribute("mapSession"+mapSessionDTO.getLocationOrd()+"DTO", mapSessionDTO);
 						message = "지역인증을 하셔야 원활한 거래가 가능합니다 인증하시겠습니까?(확인시 인증페이지로 이동)";
 						view="m.mapChecklocationPage";
 					}
@@ -72,16 +79,38 @@ public class LoginCommand implements MemberCommand {
 					long map2No = map2.getMapNo();
 					int result1 = mapDAO.isChecked(map1No);
 					int result2 = mapDAO.isChecked(map2No);
-					if(result1 > 0 || result2 > 0) {
+					MapSessionDTO mapSession1DTO = new MapSessionDTO(map1No, loginUserNo, map1.getLocation(), map1.getLocationOrd(), result1);
+					MapSessionDTO mapSession2DTO = new MapSessionDTO(map2No, loginUserNo, map2.getLocation(), map2.getLocationOrd(), result2);
+					session.setAttribute("mapSession"+mapSession1DTO.getLocationOrd()+"DTO", mapSession1DTO);
+					session.setAttribute("mapSession"+mapSession2DTO.getLocationOrd()+"DTO", mapSession2DTO);
+					
+					
+					if(result1 > 0 && result2 > 0){
+						String midLocation1 = GetMidLocation.getMidLocation(map1.getLocation());
+						String midLocation2 =GetMidLocation.getMidLocation(map2.getLocation());
+						mapSession1DTO.setLocation(midLocation1);
+						mapSession2DTO.setLocation(midLocation2);
+						session.setAttribute("mapSession"+mapSession1DTO.getLocationOrd()+"DTO", mapSession1DTO);
+						session.setAttribute("mapSession"+mapSession2DTO.getLocationOrd()+"DTO", mapSession2DTO);
 						message = "로그인 성공!";
 						view="index";
-					}else {
+					}else if(result1 > 0) {
+						String midLocation1 = GetMidLocation.getMidLocation(map1.getLocation());
+						mapSession1DTO.setLocation(midLocation1);
+						session.setAttribute("mapSession"+mapSession1DTO.getLocationOrd()+"DTO", mapSession1DTO);
+						message = "로그인 성공!";
+						view="index";
+					}else if(result2 > 0){
+						String midLocation2 =GetMidLocation.getMidLocation(map2.getLocation());
+						mapSession2DTO.setLocation(midLocation2);
+						session.setAttribute("mapSession"+mapSession2DTO.getLocationOrd()+"DTO", mapSession2DTO);
+						message = "로그인 성공!";
+						view="index";
+					}else{
 						message = "지역인증을 하셔야 원활한 거래가 가능합니다 인증하시겠습니까?(확인시 인증페이지로 이동)";
 						view="m.mapCheckLocationPage";
 					}
-				}
-				System.out.println(view);			
-				System.out.println(message);			
+				}		
 				session.setAttribute("loginUser", loginUser);
 				out.println("<script>");
 				out.println("confirm('"+message+"')");
@@ -94,7 +123,6 @@ public class LoginCommand implements MemberCommand {
 				out.println("</script>");
 			}
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			out.flush();

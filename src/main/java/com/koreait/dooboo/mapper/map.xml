@@ -6,7 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.koreait.dooboo.map.dao.MapDAO">	
 	<insert id="insertLocation">
 		INSERT INTO MAP
-		VALUES(MAP_SEQ.NEXTVAL,#{memberNo},#{location})
+		VALUES(MAP_SEQ.NEXTVAL,#{memberNo},#{location},#{locationOrd})
 	</insert>
 	
 	<select id="getMapNo" resultType="long">
@@ -17,12 +17,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<insert id="CheckLocation">
 		INSERT INTO MAPLOCATIONCHECK
-		VALUES(#{mapNo},#{result})
+		VALUES(#{mapNo},#{isChecked})
 	</insert>
 	
 	<update id="mapUpdateResult">
 		UPDATE MAPLOCATIONCHECK
-		   SET RESULT = #{result}
+		   SET IS_CHECKED = #{isChecked}
 		 WHERE MAP_NO = #{mapNo} 
 	</update>
 	
@@ -31,6 +31,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT * 
 		  FROM MAP
 		 WHERE MEMBER_NO = #{loginUserNo}
+		 
 	</select>
 	
 	<select id="getOneLocation" parameterType="long" resultType="com.koreait.dooboo.map.dto.MapDTO">
@@ -40,12 +41,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="isChecked" resultType="int">
-		SELECT RESULT
+		SELECT IS_CHECKED
 		  FROM MAPLOCATIONCHECK
 		 WHERE MAP_NO = #{mapNo}
 	</select>
 	
-	<update id="changelocation">
+	<update id="updateLocation">
 		UPDATE MAP
 		   SET LOCATION = #{location}
 		 WHERE MAP_NO = #{mapNo}

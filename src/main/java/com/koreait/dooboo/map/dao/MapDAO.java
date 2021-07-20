@@ -12,7 +12,7 @@ public interface MapDAO {
 	public List<MapDTO> getLocation(long loginUserNo);
 	public int isChecked(long mapNo);
 	public int mapUpdateResult(MapLocationCheckDTO mapLocationCheckDTO);
-	public int changelocation(MapDTO mapDTO);
+	public int updateLocation(MapDTO mapDTO);
 	public int resetChecked(MapDTO mapDTO);
 	public int deleteMapLocationCheck(long mapNo);
 	public int deleteMap(long mapNo);
