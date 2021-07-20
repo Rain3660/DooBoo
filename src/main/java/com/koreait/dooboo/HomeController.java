@@ -52,4 +52,8 @@ public class HomeController {
 	public String send() {
 		return "chat/send";
 	}
+	@GetMapping("product")
+	public String product() {
+		return "product/productList";
+	}
 }

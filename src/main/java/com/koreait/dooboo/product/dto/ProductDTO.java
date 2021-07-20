@@ -22,14 +22,8 @@ public class ProductDTO {
     // 상품상태 1 : 판매중 , 0 : 판매완료
     private int status;
 
-    // 상품위치(시) ex)서울특별시
-    private String city;
-
-    // 상품위치(구) ex)마포구
-    private String region;
-
     // 상품위치(상세주소) ex)서강로136 3층
-    private String location;
+    private String address;
 
     // 등록자 회원번호
     private long regNo;
@@ -46,107 +40,101 @@ public class ProductDTO {
     public ProductDTO() {
 		// TODO Auto-generated constructor stub
 	}
-    public long getProductNo() {
-        return productNo;
-    }
 
-    public void setProductNo(long productNo) {
-        this.productNo = productNo;
-    }
+	public long getProductNo() {
+		return productNo;
+	}
 
-    public String getTitle() {
-        return title;
-    }
+	public void setProductNo(long productNo) {
+		this.productNo = productNo;
+	}
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+	public String getTitle() {
+		return title;
+	}
 
-    public int getPrice() {
-        return price;
-    }
+	public void setTitle(String title) {
+		this.title = title;
+	}
 
-    public void setPrice(int price) {
-        this.price = price;
-    }
+	public int getPrice() {
+		return price;
+	}
 
-    public int getHit() {
-        return hit;
-    }
+	public void setPrice(int price) {
+		this.price = price;
+	}
 
-    public void setHit(int hit) {
-        this.hit = hit;
-    }
+	public int getHit() {
+		return hit;
+	}
 
-    public String getContent() {
-        return content;
-    }
+	public void setHit(int hit) {
+		this.hit = hit;
+	}
 
-    public void setContent(String content) {
-        this.content = content;
-    }
+	public String getContent() {
+		return content;
+	}
 
-    public int getStatus() {
-        return status;
-    }
+	public void setContent(String content) {
+		this.content = content;
+	}
 
-    public void setStatus(int status) {
-        this.status = status;
-    }
+	public int getStatus() {
+		return status;
+	}
 
-    public String getCity() {
-        return city;
-    }
+	public void setStatus(int status) {
+		this.status = status;
+	}
 
-    public void setCity(String city) {
-        this.city = city;
-    }
+	public String getAddress() {
+		return address;
+	}
 
-    public String getRegion() {
-        return region;
-    }
+	public void setAddress(String address) {
+		this.address = address;
+	}
 
-    public void setRegion(String region) {
-        this.region = region;
-    }
+	public long getRegNo() {
+		return regNo;
+	}
 
-    public String getLocation() {
-        return location;
-    }
+	public void setRegNo(long regNo) {
+		this.regNo = regNo;
+	}
 
-    public void setLocation(String location) {
-        this.location = location;
-    }
+	public long getModNo() {
+		return modNo;
+	}
 
-    public long getRegNo() {
-        return regNo;
-    }
+	public void setModNo(long modNo) {
+		this.modNo = modNo;
+	}
 
-    public void setRegNo(long regNo) {
-        this.regNo = regNo;
-    }
+	public Date getRegDate() {
+		return regDate;
+	}
 
-    public long getModNo() {
-        return modNo;
-    }
+	public void setRegDate(Date regDate) {
+		this.regDate = regDate;
+	}
 
-    public void setModNo(long modNo) {
-        this.modNo = modNo;
-    }
+	public Date getModDate() {
+		return modDate;
+	}
 
-    public Date getRegDate() {
-        return regDate;
-    }
+	public void setModDate(Date modDate) {
+		this.modDate = modDate;
+	}
 
-    public void setRegDate(Date regDate) {
-        this.regDate = regDate;
-    }
-
-    public Date getModDate() {
-        return modDate;
-    }
-
-    public void setModDate(Date modDate) {
-        this.modDate = modDate;
-    }
+	@Override
+	public String toString() {
+		return "ProductDTO [productNo=" + productNo + ", title=" + title + ", price=" + price + ", hit=" + hit
+				+ ", content=" + content + ", status=" + status + ", address=" + address + ", regNo=" + regNo
+				+ ", modNo=" + modNo + ", regDate=" + regDate + ", modDate=" + modDate + "]";
+	}
+    
+	
 }
