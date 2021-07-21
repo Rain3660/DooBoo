@@ -19,7 +19,7 @@
 <!-- FontAwesome -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" referrerpolicy="no-referrer" />
 </head>
-<body style="font-family: 'Sunflower', sans-serif;">
+<body style="font-family: 'Sunflower', sans-serif; " class=bg-light  >
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
 		<div class="container-fluid">
 			<a class="navbar-brand" href='<c:url value="/"></c:url>'>

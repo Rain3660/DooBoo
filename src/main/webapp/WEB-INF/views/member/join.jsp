@@ -190,51 +190,77 @@
 		})
 	}
 </script>
+
+<style>
+	#box{
+		display: table; 
+		margin-left: auto; 
+		
+		margin-right: auto;
+
+
+		
+			
+		
+	}
+</style>
 <div class="container">
 <!-- 소셜 ID 로 로그인 하지 않은 경우 -->
 <c:if test="${loginApi eq null }">
+
+    <div class="py-5 text-center">
+      <img class="d-block mx-auto mb-4" src="resources/image/DoobooLogo.png"  alt="" width="72" height="57">
+      <h2>회원 가입</h2>
+     
+	<div id="box">
 	<form style="margin-top: 50px;" method="post" id="join_form">
-		<div class="mb-3">
+		<div class="col-md-12">
 			<label for="memberId" class="form-label">아이디</label>
 			<input type="text" class="form-control" id="memberId" name="memberId">
 			<div id="idCheck" class="form-text"></div>
 		</div>
-		<div class="mb-3">
+	
+	<div class="col-md-12">
 			<label for="password" class="form-label">비밀번호</label>
 			<input type="password" class="form-control" id="password" name="password">
 			<div id="isAvailablePassword" class="form-text"></div>
 		</div>
-		<div class="mb-3">
+		<div class="col-md-12">
 			<label for="passwordCheck" class="form-label">비밀번호 확인</label>
 			<input type="password" class="form-control" id="passwordCheck">
 			<div id="pwCheck" class="form-text"></div>
 		</div>
-		<div class="mb-3">
+	<div class="col-md-12">
 			<label for="nickname" class="form-label">닉네임</label>
 			<input type="text" class="form-control" id="nickname" name="nickname">
 			<div id="nicknameCheck" class="form-text"></div>
 		</div>
-		<div class="mb-3">
+		<div class="col-md-12">
 			<label for="phone" class="form-label">연락처</label>
 			<input type="text" class="form-control" id="phone" autocomplete="off" name="phone">
 			<div id="phoneCheck" class="form-text"></div>
 		</div>
-		<div class="mb-3">
+		<div class="col-md-12">
 			<label for="name" class="form-label">이름</label>
 			<input type="text" class="form-control" id="name" name="name">
 			<div id="nameCheck" class="form-text"></div>
 		</div>
-		<div class="mb-3">
+		<div class="col-md-12">
 			<label for="birthday" class="form-label">생년월일</label>
 			<input type="text" name="birthday" id="birthday" autocomplete="off">
 			<input type="button" value="주소 검색" onclick="findAddr()">
-			<input type="text" id="address" name="address">
+			<input type="text" id="address" name="address"><br>
+			<label for="form-check-input" class="form-label"><h5>성별</h5></label>
+			 <div class="form-check">
 			<input class="form-check-input" type="radio" id="genderM" name="gender" value="M">
 			<label class="form-check-label" for="genderM">남</label>
+			</div>
+			<div class="form-check">
 			<input class="form-check-input" type="radio" id="genderW" name="gender" value="W">
 			<label class="form-check-label" for="genderW">여</label>
+			</div>
 		</div>
-		<div class="mb-3">
+		<div class="col-md-12">
 			<label for="email" class="form-label">이메일</label>
 			<input type="text" class="form-control" id="email" autocomplete="off" name="email">
 			<div id="emailCheck" class="form-text"></div>
@@ -242,59 +268,81 @@
 		<br>
 		<input type="hidden" value="0" name="apiMemberNo">
 		<input type="hidden" value="0" name="apiNumber">
-		<input type="button" class="btn btn-primary" value="회원가입" id="join_btn">
+		<input type="button"  class="btn btn-success btn btn-primary btn-lg col-md-12 " value="회원가입" id="join_btn">
 	</form>
+	</div>
 </c:if>
 <!-- 소셜 아이디로 로그인한 경우 -->
 <c:if test="${loginApi ne null }">
+       <div class="py-5 text-center">
+      <img class="d-block mx-auto mb-4" src="resources/image/DoobooLogo.png"  alt="" width="72" height="57">
+      <h2>회원 가입</h2>
+	<div id="box">
 	<form style="margin-top: 50px;" method="post" id="join_form">
-		<div class="mb-3">
+		<div class="col-md-12">
 			<label for="memberId" class="form-label">아이디</label>
 			<input type="text" class="form-control" id="memberId" name="memberId">
 			<div id="idCheck" class="form-text"></div>
 		</div>
-		<div class="mb-3">
+		<div class="col-md-12">
 			<label for="password" class="form-label">비밀번호</label>
 			<input type="password" class="form-control" id="password" name="password">
 			<div id="isAvailablePassword" class="form-text"></div>
 		</div>
-		<div class="mb-3">
+		<div class="col-md-12">
 			<label for="passwordCheck" class="form-label">비밀번호 확인</label>
 			<input type="password" class="form-control" id="passwordCheck">
 			<div id="pwCheck" class="form-text"></div>
 		</div>
-		<div class="mb-3">
+		<div class="col-md-12">
 			<label for="nickname" class="form-label">닉네임</label>
 			<input type="text" class="form-control" id="nickname" name="nickname" <c:if test="${nickname ne null }"> value="${nickname }" readonly</c:if>>
 			<div id="nicknameCheck" class="form-text"></div>
 		</div>
-		<div class="mb-3">
+		<div class="col-md-12">
 			<label for="phone" class="form-label">연락처</label>
 			<input type="text" class="form-control" id="phone" name="phone" autocomplete="off" <c:if test="${phone ne null}"> value="${phone }" readonly</c:if>>
 			<div id="phoneCheck" class="form-text"></div>
 		</div>
-		<div class="mb-3">
+		<div class="col-md-12">
 			<label for="name" class="form-label">이름</label>
 			<input type="text" class="form-control" id="name" name="name" <c:if test="${name ne null }"> value="${name }" readonly</c:if>>
 			<div id="nameCheck" class="form-text"></div>
 		</div>
-		<div class="mb-3">
+		<div class="col-md-12">
 			<label for="birthday" class="form-label">생년월일</label>
-			<input type="text" name="birthday" id="birthday" autocomplete="off"  <c:if test="${birthday ne null }"> value="${birthday }" readonly</c:if>>
-			<input type="button" value="주소 검색" onclick="findAddr()">
-			<input type="text" id="address" name="address">
+			<input  class="col-md-12" type="text" name="birthday" id="birthday" autocomplete="off"  <c:if test="${birthday ne null }"> value="${birthday }" readonly</c:if>>
+			</div>
+				<br>
+			<div class="col-md-12">
+			<input  type="button" value="주소 검색"  class="btn btn-success" onclick="findAddr()">
+			<input type="text" id="address" name="address"><br>
+				</div>
+				<label for="form-check-input" class="form-label"><h5>성별</h5></label>
 			<c:if test="${gender ne null }">
 			<c:if test="${gender  eq 'M' || gender eq 'male'}">
-				<label for="M">남<input type="radio" id="M" name="gender" value="M" checked></label>
-				<label for="W">여<input type="radio" id="W" name="gender" value="W" disabled></label>
+			 <div class="form-check">
+					<input class="form-check-input" type="radio" id="genderM" name="gender" value="M">
+			<label class="form-check-label" for="genderM">남</label>
+				</div>
+				<div class="form-check">
+					<input class="form-check-input" type="radio" id="genderW" name="gender" value="W">
+			<label class="form-check-label" for="genderW">여</label>
+				</div>
 			</c:if>
 			<c:if test="${gender  eq 'W' || gender eq 'female'}">
-				<label for="M">남<input type="radio" id="M" name="gender" value="M" disabled></label>
-				<label for="W">여<input type="radio" id="W" name="gender" value="W" checked></label>
+			<div class="form-check">
+					<input class="form-check-input" type="radio" id="genderM" name="gender" value="M">
+			<label class="form-check-label" for="genderM">남</label>
+				</div>
+				<div class="form-check">
+				<input class="form-check-input" type="radio" id="genderW" name="gender" value="W">
+			<label class="form-check-label" for="genderW">여</label>
+				</div>
 			</c:if>
 		</c:if>
-		</div>
-		<div class="mb-3">
+	
+		<div class="col-md-12">
 			<label for="email" class="form-label">이메일</label>
 			<input type="text" class="form-control" id="email" name="email" autocomplete="off" <c:if test="${email ne null}"> value="${email }" readonly</c:if>>
 			<div id="emailCheck" class="form-text"></div>
@@ -302,8 +350,9 @@
 		<br>
 		<input type="hidden" value="${apiMemberNo }" name="apiMemberNo">
 		<input type="hidden" value="${apiNumber }" name="apiNumber">
-		<input type="button" class="btn btn-primary" value="회원가입" id="join_btn">
+		<input type="button"  class="btn btn-success" value="회원가입" id="join_btn">
 	</form>
+	</div>
 </c:if>
 </div>
 <jsp:include page="../layout/footer.jsp"></jsp:include>
