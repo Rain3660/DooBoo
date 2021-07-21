@@ -5,132 +5,183 @@
 <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script> -->
 <jsp:include page="../layout/header.jsp"></jsp:include>
-<div class="container">
-	<div class="row">
-		<h1 class="text-center">마이 페이지</h1>
-		<div class="col-md-6">
-			<h3>회원 프로필</h3>
-			<form id="updateInfo" method="post">
-				이름<br>
-				<input type="text" name="name" value="${loginUser.name}" id="name">
-				<br> 닉네임<br>
-				<input type="text" name="nickname" value="${loginUser.nickname}" id="nickname">
-				<br> 성별<br> ${loginUser.gender}<br> 생년월일<br> ${loginUser.birthday}<br>
-				<input type="button" id="update_info_btn" value="수정">
-			</form>
-		</div>
-
-		<div class="col-md-6">
-			<h3>아이디, 비밀번호</h3>
-			<form id="updatePassword" method="post">
-				아이디<br> ${loginUser.memberId}<br> 현재 비밀번호<br>
-				<input type="password" id="pw0">
-				<br> <span id="currPw_msg"></span> 새 비밀번호<br>
-				<input type="password" name="password" id="pw">
-				<br> 비밀번호 확인<br>
-				<input type="password" id="pw2">
-				<input type="button" id="update_pw_btn" value="수정">
-				<br> <br>
-			</form>
-		</div>
 
 
-		<div class="col-md-6">
-			<h3>연락처 및 주소</h3>
-			<form id="updateContact" method="post">
-				연락처<br>
-				<input type="text" name="phone" id="phone" value="${loginUser.phone}">
-				<br> 이메일<br> ${loginUser.email}<br>
-				<input type="button" value="주소 검색" onclick="findAddr()">
-				<input type="text" id="address" name="address" value="${loginUser.address }">
-				<input type="button" id="update_contact_btn" value="수정">
-			</form>
-		</div>
-		<div class="col-md-6">
-		<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
-        <symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16">
-          <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
-        </symbol>
-        <symbol id="exclamation-triangle-fill" fill="currentColor" viewBox="0 0 16 16">
-          <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
-        </symbol>
-        
-      </svg>	
-		
-		<button type="button" class="btn btn-outline-success">내 동내 인증상태</button><br>
-		<c:if test="${mapSession1DTO eq null}">
-			<button type="button" class="btn btn-outline-primary">미등록</button><br>
-			<div class="alert alert-danger d-flex align-items-center col-3" role="alert">
-	        	<svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
-	        	<div>
-	        	  	지역을 등록해주세요
-	        	</div>
-	      	</div>
-	      	<br>
-		</c:if>
-		<c:if test="${mapSession1DTO ne null}">
-			<button type="button" class="btn btn-outline-primary">${mapSession1DTO.location}</button><br>
-			<c:if test="${mapSession1DTO.isChecked eq 0}">
-				<div class="alert alert-warning d-flex align-items-center col-3" role="alert">
-      				<svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"/></svg>
-      				  <div>
-          				인증을 해주세요
-       				 </div>
-      			</div>
-      			<br>
-			</c:if>
-			<c:if test="${mapSession1DTO.isChecked eq 1}">
-				<div class="alert alert-success d-flex align-items-center col-3" role="alert">
-      			 <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
-        			<div>
-         			 인증완료!
-       				 </div>
-      			</div>
-      			<br>
-			</c:if>
-		</c:if>
-		
-		<c:if test="${mapSession2DTO eq null}">
-		<button type="button" class="btn btn-outline-primary">미등록</button><br>
-			<div class="alert alert-danger d-flex align-items-center" role="alert">
-	        	<svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
-	        	<div>
-	        	  	지역을 등록해주세요
-	        	</div>
-	      	</div>
-		</c:if>
-		<c:if test="${mapSession2DTO ne null}">
-			<button type="button" class="btn btn-outline-primary">${mapSession2DTO.location}</button><br>
-			<c:if test="${mapSession2DTO.isChecked eq 0}">
-				<div class="alert alert-warning d-flex align-items-center" role="alert">
-      				<svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"/></svg>
-      				  <div>
-          				인증을 해주세요
-       				 </div>
-      			</div>
-			</c:if>
-			<c:if test="${mapSession2DTO.isChecked eq 1}">
-				<div class="alert alert-success d-flex align-items-center col-3" role="alert">
-      			 <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
-        			<div>
-         			 인증완료!
-       				 </div>
-      			</div>
-			</c:if>
-		</c:if>
-		<input type="button" value="거래지역수정하기" id="update_location_btn" onclick="window.open('m.mapCheckLocationPage','지역변경','width=430,height=500,location=no,status=no,scrollbars=yes');">
-	</div>		
-		<div>
-			<h1>내가 올린 게시글</h1>
-		</div>
-		<div>
-			<h1>구매 내역</h1>
-		</div>
-		<div>
-			<h1>찜 목록</h1>
-		</div>
-	</div>
-</div>
+<body class="bg-light">
+	<div class="container">
+        <h2 class="py-5 text-center">마이 페이지</h2>
+        <div class="row">
+        	<!-- 왼쪽 -->
+        	<div class="col">
+        		<!-- 회원 프로필 -->
+                <h3 class="mb-4">회원 프로필</h3>
+                    <form id="updateInfo" method="post">
+                    	<div class="row">
+				            <div class="col-md-8">
+					            <label for="name" class="form-label">이름</label>
+							     <input type="text" class="form-control" name="name" id="name" placeholder="${loginUser.name}" required><br>
+						    </div>
+						    <div class="col">
+						    	<div class="mb-2"></div><br>
+						    	<input type="button" class="btn btn-outline-secondary" id="delete_info_btn" onclick="" value="회원탈퇴">						   
+						    </div>
+						</div><br>
+					    <div class="col-md-8">
+			            	<label for="nickname" class="form-label">닉네임</label>
+					        <input type="text" class="form-control" name="nickname" id="nickname" placeholder="${loginUser.nickname}" required>
+					    </div><br>
+					    <div>
+							<p>성별</p><br>
+							<h6 class="my-0">${loginUser.gender}</h6><br>
+			            </div>
+					    <div>
+							<p>생년월일</p><br>
+							<h6 class="my-0">${loginUser.birthday}</h6><br>
+			            </div>
+			            <input type="button" class="btn btn-primary" id="update_info_btn" value="수정">
+                    </form><br><br>
+
+					<!-- 연락처 및 주소 -->
+                    <h3 class="mb-3">연락처 및 주소</h3>
+                    <form id="updateContact" method="post">
+                    	<div class="col-md-8">
+			            	<label for="phone" class="form-label">연락처</label>
+					     	<input type="text" class="form-control" name="phone" id="phone" placeholder="${loginUser.phone}" required>
+					    </div><br>
+						<div>
+							<p>이메일</p><br>
+							<h6 class="my-0">${loginUser.email}</h6><br>
+			            </div>
+			            <div class="row">
+				            <div class="col-md-8">
+					            <label for="address" class="form-label">주소</label>
+							     <input type="text" class="form-control" name="address" id="address" placeholder="${loginUser.address }" required><br>
+						    </div>
+						    <div class="col">
+						    	<div class="mb-2"></div><br>
+						    	<input type="button" class="btn btn-outline-secondary" value="주소 검색" onclick="findAddr()">						   
+						    </div>
+						</div><br>
+                        <input type="button" class="btn btn-primary" id="update_contact_btn" value="수정">
+                    </form>
+        	</div><br><br>
+        	
+	        <!-- 오른쪽 -->
+	        <div class="col">
+		        <!-- 아이디, 비밀번호 -->
+		        <h3 class="mb-4">아이디, 비밀번호</h3>
+				<form id="updatePassword" method="post">
+					<div>
+						<p>아이디</p><br>
+						<h6 class="my-0">${loginUser.memberId}</h6><br>
+		            </div>
+		            <div class="col-md-10">
+		            	<label for="pw0" class="form-label">현재 비밀번호</label>
+				        <input type="text" class="form-control" id="pw0" placeholder="" value="" required>
+		           	</div><br>
+		           	<div class="col-md-10">
+		           		<label for="pw" class="form-label">
+		           		<span id="currPw_msg"></span>새 비밀번호</label>
+			            <input type="text" class="form-control" name="password" id="pw" placeholder="" value="" required>
+		           	</div><br>
+		           	<div class="col-md-10">
+		           		<label for="pw2" class="form-label">비밀번호 확인</label>
+				        <input type="text" class="form-control" id="pw2" placeholder="" value="" required>
+		           	</div><br>
+		           	<input type="button" class="btn btn-primary" id="update_pw_btn" value="수정">
+				</form><br><br>
+				
+        		<!-- 지역 인증 -->
+	        	<h3 class="mb-3">지역 인증</h3>
+		        <div class="col-md-10">
+		            <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+		                <symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16">
+		                  <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+		                </symbol>
+		                <symbol id="exclamation-triangle-fill" fill="currentColor" viewBox="0 0 16 16">
+		                  <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+		                </symbol>
+		            </svg>	
+				
+		            <button type="button" class="btn btn-outline-success">나의 동네 인증상태</button><br>
+		            <c:if test="${mapSession1DTO eq null}">
+		                
+		                <div class="alert alert-danger d-flex align-items-center" role="alert">
+		                    <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+		                    <div>
+		                    	지역을 등록해주세요
+		                    </div>
+		                </div>
+		                <button type="button" class="btn btn-outline-primary">미등록</button><br>
+		                <br>
+		            </c:if>
+		            <c:if test="${mapSession1DTO ne null}">
+		                <button type="button" class="btn btn-outline-primary">${mapSession1DTO.location}</button><br>
+		                <c:if test="${mapSession1DTO.isChecked eq 0}">
+		                    <div class="alert alert-warning d-flex align-items-center" role="alert">
+		                        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+		                          <div>
+		                          	인증을 해주세요
+		                         </div>
+		                    </div>
+		                    <br>
+		                </c:if>
+		                <c:if test="${mapSession1DTO.isChecked eq 1}">
+		                    <div class="alert alert-success d-flex align-items-center" role="alert">
+		                     <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
+		                        <div>
+		                        	인증완료!
+		                         </div>
+		                    </div>
+		                    <br>
+		                </c:if>
+		            </c:if>
+				
+		            <c:if test="${mapSession2DTO eq null}">
+		                <div class="alert alert-danger d-flex align-items-center" role="alert">
+		                    <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+		                    <div>
+		                    	지역을 등록해주세요
+		                    </div>
+		                </div>
+		                <button type="button" class="btn btn-outline-primary">미등록</button><br>
+		            </c:if>
+		            <c:if test="${mapSession2DTO ne null}">
+		                <button type="button" class="btn btn-outline-primary">${mapSession2DTO.location}</button><br>
+		                <c:if test="${mapSession2DTO.isChecked eq 0}">
+		                    <div class="alert alert-warning d-flex align-items-center" role="alert">
+		                        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+		                          <div>
+		                          	인증을 해주세요
+		                         </div>
+		                    </div>
+		                </c:if>
+		                <c:if test="${mapSession2DTO.isChecked eq 1}">
+		                    <div class="alert alert-success d-flex align-items-center" role="alert">
+		                     <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
+		                        <div>
+		                        	인증완료!
+		                         </div>
+		                    </div>
+		                </c:if>
+		            </c:if>
+		            <br>
+		            <input class="btn btn-primary" type="button" value="거래지역수정하기" id="update_location_btn" onclick="window.open('m.mapCheckLocationPage','지역변경','width=430,height=500,location=no,status=no,scrollbars=yes');">
+		        </div>
+        	</div><br><br>
+  
+        </div>
+        <div>
+        	<h1>내가 올린 게시글</h1>
+        </div>
+        <div>
+            <h1>구매 내역</h1>
+        </div>
+        <div>
+            <h1>찜 목록</h1>
+        </div>
+    </div>
+</body>
 
 <script type="text/javascript">
 	$(document).ready(function(){
