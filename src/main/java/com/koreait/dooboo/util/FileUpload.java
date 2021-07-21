@@ -102,7 +102,6 @@ public class FileUpload {
 		for (String concatStr : arrStr) {
 			sb.append(concatStr);
 		}
-
 		return sb.toString();
 	}	
 }

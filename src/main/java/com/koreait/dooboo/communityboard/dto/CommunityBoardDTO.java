@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import com.koreait.dooboo.productimage.dto.ProductImageDTO;
+import com.koreait.dooboo.product.dto.ProductImageDTO;
 import com.koreait.dooboo.util.FileUpload;
 
 @Repository

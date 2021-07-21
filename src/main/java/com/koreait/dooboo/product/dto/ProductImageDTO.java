@@ -1,4 +1,4 @@
-package com.koreait.dooboo.productimage.dto;
+package com.koreait.dooboo.product.dto;
 
 import java.sql.Date;
 
@@ -24,8 +24,8 @@ public class ProductImageDTO {
 	 private Date regDate;
 	 
 	 public ProductImageDTO() {
-		// TODO Auto-generated constructor stub
-	}
+
+	 }
 	 public long getProductNo() {
 	     return productNo;
 	 }

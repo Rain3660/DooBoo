@@ -103,12 +103,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	    <result property="regDate" column="REG_DATE"/>
 	    <result property="modDate" column="MOD_DATE"/>
 	    <result property="nickname" column="NICKNAME"/>
-	    <collection property="productImageList" column="BOARD_NO" javaType="java.util.ArrayList" ofType="com.koreait.dooboo.product.dto.ProductimageDTO" select="selectBoardFileList"/>
+	    <collection property="productImageList" column="BOARD_NO" javaType="java.util.ArrayList" ofType="com.koreait.dooboo.product.dto.ProductImageDTO" select="selectBoardFileList"/>
 	</resultMap>
 	 
 
-	<select id="selectBoardFileList" resultType="com.koreait.dooboo.product.dto.ProductimageDTO">
-		SELECT * FROM PRODUCTIMAGE WHERE PRODUCT_NO = #{boardNo}
+	<select id="selectBoardFileList" resultType="com.koreait.dooboo.product.dto.ProductImageDTO">
+		SELECT * FROM PRODUCT_IMAGE WHERE PRODUCT_NO = #{productNo}
 	</select>
 	
 	<select id="selectBoardList" parameterType="com.koreait.dooboo.communityboard.dto.CommunityBoardDTO" resultMap="boardResult">

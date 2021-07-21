@@ -1,8 +1,12 @@
 package com.koreait.dooboo.product.dto;
 
 import java.sql.Date;
+import java.util.List;
 
-public class ProductDTO {
+import com.koreait.dooboo.communityboard.dto.ListPagingDTO;
+import com.koreait.dooboo.util.FileUpload;
+
+public class ProductDTO extends ListPagingDTO{
 
     // 상품번호 100 부터 시작
     private long productNo;
@@ -138,6 +142,32 @@ public class ProductDTO {
 	public void setDelYn(String delYn) {
 		this.delYn = delYn;
 	}
+	
+	 // 첨부파일 
+    private List<ProductImageDTO> productImageList; 
+    
+    public List<ProductImageDTO> getProductImageList() {
+		return productImageList;
+	}
+
+
+	public void setProductImageList(List<ProductImageDTO> productImageList) {
+		this.productImageList = productImageList;
+	}
+
+	// 첨부파일 
+    private List<FileUpload> fileUploadList; 
+    
+
+	public List<FileUpload> getFileUploadList() {
+		return fileUploadList;
+	}
+
+
+	public void setFileUploadList(List<FileUpload> fileUploadList) {
+		this.fileUploadList = fileUploadList;
+	}
+
     
 	@Override
 	public String toString() {
