@@ -24,7 +24,7 @@ public class KakaoController {
 	private SqlSession sqlSession;
 
     
-    @RequestMapping(value = "api/kakao", produces = "application/json")
+    @RequestMapping(value = "/kakao", produces = "application/json")
     public String kakaoLogin(@RequestParam("code") String code, Model model, HttpSession session) {
         System.out.println("로그인 할때 임시 코드값");
         //카카오 홈페이지에서 받은 결과 코드
@@ -84,7 +84,7 @@ public class KakaoController {
     }
     
     
-    @RequestMapping(value = "/kakaologout", produces = "application/json")
+    @RequestMapping(value = "/kakaoLogout", produces = "application/json")
     public String Logout(HttpSession session) {
         //kakao restapi 객체 선언
         Kakao_RestApi kr = new Kakao_RestApi();

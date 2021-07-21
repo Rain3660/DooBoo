@@ -21,7 +21,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class Kakao_RestApi {
 	private final static String client_id ="d5a58c13cc435c23f765c015c6b775d2";
-	private final static String redirect_uri ="http://localhost:9090/dooboo/api/kakao";
+	private final static String redirect_uri ="http://localhost:9090/dooboo/kakao";
 	
 	public static String getRedirectURL() {
 		return"https://kauth.kakao.com/oauth/authorize?client_id="+client_id+"&redirect_uri="+redirect_uri+"&response_type=code";
