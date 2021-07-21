@@ -67,7 +67,7 @@ public class MemberController {
 		return "member/join";
 	}
 
-	@RequestMapping(value = {"m.loginPage","api/m.loginPage"}, method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "m.loginPage", method = { RequestMethod.GET, RequestMethod.POST })
 	public String login(Model model, HttpSession session) {
 		/* 네이버아이디로 인증 URL을 생성하기 위하여 naverLoginBO클래스의 getAuthorizationUrl메소드 호출 */
 		String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
@@ -79,19 +79,19 @@ public class MemberController {
 
 	}
 
-	@GetMapping(value= {"m.myPage","api/m.myPage"})
+	@GetMapping(value= "m.myPage")
 	public String mypage() {
 		return "member/myPage";
 	}
 
-	@PostMapping(value= {"m.join","api/m.join"})
+	@PostMapping(value= "m.join")
 	public void join(Model model, MemberDTO memberDTO, HttpServletResponse response,HttpSession session) {
 		model.addAttribute("memberDTO", memberDTO);
 		model.addAttribute("response", response);
 		joinCommand.execute(sqlSession, model);
 	}
 
-	@PostMapping(value={"m.login","api/m.login"})
+	@PostMapping(value="m.login")
 	public void login(Model model, MemberDTO memberDTO, HttpServletRequest request, HttpServletResponse response) {
 		model.addAttribute("request", request);
 		model.addAttribute("response", response);
@@ -161,7 +161,7 @@ public class MemberController {
 		return sendTempPasswordEmailCommand.execute(sqlSession, model);
 	}
 	
-	@PostMapping(value= {"m.idCheck", "api/m.idCheck"})
+	@PostMapping(value= "m.idCheck")
 	@ResponseBody
 	public Map<String, Integer> idCheck(Model model , @RequestBody MemberDTO memberDTO){
 		
