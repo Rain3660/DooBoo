@@ -18,6 +18,9 @@
 
 <!-- FontAwesome -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" referrerpolicy="no-referrer" />
+
+<!-- 이미지 루트 -->
+<c:set var="STATIC_IMAGE_ROOT" value="http://sih8859.iptime.org:8081/dooboo" scope="application"></c:set>
 </head>
 <body style="font-family: 'Sunflower', sans-serif;">
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">

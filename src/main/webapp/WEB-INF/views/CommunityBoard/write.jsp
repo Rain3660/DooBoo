@@ -22,14 +22,14 @@
                    	<textarea rows="3" name="content" placeholder="내용을 입력하세요"></textarea>
                   
                  </div>
-	    		<div>
+	    		<!-- <div>
 			    	<label>파일</label>
 			    	<input type="file" name="uploadFile" id="fileUpload" title="첨부파일 추가1">
 			    	<label>파일2</label>
 			    	<input type="file" name="uploadFile" id="fileUpload2" title="첨부파일 추가2">
 			    	<label>파일3</label>
 			    	<input type="file" name="uploadFile" id="fileUpload3" title="첨부파일 추가3">
-			    </div>                 
+			    </div>         -->         
                  <div style="text-align : center">
 	                <c:if test="${empty board}"> 
 	                		<a href="javascript:boardSave();">저장하기</a>

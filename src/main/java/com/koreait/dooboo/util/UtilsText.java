@@ -57,7 +57,7 @@ public class UtilsText {
 		SimpleDateFormat dayTime = new SimpleDateFormat("yyyyMM", Locale.KOREA);
 		String strDt = dayTime.format(new Date(time));
 
-		sb.append(fileSeparator);
+		sb.append(fileSeparator+"images"+fileSeparator);
 		for (String str : path) {
 			sb.append(str).append(fileSeparator);
 		}

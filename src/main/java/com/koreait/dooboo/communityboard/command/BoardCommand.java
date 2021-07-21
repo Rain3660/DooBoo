@@ -54,7 +54,6 @@ public class BoardCommand{
 				productimageDTO.setRegNo(1111);
 
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			if(null != productimageDTO) {
@@ -104,6 +103,12 @@ public class BoardCommand{
 
 		return resultMap;
 	}
+	
+	public boolean setDeleteFile(ProductImageDTO productImageDto) {
+		int queryResult = 0;
+		queryResult = communityBoardDAO.deleteFile(productImageDto);
+		return (queryResult == 1) ? true : false;
+	}	
 	
 }
 

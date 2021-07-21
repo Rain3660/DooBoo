@@ -57,7 +57,7 @@
         
       </svg>	
 		
-		<button type="button" class="btn btn-outline-success">내 동내 인증상태</button><br>
+		<button type="button" class="btn btn-outline-success">내 동네 인증상태</button><br>
 		<c:if test="${mapSession1DTO eq null}">
 			<button type="button" class="btn btn-outline-primary">미등록</button><br>
 			<div class="alert alert-danger d-flex align-items-center col-3" role="alert">
