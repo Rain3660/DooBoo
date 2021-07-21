@@ -133,7 +133,7 @@ public class ProductCommand {
 				productImageDTO.setRegNo(regNo);
 				productImageDTO.setFilePath(filePath);
 				productImageDTO.setFileName(fileName);
-				productDAO.uploadImageFile(productImageDTO);				
+				//productDAO.uploadImageFile(productImageDTO);				
 			}
 		}
 	}
