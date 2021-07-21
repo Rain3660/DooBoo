@@ -22,7 +22,7 @@
 <!-- 이미지 루트 -->
 <c:set var="STATIC_IMAGE_ROOT" value="http://sih8859.iptime.org:8081/dooboo" scope="application"></c:set>
 </head>
-<body style="font-family: 'Sunflower', sans-serif;">
+<body style="font-family: 'Sunflower', sans-serif; " class=bg-light  >
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
 		<div class="container-fluid">
 			<a class="navbar-brand" href='<c:url value="/"></c:url>'>
