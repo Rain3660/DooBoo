@@ -62,7 +62,12 @@
 					</c:if>
 					<c:if test="${not empty loginUser }">
 						<li>
+							<c:if test="${apiNumber eq 2 }">
+							<a class="btn" href="kakaoLogout" id="logout">로그아웃</a>
+							</c:if>
+							<c:if test="${apiNumber ne 2 }">
 							<a class="btn" href="m.logout" id="logout">로그아웃</a>
+							</c:if>
 						</li>						
 					</c:if>
 					<li class="login_menu">

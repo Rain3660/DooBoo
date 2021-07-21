@@ -49,7 +49,7 @@ public class MapController {
 		this.deleteLocationCommand = deleteLocationCommand;
 		this.firstInsertLocationCommand = firstInsertLocationCommand;
 	}
-	@GetMapping(value= {"m.checkLocation","api/m.checkLocation"})
+	@GetMapping(value= "m.checkLocation")
 	@ResponseBody
 	public Map<String, Object> checkLocation(HttpServletRequest request,MapSessionDTO mapSessionDTO,Model model) {
 		model.addAttribute("request",request);
@@ -57,7 +57,7 @@ public class MapController {
 		return mapCheckLocationCommand.execute(sqlSession, model);
 	}
 	
-	@PostMapping(value= {"m.updateLocation","api/m.updateLocation"})
+	@PostMapping(value= "m.updateLocation")
 	@ResponseBody
 	public Map<String, Object> changeLocation(HttpServletRequest request,MapSessionDTO mapSessionDTO,Model model){
 		model.addAttribute("request",request);
@@ -65,7 +65,7 @@ public class MapController {
 		return changeLocationCommand.execute(sqlSession, model);
 	}
 	
-	@PostMapping(value= {"m.deleteLocation","api/m.deleteLocation"})
+	@PostMapping(value="m.deleteLocation")
 	@ResponseBody
 	public Map<String, Object> deleteLocation(HttpServletRequest request,MapSessionDTO mapSessionDTO,Model model){
 		model.addAttribute("request",request);
@@ -73,7 +73,7 @@ public class MapController {
 		return deleteLocationCommand.execute(sqlSession, model);
 	}
 	
-	@PostMapping(value= {"m.insertLocation","api/m.insertLocation"})
+	@PostMapping(value= "m.insertLocation")
 	@ResponseBody
 	public Map<String, Object> insertLocation(HttpServletRequest request,HttpServletResponse response,MapSessionDTO mapSessionDTO,Model model) {
 		model.addAttribute("request",request);
@@ -82,7 +82,7 @@ public class MapController {
 		return mapInsertLocationCommand.execute(sqlSession, model);
 		
 	}
-	@PostMapping(value= {"locationSave","api/locationSave"}, produces="application/json; charset=utf-8")
+	@PostMapping(value="locationSave", produces="application/json; charset=utf-8")
 	@ResponseBody
 	public Map<String, Object> locationSave(HttpServletRequest request ,MapSessionDTO mapSessionDTO, Model model) {
 		model.addAttribute("request",request);
@@ -90,12 +90,12 @@ public class MapController {
 		return saveLocationCommand.execute(sqlSession, model);
 	}
 	
-	@GetMapping(value= {"mapCheck","api/mapCheck"})
+	@GetMapping(value= "mapCheck")
 	public String mapCheck() {
 		return"map/mapCheck";
 	}
 	
-	@PostMapping(value= {"m.firstInsertLocation","api/m.firstInsertLocation"})
+	@PostMapping(value= "m.firstInsertLocation")
 	public String firstInsertLocation(HttpServletRequest request,Model model) {
 		model.addAttribute("request",request);
 		firstInsertLocationCommand.execute(sqlSession, model);
@@ -105,11 +105,11 @@ public class MapController {
 	
 	
 
-	@GetMapping(value= {"m.mapInsertLocationPage","api/m.mapInsertLocationPage"})
+	@GetMapping(value= "m.mapInsertLocationPage")
 	public String inserLocationPage() {
 		return "map/mapInsertLocation";
 	}
-	@GetMapping(value= {"m.mapCheckLocationPage","api/m.mapCheckLocationPage"})
+	@GetMapping(value= "m.mapCheckLocationPage")
 	public String checkLocationPage() {
 		return "map/mapCheckLocation";
 	}
