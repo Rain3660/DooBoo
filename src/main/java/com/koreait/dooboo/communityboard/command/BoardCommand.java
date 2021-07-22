@@ -36,9 +36,6 @@ public class BoardCommand{
 		params.setRegNo(1);
 		params.setModNo(1);
 		
-		/*String fileName = UtilsText.concat(UtilsText.parseFileRename(), ".", uploadFile.getExt());
-		String filePath = this.getFilePath("adminnotice");*/
-		
 		for(FileUpload fileUpload : params.getFileUploadList()) {
 			ProductimageDTO productimageDTO = null;
 			try {

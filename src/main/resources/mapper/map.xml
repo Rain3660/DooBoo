@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.koreait.dooboo.map.dao.MapDAO">	
+	<insert id="insertLocation">
+		INSERT INTO MAP
+		VALUES(MAP_SEQ.NEXTVAL,#{memberNo},#{location},#{locationOrd})
+	</insert>
+	
+	<select id="getMapNo" resultType="long">
+		SELECT MAP_NO
+		  FROM MAP
+		 WHERE MEMBER_NO = #{memberNo} AND LOCATION = #{location}
+	</select>
+	
+	<insert id="CheckLocation">
+		INSERT INTO MAPLOCATIONCHECK
+		VALUES(#{mapNo},#{isChecked})
+	</insert>
+	
+	<update id="mapUpdateResult">
+		UPDATE MAPLOCATIONCHECK
+		   SET IS_CHECKED = #{isChecked}
+		 WHERE MAP_NO = #{mapNo} 
+	</update>
+	
+	
+	<select id="getLocation" parameterType="long" resultType="com.koreait.dooboo.map.dto.MapDTO">
+		SELECT * 
+		  FROM MAP
+		 WHERE MEMBER_NO = #{loginUserNo}
+		 
+	</select>
+	
+	<select id="getOneLocation" parameterType="long" resultType="com.koreait.dooboo.map.dto.MapDTO">
+		SELECT *
+		  FROM MAP
+		 WHERE MAP_NO = #{mapNo}
+	</select>
+	
+	<select id="isChecked" resultType="int">
+		SELECT IS_CHECKED
+		  FROM MAPLOCATIONCHECK
+		 WHERE MAP_NO = #{mapNo}
+	</select>
+	
+	<update id="updateLocation">
+		UPDATE MAP
+		   SET LOCATION = #{location}
+		 WHERE MAP_NO = #{mapNo}
+	</update>
+	
+	
+	<delete id="deleteMapLocationCheck">
+		DELETE MAPLOCATIONCHECK
+		 WHERE MAP_NO = #{mapNo}
+	</delete>
+	
+	<delete id="deleteMap">
+		DELETE MAP
+		 WHERE MAP_NO = #{mapNo}
+	</delete>
+	
+</mapper>
