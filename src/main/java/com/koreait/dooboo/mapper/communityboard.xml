@@ -41,7 +41,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	    <result property="regDate" column="REG_DATE"/>
 	    <result property="modDate" column="MOD_DATE"/>
 	    <result property="nickname" column="NICKNAME"/>
-	    <collection property="productImageList" column="BOARD_NO" javaType="java.util.ArrayList" ofType="com.koreait.dooboo.product.dto.ProductImageDTO" select="selectBoardFileList"/>
+	    <collection property="productImageList" column="BOARD_NO" javaType="java.util.ArrayList" ofType="com.koreait.dooboo.product.dto.ProductimageDTO" select="selectBoardFileList"/>
 	</resultMap>
 
 	<insert id="insertBoard" parameterType="com.koreait.dooboo.communityboard.dto.CommunityBoardDTO">
@@ -104,7 +104,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE
 			BOARD_NO = #{boardNo}
 	</update>
-	<select id="selectBoardFileList" resultType="com.koreait.dooboo.product.dto.ProductImageDTO">
+	<select id="selectBoardFileList" resultType="com.koreait.dooboo.product.dto.ProductimageDTO">
 		SELECT * FROM PRODUCT_IMAGE WHERE PRODUCT_NO = #{productNo}
 	</select>
 	
@@ -172,7 +172,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			</if>
 	</select>
 	
-	<delete id="deleteFile" parameterType="com.koreait.dooboo.product.dto.ProductImageDTO">
+	<delete id="deleteFile" parameterType="com.koreait.dooboo.product.dto.ProductimageDTO">
 		DELETE FROM PRODUCT_IMAGE WHERE FILE_NO = #{fileNo} <!-- AND REG_NO = #{regNo} -->
 	</delete>	
 </mapper>

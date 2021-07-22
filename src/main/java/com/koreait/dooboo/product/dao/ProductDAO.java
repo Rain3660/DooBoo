@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.koreait.dooboo.communityboard.dto.CommunityBoardDTO;
 import com.koreait.dooboo.product.dto.ProductDTO;
-import com.koreait.dooboo.product.dto.ProductImageDTO;
+import com.koreait.dooboo.product.dto.ProductimageDTO;
 
 @Mapper
 public interface ProductDAO {
@@ -26,5 +26,5 @@ public interface ProductDAO {
 
 	public int updateHit(long productNo);
 	
-	public int insertProductImage(ProductImageDTO productimageDTO);
+	public int insertProductImage(ProductimageDTO productimageDTO);
 }

@@ -16,7 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.koreait.dooboo.communityboard.command.BoardCommand;
 import com.koreait.dooboo.communityboard.dto.CommunityBoardDTO;
-import com.koreait.dooboo.product.dto.ProductImageDTO;
+import com.koreait.dooboo.product.dto.ProductimageDTO;
 import com.koreait.dooboo.util.FileUpload;
 
 @Controller
@@ -107,7 +107,7 @@ public class CommunityBoardController {
 	
 	@PostMapping(value ="deleteFile")
 	@ResponseBody
-	public Map<String,Object> setDeleteFile(ProductImageDTO productImageDTO) {
+	public Map<String,Object> setDeleteFile(ProductimageDTO productImageDTO) {
 		System.out.println(productImageDTO.getFileNo());
 		System.out.println("ㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎ");
 		boolean deleteYn = boardCommand.setDeleteFile(productImageDTO);

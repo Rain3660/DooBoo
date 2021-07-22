@@ -45,11 +45,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	    <result property="regDate" column="REG_DATE"/>
 	    <result property="modDate" column="MOD_DATE"/>
 	    <result property="nickname" column="NICKNAME"/>
-	    <collection property="productImageList" column="BOARD_NO" javaType="java.util.ArrayList" ofType="com.koreait.dooboo.product.dto.ProductImageDTO" select="selectBoardFileList"/>
+	    <collection property="productImageList" column="BOARD_NO" javaType="java.util.ArrayList" ofType="com.koreait.dooboo.product.dto.ProductimageDTO" select="selectBoardFileList"/>
 	</resultMap>
 	 
 
-	<select id="selectBoardFileList" resultType="com.koreait.dooboo.product.dto.ProductImageDTO">
+	<select id="selectBoardFileList" resultType="com.koreait.dooboo.product.dto.ProductimageDTO">
 		SELECT * FROM PRODUCT_IMAGE WHERE PRODUCT_NO = #{productNo}
 	</select>
 
@@ -137,7 +137,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 	
 	<!-- 업로드한 이미지 파일을 관리한다 -->
-	<insert id="insertProductImage" parameterType="com.koreait.dooboo.product.dto.ProductImageDTO">
+	<insert id="insertProductImage" parameterType="com.koreait.dooboo.product.dto.ProductimageDTO">
 		INSERT INTO PRODUCT_IMAGE
 		(	
 			 PRODUCT_NO

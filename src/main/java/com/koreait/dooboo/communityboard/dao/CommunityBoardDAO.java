@@ -6,7 +6,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.koreait.dooboo.communityboard.dto.CommunityBoardDTO;
-import com.koreait.dooboo.product.dto.ProductImageDTO;
+import com.koreait.dooboo.product.dto.ProductimageDTO;
 
 @Mapper
 public interface CommunityBoardDAO {
@@ -27,6 +27,6 @@ public interface CommunityBoardDAO {
 		
 		public int insertProductImage(CommunityBoardDTO params);
 		
-		public int deleteFile(ProductImageDTO productImageDto);
+		public int deleteFile(ProductimageDTO productImageDto);
 }
 

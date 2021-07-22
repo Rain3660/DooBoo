@@ -3,7 +3,7 @@ package com.koreait.dooboo.product.dto;
 import java.sql.Date;
 
 //상품이미지를 저장하는 테이블 이미지는 3개까지
-public class ProductImageDTO {
+public class ProductimageDTO {
 
 	 // 상품번호 
 	 private long productNo;
@@ -23,7 +23,7 @@ public class ProductImageDTO {
 	 // 등록일 등록일
 	 private Date regDate;
 	 
-	 public ProductImageDTO() {
+	 public ProductimageDTO() {
 
 	 }
 	 public long getProductNo() {

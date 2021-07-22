@@ -32,7 +32,7 @@ public class ProductController {
 	@Autowired
 	private ProductCommand productCommand;
 	
-	@GetMapping("p.productList")
+	/*@GetMapping("p.productList")
 	public ModelAndView openBoardList(ProductDTO productDTO) {
 		ModelAndView mav = new ModelAndView();
 		
@@ -118,7 +118,5 @@ public class ProductController {
 		Map<String,Object> resultMap = new HashMap<String,Object>();
 		resultMap.put("deleteYn", deleteYn);
 		return resultMap;
-	}
-
-
+	}*/
 }

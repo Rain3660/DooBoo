@@ -144,14 +144,14 @@ public class ProductDTO extends ListPagingDTO{
 	}
 	
 	 // 첨부파일 
-    private List<ProductImageDTO> productImageList; 
+    private List<ProductimageDTO> productImageList; 
     
-    public List<ProductImageDTO> getProductImageList() {
+    public List<ProductimageDTO> getProductImageList() {
 		return productImageList;
 	}
 
 
-	public void setProductImageList(List<ProductImageDTO> productImageList) {
+	public void setProductImageList(List<ProductimageDTO> productImageList) {
 		this.productImageList = productImageList;
 	}
 

@@ -14,7 +14,7 @@ import com.koreait.dooboo.communityboard.dto.CommunityBoardDTO;
 import com.koreait.dooboo.communityboard.dto.ListPagingDTO;
 import com.koreait.dooboo.communityboard.dto.ListPagingInfo;
 import com.koreait.dooboo.product.dao.ProductDAO;
-import com.koreait.dooboo.product.dto.ProductImageDTO;
+import com.koreait.dooboo.product.dto.ProductimageDTO;
 import com.koreait.dooboo.util.FileUpload;
 import com.koreait.dooboo.util.UtilsText;
 
@@ -40,13 +40,13 @@ public class BoardCommand{
 		String filePath = this.getFilePath("adminnotice");*/
 		
 		for(FileUpload fileUpload : params.getFileUploadList()) {
-			ProductImageDTO productimageDTO = null;
+			ProductimageDTO productimageDTO = null;
 			try {
 				String fileName = UtilsText.concat(UtilsText.parseFileRename(), ".", fileUpload.getExt());
 				String filePath = UtilsText.getFilePath("product");
 				//파일생성
 				fileUpload.transferTo(filePath, fileName, true);
-				productimageDTO = new ProductImageDTO();
+				productimageDTO = new ProductimageDTO();
 				Long boardNo = params.getBoardNo();
 				productimageDTO.setProductNo(boardNo.intValue()); //일단 게시물 번호로~~
 				productimageDTO.setFileName(fileUpload.getOrgFileName());
@@ -104,7 +104,7 @@ public class BoardCommand{
 		return resultMap;
 	}
 	
-	public boolean setDeleteFile(ProductImageDTO productImageDto) {
+	public boolean setDeleteFile(ProductimageDTO productImageDto) {
 		int queryResult = 0;
 		queryResult = communityBoardDAO.deleteFile(productImageDto);
 		return (queryResult == 1) ? true : false;
