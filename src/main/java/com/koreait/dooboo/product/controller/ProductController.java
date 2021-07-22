@@ -1,18 +1,16 @@
 package com.koreait.dooboo.product.controller;
 
-
+import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.koreait.dooboo.product.command.ProductCommand;
@@ -24,45 +22,28 @@ public class ProductController {
 	@Autowired
 	private ProductCommand productCommand;
 	
-	@GetMapping(value = "ProductList")
-	public ModelAndView openBoardList(ProductDTO productDTO) {
+	@GetMapping(value="p.insertSellProduct")
+	public ModelAndView sellProductPage() {
 		ModelAndView mav = new ModelAndView();
-		
-		Map<String,Object> resultMap = productCommand.getBoardList(productDTO);
-		mav.addObject("resultMap", resultMap);
-		mav.addObject("params", productDTO);
-		mav.setViewName("CommunityBoard/prodcuctList");
+		mav.setViewName("product/insertSellProduct");
 		return mav;
 	}
 	
-	@GetMapping("p.sellProductPage")
-	public ModelAndView sellProductPage(HttpServletRequest request) {
-
+	@PostMapping(value="p.sellProduct")
+	@ResponseBody
+	public Map<String, Object> InsertsellProduct(ProductDTO productDTO,@RequestParam("mapNo") long mapNo,HttpServletResponse response) {
+		
+		return productCommand.InsertsellProduct(productDTO, mapNo,response);
+		
+	}
+	
+	@GetMapping(value="p.selectOneProduct")
+	public ModelAndView selectOneProduct(@RequestParam("productNo") long productNo) {
 		ModelAndView mav = new ModelAndView();
-
-		mav.setViewName("product/sellProductPage");
-
+		mav.addObject("likes",productCommand.getLikesCount(productNo));
+		mav.addObject("productDTO",productCommand.selectOneProduct(productNo));
+		mav.setViewName("product/productOne");
 		return mav;
 	}
 	
-	// 판매 상품을 등록한다
-	@PostMapping("p.sellProduct")
-	public ModelAndView sellProduct(MultipartHttpServletRequest multipartRequest, ProductDTO productDTO) {
-
-		ModelAndView mav = new ModelAndView();
-
-		productCommand.sellProduct(productDTO, multipartRequest);
-
-		mav.setViewName("redirect:/");
-
-		return mav;
-	}
-	// 판매등록한 상품을 삭제한다.
-	@GetMapping("p.deleteProduct")
-	public ModelAndView deleteProduct(HttpServletRequest request , HttpServletResponse response) {
-		ModelAndView mav = new ModelAndView();
-		
-		return mav;
-	}
-
 }

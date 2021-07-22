@@ -45,6 +45,12 @@ public class MapDTO {
 	public void setLocationOrd(int locationOrd) {
 		this.locationOrd = locationOrd;
 	}
+
+	@Override
+	public String toString() {
+		return "MapDTO [mapNo=" + mapNo + ", memberNo=" + memberNo + ", location=" + location + ", locationOrd="
+				+ locationOrd + "]";
+	}
 	
 	
 
