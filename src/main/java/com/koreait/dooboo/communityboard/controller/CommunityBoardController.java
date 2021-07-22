@@ -108,8 +108,6 @@ public class CommunityBoardController {
 	@PostMapping(value ="deleteFile")
 	@ResponseBody
 	public Map<String,Object> setDeleteFile(ProductimageDTO productImageDTO) {
-		System.out.println(productImageDTO.getFileNo());
-		System.out.println("ㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎ");
 		boolean deleteYn = boardCommand.setDeleteFile(productImageDTO);
 		Map<String,Object> resultMap = new HashMap<String,Object>();
 		resultMap.put("deleteYn", deleteYn);
