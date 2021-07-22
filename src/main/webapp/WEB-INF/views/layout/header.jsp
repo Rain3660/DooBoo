@@ -39,7 +39,7 @@
 					<li class="nav-item"><a class="nav-link" href="#">New</a></li>
 					<li class="nav-item"><a class="nav-link" href="#">Popular</a></li>
 					<li class="nav-item"><a class="nav-link" href="#">F&Q</a></li>
-					<li class="nav-item"><a class="nav-link" href="chat">1:1대화함</a></li>
+					<li class="nav-item"><a class="nav-link" href="#" id="chat">1:1대화함</a></li>
 					<li class="nav-item">
 						<form class="d-flex">
 							<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
@@ -74,10 +74,32 @@
 						</li>						
 					</c:if>
 					<li class="login_menu">
-					<a href="m.myPage" id="mypage" class="btn">
+					<a href="#" id="mypage" class="btn">
 						마이페이지</a>
 					</li>
 				</ul>
 			</div>
 		</div>
 	</nav>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('#mypage').on('click' , function(){
+				if(${loginUser eq null}){
+					if(confirm('로그인이 필요합니다 , 로그인 페이지로 이동할까요 ? ')){
+						location.href = 'm.loginPage';
+					}
+				}else{
+					location.href = 'm.myPage';
+				}
+			})
+			$('#chat').on('click' , function(){
+				if(${loginUser eq null}){
+					if(confirm('로그인이 필요합니다 , 로그인 페이지로 이동할까요 ? ')){
+						location.href = 'm.loginPage';
+					}
+				}else{
+					location.href = 'chat';
+				}
+			})
+		})
+	</script>
