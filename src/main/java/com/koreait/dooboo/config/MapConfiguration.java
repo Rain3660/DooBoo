@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import com.koreait.dooboo.map.command.UpdateLocationCommand;
+import com.koreait.dooboo.map.command.UpdateUseNowCommand;
 import com.koreait.dooboo.map.command.DeleteLocationCommand;
 import com.koreait.dooboo.map.command.FirstInsertLocationCommand;
 import com.koreait.dooboo.map.command.MapCheckLocationCommand;
@@ -39,5 +40,10 @@ public class MapConfiguration {
 	@Bean
 	public FirstInsertLocationCommand firstInsertLocationCommand() {
 		return new FirstInsertLocationCommand();
+	}
+	
+	@Bean
+	public UpdateUseNowCommand updateUseNowCommand() {
+		return new UpdateUseNowCommand();
 	}
 }

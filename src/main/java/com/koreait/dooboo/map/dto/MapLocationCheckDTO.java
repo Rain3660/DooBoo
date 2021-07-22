@@ -3,6 +3,7 @@ package com.koreait.dooboo.map.dto;
 public class MapLocationCheckDTO {
 	private long mapNo;
 	private int isChecked;
+	private int usenow;
 	
 	public MapLocationCheckDTO() {}
 
@@ -10,6 +11,15 @@ public class MapLocationCheckDTO {
 		super();
 		this.mapNo = mapNo;
 		this.isChecked = isChecked;
+	}
+	
+
+	public int getUsenow() {
+		return usenow;
+	}
+
+	public void setUsenow(int usenow) {
+		this.usenow = usenow;
 	}
 
 	public long getMapNo() {

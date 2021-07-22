@@ -17,4 +17,6 @@ public interface MapDAO {
 	public int deleteMapLocationCheck(long mapNo);
 	public int deleteMap(long mapNo);
 	public MapDTO getOneLocation(long mapNo);
+	public int getUseNow(long mapNo);
+	public int updateUseNow(MapLocationCheckDTO mapLocationCheckDTO);
 }

@@ -124,11 +124,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		 WHERE A.RN = 1 AND A.REG_NO = #{regNo}  		 
 	</select>
 	
-	<select id="selectOneProduct" resultType="com.koreait.dooboo.product.dto.ProductDTO">
-		SELECT * 
-		  FROM PRODUCT 
-		 WHERE PRODUCT_NO = #{param1}
+	
+	<select id="selectOneProduct" parameterType="long" resultType="com.koreait.dooboo.product.dto.ProductVO">
+     SELECT P.* 
+      FROM( SELECT P.PRODUCT_NO ,P.CONTENT, P.TITLE , P.ADDRESS , P.PRICE , P.HIT , L.LIKECOUNT 
+              FROM PRODUCT P 
+              LEFT OUTER JOIN (SELECT 
+                          PRODUCT_NO , 
+                          COUNT(REG_NO) AS LIKECOUNT 
+                     FROM LIKEPRODUCT 
+                    GROUP BY PRODUCT_NO) L 
+    ON P.PRODUCT_NO = L.PRODUCT_NO)P
+     WHERE P.PRODUCT_NO = #{param1}
 	</select>
+	
 	
 	<select id="getLikesCount" resultType="int">
 		SELECT COUNT(*)

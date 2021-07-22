@@ -47,9 +47,9 @@ public class BeanConfiguration {
 	public HikariConfig hikariConfig() {
 		HikariConfig hikariConfig = new HikariConfig();
 		hikariConfig.setDriverClassName("oracle.jdbc.OracleDriver");
-		hikariConfig.setJdbcUrl("jdbc:oracle:thin:@sih8859.iptime.org:11521:XE");
-		hikariConfig.setUsername("dooboo");
-		hikariConfig.setPassword("qwer1234!@");
+		hikariConfig.setJdbcUrl("jdbc:oracle:thin:@localhost:1521:XE");
+		hikariConfig.setUsername("spring");
+		hikariConfig.setPassword("1234");
 		return hikariConfig;
 	}
 	

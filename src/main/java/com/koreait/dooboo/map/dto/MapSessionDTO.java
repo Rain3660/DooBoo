@@ -6,16 +6,32 @@ public class MapSessionDTO {
 	private String location;
 	private int locationOrd;
 	private int isChecked;
+	private int usenow;
 	
 	public MapSessionDTO() {}
 
-	public MapSessionDTO(long mapNo, long memberNo, String location, int locationOrd, int isChecked) {
+	
+	
+
+	public MapSessionDTO(long mapNo, long memberNo, String location, int locationOrd, int isChecked, int usenow) {
 		super();
 		this.mapNo = mapNo;
 		this.memberNo = memberNo;
 		this.location = location;
 		this.locationOrd = locationOrd;
 		this.isChecked = isChecked;
+		this.usenow = usenow;
+	}
+
+
+
+
+	public int getUsenow() {
+		return usenow;
+	}
+
+	public void setUsenow(int usenow) {
+		this.usenow = usenow;
 	}
 
 	public long getMapNo() {
@@ -56,6 +72,15 @@ public class MapSessionDTO {
 
 	public void setIsChecked(int isChecked) {
 		this.isChecked = isChecked;
+	}
+
+
+
+
+	@Override
+	public String toString() {
+		return "MapSessionDTO [mapNo=" + mapNo + ", memberNo=" + memberNo + ", location=" + location + ", locationOrd="
+				+ locationOrd + ", isChecked=" + isChecked + ", usenow=" + usenow + "]";
 	}
 
 
