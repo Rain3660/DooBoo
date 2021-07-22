@@ -19,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.koreait.dooboo.communityboard.dto.CommunityBoardDTO;
 import com.koreait.dooboo.product.command.ProductCommand;
 import com.koreait.dooboo.product.dto.ProductDTO;
+import com.koreait.dooboo.product.dto.ProductimageDTO;
 import com.koreait.dooboo.util.FileUpload;
 
 @Controller
@@ -51,7 +52,8 @@ public class ProductController {
 		return mav;
 	}
 	
-	/*@PostMapping(value ="p.save")
+	// 파일 저장관련(홍보람)
+	@PostMapping(value ="p.save")
 	@ResponseBody
 	public Map<String,Object> openBoardSave(ProductDTO productDTO,@RequestParam("uploadFile") MultipartFile[] uploadFiles) {
 		
@@ -59,8 +61,6 @@ public class ProductController {
 		if(null != uploadFiles) {
 			for(MultipartFile multiPartFile : uploadFiles) {
 				FileUpload file = new FileUpload(multiPartFile);
-				System.out.println(file.getFileName());
-				System.out.println(file.getOrgFileName());
 				files.add(file);
 			}
 			productDTO.setFileUploadList(files);
@@ -71,6 +71,16 @@ public class ProductController {
 		resultMap.put("saveYn", saveYn);
 		return resultMap;
 	}
-*/
+	// 파일 삭제관련(홍보람)
+	@PostMapping(value ="deleteFile")
+	@ResponseBody
+	public Map<String,Object> setDeleteFile(ProductimageDTO productImageDTO) {
+		boolean deleteYn = productCommand.setDeleteFile(productImageDTO);
+		Map<String,Object> resultMap = new HashMap<String,Object>();
+		resultMap.put("deleteYn", deleteYn);
+		return resultMap;
+	}
+
+
 	
 }

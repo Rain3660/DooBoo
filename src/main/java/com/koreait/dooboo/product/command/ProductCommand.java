@@ -1,18 +1,13 @@
 package com.koreait.dooboo.product.command;
 
-import java.io.PrintWriter;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.http.HttpResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import com.koreait.dooboo.communityboard.dto.CommunityBoardDTO;
 import com.koreait.dooboo.map.dto.MapDTO;
 import com.koreait.dooboo.product.dao.ProductDAO;
 import com.koreait.dooboo.product.dto.ProductDTO;
@@ -26,7 +21,8 @@ public class ProductCommand {
 	@Autowired
 	private ProductDAO productDAO;
 	
-/*	public boolean registerBoard(ProductDTO params) {
+	// 파일 업로드 및  게시글 수정 관련 (홍보람)
+	public boolean registerBoard(ProductDTO params) {
 		int queryResult = 0;
 		//일단 임시값
 		params.setRegNo(1);
@@ -56,14 +52,21 @@ public class ProductCommand {
 		}
 		
 		if (params.getProductNo() == 0) {
-			queryResult = productDAO.insertBoard(params);
+			queryResult = productDAO.insertSellProduct(params);
 		} else {
 			queryResult = productDAO.updateBoard(params);
 		}
 
 		return (queryResult == 1) ? true : false;
 	}
-	*/
+	
+	// 파일 삭제 관련(홍보람)
+	public boolean setDeleteFile(ProductimageDTO productImageDto) {
+		int queryResult = 0;
+		queryResult = productDAO.deleteFile(productImageDto);
+		return (queryResult == 1) ? true : false;
+	}	
+	
 	
 	public Map<String, Object> InsertsellProduct(ProductDTO productDTO,long mapNo,HttpServletResponse response) {
 		Map<String, Object> resultMap = new HashMap<String, Object>();

@@ -66,6 +66,15 @@
 			</div>
 		</div>
 	</div>
+	<%-- <div>
+    	<label>첨부파일</label>
+    	<c:forEach var="boardFile" items="${board.productImageList}" varStatus="status">
+    		<div id="div_file_${boardFile.fileNo}">
+    			<img src="${STATIC_IMAGE_ROOT }${boardFile.filePath }" width="100px">
+				<span>${boardFile.fileName}<button type="button" class="btn-close file-close" onclick="removeFile(this)" data-file-seq="${boardFile.fileNo}" aria-label="Close"></button></span>						
+    		</div>
+    	</c:forEach>
+    </div> --%>
 	<div class="row">
 		<!-- 이 판매자가 팔고있는 상품 보여주면 될듯? -->
 	</div>

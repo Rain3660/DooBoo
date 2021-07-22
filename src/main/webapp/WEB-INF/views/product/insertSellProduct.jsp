@@ -83,8 +83,6 @@
 							alert('등록에 실패하였습니다');
 							return false;
 						}
-					},error(){
-						
 					}
 				})
 			}
@@ -132,7 +130,7 @@
 				    type: "POST",                             // HTTP 요청 방식(GET, POST)
 			        success : function(data) {
 			        	alert('저장 되었습니다.');
-			       		location.href='?????'
+			       		location.href='home.jsp'
 			        	console.log(data);
 			        	var jsonObj = JSON.parse(data);
 			        }, // success 

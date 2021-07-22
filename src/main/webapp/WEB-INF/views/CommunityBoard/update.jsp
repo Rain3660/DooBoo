@@ -59,11 +59,8 @@
 			if(confirm(saveTxt+'하시겠습니까?')){
 				var formData = $("#frm").serializeArray();
 				console.log(document.frm)
-				// var formData = new FormData(document.frm);
 				console.log('formdata',formData)
 				$.ajax({
-					//processData: false,
-		            //contentType: false,					
 				    url: "b.save", // 클라이언트가 요청을 보낼 서버의 URL 주소
 				    data: formData,                // HTTP 요청과 함께 서버로 보낼 데이터
 				    type: "POST",                             // HTTP 요청 방식(GET, POST)

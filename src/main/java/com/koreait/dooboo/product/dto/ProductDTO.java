@@ -11,6 +11,9 @@ public class ProductDTO extends ListPagingDTO{
     // 상품번호 100 부터 시작
     private long productNo;
 
+    // 게시판 rownum
+    private long rnum;
+    
     // 상품제목 
     private String title;
 
@@ -44,6 +47,9 @@ public class ProductDTO extends ListPagingDTO{
     // 삭제여부
     private String delYn;
     
+    // 닉네임
+    private String nickname;
+    
     public ProductDTO() {
     	
 	}
@@ -54,6 +60,15 @@ public class ProductDTO extends ListPagingDTO{
 
 	public void setProductNo(long productNo) {
 		this.productNo = productNo;
+	}
+
+	
+	public long getRnum() {
+		return rnum;
+	}
+
+	public void setRnum(long rnum) {
+		this.rnum = rnum;
 	}
 
 	public String getTitle() {
@@ -143,7 +158,17 @@ public class ProductDTO extends ListPagingDTO{
 		this.delYn = delYn;
 	}
 	
-	 // 첨부파일 
+	 public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+
+
+
+	// 첨부파일 
     private List<ProductimageDTO> productImageList; 
     
     public List<ProductimageDTO> getProductImageList() {
