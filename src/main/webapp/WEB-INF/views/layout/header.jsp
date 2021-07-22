@@ -34,11 +34,11 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarText">
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-					<li class="nav-item"><a class="nav-link active" aria-current="page" href="p.productList">상품</a></li>
+					<li class="nav-item"><a class="nav-link" aria-current="page" href="#" id="product_btn">상품</a></li>
 					<li class="nav-item"><a class="nav-link" href="b.list">자유게시판</a></li>
 					<li class="nav-item"><a class="nav-link" href="#">New</a></li>
 					<li class="nav-item"><a class="nav-link" href="#">Popular</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">F&Q</a></li>
+					<li class="nav-item"><a class="nav-link" href="#" id="insertProduct_btn">상품등록</a></li>
 					<li class="nav-item"><a class="nav-link" href="#" id="chat">1:1대화함</a></li>
 					<li class="nav-item">
 						<form class="d-flex">
@@ -81,25 +81,61 @@
 			</div>
 		</div>
 	</nav>
+	<!-- Modal -->
+	<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Dooboo-Market</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">로그인이 필요합니다 , 로그인 페이지로 이동할까요 ?</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+					<button type="button" class="btn btn-primary" id="loginModal_btn">로그인 하기</button>
+				</div>
+			</div>
+		</div>
+	</div>
 	<script type="text/javascript">
 		$(document).ready(function(){
+			
 			$('#mypage').on('click' , function(){
 				if(${loginUser eq null}){
-					if(confirm('로그인이 필요합니다 , 로그인 페이지로 이동할까요 ? ')){
-						location.href = 'm.loginPage';
-					}
+					openModal();
 				}else{
 					location.href = 'm.myPage';
 				}
 			})
+			$('#insertProduct_btn').on('click' , function(){
+				if(${loginUser eq null}){
+					openModal();
+				}else{
+					location.href = 'p.insertSellProduct';
+				}
+			})
 			$('#chat').on('click' , function(){
 				if(${loginUser eq null}){
-					if(confirm('로그인이 필요합니다 , 로그인 페이지로 이동할까요 ? ')){
-						location.href = 'm.loginPage';
-					}
+					openModal();
 				}else{
 					location.href = 'chat';
 				}
 			})
+			$('#product_btn').on('click' , function(){
+				if(${loginUser eq null}){
+					openModal();
+				}else{
+					location.href = 'chat';
+				}
+			})
+		})
+		function openModal(){
+			var myModal = new bootstrap.Modal(document.getElementById('exampleModal'), {
+				  keyboard: false
+				})
+			myModal.show();
+		}
+		$('#loginModal_btn').on('click' , function(){
+			location.href = 'm.loginPage';
 		})
 	</script>
