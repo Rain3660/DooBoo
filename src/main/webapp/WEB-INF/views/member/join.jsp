@@ -190,10 +190,21 @@
 		})
 	}
 </script>
-<div class="container">
+<style>
+    .body{
+        margin: auto;
+        width: 500px;
+    }
+    label{
+    	font-size: 20px;
+    }
+</style>
+
+<div class="body">
+<h2 class="py-5 text-center">회원가입</h2>
 <!-- 소셜 ID 로 로그인 하지 않은 경우 -->
 <c:if test="${loginApi eq null }">
-	<form style="margin-top: 50px;" method="post" id="join_form">
+	<form method="post" id="join_form">
 		<div class="mb-3">
 			<label for="memberId" class="form-label">아이디</label>
 			<input type="text" class="form-control" id="memberId" name="memberId">
@@ -224,16 +235,28 @@
 			<input type="text" class="form-control" id="name" name="name">
 			<div id="nameCheck" class="form-text"></div>
 		</div>
-		<div class="mb-3">
-			<label for="birthday" class="form-label">생년월일</label>
-			<input type="text" name="birthday" id="birthday" autocomplete="off">
-			<input type="button" value="주소 검색" onclick="findAddr()">
-			<input type="text" id="address" name="address">
-			<input class="form-check-input" type="radio" id="genderM" name="gender" value="M">
-			<label class="form-check-label" for="genderM">남</label>
-			<input class="form-check-input" type="radio" id="genderW" name="gender" value="W">
-			<label class="form-check-label" for="genderW">여</label>
-		</div>
+		<label for="birthday" class="form-label">생년월일</label><input type="text" class="form-control" name="birthday" id="birthday" autocomplete="off"><br>
+        <div class="row">
+            <div class="col-md-9">
+                <label for="address" class="form-label">주소</label>
+                <input type="text" class="form-control" id="address" name="address">
+			</div>
+			<div class="col" >
+                <div class="mb-2"></div><br>
+			    <input type="button" class="btn btn-outline-secondary mb-0" style="float: right" value="주소 검색" onclick="findAddr()">
+            </div>
+        </div>
+        <div class="col mt-4 mb-4 form-control">
+        	성별
+            <div class="form-check form-check-inline" style="float: right">
+                <input class="form-check-input" type="radio" name="gender" id="genderW" value="W">
+                <label class="form-check-label" for="genderW">여</label>
+            </div>
+            <div class="form-check form-check-inline" style="float: right">
+                <input class="form-check-input" type="radio" name="gender" id="genderM" value="M">
+                <label class="form-check-label" for="genderM">남</label> 
+            </div>
+        </div>
 		<div class="mb-3">
 			<label for="email" class="form-label">이메일</label>
 			<input type="text" class="form-control" id="email" autocomplete="off" name="email">
@@ -242,7 +265,7 @@
 		<br>
 		<input type="hidden" value="0" name="apiMemberNo">
 		<input type="hidden" value="0" name="apiNumber">
-		<input type="button" class="btn btn-primary" value="회원가입" id="join_btn">
+		<input type="button" class="btn btn-primary" style="float: right" value="회원가입" id="join_btn">
 	</form>
 </c:if>
 <!-- 소셜 아이디로 로그인한 경우 -->
@@ -278,22 +301,29 @@
 			<input type="text" class="form-control" id="name" name="name" <c:if test="${name ne null }"> value="${name }" readonly</c:if>>
 			<div id="nameCheck" class="form-text"></div>
 		</div>
-		<div class="mb-3">
-			<label for="birthday" class="form-label">생년월일</label>
-			<input type="text" name="birthday" id="birthday" autocomplete="off"  <c:if test="${birthday ne null }"> value="${birthday }" readonly</c:if>>
-			<input type="button" value="주소 검색" onclick="findAddr()">
-			<input type="text" id="address" name="address">
-			<c:if test="${gender ne null }">
-			<c:if test="${gender  eq 'M' || gender eq 'male'}">
-				<label for="M">남<input type="radio" id="M" name="gender" value="M" checked></label>
-				<label for="W">여<input type="radio" id="W" name="gender" value="W" disabled></label>
-			</c:if>
-			<c:if test="${gender  eq 'W' || gender eq 'female'}">
-				<label for="M">남<input type="radio" id="M" name="gender" value="M" disabled></label>
-				<label for="W">여<input type="radio" id="W" name="gender" value="W" checked></label>
-			</c:if>
-		</c:if>
-		</div>
+        
+        <label for="birthday" class="form-label">생년월일</label>
+        <input type="text" class="form-control" name="birthday" id="birthday" autocomplete="off"  <c:if test="${birthday ne null }"> value="${birthday }" readonly</c:if>><br>
+        <div class="row">
+            <div class="col-md-9">
+                <label for="address" class="form-label">주소</label>
+                <input type="text" class="form-control" id="address" name="address">
+            </div>
+            <div class="col">
+                <div class="mb-2"></div><br>
+			    <input type="button" class="btn btn-outline-secondary" value="주소 검색" onclick="findAddr()">
+            </div>
+        </div>
+        <c:if test="${gender ne null }">
+            <c:if test="${gender  eq 'M' || gender eq 'male'}">
+                <label for="M">남<input type="radio" id="M" name="gender" value="M" checked></label>
+                <label for="W">여<input type="radio" id="W" name="gender" value="W" disabled></label>
+            </c:if>
+            <c:if test="${gender  eq 'W' || gender eq 'female'}">
+                <label for="M">남<input type="radio" id="M" name="gender" value="M" disabled></label>
+                <label for="W">여<input type="radio" id="W" name="gender" value="W" checked></label>
+            </c:if>
+        </c:if>
 		<div class="mb-3">
 			<label for="email" class="form-label">이메일</label>
 			<input type="text" class="form-control" id="email" name="email" autocomplete="off" <c:if test="${email ne null}"> value="${email }" readonly</c:if>>

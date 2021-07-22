@@ -5,40 +5,40 @@
 <br><br>
 <div class="text-center container">
 	<div class="row">
-		<div class="col-md-6" >
-		<h3>아이디 찾기</h3>
+		<div class="col">
+		<h3 class="mb-4">아이디 찾기</h3>
 		<form id="f1">
-  			<div class="form-group row">
-    		<label for="name_for_id" class="col-sm-2 col-form-label">이름</label>
-    			<div class="col-sm-12">
-      				<input type="text" class="form-control" id="name_for_id">
-    			</div>
-  			</div>
-  			<div class="form-group row">
+			<div class="form-group row mb-3">
+	    	<label for="name_for_id" class="col-sm-2 col-form-label">이름</label>
+	    		<div class="col-md-9">
+	      			<input type="text" class="form-control" id="name_for_id">
+	    		</div>
+	    	</div>
+	    	<div class="form-group row mb-3">
     		<label for="email_for_id" class="col-sm-2 col-form-label">이메일</label>
-    			<div class="col-sm-12">
+    			<div class="col-md-9">
       				<input type="text" class="form-control" id="email_for_id">
     			</div>
   			</div>
-  			<input type="button" class="btn btn-primary btn-lg btn-block" value="아이디 찾기" id="find_id_btn">
+  			<input type="button" class="w-50 btn btn-primary btn-lg btn-block" value="아이디 찾기" id="find_id_btn">
 		</form>
 	</div>
-	<div class="col-md-6" >
-		<h3>비밀번호 찾기</h3>
+		<div class="col">
+		<h3 class="mb-4">비밀번호 찾기</h3>
 		<form id="f2">
-  			<div class="form-group row">
+  			<div class="form-group row mb-3">
     		<label for="id_for_pw" class="col-sm-2 col-form-label">아이디</label>
-    			<div class="col-sm-12">
+    			<div class="col-md-9">
       				<input type="text" class="form-control" id="id_for_pw">
     			</div>
   			</div>
-  			<div class="form-group row">
+  			<div class="form-group row mb-3">
     		<label for="email_for_pw" class="col-sm-2 col-form-label">이메일</label>
-    			<div class="col-sm-12">
+    			<div class="col-md-9">
       				<input type="text" class="form-control" id="email_for_pw">
     			</div>
   			</div>
-  			<input type="button" class="btn btn-primary btn-lg btn-block" value="비밀번호 찾기" id="find_pw_btn">
+  			<input type="button" class="w-50 btn btn-primary btn-lg btn-block" value="비밀번호 찾기" id="find_pw_btn">
 		</form>
 	</div>
 	</div>
