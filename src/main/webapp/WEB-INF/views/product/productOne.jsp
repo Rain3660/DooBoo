@@ -30,7 +30,7 @@
 	<div class="row">
 		<div class="col-md-6 mx-auto border-bottom">
 			<div class="float-start"><!-- 판매자 정보 --> 
-				레인 | 경기도 고양시
+				${product.address }
 			</div>
 			<div class="float-end">
 				<i class="far fa-heart"></i><!-- 좋아요 했을 때 -->
@@ -42,24 +42,24 @@
 	</div>
 	<div class="row">
 		<div class="col-md-6 mx-auto"><!-- 제목 -->
-			두부 한모 팝니다.
+			${productDTO.title }
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-md-6 mx-auto"><!-- 가격 -->
-			10000원
+			${productDTO.price }
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-md-6 mx-auto"><!-- 내용 -->
-			원흥역에서 직거래 하고싶습니다.
+			${productDTO.content }
 		</div>
 	</div>
 	<div class="row">
 	
 		<div class="col-md-6 mx-auto border-bottom"><!-- Like , hit -->
 			<div class="float-start">
-				<p class="text-secondary fs-6">조회1 | 좋아요12</p>
+				<p class="text-secondary fs-6">${productDTO.hit } | ${likes }</p>
 			</div>
 			<div class="float-end">
 				<input type="button" class="btn btn-secondary" value="판매자와 채팅하기">  

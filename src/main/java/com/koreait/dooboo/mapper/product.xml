@@ -33,30 +33,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		, REG_DATE
 		, MOD_DATE
 	</sql>
+
+<select id="selectProductList" parameterType="com.koreait.dooboo.product.dto.ProductDTO" resultType="com.koreait.dooboo.product.dto.ProductDTO">
 	
-	<resultMap id="boardResult" type="com.koreait.dooboo.communityboard.dto.CommunityBoardDTO">
-	    <result property="rnum" column="RNUM"/>
-	    <result property="boardNo" column="BOARD_NO"/>
-	    <result property="title" column="TITLE"/>
-	    <result property="content" column="CONTENT"/>
-	    <result property="hit" column="HIT"/>
-	    <result property="regNo" column="REG_NO"/>
-	    <result property="modNo" column="MOD_NO"/>
-	    <result property="regDate" column="REG_DATE"/>
-	    <result property="modDate" column="MOD_DATE"/>
-	    <result property="nickname" column="NICKNAME"/>
-	    <collection property="productImageList" column="BOARD_NO" javaType="java.util.ArrayList" ofType="com.koreait.dooboo.product.dto.ProductimageDTO" select="selectBoardFileList"/>
-	</resultMap>
-	 
-
-	<select id="selectBoardFileList" resultType="com.koreait.dooboo.product.dto.ProductimageDTO">
-		SELECT * FROM PRODUCT_IMAGE WHERE PRODUCT_NO = #{productNo}
-	</select>
-
-	<select id="selectProductList" parameterType="com.koreait.dooboo.product.dto.ProductDTO" resultType="com.koreait.dooboo.product.dto.ProductDTO">
   	 	<include refid="startPaging"/>
 	  		SELECT
-	  			  ROWNUM
+	  			 ROWNUM
 				, P.PRODUCT_NO
 				, P.TITLE
 				, P.PRICE
@@ -97,46 +79,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			del_yn = 'N'
 	</select>
 
-	<!-- 판매상품을 등록한다 -->
-	<insert id="insertProduct">
-		INSERT INTO PRODUCT VALUES
-		(PRODUCT_SEQ.NEXTVAL , #{title} , #{price} , 0 , #{content} , 1
-		<!-- 추후에 #{address} 로 변경 예정 -->
-		  , '경기도 고양시'
-		  , #{regNo} , null , SYSDATE , null)
-	</insert>
-	
-	<select id="selectProductDetail" parameterType="long" resultType="com.koreait.dooboo.product.dto.ProductDTO">
-		SELECT
-			ROWNUM ,
-			COM.BOARD_NO ,
-			p.TITLE ,
-			p.CONTENT ,
-			p.HIT ,
-			p.REG_NO,
-			p.MOD_NO,
-			p.REG_DATE,
-			p.MOD_DATE,
-			M.NICKNAME
-		FROM
-			PRODUCT P 
-			LEFT OUTER JOIN MEMBER M
-            ON REG_NO = M.MEMBER_NO
-		WHERE
-			PRODUCT_NO = #{productNo}
-	</select>
-
-	<update id="updateProduct" parameterType="com.koreait.dooboo.product.dto.ProductDTO">
-		UPDATE PRODUCT
-		SET
-			  MOD_DATE = SYSDATE
-			, TITLE = #{title}
-			, CONTENT = #{content}
-		WHERE
-			PRODUCT_NO = #{productNo}
-	</update>
-	
-	<!-- 업로드한 이미지 파일을 관리한다 -->
+	<!--  @@@@@@@@@@@@@@@@@@ 업로드한 이미지 파일을 관리한다     보람씨 작업한것 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
 	<insert id="insertProductImage" parameterType="com.koreait.dooboo.product.dto.ProductimageDTO">
 		INSERT INTO PRODUCT_IMAGE
 		(	
@@ -155,16 +98,47 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			, SYSDATE
 		)
 	</insert>
-	<!-- 판매등록한 상품을 삭제한다. -->
-	<delete id="deleteProduct">
-		DELETE FROM PRODUCT WHERE PRODUCT_NO = #{param1}
-	</delete>
-	<!-- <select id="selectProductImageByProductNo" resultType="com.koreait.dooboo.product.dto.ProductImageDTO">
-		SELECT * FROM PRODUCT_IMAGE WHERE PRODUCT_NO = #{param1}
+<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@보람씨 작업한것@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+
+	
+	
+	
+	
+	<!-- 온석태 수정 -->
+		<!-- 판매상품을 등록한다 -->
+	<insert id="insertSellProduct">
+		INSERT INTO PRODUCT VALUES
+		(PRODUCT_SEQ.NEXTVAL,#{title},${price},0,#{content},1,#{address},#{regNo},null,SYSDATE,null)
+	</insert>
+	
+	<select id="getOneLocation" parameterType="long" resultType="com.koreait.dooboo.map.dto.MapDTO">
+		SELECT *
+		  FROM MAP
+		 WHERE MAP_NO = #{mapNo}
 	</select>
-	판매등록한 상품을 삭제할 때 , 첨부한 이미지가 있다면 삭제한다.
-	<delete id="deleteProductImage">
-		DELETE FROM PRODUCT_IMAGE WHERE PRODUCT_NO = #{param1}
-	</delete>
- -->
+	<select id="getProductNo" resultType="com.koreait.dooboo.product.dto.ProductDTO">
+		SELECT A.RN ,A.PRODUCT_NO
+		  FROM (SELECT ROWNUM AS RN,PRODUCT_NO,REG_NO
+		  		  FROM PRODUCT
+		  		 ORDER BY REG_DATE DESC)A
+		 WHERE A.RN = 1 AND A.REG_NO = #{regNo}  		 
+	</select>
+	
+	<select id="selectOneProduct" resultType="com.koreait.dooboo.product.dto.ProductDTO">
+		SELECT * 
+		  FROM PRODUCT 
+		 WHERE PRODUCT_NO = #{param1}
+	</select>
+	
+	<select id="getLikesCount" resultType="int">
+		SELECT COUNT(*)
+		  FROM LIKEPRODUCT
+		 WHERE PRODUCT_NO = #{productNo}
+	</select>
+	
+	<insert id="insertLikeProduct" parameterType="com.koreait.dooboo.productimage.dto.ProductImageDTO">
+		INSERT INTO LIKEPRODUCT
+		VALUES(#{productNo},#{regNo},SYSDATE)
+	</insert>
+
 </mapper>
