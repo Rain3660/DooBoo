@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.koreait.dooboo.map.command.UpdateLocationCommand;
+import com.koreait.dooboo.map.command.UpdateUseNowCommand;
 import com.koreait.dooboo.map.command.DeleteLocationCommand;
 import com.koreait.dooboo.map.command.FirstInsertLocationCommand;
 import com.koreait.dooboo.map.command.MapCheckLocationCommand;
@@ -31,6 +32,7 @@ public class MapController {
 	private UpdateLocationCommand changeLocationCommand;
 	private DeleteLocationCommand deleteLocationCommand;
 	private FirstInsertLocationCommand firstInsertLocationCommand;
+	private UpdateUseNowCommand updateUseNowCommand;
 
 	@Autowired	
 	public MapController(	SqlSession sqlSession,
@@ -39,7 +41,8 @@ public class MapController {
 							SaveLocationCommand saveLocationCommand,
 							UpdateLocationCommand changeLocationCommand,
 							DeleteLocationCommand deleteLocationCommand,
-							FirstInsertLocationCommand firstInsertLocationCommand) {
+							FirstInsertLocationCommand firstInsertLocationCommand,
+							UpdateUseNowCommand updateUseNowCommand) {
 		super();
 		this.sqlSession = sqlSession;
 		this.mapCheckLocationCommand = mapCheckLocationCommand;
@@ -48,6 +51,7 @@ public class MapController {
 		this.changeLocationCommand = changeLocationCommand;
 		this.deleteLocationCommand = deleteLocationCommand;
 		this.firstInsertLocationCommand = firstInsertLocationCommand;
+		this.updateUseNowCommand = updateUseNowCommand;
 	}
 	@GetMapping(value= "m.checkLocation")
 	@ResponseBody
@@ -114,7 +118,13 @@ public class MapController {
 		return "map/mapCheckLocation";
 	}
 
-
+	@PostMapping(value="m.updateUsenow",produces="application/json; charset=utf-8")
+	@ResponseBody
+	public Map<String, Object> updateUsenow(MapSessionDTO mapSessionDTO,Model model,HttpServletRequest request) {
+		model.addAttribute("mapSessionDTO",mapSessionDTO);
+		model.addAttribute("request",request);
+		return updateUseNowCommand.execute(sqlSession, model);
+	}
 
 
 	

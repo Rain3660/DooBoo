@@ -5,7 +5,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="com.koreait.dooboo.map.dao.MapDAO">	
 	<insert id="insertLocation">
-		INSERT INTO MAP
+		INSERT INTO MAP 
 		VALUES(MAP_SEQ.NEXTVAL,#{memberNo},#{location},#{locationOrd})
 	</insert>
 	
@@ -16,7 +16,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<insert id="CheckLocation">
-		INSERT INTO MAPLOCATIONCHECK
+		INSERT INTO MAPLOCATIONCHECK (MAP_NO,IS_CHECKED)
 		VALUES(#{mapNo},#{isChecked})
 	</insert>
 	
@@ -62,5 +62,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		DELETE MAP
 		 WHERE MAP_NO = #{mapNo}
 	</delete>
+	
+	<select id="getUseNow" parameterType="long" resultType="int">
+		SELECT USENOW
+		  FROM MAPLOCATIONCHECK
+		 WHERE MAP_NO = #{mapNo}
+	</select>
+	
+	<update id="updateUseNow">
+		UPDATE MAPLOCATIONCHECK
+		   SET USENOW = #{usenow}
+		 WHERE MAP_NO = #{mapNo} 
+	</update>
 	
 </mapper>

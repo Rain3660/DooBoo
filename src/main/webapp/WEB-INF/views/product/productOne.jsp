@@ -42,24 +42,24 @@
 	</div>
 	<div class="row">
 		<div class="col-md-6 mx-auto"><!-- 제목 -->
-			${productDTO.title }
+			${productVO.title }
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-md-6 mx-auto"><!-- 가격 -->
-			${productDTO.price }
+			${productVO.price }
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-md-6 mx-auto"><!-- 내용 -->
-			${productDTO.content }
+			${productVO.content }
 		</div>
 	</div>
 	<div class="row">
 	
 		<div class="col-md-6 mx-auto border-bottom"><!-- Like , hit -->
 			<div class="float-start">
-				<p class="text-secondary fs-6">${productDTO.hit } | ${likes }</p>
+				<p class="text-secondary fs-6">${productVO.hit } | ${productVO.likecount }</p>
 			</div>
 			<div class="float-end">
 				<input type="button" class="btn btn-secondary" value="판매자와 채팅하기">  

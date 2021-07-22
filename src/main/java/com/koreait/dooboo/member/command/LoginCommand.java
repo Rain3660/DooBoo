@@ -62,12 +62,13 @@ public class LoginCommand implements MemberCommand {
 					MapSessionDTO mapSessionDTO = null;
 					String midLocation = GetMidLocation.getMidLocation(map.getLocation());
 					if(result > 0) {
-						mapSessionDTO = new MapSessionDTO(mapNo, loginUserNo, midLocation, map.getLocationOrd(), result);
+						mapSessionDTO = new MapSessionDTO(mapNo, loginUserNo, midLocation, map.getLocationOrd(), result ,1);
+						//지역이 1개있고 인증까지 되었다는 이야기는 선호지역이라는 의미
 						session.setAttribute("mapSession"+mapSessionDTO.getLocationOrd()+"DTO", mapSessionDTO);
 						message = "로그인 성공!";
 						view="index";
 					}else {
-						mapSessionDTO = new MapSessionDTO(mapNo, loginUserNo, midLocation, map.getLocationOrd(), result);
+						mapSessionDTO = new MapSessionDTO(mapNo, loginUserNo, midLocation, map.getLocationOrd(), result , 0);
 						session.setAttribute("mapSession"+mapSessionDTO.getLocationOrd()+"DTO", mapSessionDTO);
 						message = "지역인증을 하셔야 원활한 거래가 가능합니다 인증하시겠습니까?(확인시 인증페이지로 이동)";
 						view="m.mapChecklocationPage";
@@ -79,8 +80,10 @@ public class LoginCommand implements MemberCommand {
 					long map2No = map2.getMapNo();
 					int result1 = mapDAO.isChecked(map1No);
 					int result2 = mapDAO.isChecked(map2No);
-					MapSessionDTO mapSession1DTO = new MapSessionDTO(map1No, loginUserNo, map1.getLocation(), map1.getLocationOrd(), result1);
-					MapSessionDTO mapSession2DTO = new MapSessionDTO(map2No, loginUserNo, map2.getLocation(), map2.getLocationOrd(), result2);
+					int useNow1 = mapDAO.getUseNow(map1No);
+					int useNow2 = mapDAO.getUseNow(map2No);
+					MapSessionDTO mapSession1DTO = new MapSessionDTO(map1No, loginUserNo, map1.getLocation(), map1.getLocationOrd(), result1,useNow1);
+					MapSessionDTO mapSession2DTO = new MapSessionDTO(map2No, loginUserNo, map2.getLocation(), map2.getLocationOrd(), result2,useNow2);
 					session.setAttribute("mapSession"+mapSession1DTO.getLocationOrd()+"DTO", mapSession1DTO);
 					session.setAttribute("mapSession"+mapSession2DTO.getLocationOrd()+"DTO", mapSession2DTO);
 					

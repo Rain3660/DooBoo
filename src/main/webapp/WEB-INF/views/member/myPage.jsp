@@ -116,7 +116,13 @@
 		                <br>
 		            </c:if>
 		            <c:if test="${mapSession1DTO ne null}">
-		                <button type="button" class="btn btn-outline-primary">${mapSession1DTO.location}</button><br>
+		                 <input type="radio" class="btn-check"  name="btnradio" id="btnradio1" autocomplete="off" <c:if test="${mapSession1DTO.usenow eq 1}">checked</c:if>>
+		                 <label class="btn btn-outline-primary" id="btnradio1text" for="btnradio1">${mapSession1DTO.location}</label><br>
+						 
+						 <c:if test="${mapSession1DTO.usenow eq 1}"> 
+						 <img src="resources/image/두부1.png" width="45px" height="45px">거래 선호지역!
+						 </c:if>	
+						 	                
 		                <c:if test="${mapSession1DTO.isChecked eq 0}">
 		                    <div class="alert alert-warning d-flex align-items-center" role="alert">
 		                        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"/></svg>
@@ -147,7 +153,13 @@
 		                <button type="button" class="btn btn-outline-primary">미등록</button><br>
 		            </c:if>
 		            <c:if test="${mapSession2DTO ne null}">
-		                <button type="button" class="btn btn-outline-primary">${mapSession2DTO.location}</button><br>
+		                  <input type="radio" class="btn-check"  name="btnradio" id="btnradio2" autocomplete="off" <c:if test="${mapSession2DTO.usenow eq 1}">checked</c:if>>
+		            	  <label class="btn btn-outline-primary" id="btnradio2text" for="btnradio2">${mapSession2DTO.location}</label>
+		            	  <c:if test="${mapSession2DTO.usenow eq 1}">
+						 
+						 	<img src="resources/image/두부1.png" width="45px" height="45px">거래 선호지역!
+						 
+						 </c:if>
 		                <c:if test="${mapSession2DTO.isChecked eq 0}">
 		                    <div class="alert alert-warning d-flex align-items-center" role="alert">
 		                        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"/></svg>
@@ -166,7 +178,8 @@
 		                </c:if>
 		            </c:if>
 		            <br>
-		            <input class="btn btn-primary" type="button" value="거래지역수정하기" id="update_location_btn" onclick="window.open('m.mapCheckLocationPage','지역변경','width=430,height=500,location=no,status=no,scrollbars=yes');">
+		            <input class="useNow_btn btn btn-primary" type="button" value="선호지역 변경하기" id="update_usenow_location_btn">
+		            <input class="btn btn-primary" type="button" value="거래지역 수정하기" id="update_location_btn" onclick="window.open('m.mapCheckLocationPage','지역변경','width=430,height=500,location=no,status=no,scrollbars=yes');">
 		        </div>
         	</div><br><br>
   
@@ -267,7 +280,91 @@
 			$('#updateContact').attr('action' , 'm.updateContact');
 			$('#updateContact').submit();
 		})
+		fn_IdChange();
+		fn_update_usenow();
 	})
+	var result = false;
+	   function fn_IdChange(){
+            $("#btnradio1").change(function(){
+                if($('#btnradio1').is(':checked')){
+
+                  result = true;
+                }
+            }) 
+            $("#btnradio2").change(function(){
+                if($('#btnradio2').is(':checked')){
+
+                    result = true;
+                }
+            }) 
+        }
+	function fn_update_usenow(){
+		$('.useNow_btn').on('click',function(){
+			if(!result){
+				alert('지역을 먼저 선택해주세요');
+			}else{
+				
+           	 if($('#btnradio1').is(':checked')){
+            	 if(confirm('선호지역을"'+$('#btnradio1text').text()+'"으로 변경하시겠습니까?')){
+            		 if('${mapSession1DTO.isChecked}'==0){
+            			 alert('인증을 먼저 해주세요!');
+            			 $('#btnradio2').prop('checked',true);
+            			 return;
+            		 }else{
+	            			$.ajax({
+	                    		url:'m.updateUsenow',
+	                    		type : 'post',
+	                    		data : 'mapNo=${mapSession1DTO.mapNo} &memberNo=${loginUser.memberNo}',
+	                    	    dataType : 'json',
+	                            success : function(resultMap){
+	                            	if(resultMap.result > 0){
+	                                    alert('변경되었습니다');
+	                                	window.location.assign('m.myPage');
+	                                }
+	                            },error(){
+	                       
+	            
+	                            }
+	                    });  
+            		 }
+        	 	}
+        		 
+            }
+        	 if($('#btnradio2').is(':checked')){
+            	 if(confirm('선호지역을"'+$('#btnradio2text').text()+'"으로 변경하시겠습니까?')){
+            		 if('${mapSession2DTO.isChecked}'==0){
+            			 alert('인증을 먼저 해주세요!');
+            			 $('#btnradio1').prop('checked',true);
+            			 return;
+            		 }else{
+	            		 $.ajax({
+	                    		url:'m.updateUsenow',
+	                    		type : 'post',
+	                    		data : 'mapNo=${mapSession2DTO.mapNo} &memberNo=${loginUser.memberNo}',
+	                    	    dataType : 'json',
+	                            success : function(resultMap){
+	                                if(resultMap.result > 0){
+	                                    alert('변경되었습니다');
+	                                	window.location.assign('m.myPage');
+	                                }
+	                            },error(){
+	            				
+	                            }
+	                    });
+            		 }
+        	 	}
+        		 
+              }
+        	 
+        	 
+        	 
+			
+		}
+			
+	})
+}
+	
+	
 	function findAddr() {
 	$('#address').val('');
 	new daum.Postcode({

@@ -26,12 +26,15 @@ public class MapCheckLocationCommand {
 		HttpSession session = request.getSession(); //세션에 등록하기위해 준비
 		long mapNo = mapSessionDTO.getMapNo(); //이곳에 들어왔다는것 == 이미 인증이 되어 업데이트만 진행하면됨
 		MapLocationCheckDTO mapLocationCheckDTO = new MapLocationCheckDTO(mapNo, 1); //mapNo를 꺼내 인증이됬다는 result값을 dto에 담는다
+
+		
 		MapDAO mapDAO = sqlSession.getMapper(MapDAO.class); //DB에 저장하기위해 DAO호출
 		Map<String, Object> resultMap = new HashMap<String,Object>(); //ajax에 반환을 위해 만든 HashMap
 		String fullLocation = mapSessionDTO.getLocation(); //미리 저장해둔 현재위치를 파라미터를 통해 받는다 ex)서울시 은평구 녹번동
 		String midLocation = GetMidLocation.getMidLocation(fullLocation); //미리만들어둔 util을 통해 spit을 진행하여 중간에 '구' 만 가져온다.
+
 		
-		int result1 = mapDAO.mapUpdateResult(mapLocationCheckDTO); //인증됬다는 result값을 DAO를 통해 DB로 저장
+		int result1 = mapDAO.mapUpdateResult(mapLocationCheckDTO); //인증됬다는 result값을 DAO를 통해 DB로 저장(++ 첫 회원가입이라면 선호지역도 인증)
 		
 		if(result1 > 0) {
 			long memberNo = mapSessionDTO.getMemberNo(); //멤버기본키를받아온다
@@ -44,6 +47,15 @@ public class MapCheckLocationCommand {
 				int locatioOrd = mapSessionDTO.getLocationOrd(); //지역 1번 2번을 구분하기위한 변수
 				mapSessionDTO.setIsChecked(mapLocationCheckDTO.getIsChecked());	//인증이되었고 업데이트도 되었기때문에 dto에 isChecked만 1로 set하여 session에 올린다.
 				mapSessionDTO.setLocation(midLocation);//서울시 은평구 녹번동 중 '은평구'만 세션에 올린다.
+				
+				int firstVisit = (int) session.getAttribute("firstVisit"); //처음 회원가입인지 그냥 지역인증인이지 확인하기위해 세션에서 꺼내 확인
+				System.out.println(firstVisit);
+				if(firstVisit == 1) { 					 //첫 회원가입에 진행한 지역 인증이라면
+					mapLocationCheckDTO.setUsenow(1);   //선호지역으로 자동 업데이트 된다.
+					mapSessionDTO.setUsenow(1); 		//세션용 dto에도 추가시켜준다.
+					mapDAO.updateUseNow(mapLocationCheckDTO);
+				}
+				
 				session.setAttribute("mapSession"+mapSessionDTO.getLocationOrd()+"DTO", mapSessionDTO);//중간에 locationOrd를 통해 지역중 몇번째인지 넣고 세션에 올린다.				
 			}
 			
