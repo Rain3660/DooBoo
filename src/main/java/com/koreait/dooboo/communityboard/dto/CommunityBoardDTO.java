@@ -45,32 +45,6 @@ public class CommunityBoardDTO extends ListPagingDTO{
     
     // 닉네임
     private String nickname;
-    
-    // 첨부파일 
-    private List<ProductimageDTO> productImageList; 
-    
-    public List<ProductimageDTO> getProductImageList() {
-		return productImageList;
-	}
-
-
-	public void setProductImageList(List<ProductimageDTO> productImageList) {
-		this.productImageList = productImageList;
-	}
-
-	// 첨부파일 
-    private List<FileUpload> fileUploadList; 
-    
-
-	public List<FileUpload> getFileUploadList() {
-		return fileUploadList;
-	}
-
-
-	public void setFileUploadList(List<FileUpload> fileUploadList) {
-		this.fileUploadList = fileUploadList;
-	}
-
 
 	public CommunityBoardDTO() {}
     

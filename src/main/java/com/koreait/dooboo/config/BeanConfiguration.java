@@ -68,7 +68,7 @@ public class BeanConfiguration {
 		SqlSessionFactoryBean sqlSessionFactory = new SqlSessionFactoryBean();
 		sqlSessionFactory.setConfigurationProperties(properties); //카멜케이스 설정 
 		sqlSessionFactory.setDataSource(hikariDataSource());
-		sqlSessionFactory.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath:com/koreait/dooboo/mapper/*.xml"));
+		sqlSessionFactory.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath:mapper/*.xml"));
 		//카멜케이스 설정
 		Resource myBatisConfig = new PathMatchingResourcePatternResolver().getResource("classpath:mybatis-config.xml");
 		sqlSessionFactory.setConfigLocation(myBatisConfig);		

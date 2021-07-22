@@ -13,10 +13,6 @@ import com.koreait.dooboo.communityboard.dao.CommunityBoardDAO;
 import com.koreait.dooboo.communityboard.dto.CommunityBoardDTO;
 import com.koreait.dooboo.communityboard.dto.ListPagingDTO;
 import com.koreait.dooboo.communityboard.dto.ListPagingInfo;
-import com.koreait.dooboo.product.dao.ProductDAO;
-import com.koreait.dooboo.product.dto.ProductimageDTO;
-import com.koreait.dooboo.util.FileUpload;
-import com.koreait.dooboo.util.UtilsText;
 
 @Service("boardCommand")
 public class BoardCommand{
@@ -25,43 +21,11 @@ public class BoardCommand{
 	private CommunityBoardDAO communityBoardDAO;
 	
 	@Autowired
-	private ProductDAO productDAO;
-	
-	@Autowired
 	private ListPagingDTO listpagingDTO;
 	
 	public boolean registerBoard(CommunityBoardDTO params) {
 		int queryResult = 0;
-		//일단 임시값
-		params.setRegNo(1);
-		params.setModNo(1);
-		
-		/*String fileName = UtilsText.concat(UtilsText.parseFileRename(), ".", uploadFile.getExt());
-		String filePath = this.getFilePath("adminnotice");*/
-		
-		for(FileUpload fileUpload : params.getFileUploadList()) {
-			ProductimageDTO productimageDTO = null;
-			try {
-				String fileName = UtilsText.concat(UtilsText.parseFileRename(), ".", fileUpload.getExt());
-				String filePath = UtilsText.getFilePath("product");
-				//파일생성
-				fileUpload.transferTo(filePath, fileName, true);
-				productimageDTO = new ProductimageDTO();
-				Long boardNo = params.getBoardNo();
-				productimageDTO.setProductNo(boardNo.intValue()); //일단 게시물 번호로~~
-				productimageDTO.setFileName(fileUpload.getOrgFileName());
-				productimageDTO.setFilePath(filePath+fileName);
-				productimageDTO.setRegNo(1111);
 
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			if(null != productimageDTO) {
-				System.out.println(productimageDTO);
-				productDAO.insertProductImage(productimageDTO);
-			}
-		}
-		
 		if (params.getBoardNo() == 0) {
 			queryResult = communityBoardDAO.insertBoard(params);
 		} else {
@@ -69,6 +33,7 @@ public class BoardCommand{
 		}
 
 		return (queryResult == 1) ? true : false;
+		
 	}
 
 	public CommunityBoardDTO getBoardDetail(long idx) {
@@ -103,13 +68,6 @@ public class BoardCommand{
 
 		return resultMap;
 	}
-	
-	public boolean setDeleteFile(ProductimageDTO productImageDto) {
-		int queryResult = 0;
-		queryResult = communityBoardDAO.deleteFile(productImageDto);
-		return (queryResult == 1) ? true : false;
-	}	
-	
 }
 
 
