@@ -36,7 +36,7 @@
 	 <img class="mb-4" src="resources/image/DoobooLogo.png"" alt="" width="72" height="57">
     <h1 class="h3 mb-3 fw-normal">DOO BOO Market<br> Login</h1>
 	 <div class="form-floating">
-          <input type="email" class="form-control" name="memberId" id="memberId">
+          <input type="text" class="form-control" name="memberId" id="memberId">
            <label for="fmemberId">ID</label>
     </div><br><br>
 	  <div class="form-floating">
