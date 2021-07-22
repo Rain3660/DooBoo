@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import com.koreait.dooboo.productimage.dto.ProductImageDTO;
+import com.koreait.dooboo.product.dto.ProductimageDTO;
 import com.koreait.dooboo.util.FileUpload;
 
 @Repository
@@ -47,14 +47,14 @@ public class CommunityBoardDTO extends ListPagingDTO{
     private String nickname;
     
     // 첨부파일 
-    private List<ProductImageDTO> productImageList; 
+    private List<ProductimageDTO> productImageList; 
     
-    public List<ProductImageDTO> getProductImageList() {
+    public List<ProductimageDTO> getProductImageList() {
 		return productImageList;
 	}
 
 
-	public void setProductImageList(List<ProductImageDTO> productImageList) {
+	public void setProductImageList(List<ProductimageDTO> productImageList) {
 		this.productImageList = productImageList;
 	}
 

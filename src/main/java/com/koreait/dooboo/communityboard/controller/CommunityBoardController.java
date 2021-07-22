@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.koreait.dooboo.communityboard.command.BoardCommand;
 import com.koreait.dooboo.communityboard.dto.CommunityBoardDTO;
+import com.koreait.dooboo.product.dto.ProductimageDTO;
 import com.koreait.dooboo.util.FileUpload;
 
 @Controller
@@ -99,6 +100,17 @@ public class CommunityBoardController {
 	@ResponseBody
 	public Map<String,Object> openBoardDelete(CommunityBoardDTO boardDTO) {
 		boolean deleteYn = boardCommand.deleteBoard((int) boardDTO.getBoardNo());
+		Map<String,Object> resultMap = new HashMap<String,Object>();
+		resultMap.put("deleteYn", deleteYn);
+		return resultMap;
+	}
+	
+	@PostMapping(value ="deleteFile")
+	@ResponseBody
+	public Map<String,Object> setDeleteFile(ProductimageDTO productImageDTO) {
+		System.out.println(productImageDTO.getFileNo());
+		System.out.println("ㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎ");
+		boolean deleteYn = boardCommand.setDeleteFile(productImageDTO);
 		Map<String,Object> resultMap = new HashMap<String,Object>();
 		resultMap.put("deleteYn", deleteYn);
 		return resultMap;

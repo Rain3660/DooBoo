@@ -1,7 +1,6 @@
 package com.koreait.dooboo.communityboard.command;
 
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -55,12 +54,11 @@ public class BoardCommand{
 				productimageDTO.setRegNo(1111);
 
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			if(null != productimageDTO) {
 				System.out.println(productimageDTO);
-				productDAO.insertImageFile(productimageDTO);
+				productDAO.insertProductImage(productimageDTO);
 			}
 		}
 		
@@ -105,6 +103,12 @@ public class BoardCommand{
 
 		return resultMap;
 	}
+	
+	public boolean setDeleteFile(ProductimageDTO productImageDto) {
+		int queryResult = 0;
+		queryResult = communityBoardDAO.deleteFile(productImageDto);
+		return (queryResult == 1) ? true : false;
+	}	
 	
 }
 

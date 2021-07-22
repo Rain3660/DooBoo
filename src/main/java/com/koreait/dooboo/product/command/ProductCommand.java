@@ -1,16 +1,11 @@
 package com.koreait.dooboo.product.command;
 
 
-import java.io.File;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +18,6 @@ import com.koreait.dooboo.communityboard.dto.ListPagingInfo;
 import com.koreait.dooboo.member.dto.MemberDTO;
 import com.koreait.dooboo.product.dao.ProductDAO;
 import com.koreait.dooboo.product.dto.ProductDTO;
-import com.koreait.dooboo.productimage.dto.ProductImageDTO;
 
 @Service("productCommand")
 public class ProductCommand {
@@ -69,7 +63,7 @@ public class ProductCommand {
 		productDTO.setRegNo(memberNo);
 		// DB 에 업데이트
 		
-		productDAO.sellProduct(productDTO);
+		productDAO.insertProduct(productDTO);
 		updateProductImageFiles(productDTO, multipartRequest);
 	}
 	
@@ -85,7 +79,7 @@ public class ProductCommand {
 		MemberDTO loginUser = (MemberDTO)session.getAttribute("loginUser");
 		long regNo = loginUser.getMemberNo();
 		
-		for (MultipartFile multipartFile : files) {
+	/*	for (MultipartFile multipartFile : files) {
 			
 			if(!multipartFile.isEmpty() && multipartFile != null) {
 				// 올린 파일의 이름
@@ -135,10 +129,10 @@ public class ProductCommand {
 				productImageDTO.setFileName(fileName);
 				//productDAO.uploadImageFile(productImageDTO);				
 			}
-		}
+		}*/
 	}
 	
-	// 판매등록한 상품을 삭제한다.
+/*	// 판매등록한 상품을 삭제한다.
 	public void deleteProduct(HttpServletRequest request , HttpServletResponse response) {
 		
 		long productNo = Long.parseLong(request.getParameter("productNo"));
@@ -164,5 +158,5 @@ public class ProductCommand {
 		}
 		
 		
-	}
+	}*/
 }

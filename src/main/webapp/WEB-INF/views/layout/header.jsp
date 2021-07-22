@@ -18,6 +18,9 @@
 
 <!-- FontAwesome -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" referrerpolicy="no-referrer" />
+
+<!-- 이미지 루트 -->
+<c:set var="STATIC_IMAGE_ROOT" value="http://sih8859.iptime.org:8081/dooboo" scope="application"></c:set>
 </head>
 <body style="font-family: 'Sunflower', sans-serif; " class=bg-light  >
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -31,7 +34,7 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarText">
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-					<li class="nav-item"><a class="nav-link" aria-current="page" href="#">상품</a></li>
+					<li class="nav-item"><a class="nav-link active" aria-current="page" href="p.productList">상품</a></li>
 					<li class="nav-item"><a class="nav-link" href="b.list">자유게시판</a></li>
 					<li class="nav-item"><a class="nav-link" href="#">New</a></li>
 					<li class="nav-item"><a class="nav-link" href="#">Popular</a></li>
