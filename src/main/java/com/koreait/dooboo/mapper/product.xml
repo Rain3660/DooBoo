@@ -136,7 +136,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		 WHERE PRODUCT_NO = #{productNo}
 	</select>
 	
-	<insert id="insertLikeProduct" parameterType="com.koreait.dooboo.productimage.dto.ProductImageDTO">
+	<insert id="insertLikeProduct" parameterType="com.koreait.dooboo.likeproduct.dto.LikeProductDTO">
 		INSERT INTO LIKEPRODUCT
 		VALUES(#{productNo},#{regNo},SYSDATE)
 	</insert>
