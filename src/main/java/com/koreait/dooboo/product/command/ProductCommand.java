@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.koreait.dooboo.map.dto.MapDTO;
 import com.koreait.dooboo.product.dao.ProductDAO;
 import com.koreait.dooboo.product.dto.ProductDTO;
+import com.koreait.dooboo.product.dto.ProductVO;
 
 @Service("productCommand")
 public class ProductCommand {
@@ -35,13 +36,13 @@ public class ProductCommand {
 		return resultMap;
 	}
 	
-	public ProductDTO selectOneProduct(long productNo){
-		 ProductDTO productDTO= productDAO.selectOneProduct(productNo);
-		return productDTO;
+	public ProductVO selectOneProduct(long productNo){
+		 ProductVO productVO= productDAO.selectOneProduct(productNo);
+		return productVO;
 	}
 	
-	public int getLikesCount(long productNo) {
-		int likes = productDAO.getLikesCount(productNo);
-		return likes;
-	}
-}
+/*//	public int getLikesCount(long productNo) {
+//		int likes = productDAO.getLikesCount(productNo);
+//		return likes;
+//	}
+*/}

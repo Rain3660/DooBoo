@@ -38,7 +38,7 @@ public class FirstInsertLocationCommand implements MemberCommand {
 				MapLocationCheckDTO mapLocationCheckDTO = new MapLocationCheckDTO(mapNo, 0); //지역 인증유무 추가 아직 인증전이기 때문에 0 이다.
 				int result2 = mapDAO.CheckLocation(mapLocationCheckDTO);
 					if(result2 > 0) { //지역인증유무에 저장이 잘되었다면
-						MapSessionDTO mapSessionDTO = new MapSessionDTO(mapNo, memberNo, location1, 1, 0);
+						MapSessionDTO mapSessionDTO = new MapSessionDTO(mapNo, memberNo, location1, 1, 0 ,0);
 						session.setAttribute("mapSession"+mapSessionDTO.getLocationOrd()+"DTO", mapSessionDTO);
 					}
 				
@@ -51,13 +51,12 @@ public class FirstInsertLocationCommand implements MemberCommand {
 			mapDTO2.setLocation(location2);
 			mapDTO2.setLocationOrd(2);
 			int result3 = mapDAO.insertLocation(mapDTO2); //지역2를 DB에 저장
-			System.out.println("결과!!!!!!!!!!!!!!!!1"+result3);
 			if(result3 > 0) {//저장이 잘 되었다면
 				long mapNo = mapDAO.getMapNo(mapDTO2);  
 				MapLocationCheckDTO mapLocationCheckDTO = new MapLocationCheckDTO(mapNo, 0); //지역 인증유무 추가 아직 인증전이기 때문에 0 이다.
 				int result4 = mapDAO.CheckLocation(mapLocationCheckDTO);
 					if(result4 > 0) { //지역인증유무에 저장이 잘되었다면
-						MapSessionDTO mapSessionDTO = new MapSessionDTO(mapNo, memberNo, location2, 2, 0);						
+						MapSessionDTO mapSessionDTO = new MapSessionDTO(mapNo, memberNo, location2, 2, 0 ,0);						
 						session.setAttribute("mapSession"+mapSessionDTO.getLocationOrd()+"DTO", mapSessionDTO);
 					}
 			}
