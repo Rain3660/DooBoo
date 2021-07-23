@@ -203,13 +203,15 @@
 			var row;
 			// 행이 바뀌면 productList 안에 행부터 만들고 그 행 안에 col 을 만들어 준다.
 			// 행이 바뀌지 않는다면 그 !! 행 안에 col을 만들어야 한다.
+
 			if(index % 3 == 0){
 				// 행
 				row = $('<div class="row row-cols-lg-3 row-cols-md-2 row-cols-lg-1 mt-5"></div>');
 				row.append(columnMaker(productVO.images.split(',')[0] , productVO.title , productVO.price , productVO.address , productVO.hit , productVO.likeCount))
 				.appendTo('#productList');
 			}else{
-				row.append(columnMaker(productVO.images.split(',')[0] , productVO.title , productVO.price , productVO.address , productVO.hit , productVO.likeCount));
+				$(columnMaker(productVO.images.split(',')[0] , productVO.title , productVO.price , productVO.address , productVO.hit , productVO.likeCount))
+				.appendTo($('#productList > div:last-child'));
 			}
 			
 		})
@@ -229,7 +231,7 @@
 		return col;
 	}
 </script>
-<div class="container" id="produtList">
+<div class="container">
 	<div class="row">
 		<h2 class="text-center" id="header_title">중고거래 인기매물</h2>
 	</div>
