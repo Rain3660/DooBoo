@@ -19,4 +19,6 @@ public interface MapDAO {
 	public MapDTO getOneLocation(long mapNo);
 	public int getUseNow(long mapNo);
 	public int updateUseNow(MapLocationCheckDTO mapLocationCheckDTO);
+	public int didntUseNowYet(long memberNo);
+	public String getUseNowLocation(long memberNo);
 }

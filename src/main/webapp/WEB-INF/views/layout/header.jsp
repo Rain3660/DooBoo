@@ -34,11 +34,11 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarText">
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-					<li class="nav-item"><a class="nav-link" aria-current="page" href="#" id="product_btn">상품</a></li>
+					<li class="nav-item"><a class="nav-link" aria-current="page" href="p.productListPage" id="product_btn">상품</a></li>
 					<li class="nav-item"><a class="nav-link" href="b.list">자유게시판</a></li>
 					<li class="nav-item"><a class="nav-link" href="#">New</a></li>
 					<li class="nav-item"><a class="nav-link" href="#">Popular</a></li>
-					<li class="nav-item"><a class="nav-link" href="#" id="insertProduct_btn">상품등록</a></li>
+					<li class="nav-item"><a class="nav-link" href="p.insertSellProductPage" id="insertProduct_btn">상품등록</a></li>
 					<li class="nav-item"><a class="nav-link" href="#" id="chat">1:1대화함</a></li>
 					<li class="nav-item">
 						<form class="d-flex">
@@ -124,8 +124,14 @@
 			$('#product_btn').on('click' , function(){
 				if(${loginUser eq null}){
 					openModal();
+				}else if(${mapSession1DTO eq null} && ${mapSession2DTO eq null}){
+					confirm('지역인증이 필요합니다  지역인증을위해 마이페이지로 이동하겠습니까?'){
+						location.href='m.myPage';
+					}else{
+						return false;
+					} 
 				}else{
-					location.href = 'chat';
+					location.href = 'p.productListPage';
 				}
 			})
 		})

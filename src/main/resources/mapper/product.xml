@@ -131,7 +131,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<!-- 판매상품을 등록한다 -->
 	<insert id="insertSellProduct">
 		INSERT INTO PRODUCT VALUES
-		(PRODUCT_SEQ.NEXTVAL,#{title},${price},0,#{content},1,#{address},#{regNo},null,SYSDATE,null)
+		(PRODUCT_SEQ.NEXTVAL,#{title},${price},0,#{content},1,#{address},#{regNo},null,SYSDATE,null,'N')
 	</insert>
 	
 	<select id="getOneLocation" parameterType="long" resultType="com.koreait.dooboo.map.dto.MapDTO">
@@ -172,5 +172,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		INSERT INTO LIKEPRODUCT
 		VALUES(#{productNo},#{regNo},SYSDATE)
 	</insert>
+	
+	<select id="selectProductListByLocation" parameterType="String" resultType="com.koreait.dooboo.vo.ProductVO">
+		SELECT M.NICKNAME , P.REG_NO , P.CONTENT , P.MOD_NO , P.MOD_DATE , P.REG_DATE , P.PRODUCT_NO , P.TITLE , P.ADDRESS , P.PRICE , P.HIT , I.IMAGES , L.LIKECOUNT
+		  FROM MEMBER M INNER JOIN PRODUCT P ON M.MEMBER_NO = P.REG_NO
+	      LEFT OUTER JOIN (SELECT PRODUCT_NO AS PNO , LISTAGG(FILE_PATH , ',') WITHIN GROUP (ORDER BY PRODUCT_NO)IMAGES FROM PRODUCT_IMAGE  GROUP BY PRODUCT_NO) I ON P.PRODUCT_NO = I.PNO
+	  	  LEFT OUTER JOIN (SELECT PRODUCT_NO , COUNT(REG_NO) AS LIKECOUNT FROM LIKEPRODUCT GROUP BY PRODUCT_NO) L ON P.PRODUCT_NO = L.PRODUCT_NO
+		 WHERE P.STATUS = 1 AND P.DEL_YN = 'N'
+		 AND P.ADDRESS LIKE '%'||#{location}||'%'
+	</select>
 
 </mapper>

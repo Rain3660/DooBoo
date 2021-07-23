@@ -75,4 +75,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		 WHERE MAP_NO = #{mapNo} 
 	</update>
 	
+	<select id="didntUseNowYet" parameterType="long" resultType="int">
+		 SELECT COUNT(M.MAP_NO)
+   	 	   FROM MAP M INNER JOIN MAPLOCATIONCHECK L  ON M.MAP_NO = L.MAP_NO
+		  WHERE M.MEMBER_NO = #{memberNo} AND L.USENOW = 0
+	</select>
+	
+	<select id="getUseNowLocation" parameterType="long" resultType="String">
+		SELECT M.LOCATION 
+          FROM MAP M INNER JOIN MAPLOCATIONCHECK L ON M.MAP_NO = L.MAP_NO
+         WHERE M.MEMBER_NO = #{memberNo} AND L.USENOW = 1
+	</select>
+	
 </mapper>

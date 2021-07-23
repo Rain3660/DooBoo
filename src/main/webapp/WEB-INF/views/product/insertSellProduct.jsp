@@ -25,7 +25,7 @@
 			<textarea class="form-control" id="content" rows="3" cols="5" name="content"></textarea>
 		</div>
 		<div class="mb-3 text-right">
-			<button class="btn btn-outline-success" id="fileAddBtn">파일첨부</button>
+			<input type="button" class="btn btn-outline-success" id="fileAddBtn" value="파일첨부">
 			<div id="fileArea">
 		    	<c:forEach var="boardFile" items="${board.productImageList}" varStatus="status">
 		    		<div id="div_file_${boardFile.fileNo}">

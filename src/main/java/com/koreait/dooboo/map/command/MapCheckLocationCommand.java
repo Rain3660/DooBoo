@@ -20,6 +20,8 @@ public class MapCheckLocationCommand {
 
 	
 	public Map<String, Object> execute(SqlSession sqlSession, Model model) {
+		
+
 		Map<String, Object> map = model.asMap();
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
 		MapSessionDTO mapSessionDTO = (MapSessionDTO) map.get("mapSessionDTO"); //session에 필요한 컬럼들만 모은 dto
@@ -49,8 +51,8 @@ public class MapCheckLocationCommand {
 				mapSessionDTO.setLocation(midLocation);//서울시 은평구 녹번동 중 '은평구'만 세션에 올린다.
 				
 				int firstVisit = (int) session.getAttribute("firstVisit"); //처음 회원가입인지 그냥 지역인증인이지 확인하기위해 세션에서 꺼내 확인
-				System.out.println(firstVisit);
-				if(firstVisit == 1) { 					 //첫 회원가입에 진행한 지역 인증이라면
+				int useNowYet = mapDAO.didntUseNowYet(memberNo);
+				if(firstVisit == 1 || useNowYet==2) { 					 //첫 회원가입에 진행한 지역 인증이라면
 					mapLocationCheckDTO.setUsenow(1);   //선호지역으로 자동 업데이트 된다.
 					mapSessionDTO.setUsenow(1); 		//세션용 dto에도 추가시켜준다.
 					mapDAO.updateUseNow(mapLocationCheckDTO);

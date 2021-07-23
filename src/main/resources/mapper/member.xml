@@ -63,4 +63,5 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT COUNT(MEMBER_ID) FROM MEMBER WHERE MEMBER_ID = #{param1}
 	</select>
 
+
 </mapper>

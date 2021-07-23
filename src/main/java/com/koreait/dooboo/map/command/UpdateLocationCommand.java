@@ -42,6 +42,10 @@ public class UpdateLocationCommand {
 				MapLocationCheckDTO mapLocationCheckDTO = new MapLocationCheckDTO(mapNo, 1);//업데이트된 지역은 현재지역으로 수정하여 인증이 이미 된 상태이기 때문에 mapLocationCheck 테이블도  1로 업데이트 시켜준다
 				result2 = mapDAO.mapUpdateResult(mapLocationCheckDTO); // 인증유무 업데이트까지 확인
 				if(result2 > 0) {
+					int useNowYet = mapDAO.didntUseNowYet(mapSessionDTO.getMemberNo());//인증하러 왔지만 아직 선호지역을 선택을 안했을때 자동으로 선호지역으로 적용
+					if(useNowYet == 2) {
+						mapSessionDTO.setUsenow(1);
+					}
 					mapSessionDTO.setIsChecked(1);//업데이트된 지역은 인증이 된상태이기때문에 dto를 수정해준다 세션업데이트임
 					mapSessionDTO.setLocation(GetMidLocation.getMidLocation(mapSessionDTO.getLocation()));//인증이 끝난 지역은 풀 주소를 DB에 저장해두고 클라이언트에게는 '구'만 보여준다
 					session.setAttribute("mapSession"+mapSessionDTO.getLocationOrd()+"DTO",mapSessionDTO); //LocationOrd를 통해 순서를 부여해준후 세션에 올려준다.

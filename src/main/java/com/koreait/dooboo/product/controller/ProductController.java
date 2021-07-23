@@ -20,14 +20,17 @@ import org.springframework.web.servlet.ModelAndView;
 import com.koreait.dooboo.communityboard.dto.CommunityBoardDTO;
 import com.koreait.dooboo.product.command.ProductCommand;
 import com.koreait.dooboo.product.dto.ProductDTO;
+import com.koreait.dooboo.product.dto.ProductVO;
 import com.koreait.dooboo.product.dto.ProductimageDTO;
 import com.koreait.dooboo.util.FileUpload;
+import com.koreait.dooboo.util.GetMidLocation;
 
 @Controller
 public class ProductController {
 
 	@Autowired
 	private ProductCommand productCommand;
+	
 	
 	@GetMapping(value="p.insertSellProductPage")
 	public String sellProductPage() {		
@@ -74,6 +77,18 @@ public class ProductController {
 		Map<String,Object> resultMap = new HashMap<String,Object>();
 		resultMap.put("deleteYn", deleteYn);
 		return resultMap;
+	}
+	
+	@GetMapping(value="p.selectProductListByLocation")
+	@ResponseBody
+	public Map<String, Object> selectProductListByLocation(@RequestParam("memberNo")long memberNo,Model model){	
+		
+		return productCommand.selectProductListByLocation(productCommand.getUseNowLocation(memberNo));
+	}
+	
+	@GetMapping(value="p.productListPage")
+	public String productListPage() {
+		return "product/productList";
 	}
 
 

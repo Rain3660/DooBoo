@@ -167,6 +167,14 @@ public class ProductVO extends ListPagingDTO{
 	public void setLikecount(int likecount) {
 		this.likecount = likecount;
 	}
+
+	@Override
+	public String toString() {
+		return "ProductVO [productNo=" + productNo + ", title=" + title + ", price=" + price + ", hit=" + hit
+				+ ", content=" + content + ", status=" + status + ", address=" + address + ", regNo=" + regNo
+				+ ", modNo=" + modNo + ", regDate=" + regDate + ", modDate=" + modDate + ", delYn=" + delYn
+				+ ", likecount=" + likecount + "]";
+	}
     
     
     

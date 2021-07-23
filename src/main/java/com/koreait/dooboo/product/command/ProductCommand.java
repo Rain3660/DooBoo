@@ -1,6 +1,7 @@
 package com.koreait.dooboo.product.command;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
@@ -8,13 +9,15 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.koreait.dooboo.map.dao.MapDAO;
 import com.koreait.dooboo.map.dto.MapDTO;
 import com.koreait.dooboo.product.dao.ProductDAO;
 import com.koreait.dooboo.product.dto.ProductDTO;
 import com.koreait.dooboo.product.dto.ProductimageDTO;
 import com.koreait.dooboo.util.FileUpload;
+import com.koreait.dooboo.util.GetMidLocation;
 import com.koreait.dooboo.util.UtilsText;
-import com.koreait.dooboo.product.dto.ProductVO;
+import com.koreait.dooboo.vo.ProductVO;
 
 
 @Service("productCommand")
@@ -23,6 +26,8 @@ public class ProductCommand {
 	@Autowired
 	private ProductDAO productDAO;
 	
+	@Autowired
+	private MapDAO mapDAO;
 	// 파일 업로드 및  게시글 수정 관련 (홍보람)
 	public boolean registerBoard(ProductDTO params) {
 		int queryResult = 0;
@@ -97,5 +102,23 @@ public class ProductCommand {
 		int likes = productDAO.getLikesCount(productNo);
 		return likes;
 	}*/
+	public String getUseNowLocation(long memberNo) {
+		return mapDAO.getUseNowLocation(memberNo);
+	}
+	
+	public Map<String, Object> selectProductListByLocation(String location){
+		Map<String, Object> resultMap = new HashMap<String,Object>();
+		List<ProductVO> list = productDAO.selectProductListByLocation(GetMidLocation.getMidLocation(location));
+		if(list != null) {
+			resultMap.put("result", 1);			
+		}else {
+			resultMap.put("result", 0);						
+		}
+		resultMap.put("list", list);
+		resultMap.put("midLocation", GetMidLocation.getMidLocation(location));
+		
+		return resultMap;
+		
+	}
 }
 

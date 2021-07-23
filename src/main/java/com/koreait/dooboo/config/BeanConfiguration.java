@@ -43,6 +43,7 @@ public class BeanConfiguration {
 	private ApplicationContext applicationContext;
 	
 
+
 	@Bean
 	public HikariConfig hikariConfig() {
 		HikariConfig hikariConfig = new HikariConfig();
