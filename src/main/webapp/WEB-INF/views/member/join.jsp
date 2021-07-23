@@ -182,7 +182,7 @@
 				$('#address').focus();
 				return false;
 			}
-			if(idCheck || isUsablePassword || pwCheck || nicknameCheck || nameCheck || phoneCheck || emailCheck){
+			if(idCheck && isUsablePassword || pwCheck || nicknameCheck || nameCheck || phoneCheck || emailCheck){
 				
 				$('#join_form').attr('action' , 'm.join');
 				$('#join_form').submit();			
