@@ -8,10 +8,12 @@ import java.util.Map;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -22,6 +24,7 @@ import com.koreait.dooboo.product.command.ProductCommand;
 import com.koreait.dooboo.product.dto.ProductDTO;
 import com.koreait.dooboo.product.dto.ProductimageDTO;
 import com.koreait.dooboo.util.FileUpload;
+import com.koreait.dooboo.vo.PageVO;
 
 @Controller
 public class ProductController {
@@ -75,7 +78,18 @@ public class ProductController {
 		resultMap.put("deleteYn", deleteYn);
 		return resultMap;
 	}
+	// 페이지에 상품 리스트를 뿌려주는 메서드
+	// page , city , region 이 넘어온다.
+	@PostMapping(value="p.selectProductList" , produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ResponseBody
+	public Map<String, Object> getProductList(Model model , @RequestBody PageVO pageVO){
+		System.out.println(pageVO.toString());
+		
+		model.addAttribute("pageVO", pageVO);
+		
+		return productCommand.selectProductList(model);
 
+	}
 
 	
 }
