@@ -143,21 +143,25 @@
 				region.on('change' , function(){
 					header_title.text(city.val() + ' ' + region.val() + ' 인기 매물');
 						
-					var col = columnMaker('/images/product/202107/20210721233336541.png',1,1,1,1,1);
-					$(col).appendTo('#productList');
+
 
 				})
+				
+				getProductList();
 
 			});
 
 	function getProductList() {
 		var obj;
 
-		$('#city').val() == null ? obj = {
-			page : page
+		$('#city').val() == '' ? obj = {
+			page : page ,
+			city : '' ,
+			region : ''
 		} : $('#region').val() == null ? obj = {
 			page : page,
-			city : $('#city').val()
+			city : $('#city').val() ,
+			region : ''
 		} : obj = {
 			page : page,
 			city : $('#city').val(),
@@ -172,13 +176,11 @@
 			contentType : 'application/json; charset=utf-8',
 			dataType : 'json',
 			success : function(resultMap) {
-
+				console.log(resultMap);
+				// resultMap.productList , resultMap.pageAndQueryVO
 				// list 를 받아온 후 , 메인페이지에 뿌려준다.
-				listMaker(resultMap.list);
-				// 하단에 페이징처리 
-				pageMaker(resultMap.pageDTO);
-				// 페이징에 링크처리
-				linkMaker();
+				listMaker(resultMap.productList);
+				
 			}
 		})
 	}
@@ -204,10 +206,10 @@
 			if(index % 3 == 0){
 				// 행
 				row = $('<div class="row row-cols-lg-3 row-cols-md-2 row-cols-lg-1 mt-5"></div>');
-				row.append(columnMaker(productVO.images.split(',')[0] , productVO.title , productVO.price , productVO.address , productVO.hit , productVO.likecount))
+				row.append(columnMaker(productVO.images.split(',')[0] , productVO.title , productVO.price , productVO.address , productVO.hit , productVO.likeCount))
 				.appendTo('#productList');
 			}else{
-				row.append(columnMaker(productVO.images.split(',')[0] , productVO.title , productVO.price , productVO.address , productVO.hit , productVO.likecount));
+				row.append(columnMaker(productVO.images.split(',')[0] , productVO.title , productVO.price , productVO.address , productVO.hit , productVO.likeCount));
 			}
 			
 		})
@@ -215,10 +217,11 @@
 	function columnMaker(image , title , price , address , hit , likecount ){
 		var col;
 		/* src="${STATIC_IMAGE_ROOT }${boardFile.filePath }" */
-		
+		// 임시로쓰는 image
+		image = 'http://placehold.it/150x150';
 		col = '<div class="col-lg-4 col-md-6 col-sm-12  mb-5">' +
 		'<div class="card border-0 mb-3 mx-auto" style="width: 18rem;">' +
-		  '<img src="${STATIC_IMAGE_ROOT }' + image + '" class="card-img-top" alt="...">' +
+		  '<img src="' + image + '" class="card-img-top" alt="...">' +
 		  	'<div class="card-body">' +
 		  		'<p class="card-text">' +
 		  			title + '<br>' + price + '<br>' + address + '<br> <span class="text-secondary fs-6">조회' + hit + ' | 좋아요' + likecount + '</span>' 
@@ -245,38 +248,7 @@
 		</div>
 	</div>
 	<div id="productList">
-		<div class="row row-cols-lg-3 row-cols-md-2 row-cols-lg-1 mt-5">
-			<div class="col-lg-4 col-md-6 col-sm-12  mb-5">
-				<div class="card border-0 mb-3 mx-auto" style="width: 18rem;">
-					<img src="resources/image/DoobooLogo.png" class="card-img-top" alt="...">
-					<div class="card-body">
-						<p class="card-text">
-							두부 한모 팝니다 <br> 10000 <br> 경기도 고양시 <br> <span class="text-secondary fs-6">조회1 | 좋아요12</span>
-						</p>
-					</div>
-				</div>
-			</div>
-			<div class="col-lg-4 col-md-6 col-sm-12  mb-5">
-				<div class="card border-0 mb-3 mx-auto" style="width: 18rem;">
-					<img src="resources/image/DoobooLogo.png" class="card-img-top" alt="...">
-					<div class="card-body">
-						<p class="card-text">
-							두부 한모 팝니다 <br> 10000 <br> 경기도 고양시 <br> <span class="text-secondary fs-6">조회1 | 좋아요12</span>
-						</p>
-					</div>
-				</div>
-			</div>
-			<div class="col-lg-4 col-md-6 col-sm-12  mb-5">
-				<div class="card border-0 mb-3 mx-auto" style="width: 18rem;">
-					<img src="resources/image/DoobooLogo.png" class="card-img-top" alt="...">
-					<div class="card-body">
-						<p class="card-text">
-							두부 한모 팝니다 <br> 10000 <br> 경기도 고양시 <br> <span class="text-secondary fs-6">조회1 | 좋아요12</span>
-						</p>
-					</div>
-				</div>
-			</div>
-		</div>
+
 	</div>
 </div>
 <jsp:include page="layout/footer.jsp"></jsp:include>

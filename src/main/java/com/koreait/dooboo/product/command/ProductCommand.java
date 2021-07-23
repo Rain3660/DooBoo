@@ -1,19 +1,23 @@
 package com.koreait.dooboo.product.command;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import com.koreait.dooboo.map.dto.MapDTO;
 import com.koreait.dooboo.product.dao.ProductDAO;
 import com.koreait.dooboo.product.dto.ProductDTO;
 import com.koreait.dooboo.product.dto.ProductimageDTO;
 import com.koreait.dooboo.util.FileUpload;
+import com.koreait.dooboo.util.PagingUtils;
 import com.koreait.dooboo.util.UtilsText;
+import com.koreait.dooboo.vo.PageVO;
 import com.koreait.dooboo.product.dto.ProductVO;
 
 
@@ -97,5 +101,25 @@ public class ProductCommand {
 		int likes = productDAO.getLikesCount(productNo);
 		return likes;
 	}*/
+	
+	public Map<String, Object> selectProductList(Model model){
+		
+		// 페이지 번호( default 1 ) , city region 을 가지고있습니다.
+		PageVO pageVO = (PageVO)model.asMap().get("pageVO");
+		int page = pageVO.getPage();
+		// 총 데이터 수
+		int totalRecord = productDAO.getTotalProductListCount();
+		
+		// 쿼리에 사용할 PageVO 
+		PageVO pageAndQueryVO = PagingUtils.getPage(totalRecord, page);
+		pageAndQueryVO.setCity(pageVO.getCity());
+		pageAndQueryVO.setRegion(pageVO.getRegion());
+		List<ProductVO> productList = productDAO.getProductList(pageAndQueryVO);
+		
+		Map<String, Object> resultMap = new HashMap<>();
+		resultMap.put("pageAndQueryVO", pageAndQueryVO);
+		resultMap.put("productList", productList);
+		return resultMap;
+	}
 }
 

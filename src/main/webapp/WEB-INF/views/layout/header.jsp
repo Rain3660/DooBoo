@@ -111,7 +111,7 @@
 				if(${loginUser eq null}){
 					openModal();
 				}else{
-					location.href = 'p.insertSellProduct';
+					location.href = 'p.insertSellProductPage';
 				}
 			})
 			$('#chat').on('click' , function(){
