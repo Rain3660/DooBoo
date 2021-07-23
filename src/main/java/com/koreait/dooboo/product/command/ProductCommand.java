@@ -1,5 +1,6 @@
 package com.koreait.dooboo.product.command;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.koreait.dooboo.map.dto.MapDTO;
 import com.koreait.dooboo.product.dao.ProductDAO;
@@ -74,16 +76,48 @@ public class ProductCommand {
 	}	
 	
 	
-	public Map<String, Object> InsertsellProduct(ProductDTO productDTO,long mapNo,HttpServletResponse response) {
+	public Map<String, Object> InsertsellProduct(ProductDTO productDTO,long mapNo,HttpServletResponse response,MultipartFile[] uploadFiles) {
+		
+		
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		MapDTO mapDTO = productDAO.getOneLocation(mapNo);
 		productDTO.setAddress(mapDTO.getLocation());
 		int result = productDAO.insertSellProduct(productDTO);
 		ProductDTO insertNowProductDTO = productDAO.getProductNo(productDTO.getRegNo());
 		if(result > 0 && insertNowProductDTO != null) {
+			long productNo = insertNowProductDTO.getProductNo();
 			resultMap.put("result", result);
-			resultMap.put("productNo", insertNowProductDTO.getProductNo());
+			resultMap.put("productNo", productNo);
+			
+			//파일업로드처리 
+			if(null != uploadFiles) {
+				ProductimageDTO productimageDTO = null;
+				for(MultipartFile multiPartFile : uploadFiles) {
+					FileUpload fileUpload = new FileUpload(multiPartFile);
+					try {
+						String fileName = UtilsText.concat(UtilsText.parseFileRename(), ".", fileUpload.getExt());
+						String filePath = UtilsText.getFilePath("product");
+						//파일생성
+						fileUpload.transferTo(filePath, fileName, true);
+						productimageDTO = new ProductimageDTO();
+						productimageDTO.setProductNo(productNo); 
+						productimageDTO.setFileName(fileUpload.getOrgFileName());
+						productimageDTO.setFilePath(filePath+	fileName);
+						productimageDTO.setRegNo(productDTO.getRegNo());
+						
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					if(null != productimageDTO) {
+						System.out.println(productimageDTO);
+						productDAO.insertProductImage(productimageDTO);
+					}
+					
+				}
+			}
 		}
+		
+		
 		return resultMap;
 	}
 	

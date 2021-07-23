@@ -5,7 +5,7 @@
 	<br>
 	<br>
 	
-	<form method="post" enctype="multipart/form-data" id="sellProductForm">
+	<form method="post" id="sellProductForm" name="sellProductForm" onsubmit="return false">
 		<div class="mb-3 text-right">
 			<h1 class="text-center">중고거래 등록하기</h1>
 		</div>
@@ -18,7 +18,7 @@
 		</div>
 		<div class="mb-3">
 			<label for="price" class="form-label">가격</label>
-			<input type="text" class="form-control" id="price" name="price" placeholder="$">
+			<input type="text" class="form-control" id="price" name="price" placeholder="$" >
 		</div>
 		<div class="mb-3">
 			<label for="content" class="form-label">내용</label>
@@ -29,13 +29,12 @@
 			<div id="fileArea">
 		    	<c:forEach var="boardFile" items="${board.productImageList}" varStatus="status">
 		    		<div id="div_file_${boardFile.fileNo}">
-		    			<img src="${STATIC_IMAGE_ROOT }${boardFile.filePath }" width="100px">
+		    			<img src="${STATIC_IMAGE_ROOT }${boardFile.filePath}" width="100px">
 						<span>${boardFile.fileName}<button type="button" class="btn-close file-close" onclick="removeFile(this)" data-file-seq="${boardFile.fileNo}" aria-label="Close"></button></span>						
 		    		</div>
 		    	</c:forEach>
 		    </div>
 		</div>
-		
 		
 		<c:if test="${mapSession1DTO ne null }">
 		            <input type="radio" class="btn-check"  name="btnradio" id="btnradio1" autocomplete="off">
@@ -58,11 +57,11 @@
 		     <label class="btn btn-outline-primary" id="btnradio2text" for="btnradio2" >미등록</label>
 		</c:if>
 		&nbsp;&nbsp; <input type="button" value="거래지역수정하기" id="update_location_btn" onclick="window.open('m.mapCheckLocationPage','지역변경','width=430,height=500,location=no,status=no,scrollbars=yes');">
-		
-		<input type="hidden" value="${loginUser.memberNo }" name="regNo">
-		<input type="hidden" name="mapNo" id="mapNo">	
+		<input type="hidden" value="1043" name="regNo">
+		<input type="hidden" name="mapNo" id="mapNo" value="58">
 	</form>
 </div>
+
 <script type="text/javascript">
 	$(document).ready(function(){
 		fn_IdChange();
@@ -70,21 +69,29 @@
 			if(!fn_IdChange()){
 				alert('지역이 인증되지 않았습니다. 다시확인해주세요');					
 			}else{
-				$.ajax({
-					url:'p.sellProduct',
-					data:$('#sellProductForm').serialize(),
-					type :'post',
-					datatype:'json',
-					success : function(resultMap){
-						if(resultMap.result > 0){
-							alert('등록되었습니다.');
-							location.href='p.selectOneProduct?productNo='+resultMap.productNo;
-						}else{
-							alert('등록에 실패하였습니다');
-							return false;
+				if(confirm('저장 하시겠습니까?')){
+					var formData = new FormData(document.sellProductForm);
+					$.ajax({
+						processData: false,
+			            contentType: false,				
+						url:'p.sellProduct',
+						data: formData,
+						type :'post',
+						datatype:'json',
+						success : function(resultMap){
+							if(resultMap.result > 0){
+								alert('등록되었습니다.');
+								location.href='p.selectOneProduct?productNo='+resultMap.productNo;
+							}else{
+								alert('등록에 실패하였습니다');
+								return false;
+							}
 						}
-					}
-				})
+						,error : function(res){
+							console.log(res,'error');
+						}
+					})
+				}
 			}
 		})
 	})

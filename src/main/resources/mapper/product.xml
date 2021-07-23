@@ -34,7 +34,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		, MOD_DATE
 	</sql>
 	
-	<resultMap id="productResult" type="com.koreait.dooboo.product.dto.ProductDTO">
+	<!-- <resultMap id="productResult" type="com.koreait.dooboo.product.dto.ProductDTO">
 	    <result property="rnum" column="RNUM"/>
 	    <result property="productNo" column="PRODUCT_NO"/>
 	    <result property="title" column="TITLE"/>
@@ -50,8 +50,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	    <result property="nickname" column="NICKNAME"/>
 	    <collection property="productImageList" column="PRODUCT_NO" javaType="java.util.ArrayList" ofType="com.koreait.dooboo.product.dto.ProductimageDTO" select="selectProductFileList"/>
 	</resultMap>
+	
+	<select id="selectProductFileList" resultType="com.koreait.dooboo.product.dto.ProductimageDTO">
+		SELECT * FROM PRODUCT_IMAGE WHERE PRODUCT_NO = #{productNo}
+	</select>	
 
-<select id="selectProductList" parameterType="com.koreait.dooboo.product.dto.ProductDTO" resultMap ="productResult">
+	<select id="getProductList" parameterType="com.koreait.dooboo.product.dto.ProductDTO" resultMap ="productResult">
 	
   	 	<include refid="startPaging"/>
 	  		SELECT
@@ -67,6 +71,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				, P.MOD_NO
 				, P.REG_DATE
 				, P.MOD_DATE
+				, M.NICKNAME
 			FROM
 				PRODUCT P
 			LEFT OUTER JOIN MEMBER M
@@ -75,8 +80,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			ORDER BY
 				P.PRODUCT_NO DESC,
 				P.REG_DATE DESC 
+				
+		<choose>
+			<when  test="city == ''">
+				WHERE B.RN BETWEEN #{beginRecord} AND #{endRecord}
+			</when >
+			<when  test="city != '' and region == ''">
+				WHERE B.RN BETWEEN #{beginRecord} AND #{endRecord} AND B.ADDRESS LIKE '%' || #{city}
+			</when >
+			<when  test="region == ''">
+				WHERE B.RN BETWEEN #{beginRecord} AND #{endRecord} AND B.ADDRESS LIKE '%' || #{city} || ' ' || #{region} || '%'
+			</when >
+		</choose>						
 		<include refid="endPaging"/>				
-	</select>
+	</select> -->
 	
 	<!--  @@@@@@@@@@@@@@@@@@ 업로드한 이미지 파일을 관리한다     보람씨 작업한것 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
 	<update id="updateHit" parameterType="long">
@@ -116,12 +133,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		)
 	</insert>
 	
-	
-	
-	<select id="selectProductFileList" resultType="com.koreait.dooboo.product.dto.ProductimageDTO">
-		SELECT * FROM PRODUCT_IMAGE WHERE PRODUCT_NO = #{productNo}
-	</select>
-	
 	<delete id="deleteFile" parameterType="com.koreait.dooboo.product.dto.ProductimageDTO">
 		DELETE FROM PRODUCT_IMAGE WHERE FILE_NO = #{fileNo} <!-- AND REG_NO = #{regNo} -->
 	</delete>	
@@ -130,8 +141,34 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 온석태 수정 -->
 		<!-- 판매상품을 등록한다 -->
 	<insert id="insertSellProduct">
-		INSERT INTO PRODUCT VALUES
-		(PRODUCT_SEQ.NEXTVAL,#{title},${price},0,#{content},1,#{address},#{regNo},null,SYSDATE,null)
+		INSERT INTO PRODUCT 
+		(
+			PRODUCT_NO
+			, TITLE
+			, PRICE
+			, HIT
+			, CONTENT
+			, STATUS
+			, ADDRESS
+			, REG_NO
+			, MOD_NO
+			, REG_DATE
+			, MOD_DATE
+			, DEL_YN		
+		)VALUES(
+			PRODUCT_SEQ.NEXTVAL
+			,#{title}
+			,${price}
+			,0
+			,#{content}
+			,1
+			,#{address}
+			,#{regNo}
+			,#{regNo}
+			,SYSDATE
+			,SYSDATE
+			,'N'		
+		)
 	</insert>
 	
 	<select id="getOneLocation" parameterType="long" resultType="com.koreait.dooboo.map.dto.MapDTO">
@@ -140,11 +177,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		 WHERE MAP_NO = #{mapNo}
 	</select>
 	<select id="getProductNo" resultType="com.koreait.dooboo.product.dto.ProductDTO">
-		SELECT A.RN ,A.PRODUCT_NO
+		<!-- SELECT A.RN ,A.PRODUCT_NO
 		  FROM (SELECT ROWNUM AS RN,PRODUCT_NO,REG_NO
 		  		  FROM PRODUCT
+		  		  WHERE REG_NO = #{regNo}
 		  		 ORDER BY REG_DATE DESC)A
-		 WHERE A.RN = 1 AND A.REG_NO = #{regNo}  		 
+		 WHERE A.RN = 1 -->
+		 SELECT max(product_no) as product_no FROM PRODUCT WHERE REG_NO = #{regNo}     		 
 	</select>
 	
 	
@@ -180,9 +219,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		LEFT OUTER JOIN (SELECT PRODUCT_NO , COUNT(REG_NO) AS LIKECOUNT FROM LIKEPRODUCT GROUP BY PRODUCT_NO) L ON P.PRODUCT_NO = L.PRODUCT_NO
 		WHERE P.STATUS = 1 AND P.DEL_YN = 'N' AND M.STATUS = 0
 	</select>
+	
 	<select id="getProductList" resultType="com.koreait.dooboo.vo.ProductVO">
 		SELECT 
-		B.NICKNAME AS NICKNAME , B.REG_NO AS REGNO 
+		  B.NICKNAME AS NICKNAME , B.REG_NO AS REGNO 
 		, B.CONTENT AS CONTENT , B.MOD_NO AS MODNO 
 		, B.MOD_DATE AS MODDATE , B.REG_DATE AS REGDATE 
 		, B.PRODUCT_NO AS PRODUCTNO , B.TITLE AS TITLE , B.ADDRESS AS ADDRESS 

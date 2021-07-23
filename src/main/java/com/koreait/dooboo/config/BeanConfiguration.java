@@ -12,7 +12,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
+import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 
 import com.koreait.dooboo.api.NaverLoginBO;
 import com.koreait.dooboo.map.command.UpdateLocationCommand;
@@ -85,7 +87,7 @@ public class BeanConfiguration {
 	public CommonsMultipartResolver multipartResolver() {
 		CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
 		multipartResolver.setDefaultEncoding("utf-8");
-		multipartResolver.setMaxUploadSize(1024 * 1024 * 10);
+		multipartResolver.setMaxUploadSize(1024 * 1024 * 50);
 		return multipartResolver;
 	}
 	@Bean

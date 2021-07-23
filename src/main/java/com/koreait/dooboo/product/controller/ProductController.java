@@ -39,9 +39,12 @@ public class ProductController {
 	
 	@PostMapping(value="p.sellProduct")
 	@ResponseBody
-	public Map<String, Object> InsertsellProduct(ProductDTO productDTO,@RequestParam("mapNo") long mapNo,HttpServletResponse response) {
-		return productCommand.InsertsellProduct(productDTO, mapNo,response);
-		
+	public Map<String, Object> InsertsellProduct(
+			ProductDTO productDTO
+			, @RequestParam("mapNo") long mapNo
+			, HttpServletResponse response
+			, @RequestParam("uploadFile") MultipartFile[] uploadFiles){
+		return productCommand.InsertsellProduct(productDTO, mapNo,response,uploadFiles);
 	}
 	
 	@GetMapping(value="p.selectOneProduct")
