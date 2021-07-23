@@ -17,7 +17,7 @@ public class ProductVO {
 	private int price;
 	private int hit;
 	private int likeCount;
-	private List<String> fileNames;
+	private String images;
 	
 	public ProductVO() {
 		// TODO Auto-generated constructor stub
@@ -119,12 +119,12 @@ public class ProductVO {
 		this.likeCount = likeCount;
 	}
 
-	public List<String> getFileNames() {
-		return fileNames;
+	public String getImages() {
+		return images;
 	}
 
-	public void setFileNames(List<String> fileNames) {
-		this.fileNames = fileNames;
+	public void setImages(String images) {
+		this.images = images;
 	}
 
 	@Override
@@ -132,8 +132,6 @@ public class ProductVO {
 		return "ProductVO [nickname=" + nickname + ", regNo=" + regNo + ", content=" + content + ", modNo=" + modNo
 				+ ", modDate=" + modDate + ", regDate=" + regDate + ", productNo=" + productNo + ", title=" + title
 				+ ", address=" + address + ", price=" + price + ", hit=" + hit + ", likeCount=" + likeCount
-				+ ", fileNames=" + fileNames + "]";
+				+ ", images=" + images + "]";
 	}
-	
-	
 }

@@ -142,6 +142,10 @@
 				
 				region.on('change' , function(){
 					header_title.text(city.val() + ' ' + region.val() + ' 인기 매물');
+						
+					var col = columnMaker('/images/product/202107/20210721233336541.png',1,1,1,1,1);
+					$(col).appendTo('#productList');
+
 				})
 
 			});
@@ -178,6 +182,49 @@
 			}
 		})
 	}
+	function listMaker(list){
+		
+		
+		
+		// 리스트를 뿌리기 전에 비워야한다.
+		$('#productList').empty();
+		
+		$.each(list , function(index , productVO){
+			// 이미지 파일의 배열
+			// var images = productVO.images.split(',');
+			// 대표이미지
+			// var mainImage = images[0];
+			
+			// 0 , 3 , 6 ... 번쨰 마다 행을 만들어야 합니다.
+			// 선언해둔다.
+			
+			var row;
+			// 행이 바뀌면 productList 안에 행부터 만들고 그 행 안에 col 을 만들어 준다.
+			// 행이 바뀌지 않는다면 그 !! 행 안에 col을 만들어야 한다.
+			if(index % 3 == 0){
+				// 행
+				row = $('<div class="row row-cols-lg-3 row-cols-md-2 row-cols-lg-1 mt-5"></div>');
+				row.append(columnMaker(productVO.images.split(',')[0] , productVO.title , productVO.price , productVO.address , productVO.hit , productVO.likecount))
+				.appendTo('#productList');
+			}else{
+				row.append(columnMaker(productVO.images.split(',')[0] , productVO.title , productVO.price , productVO.address , productVO.hit , productVO.likecount));
+			}
+			
+		})
+	}
+	function columnMaker(image , title , price , address , hit , likecount ){
+		var col;
+		/* src="${STATIC_IMAGE_ROOT }${boardFile.filePath }" */
+		
+		col = '<div class="col-lg-4 col-md-6 col-sm-12  mb-5">' +
+		'<div class="card border-0 mb-3 mx-auto" style="width: 18rem;">' +
+		  '<img src="${STATIC_IMAGE_ROOT }' + image + '" class="card-img-top" alt="...">' +
+		  	'<div class="card-body">' +
+		  		'<p class="card-text">' +
+		  			title + '<br>' + price + '<br>' + address + '<br> <span class="text-secondary fs-6">조회' + hit + ' | 좋아요' + likecount + '</span>' 
+		  			+ '</p></div></div></div>';
+		return col;
+	}
 </script>
 <div class="container" id="produtList">
 	<div class="row">
@@ -201,7 +248,7 @@
 		<div class="row row-cols-lg-3 row-cols-md-2 row-cols-lg-1 mt-5">
 			<div class="col-lg-4 col-md-6 col-sm-12  mb-5">
 				<div class="card border-0 mb-3 mx-auto" style="width: 18rem;">
-					<img src="<c:if test="${loginUser.apiNumber eq 1 || apiLogout eq 1}"></c:if>resources/image/DoobooLogo.png" class="card-img-top" alt="...">
+					<img src="resources/image/DoobooLogo.png" class="card-img-top" alt="...">
 					<div class="card-body">
 						<p class="card-text">
 							두부 한모 팝니다 <br> 10000 <br> 경기도 고양시 <br> <span class="text-secondary fs-6">조회1 | 좋아요12</span>
@@ -211,7 +258,7 @@
 			</div>
 			<div class="col-lg-4 col-md-6 col-sm-12  mb-5">
 				<div class="card border-0 mb-3 mx-auto" style="width: 18rem;">
-					<img src="<c:if test="${loginUser.apiNumber eq 1 || apiLogout eq 1}"></c:if>resources/image/DoobooLogo.png" class="card-img-top" alt="...">
+					<img src="resources/image/DoobooLogo.png" class="card-img-top" alt="...">
 					<div class="card-body">
 						<p class="card-text">
 							두부 한모 팝니다 <br> 10000 <br> 경기도 고양시 <br> <span class="text-secondary fs-6">조회1 | 좋아요12</span>
@@ -221,7 +268,7 @@
 			</div>
 			<div class="col-lg-4 col-md-6 col-sm-12  mb-5">
 				<div class="card border-0 mb-3 mx-auto" style="width: 18rem;">
-					<img src="<c:if test="${loginUser.apiNumber eq 1 || apiLogout eq 1}"></c:if>resources/image/DoobooLogo.png" class="card-img-top" alt="...">
+					<img src="resources/image/DoobooLogo.png" class="card-img-top" alt="...">
 					<div class="card-body">
 						<p class="card-text">
 							두부 한모 팝니다 <br> 10000 <br> 경기도 고양시 <br> <span class="text-secondary fs-6">조회1 | 좋아요12</span>
