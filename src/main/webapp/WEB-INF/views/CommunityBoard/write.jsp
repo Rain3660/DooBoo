@@ -7,27 +7,37 @@
 <!-- head -->
 	<jsp:include page="../layout/header.jsp"></jsp:include>
 <!-- End head -->
+<style>
+	a {text-decoration:none}
+	#frm {
+		margin: auto;
+		width: 50%;
+		height: 800px;
+		font-size: 20px;
+	}
+</style>
 <body>
 	<form id="frm" name="frm">
-      <h1>커뮤니티 게시판</h1>
-         <h3>게시글 작성하기</h3>
-           <div>
-              <label>Title</label>
-              <input type="text"  value="${communityboard.getTitle()}" name="title" placeholder="제목을 입력해주세요">
-           </div>
-           <div>
-           	 <label>Contents</label>
-           	 <textarea rows="3" name="content" placeholder="내용을 입력하세요"></textarea>
-           </div>     
-           <div style="text-align : center">
+      <h1 class="py-5 text-center">커뮤니티 게시판</h1>
+         <h3 class="py-3 text-center">게시글 작성하기</h3>
+
+				  <label for="title" class="form-label mt-3">Title</label>
+				  <input type="text" class="form-control" name="title" id="title"
+				  value="${communityboard.getTitle()}" placeholder="제목을 입력해주세요">
+
+				  <label for="contents" class="form-label mt-5">Contents</label>
+				  <textarea class="form-control" name="content" id="contents" rows="5" placeholder="내용을 입력하세요"></textarea>
+	
+           <div class="text-center mt-5">
              <c:if test="${empty board}"> 
-               <a href="javascript:boardSave();">저장하기</a>
+               	<button type="button" class="btn btn-outline-success" onclick="location.href='javascript:boardSave();'">저장하기</button>
 			 </c:if>
 			 <c:if test="${not empty board}"> 
-             	<a href="javascript:boardSave();">수정하기</a>
+			 	<button type="button" class="btn btn-outline-success" onclick="location.href='javascript:boardSave();'">수정하기</button>
 			 </c:if>
-          <button><a href="b.list">목록보기</a></button>
-     </form>  
+			 <button type="button" class="btn btn-outline-secondary" onclick="location.href='b.list'">목록보기</button>
+          </div>
+    </form>
 	<script>
 		function boardSave(){
 			
@@ -56,7 +66,9 @@
 			
 		}
 	</script>
-	   <!-- Footer -->
-        	<jsp:include page="../layout/footer.jsp"></jsp:include>
-       <!-- End Footer -->
+
+	<!-- Footer -->
+	   <jsp:include page="../layout/footer.jsp"></jsp:include>
+	<!-- End Footer -->
+</body>   
 </html>
