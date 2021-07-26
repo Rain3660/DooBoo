@@ -97,8 +97,8 @@ function fn_kakoShare(){
 		    imageUrl:
 				'${STATIC_IMAGE_ROOT}${productVO.images}',
 		    link: {
-		      mobileWebUrl: 'https://developers.kakao.com',
-		      androidExecutionParams: 'test',
+		      mobileWebUrl: 'http://sih8859.iptime.org:9099/p.selectOneProduct?productNo=${productVO.productNo}',
+		      webUrl :'http://sih8859.iptime.org:9099/p.selectOneProduct?productNo=${productVO.productNo}',
 		    },
 		  },
 		  social: {
@@ -107,15 +107,10 @@ function fn_kakoShare(){
 		  },
 		  buttons: [
 		    {
-		      title: '웹으로 이동',
+		      title: '상품보러가기',
 		      link: {
 		        mobileWebUrl: 'http://sih8859.iptime.org:9099/p.selectOneProduct?productNo=${productVO.productNo}',
-		      },
-		    },
-		    {
-		      title: '앱으로 이동',
-		      link: {
-		        mobileWebUrl: 'https://www.naver.com',
+		        webUrl :'http://sih8859.iptime.org:9099/p.selectOneProduct?productNo=${productVO.productNo}',
 		      },
 		    },
 		  ]
