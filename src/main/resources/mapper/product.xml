@@ -252,7 +252,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		FROM 
 		( SELECT ROWNUM AS RN , A.* FROM 
 		(SELECT 
-		M.NICKNAME , P.REG_NO , P.CONTENT , P.MOD_NO , P.MOD_DATE , P.REG_DATE , P.PRODUCT_NO , P.TITLE , P.ADDRESS , P.PRICE , P.HIT , NVL(I.IMAGES , '1,2,3') AS IMAGES , NVL(L.LIKECOUNT,0) AS LIKECOUNT
+		M.NICKNAME , P.REG_NO , P.CONTENT , P.MOD_NO , P.MOD_DATE , P.REG_DATE , P.PRODUCT_NO , P.TITLE , P.ADDRESS , P.PRICE , P.HIT , NVL(I.IMAGES , '') AS IMAGES , NVL(L.LIKECOUNT,0) AS LIKECOUNT
 		FROM MEMBER M INNER JOIN PRODUCT P ON M.MEMBER_NO = P.REG_NO	
 		LEFT OUTER JOIN (SELECT PRODUCT_NO AS PNO , LISTAGG(FILE_PATH , ',') WITHIN GROUP (ORDER BY PRODUCT_NO)IMAGES FROM PRODUCT_IMAGE  GROUP BY PRODUCT_NO) I ON P.PRODUCT_NO = I.PNO
 		LEFT OUTER JOIN (SELECT PRODUCT_NO , COUNT(REG_NO) AS LIKECOUNT FROM LIKEPRODUCT GROUP BY PRODUCT_NO) L ON P.PRODUCT_NO = L.PRODUCT_NO
@@ -262,10 +262,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				WHERE B.RN BETWEEN #{beginRecord} AND #{endRecord}
 			</when >
 			<when  test="city != '' and region == ''">
-				WHERE B.RN BETWEEN #{beginRecord} AND #{endRecord} AND B.ADDRESS LIKE '%' || #{city}
+				WHERE B.RN BETWEEN #{beginRecord} AND #{endRecord} AND B.ADDRESS LIKE '%' || #{city} || '%' 
 			</when >
-			<when  test="region == ''">
-				WHERE B.RN BETWEEN #{beginRecord} AND #{endRecord} AND B.ADDRESS LIKE '%' || #{city} || ' ' || #{region} || '%'
+			<when  test="region != ''">
+				WHERE B.RN BETWEEN #{beginRecord} AND #{endRecord} AND B.ADDRESS LIKE '%' || #{region} || '%'
 			</when >
 		</choose>		
 	</select>
