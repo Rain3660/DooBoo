@@ -187,7 +187,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	
-	<select id="selectOneProduct" parameterType="long" resultType="com.koreait.dooboo.product.dto.ProductVO">
+	<select id="selectOneProduct" parameterType="long" resultType="com.koreait.dooboo.vo.ProductVO">
      SELECT P.* 
       FROM( SELECT P.PRODUCT_NO ,P.CONTENT, P.TITLE , P.ADDRESS , P.PRICE , P.HIT , L.LIKECOUNT 
               FROM PRODUCT P 

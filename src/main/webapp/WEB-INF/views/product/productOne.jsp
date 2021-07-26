@@ -59,7 +59,7 @@
 	
 		<div class="col-md-6 mx-auto border-bottom"><!-- Like , hit -->
 			<div class="float-start">
-				<p class="text-secondary fs-6">${productVO.hit } | ${productVO.likecount }</p>
+				<p class="text-secondary fs-6">${productVO.hit } | ${productVO.likeCount }</p>
 			</div>
 			<div class="float-end">
 				<input type="button" class="btn btn-secondary" value="판매자와 채팅하기">  
