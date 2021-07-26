@@ -152,6 +152,13 @@
 				})
 				
 				getProductList();
+				
+				// 카드를 클릭했을 때 (상품 클릭) click 이벤트 추가
+				$('#productList').on('click' , '.card_link' , function(){
+					var productNo = $(this).data('productno');
+					alert(productNo);
+					/* 상품 번호에 해당하는 상품 상세 페이지로 이동 */
+				})
 
 			});
 
@@ -218,17 +225,17 @@
 			if(index % 3 == 0){
 				// 행
 				row = $('<div class="row row-cols-lg-3 row-cols-md-2 row-cols-lg-1 mt-5"></div>');
-				row.append(columnMaker(productVO.images , productVO.title , productVO.price , productVO.address , productVO.hit , productVO.likeCount))
+				row.append(columnMaker(productVO.images , productVO.title , productVO.price , productVO.address , productVO.hit , productVO.likeCount , productVO.productNo))
 				.appendTo('#productList');
 			}else{
-				$(columnMaker(productVO.images, productVO.title , productVO.price , productVO.address , productVO.hit , productVO.likeCount))
+				$(columnMaker(productVO.images, productVO.title , productVO.price , productVO.address , productVO.hit , productVO.likeCount , productVO.productNo))
 				.appendTo($('#productList > div:last-child'));
 			} 
 			
 			
 		})
 	}
-	function columnMaker(images , title , price , address , hit , likecount ){
+	function columnMaker(images , title , price , address , hit , likecount , productNo ){
 		var col;
 		/* src="${STATIC_IMAGE_ROOT }${boardFile.filePath }" */
 		// image 에는 , 를 포함한 문자열 또는 '' 빈 문자열이 넘어온다.
@@ -240,7 +247,7 @@
 		}
 		
 		col = '<div class="col-lg-4 col-md-6 col-sm-12  mb-5">' +
-		'<div class="card border-0 mb-3 mx-auto" style="width: 18rem;">' +
+		'<div class="card border-0 mb-3 mx-auto card_link" data-productNo="' + productNo + '" style="width: 18rem;">' +
 		  '<img src="' + image + '" class="card-img-top" alt="...">' +
 		  	'<div class="card-body">' +
 		  		'<p class="card-text">' +
