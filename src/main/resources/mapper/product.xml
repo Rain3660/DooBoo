@@ -279,4 +279,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</choose>				
 		) A ) B WHERE B.RN BETWEEN #{beginRecord} AND #{endRecord}	
 	</select>
+	<select id="getOneImage" parameterType="long" resultType="String">
+		SELECT A.FILE_PATH
+ 		  FROM(SELECT FILE_PATH,ROWNUM AS RN
+		  	     FROM PRODUCT_IMAGE
+         		WHERE PRODUCT_NO = #{productNo}
+		    	ORDER BY REG_DATE ASC)A
+ 		 WHERE A.RN = 1
+		 
+	</select>
 </mapper>

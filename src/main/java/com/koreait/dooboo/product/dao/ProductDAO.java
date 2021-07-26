@@ -23,6 +23,7 @@ public interface ProductDAO {
 	public ProductDTO getProductNo(long regNo);
 	public ProductVO selectOneProduct(long productNo);
 	public int getLikesCount(long productNo);
+	public String getOneImage(long productNo);
 	
 	// 총 데이터 수 반환
 	public int getTotalProductListCount(PageVO pageVO);
