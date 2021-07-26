@@ -3,6 +3,8 @@ package com.koreait.dooboo.vo;
 import java.sql.Date;
 import java.util.List;
 
+import com.koreait.dooboo.product.dto.ProductimageDTO;
+
 public class ProductVO {
 	
 	private String nickname;
@@ -18,9 +20,18 @@ public class ProductVO {
 	private int hit;
 	private int likeCount;
 	private String images;
+	private List<ProductimageDTO> productImageList;
 	
 	public ProductVO() {
 		// TODO Auto-generated constructor stub
+	}
+
+	public List<ProductimageDTO> getProductImageList() {
+		return productImageList;
+	}
+
+	public void setProductImageList(List<ProductimageDTO> productImageList) {
+		this.productImageList = productImageList;
 	}
 
 	public String getNickname() {

@@ -149,9 +149,8 @@
 			}
 			
 		}
-	
-		
- 		$("#fileAddBtn").off().on('click',function(e){
+
+		$("#fileAddBtn").off().on('click',function(e){
 			if($("#fileArea div[id^=div_file_]").length > 2){
 				alert("파일은 최대 3개 까지 등록 할 수 있습니다.");
 				return false;
