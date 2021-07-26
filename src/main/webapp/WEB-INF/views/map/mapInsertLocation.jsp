@@ -34,7 +34,7 @@
       
 
 </script>
-		<h3>거래할 지역을 선택해주새요</h3>
+		<button type="button" class="btn btn-outline-primary">거래할 지역을 선택해주새요</button>
 
 		
 			 <div class="btn-group">

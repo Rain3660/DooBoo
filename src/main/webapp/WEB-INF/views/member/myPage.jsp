@@ -117,7 +117,7 @@
 		            </c:if>
 		            <c:if test="${mapSession1DTO ne null}">
 		                 <input type="radio" class="btn-check"  name="btnradio" id="btnradio1" autocomplete="off" <c:if test="${mapSession1DTO.usenow eq 1}">checked</c:if>>
-		                 <label class="btn btn-outline-primary" id="btnradio1text" for="btnradio1">${mapSession1DTO.location}</label><br>
+		                 <label class="btn btn-outline-primary" id="btnradio1text" for="btnradio1">${mapSession1DTO.location}</label>
 						 
 						 <c:if test="${mapSession1DTO.usenow eq 1}"> 
 						 <img src="resources/image/두부1.png" width="45px" height="45px">거래 선호지역!
@@ -305,7 +305,9 @@
 			}else{
 				
            	 if($('#btnradio1').is(':checked')){
-            	 if(confirm('선호지역을"'+$('#btnradio1text').text()+'"으로 변경하시겠습니까?')){
+           		 if(${mapSession1DTO.usenow eq 1}){
+           			 alert('이미 선호지역으로 등록되어있습니다. 다른지역을 선택해주세요');
+           		 }else if(confirm('선호지역을"'+$('#btnradio1text').text()+'"으로 변경하시겠습니까?')){
             		 if('${mapSession1DTO.isChecked}'==0){
             			 alert('인증을 먼저 해주세요!');
             			 $('#btnradio2').prop('checked',true);
@@ -331,7 +333,9 @@
         		 
             }
         	 if($('#btnradio2').is(':checked')){
-            	 if(confirm('선호지역을"'+$('#btnradio2text').text()+'"으로 변경하시겠습니까?')){
+        		 if(${mapSession2DTO.usenow eq 1}){
+           			 alert('이미 선호지역으로 등록되어있습니다. 다른지역을 선택해주세요');
+           		 }else if(confirm('선호지역을"'+$('#btnradio2text').text()+'"으로 변경하시겠습니까?')){
             		 if('${mapSession2DTO.isChecked}'==0){
             			 alert('인증을 먼저 해주세요!');
             			 $('#btnradio1').prop('checked',true);
