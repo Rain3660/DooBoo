@@ -65,6 +65,9 @@
 				<input type="button" class="btn btn-secondary" value="판매자와 채팅하기">  
 			</div>
 		</div>
+		<button id="send-to-btn" onclick="fn_kakoShare()">
+				    공유하기
+		    </button>
 	</div>
 	<%-- <div>
     	<label>첨부파일</label>
@@ -79,4 +82,57 @@
 		<!-- 이 판매자가 팔고있는 상품 보여주면 될듯? -->
 	</div>
 </div>
+<<<<<<< Updated upstream
+=======
+<script>
+	$(document).ready(function(){
+		$('.carousel').carousel()
+	})
+</script>
+
+
+<!-- 카카오 공유하기 스크립트 -->
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+<script>
+            Kakao.init('5ed12af5dc728fe381f7652e93c6b462');
+            Kakao.isInitialized();
+</script>
+<script type="text/javascript">
+
+function fn_kakoShare(){
+	Kakao.Link.sendDefault({
+		  objectType: 'feed',
+		  content: {
+		    title: '${productVO.title}',
+		    description: '${productVO.content}',
+		    imageUrl:
+				'${STATIC_IMAGE_ROOT}${productVO.images}',
+		    link: {
+		      mobileWebUrl: 'https://developers.kakao.com',
+		      androidExecutionParams: 'test',
+		    },
+		  },
+		  social: {
+		    likeCount: ${productVO.likeCount},
+		    sharedCount: 30,
+		  },
+		  buttons: [
+		    {
+		      title: '웹으로 이동',
+		      link: {
+		        mobileWebUrl: 'http://localhost:9090/dooboo/p.selectOneProduct?productNo=${productVO.productNo}',
+		      },
+		    },
+		    {
+		      title: '앱으로 이동',
+		      link: {
+		        mobileWebUrl: 'https://www.naver.com',
+		      },
+		    },
+		  ]
+		});
+}
+
+</script>
+>>>>>>> Stashed changes
 <jsp:include page="../layout/footer.jsp"></jsp:include>

@@ -124,6 +124,7 @@ public class ProductCommand {
 	
 	public ProductVO selectOneProduct(long productNo){
 		 ProductVO productVO= productDAO.selectOneProduct(productNo);
+
 		return productVO;
 	}
 	
