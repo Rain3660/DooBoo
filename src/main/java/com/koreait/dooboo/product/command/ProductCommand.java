@@ -146,7 +146,7 @@ public class ProductCommand {
 		PageVO pageVO = (PageVO)model.asMap().get("pageVO");
 		int page = pageVO.getPage();
 		// 총 데이터 수
-		int totalRecord = productDAO.getTotalProductListCount();
+		int totalRecord = productDAO.getTotalProductListCount(pageVO);
 		
 		// 쿼리에 사용할 PageVO 
 		PageVO pageAndQueryVO = PagingUtils.getPage(totalRecord, page);

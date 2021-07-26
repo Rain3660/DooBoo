@@ -57,8 +57,10 @@
 		     <label class="btn btn-outline-primary" id="btnradio2text" for="btnradio2" >미등록</label>
 		</c:if>
 		&nbsp;&nbsp; <input type="button" value="거래지역수정하기" id="update_location_btn" onclick="window.open('m.mapCheckLocationPage','지역변경','width=430,height=500,location=no,status=no,scrollbars=yes');">
+
 		<input type="hidden" value="${loginUser.memberNo }" name="regNo">
 		<input type="hidden" name="mapNo" id="mapNo">
+
 	</form>
 </div>
 
@@ -149,9 +151,8 @@
 			}
 			
 		}
-	
-		
- 		$("#fileAddBtn").off().on('click',function(e){
+
+		$("#fileAddBtn").off().on('click',function(e){
 			if($("#fileArea div[id^=div_file_]").length > 2){
 				alert("파일은 최대 3개 까지 등록 할 수 있습니다.");
 				return false;

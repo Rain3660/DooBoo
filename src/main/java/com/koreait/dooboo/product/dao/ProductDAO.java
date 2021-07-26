@@ -26,7 +26,7 @@ public interface ProductDAO {
 	public String getOneImage(long productNo);
 	
 	// 총 데이터 수 반환
-	public int getTotalProductListCount();
+	public int getTotalProductListCount(PageVO pageVO);
 	// 검색 조건에 맞는 데이터 반환
 	public List<ProductVO> getProductList(PageVO pageVO);
 }
