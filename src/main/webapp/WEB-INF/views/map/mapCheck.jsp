@@ -49,6 +49,8 @@
             $('body').on('click','#location1_btn',function(){
                 if('${nowLocation}' != $('#btnradio1text').text()){
                 	alert('인증에 실패하였습니다');
+                }else if(${mapSession1DTO.isChecked eq 1}){
+                	alert('이미 인증이 완료된 지역입니다! 다른지역을 선택해주세요');
                 }else{
               	  $.ajax({
                       url:'m.checkLocation',
@@ -78,6 +80,8 @@
             $('body').on('click','#location2_btn',function(){
             	   if('${nowLocation}' != $('#btnradio2text').text()){
                    	alert('인증에 실패하였습니다');
+                   }else if(${mapSession2DTO.isChecked eq 1}){
+                   	alert('이미 인증이 완료된 지역입니다! 다른지역을 선택해주세요');
                    }else{
                  	  $.ajax({
                          url:'m.checkLocation',
@@ -112,7 +116,10 @@
                     		if($('#btnradio2text').text()==location){
                     			alert('이미 추가된 지역입니다 다른지역을 선택해주세요!');
                     			return;
-                    		}else{		
+                    		}else if(${mapSession2DTO.isChecked eq 0}){
+	                			 alert('최소 1개의 인증지역은 필수입니다 다른지역을 수정해주세요!');
+	                			 return false;
+	                		 }else{		
                         	$.ajax({
                         		url:'m.updateLocation',
                         		type : 'post',
@@ -131,10 +138,14 @@
                         	});
                     		}
                         }else{
+                        
                         if($('#btnradio1text').text()==location){
                         	alert('이미 추가된 지역입니다 다른지역을 선택해주세요!');
                 			return;
-                        }else{
+                        }else if(${mapSession1DTO.isChecked eq 0}){
+               			 alert('최소 1개의 인증지역은 필수입니다 다른지역을 수정해주세요!');
+            			 return false;
+            		 }else{
                   			$.ajax({
                         		url:'m.updateLocation',
                         		type : 'post',
@@ -230,7 +241,10 @@
 	                     return;
 	                 }else{
 	                	 if($('#btnradio1').is(':checked')){
-		                	 if(confirm('현재 선택한 지역은"'+$('#btnradio1text').text()+'"입니다 삭제하시겠습니까?')){
+	                		 if(${mapSession2DTO.isChecked eq 0}){
+	                			 alert('최소 1개의 인증지역은 필수입니다 다른지역을 수정해주세요!');
+	                			 return false;
+	                		 }else if(confirm('현재 선택한 지역은"'+$('#btnradio1text').text()+'"입니다 삭제하시겠습니까?')){
 		                			$.ajax({
 		                        		url:'m.deleteLocation',
 		                        		type : 'post',
@@ -249,7 +263,10 @@
 	                		 
 	 	               	 }
 	                	 if($('#btnradio2').is(':checked')){
-		                	 if(confirm('현재 선택한 지역은"'+$('#btnradio2text').text()+'"입니다 삭제하시겠습니까?')){
+	                		 if(${mapSession1DTO.isChecked eq 0}){
+	                			 alert('최소 1개의 인증지역은 필수입니다 다른지역을 수정해주세요!');
+	                			 return false;
+	                		 }else if(confirm('현재 선택한 지역은"'+$('#btnradio2text').text()+'"입니다 삭제하시겠습니까?')){
 		                		 $.ajax({
 		                        		url:'m.deleteLocation',
 		                        		type : 'post',
@@ -380,7 +397,7 @@
                                  </c:if>
 	            			}
 	            		},error(){
-			                alert('안들어옴');
+			                
 	                    }
 	            	});         		
             	}
@@ -394,20 +411,25 @@
     </script>
 <body>
 	<form id="f">
-        <div style="text-align: center; margin-top: 200px;">
+        <div style="text-align: center; margin-top: 34px;">
             <button type="button" class="btn btn-outline-success btn-lg">내 동내 인증하기</button><br>
           		 지역은 최소 1개이상 최대 2개이하 인증해야해요.
             
             <br>
+
 				<c:if test="${mapSession1DTO ne null }">
 		            <input type="radio" class="btn-check"  name="btnradio" id="btnradio1" autocomplete="off">
-		            <label class="btn btn-outline-primary" id="btnradio1text" for="btnradio1">${mapSession1DTO.location}</label>
-		            <c:if test="${mapSession1DTO.isChecked eq 1}">인증완료</c:if>				
-		            <c:if test="${mapSession1DTO.isChecked ne 1}">미인증</c:if>
+		            <label class="btn btn-outline-primary mt-3" id="btnradio1text" for="btnradio1">${mapSession1DTO.location}</label>
+		            <c:if test="${mapSession1DTO.isChecked eq 1}">
+		            	인증완료
+		            </c:if>				
+		            <c:if test="${mapSession1DTO.isChecked ne 1}">
+		            	미인증
+		            </c:if>
 				</c:if>
 				<c:if test="${mapSession1DTO eq null }">
 				<div class="btn-group">
-                <button type="button" class="btn btn-outline-primary" data-bs-toggle="dropdown" aria-expanded="false">
+                <button type="button" class="btn btn-outline-primary mt-3" data-bs-toggle="dropdown" aria-expanded="false">
                 	새로운 지역 선택하기
            		</button>
 	            <ul class="dropdown-menu">
@@ -443,13 +465,18 @@
 	                &nbsp;
 				<c:if test="${mapSession2DTO ne null }">
 	                <input type="radio" class="btn-check"  name="btnradio" id="btnradio2" autocomplete="off">
-	                <label class="btn btn-outline-primary" id="btnradio2text" for="btnradio2">${mapSession2DTO.location}</label>
-	                <c:if test="${mapSession2DTO.isChecked eq 1}">인증완료</c:if>				
-		            <c:if test="${mapSession2DTO.isChecked ne 1}">미인증</c:if>
+	                <label class="btn btn-outline-primary mt-3" id="btnradio2text" for="btnradio2">${mapSession2DTO.location}</label>
+	            
+					<c:if test="${mapSession2DTO.isChecked eq 1}">
+						인증완료						
+	                </c:if>				
+		            <c:if test="${mapSession2DTO.isChecked ne 1}">
+		            	미인증
+		            </c:if>       
 				</c:if>
 				<c:if test="${mapSession2DTO eq null }">
 				<div class="btn-group">
-                <button type="button" class="btn btn-outline-primary" data-bs-toggle="dropdown" aria-expanded="false">
+                <button type="button" class="btn btn-outline-primary mt-3" data-bs-toggle="dropdown" aria-expanded="false">
                 	새로운 지역 선택하기
            		</button>
 	            <ul class="dropdown-menu">
@@ -493,8 +520,8 @@
 	            <input type="hidden" value="${mapSession2DTO.mapNo}" name="mapNo" id="mapno2">
 	            <input type="hidden" value="${mapSession2DTO.location}" id="location2">  
 	            <input type="hidden" value="${loginUser.memberNo}" id="memberNo">              
-          	
-          	<input type="button" class="location_btn btn btn-outline-secondary" value="지역인증하기" id="location_btn">
+
+          	<input type="button" class="location_btn btn btn-outline-secondary mb-3 mt-3" value="지역인증하기" id="location_btn">
             
             <br>
 
@@ -544,7 +571,10 @@
     </form>
     
     <c:if test="${firstVisit eq 0}">
-    	<input type="button" value="저장하기" onclick = "reload()">
+
+	    <input type="button" class="btn btn-outline-secondary mt-3 text-center" value="저장하기" onclick="reload()">    
+
+    	
     </c:if>
     <script>
 		function reload(){
