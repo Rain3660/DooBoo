@@ -124,7 +124,9 @@ public class ProductCommand {
 	
 	public ProductVO selectOneProduct(long productNo){
 		 ProductVO productVO= productDAO.selectOneProduct(productNo);
-
+		 String image = productDAO.getOneImage(productNo);
+		 //이미지가 없을때 따로 
+		 productVO.setImages(image);
 		return productVO;
 	}
 	

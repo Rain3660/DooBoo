@@ -86,6 +86,8 @@
 </script>
 <script type="text/javascript">
 
+
+
 function fn_kakoShare(){
 	Kakao.Link.sendDefault({
 		  objectType: 'feed',
@@ -107,7 +109,7 @@ function fn_kakoShare(){
 		    {
 		      title: '웹으로 이동',
 		      link: {
-		        mobileWebUrl: 'http://localhost:9090/dooboo/p.selectOneProduct?productNo=${productVO.productNo}',
+		        mobileWebUrl: 'http://sih8859.iptime.org:9099/p.selectOneProduct?productNo=${productVO.productNo}',
 		      },
 		    },
 		    {
