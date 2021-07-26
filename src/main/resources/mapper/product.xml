@@ -277,6 +277,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				WHERE P.STATUS = 1 AND P.DEL_YN = 'N' AND M.STATUS = 0 AND P.ADDRESS LIKE '%' || #{region} || '%'
 			</when >
 		</choose>				
-		) A ) B WHERE B.RN BETWEEN #{beginRecord} AND #{endRecord}
+		) A ) B WHERE B.RN BETWEEN #{beginRecord} AND #{endRecord}	
 	</select>
 </mapper>
