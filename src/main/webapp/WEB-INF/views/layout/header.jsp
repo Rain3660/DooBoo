@@ -18,7 +18,11 @@
 
 <!-- FontAwesome -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" referrerpolicy="no-referrer" />
-
+<style type="text/css">
+	.card_link:hover{
+		cursor: pointer;
+	}
+</style>
 <!-- 이미지 루트 -->
 <c:set var="STATIC_IMAGE_ROOT" value="http://sih8859.iptime.org:8081/dooboo" scope="application"></c:set>
 </head>

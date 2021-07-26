@@ -239,7 +239,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		FROM MEMBER M INNER JOIN PRODUCT P ON M.MEMBER_NO = P.REG_NO
 		LEFT OUTER JOIN (SELECT PRODUCT_NO AS PNO , LISTAGG(FILE_PATH , ',') WITHIN GROUP (ORDER BY PRODUCT_NO)IMAGES FROM PRODUCT_IMAGE  GROUP BY PRODUCT_NO) I ON P.PRODUCT_NO = I.PNO
 		LEFT OUTER JOIN (SELECT PRODUCT_NO , COUNT(REG_NO) AS LIKECOUNT FROM LIKEPRODUCT GROUP BY PRODUCT_NO) L ON P.PRODUCT_NO = L.PRODUCT_NO
-		WHERE P.STATUS = 1 AND P.DEL_YN = 'N' AND M.STATUS = 0
+		<choose>
+			<when  test="city == ''">
+				WHERE P.STATUS = 1 AND P.DEL_YN = 'N' AND M.STATUS = 0
+			</when >
+			<when  test="city != '' and region == ''">
+				WHERE P.STATUS = 1 AND P.DEL_YN = 'N' AND M.STATUS = 0 AND P.ADDRESS LIKE '%' || #{city} || '%' 
+			</when >
+			<when  test="region != ''">
+				WHERE P.STATUS = 1 AND P.DEL_YN = 'N' AND M.STATUS = 0 AND P.ADDRESS LIKE '%' || #{region} || '%'
+			</when >
+		</choose>	
 	</select>
 	
 	<select id="getProductList" resultType="com.koreait.dooboo.vo.ProductVO">
@@ -256,17 +266,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		FROM MEMBER M INNER JOIN PRODUCT P ON M.MEMBER_NO = P.REG_NO	
 		LEFT OUTER JOIN (SELECT PRODUCT_NO AS PNO , LISTAGG(FILE_PATH , ',') WITHIN GROUP (ORDER BY PRODUCT_NO)IMAGES FROM PRODUCT_IMAGE  GROUP BY PRODUCT_NO) I ON P.PRODUCT_NO = I.PNO
 		LEFT OUTER JOIN (SELECT PRODUCT_NO , COUNT(REG_NO) AS LIKECOUNT FROM LIKEPRODUCT GROUP BY PRODUCT_NO) L ON P.PRODUCT_NO = L.PRODUCT_NO
-		WHERE P.STATUS = 1 AND P.DEL_YN = 'N' AND M.STATUS = 0) A ) B
 		<choose>
 			<when  test="city == ''">
-				WHERE B.RN BETWEEN #{beginRecord} AND #{endRecord}
+				WHERE P.STATUS = 1 AND P.DEL_YN = 'N' AND M.STATUS = 0
 			</when >
 			<when  test="city != '' and region == ''">
-				WHERE B.RN BETWEEN #{beginRecord} AND #{endRecord} AND B.ADDRESS LIKE '%' || #{city} || '%' 
+				WHERE P.STATUS = 1 AND P.DEL_YN = 'N' AND M.STATUS = 0 AND P.ADDRESS LIKE '%' || #{city} || '%' 
 			</when >
 			<when  test="region != ''">
-				WHERE B.RN BETWEEN #{beginRecord} AND #{endRecord} AND B.ADDRESS LIKE '%' || #{region} || '%'
-			</when>
-		</choose>		
+				WHERE P.STATUS = 1 AND P.DEL_YN = 'N' AND M.STATUS = 0 AND P.ADDRESS LIKE '%' || #{region} || '%'
+			</when >
+		</choose>				
+		) A ) B WHERE B.RN BETWEEN #{beginRecord} AND #{endRecord}	
+	</select>
+	<select id="getOneImage" parameterType="long" resultType="String">
+		SELECT A.FILE_PATH
+ 		  FROM(SELECT FILE_PATH,ROWNUM AS RN
+		  	     FROM PRODUCT_IMAGE
+         		WHERE PRODUCT_NO = #{productNo}
+		    	ORDER BY REG_DATE ASC)A
+ 		 WHERE A.RN = 1
+		 
 	</select>
 </mapper>

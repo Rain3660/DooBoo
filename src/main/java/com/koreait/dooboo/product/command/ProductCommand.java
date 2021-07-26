@@ -124,6 +124,9 @@ public class ProductCommand {
 	
 	public ProductVO selectOneProduct(long productNo){
 		 ProductVO productVO= productDAO.selectOneProduct(productNo);
+		 String image = productDAO.getOneImage(productNo);
+		 //이미지가 없을때 따로 
+		 productVO.setImages(image);
 		return productVO;
 	}
 	
@@ -143,7 +146,7 @@ public class ProductCommand {
 		PageVO pageVO = (PageVO)model.asMap().get("pageVO");
 		int page = pageVO.getPage();
 		// 총 데이터 수
-		int totalRecord = productDAO.getTotalProductListCount();
+		int totalRecord = productDAO.getTotalProductListCount(pageVO);
 		
 		// 쿼리에 사용할 PageVO 
 		PageVO pageAndQueryVO = PagingUtils.getPage(totalRecord, page);

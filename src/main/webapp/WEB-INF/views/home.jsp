@@ -139,19 +139,26 @@
 						region.append('<option value="' + item + '">' + item
 								+ '</option>');
 					})
-					// '시' 에 해당하는 물품 출력
+					// '시' 에 해당하는 물품 출력 , 페이지는 1로 초기화 해야 한다.
+					page = 1;
 					getProductList();
-					console.log("나옴1??");
 				})
 				
 				region.on('change' , function(){
 					header_title.text(city.val() + ' ' + region.val() + ' 인기 매물');
-					// '구' 에 해당하는 물품 출력
+					// '구' 에 해당하는 물품 출력 , 페이지는 1로 초기화 해야 한다.
+					page = 1;
 					getProductList();
-					console.log("나옴2??");
 				})
 				
 				getProductList();
+				
+				// 카드를 클릭했을 때 (상품 클릭) click 이벤트 추가
+				$('#productList').on('click' , '.card_link' , function(){
+					var productNo = $(this).data('productno');
+					alert(productNo);
+					/* 상품 번호에 해당하는 상품 상세 페이지로 이동 */
+				})
 
 			});
 
@@ -171,7 +178,7 @@
 			city : $('#city').val(),
 			region : $('#region').val()
 		}
-		console.log(obj);
+
 
 		$.ajax({
 			url : 'p.selectProductList',
@@ -180,10 +187,16 @@
 			contentType : 'application/json; charset=utf-8',
 			dataType : 'json',
 			success : function(resultMap) {
-				console.log(resultMap);
+
 				// resultMap.productList , resultMap.pageAndQueryVO
+				
 				// list 를 받아온 후 , 메인페이지에 뿌려준다.
 				listMaker(resultMap.productList);
+				
+				pageMaker(resultMap.pageAndQueryVO);
+				console.log(resultMap.pageAndQueryVO);
+				// 페이징에 링크처리
+				linkMaker();
 				
 			}
 		})
@@ -212,17 +225,17 @@
 			if(index % 3 == 0){
 				// 행
 				row = $('<div class="row row-cols-lg-3 row-cols-md-2 row-cols-lg-1 mt-5"></div>');
-				row.append(columnMaker(productVO.images , productVO.title , productVO.price , productVO.address , productVO.hit , productVO.likeCount))
+				row.append(columnMaker(productVO.images , productVO.title , productVO.price , productVO.address , productVO.hit , productVO.likeCount , productVO.productNo))
 				.appendTo('#productList');
 			}else{
-				$(columnMaker(productVO.images, productVO.title , productVO.price , productVO.address , productVO.hit , productVO.likeCount))
+				$(columnMaker(productVO.images, productVO.title , productVO.price , productVO.address , productVO.hit , productVO.likeCount , productVO.productNo))
 				.appendTo($('#productList > div:last-child'));
 			} 
 			
 			
 		})
 	}
-	function columnMaker(images , title , price , address , hit , likecount ){
+	function columnMaker(images , title , price , address , hit , likecount , productNo ){
 		var col;
 		/* src="${STATIC_IMAGE_ROOT }${boardFile.filePath }" */
 		// image 에는 , 를 포함한 문자열 또는 '' 빈 문자열이 넘어온다.
@@ -234,7 +247,7 @@
 		}
 		
 		col = '<div class="col-lg-4 col-md-6 col-sm-12  mb-5">' +
-		'<div class="card border-0 mb-3 mx-auto" style="width: 18rem;">' +
+		'<div class="card border-0 mb-3 mx-auto card_link" data-productNo="' + productNo + '" style="width: 18rem;">' +
 		  '<img src="' + image + '" class="card-img-top" alt="...">' +
 		  	'<div class="card-body">' +
 		  		'<p class="card-text">' +
@@ -242,6 +255,37 @@
 		  			+ '</p></div></div></div>';
 		return col;
 	}
+	
+	function pageMaker(pageAndQueryVO){
+		 $('#paging').empty();
+		 if(pageAndQueryVO.beginPage <= pageAndQueryVO.pagePerBlock){ // 이전이 없음
+			 $('#paging').append('<li class="page-item disabled"><a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a></li>');
+		 }else{
+			 $('#paging').append('<li class="page-item"><a class="page-link" href="#" tabindex="-1" aria-disabled="true" data-page="' + (pageAndQueryVO.beginPage - 1) + '">Previous</a></li>');
+		 }
+		 for(let p = pageAndQueryVO.beginPage ; p <= pageAndQueryVO.endPage ; p++){
+			 if(p == page){//현재 페이지에 배경색적용
+				 $('#paging').append('<li class="page-item active"><a class="page-link" href="#" data-page="' + p + '">' + p + '</a></li>');
+			 }else{
+				 $('#paging').append('<li class="page-item"><a class="page-link" href="#" data-page="' + p + '">' + p + '</a></li>');				 
+			 }
+		 }
+		 
+		if (pageAndQueryVO.endPage == pageAndQueryVO.totalPage) { // 마지막 블록
+			$('#paging').append('<li class="page-item disabled"><a class="page-link" href="#" tabindex="-1" aria-disabled="true">Next</a></li>');
+			} else {
+				$('#paging').append('<li class="page-item"><a class="page-link" href="#" tabindex="-1" aria-disabled="true" data-page="' + (pageAndQueryVO.endPage + 1) +'">Next</a></li>');
+			}
+		}
+	 function linkMaker(){
+		 //data-page속성 가진 a 태그들 
+		 $('#paging').on('click' , 'a[data-page]' , function(){
+			 // 페이지 변경해주고
+			 page = $(this).data('page');
+			 // ajax 로 list 호출
+			 getProductList();
+		 })
+	 }
 </script>
 <div class="container">
 	<div class="row">
@@ -264,5 +308,7 @@
 	<div id="productList">
 
 	</div>
+	<ul class="pagination justify-content-center" id="paging">
+	</ul>
 </div>
 <jsp:include page="layout/footer.jsp"></jsp:include>
