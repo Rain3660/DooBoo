@@ -67,6 +67,7 @@
 						header_title.text('중고거래 인기 매물');
 						region.empty();
 						region.attr('disabled', true); // disable 속성은 true > 비활성화
+						getProductList();
 						return;
 					}
 					// 경기도 같이 정확한 주소 선택한경우
@@ -138,13 +139,16 @@
 						region.append('<option value="' + item + '">' + item
 								+ '</option>');
 					})
+					// '시' 에 해당하는 물품 출력
+					getProductList();
+					console.log("나옴1??");
 				})
 				
 				region.on('change' , function(){
 					header_title.text(city.val() + ' ' + region.val() + ' 인기 매물');
-						
-
-
+					// '구' 에 해당하는 물품 출력
+					getProductList();
+					console.log("나옴2??");
 				})
 				
 				getProductList();
@@ -200,27 +204,35 @@
 			// 0 , 3 , 6 ... 번쨰 마다 행을 만들어야 합니다.
 			// 선언해둔다.
 			
+			
+			
 			var row;
 			// 행이 바뀌면 productList 안에 행부터 만들고 그 행 안에 col 을 만들어 준다.
 			// 행이 바뀌지 않는다면 그 !! 행 안에 col을 만들어야 한다.
-
 			if(index % 3 == 0){
 				// 행
 				row = $('<div class="row row-cols-lg-3 row-cols-md-2 row-cols-lg-1 mt-5"></div>');
-				row.append(columnMaker(productVO.images.split(',')[0] , productVO.title , productVO.price , productVO.address , productVO.hit , productVO.likeCount))
+				row.append(columnMaker(productVO.images , productVO.title , productVO.price , productVO.address , productVO.hit , productVO.likeCount))
 				.appendTo('#productList');
 			}else{
-				$(columnMaker(productVO.images.split(',')[0] , productVO.title , productVO.price , productVO.address , productVO.hit , productVO.likeCount))
+				$(columnMaker(productVO.images, productVO.title , productVO.price , productVO.address , productVO.hit , productVO.likeCount))
 				.appendTo($('#productList > div:last-child'));
-			}
+			} 
+			
 			
 		})
 	}
-	function columnMaker(image , title , price , address , hit , likecount ){
+	function columnMaker(images , title , price , address , hit , likecount ){
 		var col;
 		/* src="${STATIC_IMAGE_ROOT }${boardFile.filePath }" */
-		// 임시로쓰는 image
-		image = 'http://placehold.it/150x150';
+		// image 에는 , 를 포함한 문자열 또는 '' 빈 문자열이 넘어온다.
+		 	
+		if(images == null){ // 첨부한 사진이 없어서 빈 문자열이 넘어 올 때,
+			image = 'resources/image/noimage.png'; 
+		}else{ // 첨부한 사진이 있을 때는 제일 먼저 첨부한 사진을 보여준다.
+			image = '${STATIC_IMAGE_ROOT }' + images.split(',')[0];
+		}
+		
 		col = '<div class="col-lg-4 col-md-6 col-sm-12  mb-5">' +
 		'<div class="card border-0 mb-3 mx-auto" style="width: 18rem;">' +
 		  '<img src="' + image + '" class="card-img-top" alt="...">' +
