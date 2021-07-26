@@ -82,8 +82,6 @@
 		<!-- 이 판매자가 팔고있는 상품 보여주면 될듯? -->
 	</div>
 </div>
-<<<<<<< Updated upstream
-=======
 <script>
 	$(document).ready(function(){
 		$('.carousel').carousel()
@@ -134,5 +132,4 @@ function fn_kakoShare(){
 }
 
 </script>
->>>>>>> Stashed changes
 <jsp:include page="../layout/footer.jsp"></jsp:include>
