@@ -86,7 +86,6 @@ public class ProductController {
 	@PostMapping(value="p.selectProductList" , produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
 	public Map<String, Object> getProductList(Model model , @RequestBody PageVO pageVO){
-		System.out.println(pageVO.toString());
 		
 		model.addAttribute("pageVO", pageVO);
 		
