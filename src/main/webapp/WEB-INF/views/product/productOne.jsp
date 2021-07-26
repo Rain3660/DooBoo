@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<jsp:include page="../layout/header.jsp"></jsp:include>
+<%@include file="../layout/header.jsp" %>
+
 <div class="container">
 	<div class="row"> <!-- 상단에 상품 이미지 -->
 		<div id="carouselExampleIndicators" class="carousel slide col-md-6 carousel slide mx-auto" data-bs-ride="carousel">
@@ -9,15 +10,11 @@
 				<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
 			</div>
 			<div class="carousel-inner">
-				<div class="carousel-item active">
-					<img src="resources/image/DoobooLogo.png" class="d-block w-100" alt="...">
-				</div>
-				<div class="carousel-item">
-					<img src="resources/image/DoobooLogo.png" class="d-block w-100" alt="...">
-				</div>
-				<div class="carousel-item">
-					<img src="resources/image/DoobooLogo.png" class="d-block w-100" alt="...">
-				</div>
+				<c:forEach var="boardFile" items="${productVO.productImageList}" varStatus="status">
+					<div class="carousel-item <c:if test="${status.index eq 0 }">active</c:if>">
+						<img src="${STATIC_IMAGE_ROOT}${boardFile.filePath}" class="d-block w-100" alt="${boardFile.fileName}">
+					</div>
+    			</c:forEach>				
 			</div>
 			<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
 				<span class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="visually-hidden">Previous</span>
@@ -25,7 +22,7 @@
 			<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
 				<span class="carousel-control-next-icon" aria-hidden="true"></span> <span class="visually-hidden">Next</span>
 			</button>
-		</div>
+		</div>		
 	</div>
 	<div class="row">
 		<div class="col-md-6 mx-auto border-bottom">
@@ -66,17 +63,13 @@
 			</div>
 		</div>
 	</div>
-	<%-- <div>
-    	<label>첨부파일</label>
-    	<c:forEach var="boardFile" items="${board.productImageList}" varStatus="status">
-    		<div id="div_file_${boardFile.fileNo}">
-    			<img src="${STATIC_IMAGE_ROOT }${boardFile.filePath }" width="100px">
-				<span>${boardFile.fileName}<button type="button" class="btn-close file-close" onclick="removeFile(this)" data-file-seq="${boardFile.fileNo}" aria-label="Close"></button></span>						
-    		</div>
-    	</c:forEach>
-    </div> --%>
 	<div class="row">
 		<!-- 이 판매자가 팔고있는 상품 보여주면 될듯? -->
 	</div>
 </div>
+<script>
+	$(document).ready(function(){
+		$('.carousel').carousel()
+	})
+</script>
 <jsp:include page="../layout/footer.jsp"></jsp:include>
