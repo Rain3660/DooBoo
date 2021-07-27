@@ -22,7 +22,7 @@ public class NaverLoginBO {
 		//state: 애플리케이션이 생성한 상태 토큰
 		private final static String CLIENT_ID = "bUdtud5d5o9DxMbBRaMm";
 		private final static String CLIENT_SECRET = "L056DR2t_L";
-		private final static String REDIRECT_URI = "http://sih8859.iptime.org:9099/callback";
+		private final static String REDIRECT_URI = "http://localhost:9090/callback";
 		private final static String SESSION_STATE = "oauth_state";
 		//private final static String CLIENT_ID_MainServer = "o9M62kgkIWTPJxOzzBjn";
 		//private final static String CLIENT_SECRET_MainServer = "Swmr7eXqEg";
