@@ -20,13 +20,14 @@
 	<form id="frm" name="frm">
       <h1 class="py-5 text-center">커뮤니티 게시판</h1>
          <h3 class="py-3 text-center">게시글 작성하기</h3>
+			<input type="hidden" value="${loginUser.memberNo}" name="memberNo">
 
-				  <label for="title" class="form-label mt-3">Title</label>
-				  <input type="text" class="form-control" name="title" id="title"
-				  value="${communityboard.getTitle()}" placeholder="제목을 입력해주세요">
+    		<label for="title" class="form-label mt-3">Title</label>
+		    <input type="text" class="form-control" name="title" id="title"
+		    value="${communityboard.getTitle()}" placeholder="제목을 입력해주세요">
 
-				  <label for="contents" class="form-label mt-5">Contents</label>
-				  <textarea class="form-control" name="content" id="contents" rows="5" placeholder="내용을 입력하세요"></textarea>
+		    <label for="contents" class="form-label mt-5">Contents</label>
+		    <textarea class="form-control" name="content" id="contents" rows="5" placeholder="내용을 입력하세요"></textarea>
 	
            <div class="text-center mt-5">
              <c:if test="${empty board}"> 
