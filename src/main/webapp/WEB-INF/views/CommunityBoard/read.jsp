@@ -18,7 +18,7 @@
 			
 		}
 		.nickname {
-			height: 20px;
+			height: 30px;
 			padding: 5px;
 		}
 		.content {
@@ -53,7 +53,7 @@
 				    <h1 class="border-0 bg-light" name="title">${board.getTitle()}</h1>
 			    </div>
 			  	<div class="nickname">
-				    <p class="border-0 bg-light" name="nickname">${member.getNickname()}</p>
+				    <p class="border-0 bg-light" name="nickname">${board.getNickname()}&nbsp;님</p>
 			    </div>
 		    </div>
     		<div class="content">
