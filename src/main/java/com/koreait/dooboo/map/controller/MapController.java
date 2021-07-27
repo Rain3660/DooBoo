@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.koreait.dooboo.map.command.UpdateLocationCommand;
@@ -126,7 +127,12 @@ public class MapController {
 		return updateUseNowCommand.execute(sqlSession, model);
 	}
 
-
+	@GetMapping(value="m.dealLocationByMap")
+	public String dealLocationByMap(@RequestParam("location") String location,@RequestParam("image") String image,Model model) {
+		model.addAttribute("location",location);
+		model.addAttribute("image",image);
+		return"map/dealLocationByMap";
+	}
 	
 
 

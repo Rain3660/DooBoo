@@ -62,7 +62,7 @@
 				<p class="text-secondary fs-6">${productVO.hit } | ${productVO.likeCount }</p>
 			</div>
 			<div class="float-end">
-				<button id="send-to-btn" class="btn btn-secondary onclick="fn_kakoShare()">	
+				<button id="send-to-btn" class="btn btn-secondary" onclick="fn_kakoShare()">	
 					    공유하기
 			    </button>
 				<input type="button" class="btn btn-secondary" value="판매자와 채팅하기">  
@@ -80,6 +80,12 @@
 		
 	})
 </script>
+
+<button type="button" class="btn btn-success" onclick="window.open('m.dealLocationByMap?location=${productVO.address}&image=${productVO.images}','거래지역 근처 확인하기','width=432,height=355,location=no,status=no,scrollbars=yes');">거래지역 근처 확인하기</button>
+   
+
+
+
 <!-- 카카오 공유하기 스크립트 -->
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script>
