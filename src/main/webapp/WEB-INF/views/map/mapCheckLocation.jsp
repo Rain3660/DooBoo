@@ -96,8 +96,6 @@ function displayCenterInfo(result, status) {
 		data:'location='+result[0].region_1depth_name+' '+result[0].region_2depth_name+' '+result[0].region_3depth_name,
 		dataType : 'json',
 		success : function(resultMap){
-			alert(resultMap.result);
-			console.log(resultMap.result);
 			if(resultMap.result){
 				location.href='mapCheck';
 			}

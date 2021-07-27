@@ -22,11 +22,9 @@ public class NaverLoginBO {
 		//state: 애플리케이션이 생성한 상태 토큰
 		private final static String CLIENT_ID = "bUdtud5d5o9DxMbBRaMm";
 		private final static String CLIENT_SECRET = "L056DR2t_L";
-		private final static String REDIRECT_URI = "http://localhost:9090/callback";
+		//private final static String REDIRECT_URI = "http://localhost:9090/callback";
 		private final static String SESSION_STATE = "oauth_state";
-		//private final static String CLIENT_ID_MainServer = "o9M62kgkIWTPJxOzzBjn";
-		//private final static String CLIENT_SECRET_MainServer = "Swmr7eXqEg";
-		//private final static String REDIRECT_URI_MainServer = "hhttp://sih8859.iptime.org:9099/callback";
+		private final static String REDIRECT_URI_MainServer = "http://sih8859.iptime.org:9099/callback";
 		/* 프로필 조회 API URL */
 		private final static String PROFILE_API_URL = "https://openapi.naver.com/v1/nid/me";
 		/* 네이버 아이디로 인증 URL 생성 Method */
@@ -39,7 +37,7 @@ public class NaverLoginBO {
 		OAuth20Service oauthService = new ServiceBuilder()
 		.apiKey(CLIENT_ID)
 		.apiSecret(CLIENT_SECRET)
-		.callback(REDIRECT_URI)
+		.callback(REDIRECT_URI_MainServer)
 		.state(state) //앞서 생성한 난수값을 인증 URL생성시 사용함
 		.build(NaverLoginApi.instance());
 		return oauthService.getAuthorizationUrl();
@@ -52,7 +50,7 @@ public class NaverLoginBO {
 		OAuth20Service oauthService = new ServiceBuilder()
 		.apiKey(CLIENT_ID)
 		.apiSecret(CLIENT_SECRET)
-		.callback(REDIRECT_URI)
+		.callback(REDIRECT_URI_MainServer)
 		.state(state)
 		.build(NaverLoginApi.instance());
 		/* Scribe에서 제공하는 AccessToken 획득 기능으로 네아로 Access Token을 획득 */
@@ -78,7 +76,7 @@ public class NaverLoginBO {
 		OAuth20Service oauthService =new ServiceBuilder()
 		.apiKey(CLIENT_ID)
 		.apiSecret(CLIENT_SECRET)
-		.callback(REDIRECT_URI).build(NaverLoginApi.instance());
+		.callback(REDIRECT_URI_MainServer).build(NaverLoginApi.instance());
 		OAuthRequest request = new OAuthRequest(Verb.GET, PROFILE_API_URL, oauthService);
 		oauthService.signRequest(oauthToken, request);
 		Response response = request.send();
