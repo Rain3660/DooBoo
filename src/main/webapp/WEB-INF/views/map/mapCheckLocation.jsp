@@ -10,7 +10,7 @@
     </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c557d177c955a70039a29a85e997a6cd&libraries=services"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5ed12af5dc728fe381f7652e93c6b462&libraries=services"></script>
 <script>
 
 if (navigator.geolocation) {
