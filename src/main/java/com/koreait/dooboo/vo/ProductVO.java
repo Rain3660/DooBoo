@@ -21,7 +21,16 @@ public class ProductVO {
 	private int likeCount;
 	private String images;
 	private List<ProductimageDTO> productImageList;
+	private List<String> imageList;
 	
+	public List<String> getImageList() {
+		return imageList;
+	}
+
+	public void setImageList(List<String> imageList) {
+		this.imageList = imageList;
+	}
+
 	public ProductVO() {
 		// TODO Auto-generated constructor stub
 	}

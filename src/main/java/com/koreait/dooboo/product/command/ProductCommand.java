@@ -1,11 +1,14 @@
 package com.koreait.dooboo.product.command;
 
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.koreait.dooboo.map.dto.MapDTO;
+import com.koreait.dooboo.member.dto.MemberDTO;
 import com.koreait.dooboo.product.dao.ProductDAO;
 import com.koreait.dooboo.product.dto.ProductDTO;
 import com.koreait.dooboo.product.dto.ProductimageDTO;
@@ -158,6 +162,50 @@ public class ProductCommand {
 		resultMap.put("pageAndQueryVO", pageAndQueryVO);
 		resultMap.put("productList", productList);
 		return resultMap;
+	}
+	
+	public void selectProductDetailByProductNo(Model model) {
+		HttpServletRequest request = (HttpServletRequest)model.asMap().get("request");
+		
+		long productNo = Long.parseLong(request.getParameter("productNo"));
+		
+		
+		// 상품번호에 해당하는 상품
+		ProductVO productVO = productDAO.selectProductDetailByProductNo(productNo);
+		String strImages = productVO.getImages();
+		List<String> imageList = new ArrayList<>();
+		if(strImages != null) {
+			for (String image : strImages.split(",")) {
+
+				imageList.add(image);
+				
+			}
+		}
+		productVO.setImageList(imageList);
+		
+		// 그 상품을 판매자가 판매하고있는 최근 상품들
+		long regNo = productVO.getRegNo();
+		List<ProductVO> productList = productDAO.getProductListOfSeller(regNo);
+		
+		// 조회수 증가시키기
+		productDAO.updateHit(productNo);
+		
+		
+		model.addAttribute("productVO", productVO);
+		model.addAttribute("productList", productList);
+	}
+	public Map<String, Object> iLikeThisProduct(Model model){
+		Map<String, Object> resultMap = new HashMap<>();
+		
+		long productNo = (long)model.asMap().get("productNo");
+		HttpSession session = (HttpSession)model.asMap().get("session");
+		
+		long regNo = ((MemberDTO)session.getAttribute("loginUser")).getMemberNo();
+		
+		int result = productDAO.iLikeThisProduct(productNo, regNo);
+		resultMap.put("result", result);
+		return resultMap;
+		
 	}
 }
 

@@ -156,8 +156,10 @@
 				// 카드를 클릭했을 때 (상품 클릭) click 이벤트 추가
 				$('#productList').on('click' , '.card_link' , function(){
 					var productNo = $(this).data('productno');
-					alert(productNo);
+					
 					/* 상품 번호에 해당하는 상품 상세 페이지로 이동 */
+					location.href = 'p.selectOneProduct?productNo=' + productNo;
+					
 				})
 
 			});
@@ -247,7 +249,7 @@
 		}
 		
 		col = '<div class="col-lg-4 col-md-6 col-sm-12  mb-5">' +
-		'<div class="card border-0 mb-3 mx-auto card_link" data-productNo="' + productNo + '" style="width: 18rem;">' +
+		'<div class="card border-0 mb-3 mx-auto card_link" data-productno="' + productNo + '" style="width: 18rem;">' +
 		  '<img src="' + image + '" class="card-img-top" alt="...">' +
 		  	'<div class="card-body">' +
 		  		'<p class="card-text">' +

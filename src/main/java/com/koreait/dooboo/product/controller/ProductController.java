@@ -5,7 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -48,8 +50,9 @@ public class ProductController {
 	}
 	
 	@GetMapping(value="p.selectOneProduct")
-	public String selectOneProduct(Model model,@RequestParam("productNo") long productNo) {
-		model.addAttribute("productVO",productCommand.selectOneProduct(productNo));
+	public String selectOneProduct(Model model , HttpServletRequest request) {
+		model.addAttribute("request", request);
+		productCommand.selectProductDetailByProductNo(model);
 		return "product/productOne";
 	}
 	
@@ -91,6 +94,13 @@ public class ProductController {
 		
 		return productCommand.selectProductList(model);
 
+	}
+	@PostMapping(value="p.iLikeThisProduct" , produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ResponseBody
+	public Map<String , Object> iLikeThisProduct(HttpSession session , @RequestParam("productNo") long productNo , Model model){
+		model.addAttribute("session", session);
+		model.addAttribute("productNo", productNo);		
+		return productCommand.iLikeThisProduct(model);
 	}
 
 	
