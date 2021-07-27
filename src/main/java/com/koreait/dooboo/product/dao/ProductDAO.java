@@ -29,4 +29,13 @@ public interface ProductDAO {
 	public int getTotalProductListCount(PageVO pageVO);
 	// 검색 조건에 맞는 데이터 반환
 	public List<ProductVO> getProductList(PageVO pageVO);
+	// 상품번호에 해당하는 상품 상세정보 가져오기
+	public ProductVO selectProductDetailByProductNo(long productNo);
+	// 상품번호에 해당하는 상품 상세정보를 볼 때 그 판매자가 팔고 있는 상품 리스트 보기 , 등록순으로 4개만 가져오도록 한다.
+	public List<ProductVO> getProductListOfSeller(long regNo);
+	// 조회수 증가시키기
+	public int updateHit(long productNo);
+	// 좋아요
+	public int iLikeThisProduct(long productNo , long regNo);
+	
 }

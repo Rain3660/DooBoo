@@ -3,7 +3,7 @@ package com.koreait.dooboo.member.dto;
 import java.sql.Date;
 
 public class MemberDTO {
-
+	
 	// 회원번호 1000부터 시작
 	private long memberNo;
 
@@ -53,6 +53,7 @@ public class MemberDTO {
 	
 	public MemberDTO() {
 		// TODO Auto-generated constructor stub
+		
 	}
 
 
