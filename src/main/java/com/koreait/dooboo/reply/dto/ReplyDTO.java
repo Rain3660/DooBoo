@@ -4,96 +4,114 @@ import java.sql.Date;
 
 // Community Board 의 댓글게시판
 public class ReplyDTO {
+	
+	private int page ;
+	// 댓글번호 1부터 시작
+	private long replyNo;
 
-    // 댓글번호 1부터 시작
-    private long replyNo;
 
-    // 원글번호 
-    private long boardNo;
+	public int getPage() {
+		return page;
+	}
 
-    // 댓글내용 
-    private String replyContent;
+	public void setPage(int page) {
+		this.page = page;
+	}
 
-    // 삭제여부 
-    private String delYn;
+	// 원글번호
+	private long boardNo;
 
-    // 작성자 
-    private long regNo;
+	// 댓글내용
+	private String replyContent;
 
-    // 수정자 
-    private long modNo;
+	// 삭제여부
+	private String delYn;
 
-    // 등록날짜 
-    private Date regDate;
+	// 작성자
+	private long regNo;
 
-    // 수정날짜 
-    private Date modDate;
-    
-    public ReplyDTO() {
+	// 수정자
+	private long modNo;
+
+	// 등록날짜
+	private Date regDate;
+
+	// 수정날짜
+	private Date modDate;
+
+	public ReplyDTO() {
 		// TODO Auto-generated constructor stub
 	}
-    public long getReplyNo() {
-        return replyNo;
-    }
 
-    public void setReplyNo(long replyNo) {
-        this.replyNo = replyNo;
-    }
+	public long getReplyNo() {
+		return replyNo;
+	}
 
-    public long getBoardNo() {
-        return boardNo;
-    }
+	public void setReplyNo(long replyNo) {
+		this.replyNo = replyNo;
+	}
 
-    public void setBoardNo(long boardNo) {
-        this.boardNo = boardNo;
-    }
+	public long getBoardNo() {
+		return boardNo;
+	}
 
-    public String getReplyContent() {
-        return replyContent;
-    }
+	public void setBoardNo(long boardNo) {
+		this.boardNo = boardNo;
+	}
 
-    public void setReplyContent(String replyContent) {
-        this.replyContent = replyContent;
-    }
+	public String getReplyContent() {
+		return replyContent;
+	}
 
-    public String getDelYn() {
-        return delYn;
-    }
+	public void setReplyContent(String replyContent) {
+		this.replyContent = replyContent;
+	}
 
-    public void setDelYn(String delYn) {
-        this.delYn = delYn;
-    }
+	public String getDelYn() {
+		return delYn;
+	}
 
-    public long getRegNo() {
-        return regNo;
-    }
+	public void setDelYn(String delYn) {
+		this.delYn = delYn;
+	}
 
-    public void setRegNo(long regNo) {
-        this.regNo = regNo;
-    }
+	public long getRegNo() {
+		return regNo;
+	}
 
-    public long getModNo() {
-        return modNo;
-    }
+	public void setRegNo(long regNo) {
+		this.regNo = regNo;
+	}
 
-    public void setModNo(long modNo) {
-        this.modNo = modNo;
-    }
+	public long getModNo() {
+		return modNo;
+	}
 
-    public Date getRegDate() {
-        return regDate;
-    }
+	public void setModNo(long modNo) {
+		this.modNo = modNo;
+	}
 
-    public void setRegDate(Date regDate) {
-        this.regDate = regDate;
-    }
+	public Date getRegDate() {
+		return regDate;
+	}
 
-    public Date getModDate() {
-        return modDate;
-    }
+	public void setRegDate(Date regDate) {
+		this.regDate = regDate;
+	}
 
-    public void setModDate(Date modDate) {
-        this.modDate = modDate;
-    }
+	public Date getModDate() {
+		return modDate;
+	}
+
+	public void setModDate(Date modDate) {
+		this.modDate = modDate;
+	}
+
+	@Override
+	public String toString() {
+		return "ReplyDTO [replyNo=" + replyNo + ", boardNo=" + boardNo + ", replyContent=" + replyContent + ", delYn="
+				+ delYn + ", regNo=" + regNo + ", modNo=" + modNo + ", regDate=" + regDate + ", modDate=" + modDate
+				+ "]";
+	}
 
 }
