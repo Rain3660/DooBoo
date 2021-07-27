@@ -34,67 +34,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		, MOD_DATE
 	</sql>
 	
-	<!-- <resultMap id="productResult" type="com.koreait.dooboo.product.dto.ProductDTO">
-	    <result property="rnum" column="RNUM"/>
-	    <result property="productNo" column="PRODUCT_NO"/>
-	    <result property="title" column="TITLE"/>
-	    <result property="price" column="PRICE"/>
-	    <result property="hit" column="HIT"/>
-	    <result property="content" column="CONTENT"/>
-	    <result property="status" column="STATUS"/>
-	    <result property="address" column="ADDRESS"/>
-	    <result property="regNo" column="REG_NO"/>
-	    <result property="modNo" column="MOD_NO"/>
-	    <result property="regDate" column="REG_DATE"/>
-	    <result property="modDate" column="MOD_DATE"/>
-	    <result property="nickname" column="NICKNAME"/>
-	    <collection property="productImageList" column="PRODUCT_NO" javaType="java.util.ArrayList" ofType="com.koreait.dooboo.product.dto.ProductimageDTO" select="selectProductFileList"/>
-	</resultMap>
-	
-	<select id="selectProductFileList" resultType="com.koreait.dooboo.product.dto.ProductimageDTO">
-		SELECT * FROM PRODUCT_IMAGE WHERE PRODUCT_NO = #{productNo}
-	</select>	
-
-	<select id="getProductList" parameterType="com.koreait.dooboo.product.dto.ProductDTO" resultMap ="productResult">
-	
-  	 	<include refid="startPaging"/>
-	  		SELECT
-	  			 ROWNUM
-				, P.PRODUCT_NO
-				, P.TITLE
-				, P.PRICE
-				, P.HIT
-				, P.CONTENT
-				, P.STATUS
-				, P.ADDRESS
-				, P.REG_NO
-				, P.MOD_NO
-				, P.REG_DATE
-				, P.MOD_DATE
-				, M.NICKNAME
-			FROM
-				PRODUCT P
-			LEFT OUTER JOIN MEMBER M
-            ON REG_NO = M.MEMBER_NO
-			WHERE DEL_YN = 'N'
-			ORDER BY
-				P.PRODUCT_NO DESC,
-				P.REG_DATE DESC 
-				
-		<choose>
-			<when  test="city == ''">
-				WHERE B.RN BETWEEN #{beginRecord} AND #{endRecord}
-			</when >
-			<when  test="city != '' and region == ''">
-				WHERE B.RN BETWEEN #{beginRecord} AND #{endRecord} AND B.ADDRESS LIKE '%' || #{city}
-			</when >
-			<when  test="region == ''">
-				WHERE B.RN BETWEEN #{beginRecord} AND #{endRecord} AND B.ADDRESS LIKE '%' || #{city} || ' ' || #{region} || '%'
-			</when >
-		</choose>						
-		<include refid="endPaging"/>				
-	</select> -->
-	
 	<!--  @@@@@@@@@@@@@@@@@@ 업로드한 이미지 파일을 관리한다     보람씨 작업한것 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
 	<update id="updateHit" parameterType="long">
 		UPDATE
