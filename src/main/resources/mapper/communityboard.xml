@@ -156,7 +156,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 					 </if>
 					<if test="searchType == 'content' ">
 					 	AND CONTENT like '%'|| #{searchKeyword} ||'%'
-					 </if>
+					</if>
 				</if>
 			</if>
 	</select>

@@ -39,7 +39,7 @@
 			<div class="collapse navbar-collapse" id="navbarText">
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 					<li class="nav-item"><a class="nav-link" aria-current="page" href="#" id="product_btn">상품</a></li>
-					<li class="nav-item"><a class="nav-link" href="b.list">자유게시판</a></li>
+					<li class="nav-item"><a class="nav-link" href="#" id="communityBoard_btn">자유게시판</a></li>
 					<li class="nav-item"><a class="nav-link" href="#">New</a></li>
 					<li class="nav-item"><a class="nav-link" href="#">Popular</a></li>
 					<li class="nav-item"><a class="nav-link" href="#" id="insertProduct_btn">상품등록</a></li>
@@ -109,6 +109,13 @@
 					openModal();
 				}else{
 					location.href = 'm.myPage';
+				}
+			})
+			$('#communityBoard_btn').on('click' , function(){
+				if(${loginUser eq null}){
+					openModal();
+				}else{
+					location.href = 'b.list';
 				}
 			})
 			$('#insertProduct_btn').on('click' , function(){
