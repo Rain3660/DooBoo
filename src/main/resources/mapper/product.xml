@@ -38,6 +38,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		, MOD_DATE
 	</sql>
 
+
 	<!-- <resultMap id="productResult" type="com.koreait.dooboo.product.dto.ProductDTO"> 
 		<result property="rnum" column="RNUM"/> <result property="productNo" column="PRODUCT_NO"/> 
 		<result property="title" column="TITLE"/> <result property="price" column="PRICE"/> 
@@ -64,6 +65,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</select> -->
 
 	<!-- @@@@@@@@@@@@@@@@@@ 업로드한 이미지 파일을 관리한다 보람씨 작업한것 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+
+	
+	<!--  @@@@@@@@@@@@@@@@@@ 업로드한 이미지 파일을 관리한다     보람씨 작업한것 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
+
 	<update id="updateHit" parameterType="long">
 		UPDATE
 		PRODUCT

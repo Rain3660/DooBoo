@@ -27,6 +27,9 @@ public class CommunityBoardDTO extends ListPagingDTO{
 
     // 조회수 
     private int hit;
+    
+   // 회원번호 1000부터 시작
+ 	private long memberNo;
 
     // 등록자 
     private int regNo;
@@ -97,7 +100,17 @@ public class CommunityBoardDTO extends ListPagingDTO{
         this.hit = hit;
     }
 
-    public int getRegNo() {
+    public long getMemberNo() {
+		return memberNo;
+	}
+
+
+	public void setMemberNo(long memberNo) {
+		this.memberNo = memberNo;
+	}
+
+
+	public int getRegNo() {
         return regNo;
     }
 

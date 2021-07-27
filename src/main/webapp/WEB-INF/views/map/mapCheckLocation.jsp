@@ -9,6 +9,12 @@
         <input type="hidden" id="centerAddr">
     </div>
 </div>
+<body>
+	<form method="post" id="f">
+		<input type="hidden" id="location" name="location">
+	</form>
+</body>
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5ed12af5dc728fe381f7652e93c6b462&libraries=services"></script>
 <script>
@@ -90,9 +96,13 @@ function displayCenterInfo(result, status) {
 		data:'location='+result[0].region_1depth_name+' '+result[0].region_2depth_name+' '+result[0].region_3depth_name,
 		dataType : 'json',
 		success : function(resultMap){
+			alert(resultMap.result);
+			console.log(resultMap.result);
 			if(resultMap.result){
 				location.href='mapCheck';
 			}
+		},error(){
+			alert('에러뜸');
 		}
 		
 	})  
@@ -114,8 +124,5 @@ function displayCenterInfo(result, status) {
     }
 
 </script>
-<form method="post" id="f">
-	<input type="hidden" id="location" name="location">
-</form>
 
 <jsp:include page="../layout/footer.jsp"></jsp:include>
