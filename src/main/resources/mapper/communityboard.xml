@@ -32,25 +32,30 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 </sql>
 	
 	<insert id="insertBoard" parameterType="com.koreait.dooboo.communityboard.dto.CommunityBoardDTO">
-	INSERT INTO COMMUNITYBOARD (
-					  BOARD_NO
-					, TITLE
-					, CONTENT
-					, HIT
-					, REG_NO
-					, MOD_NO
-					, REG_DATE
-					, MOD_DATE
+		INSERT  
+		INTO COMMUNITYBOARD (
+						  BOARD_NO
+						, TITLE
+						, CONTENT
+						, HIT
+						, NICKNAME
+						, REG_NO
+						, MOD_NO
+						, REG_DATE
+						, MOD_DATE
 		) VALUES (
-			  COMMUNITYBOARD_SEQ.NEXTVAL
-			, #{title}
-			, #{content}
-			, 0
-			, #{regNo}
-			, #{modNo}
-			, SYSDATE
-			, SYSDATE
+				  COMMUNITYBOARD_SEQ.NEXTVAL
+				, #{title}
+				, #{content}
+				, 0
+			    , (SELECT NICKNAME FROM MEMBER WHERE MEMBER_NO = #{memberNo})
+			    , #{memberNo}
+			    , #{memberNo}
+				, SYSDATE
+				, SYSDATE
 		)
+		
+
 	</insert>
 
 	<select id="selectBoardDetail" parameterType="long" resultType="com.koreait.dooboo.communityboard.dto.CommunityBoardDTO">
