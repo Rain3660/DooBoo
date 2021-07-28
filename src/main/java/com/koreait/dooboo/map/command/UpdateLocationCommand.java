@@ -36,9 +36,6 @@ public class UpdateLocationCommand {
 		mapDTO.setMapNo(mapNo); //어떤 map의 업데이트인지 알기위해 필요한 map기본키
 		int result = mapDAO.updateLocation(mapDTO); // location의 업데이트를 진행한다.
 		int usenowCount = mapDAO.didntUseNowYet(mapSessionDTO.getMemberNo());
-		System.out.println(mapSessionDTO.getMemberNo());
-		System.out.println(usenowCount);
-		System.out.println("dkdkdk");
 		if(location.length() > 5) {//location이 5이상이라는것은 현재주소를 가져와 인증까지 완료 해야한다는 뜻
 			location = GetMidLocation.getMidLocation(location);
 			if(result > 0 && usenowCount > 0) {
