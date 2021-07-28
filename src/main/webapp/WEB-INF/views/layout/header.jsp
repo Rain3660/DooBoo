@@ -19,14 +19,14 @@
 <!-- FontAwesome -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" referrerpolicy="no-referrer" />
 <style type="text/css">
-	.card_link:hover{
-		cursor: pointer;
-	}
+.card_link:hover {
+	cursor: pointer;
+}
 </style>
 <!-- 이미지 루트 -->
 <c:set var="STATIC_IMAGE_ROOT" value="http://sih8859.iptime.org:8081/dooboo" scope="application"></c:set>
 </head>
-<body style="font-family: 'Sunflower', sans-serif; " class=bg-light  >
+<body style="font-family: 'Sunflower', sans-serif;" class=bg-light>
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
 		<div class="container-fluid">
 			<a class="navbar-brand" href='<c:url value="/"></c:url>'>
@@ -39,7 +39,7 @@
 			<div class="collapse navbar-collapse" id="navbarText">
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
-					<li class="nav-item"><a class="nav-link" aria-current="page" href="#" id="product_btn">상품입니다</a></li>
+					<li class="nav-item"><a class="nav-link" aria-current="page" href="#" id="product_btn">상품</a></li>
 					<li class="nav-item"><a class="nav-link" href="b.list">자유게시판</a></li>
 					<li class="nav-item"><a class="nav-link" href="#">New</a></li>
 					<li class="nav-item"><a class="nav-link" href="#">Popular</a></li>
@@ -54,34 +54,22 @@
 				</ul>
 				<ul class="navbar-nav float-end">
 					<c:if test="${empty loginUser }">
-						<li class="">
-							<a class="btn" href="m.joinPage">회원가입</a>
-						</li>
+						<li class=""><a class="btn" href="m.joinPage">회원가입</a></li>
 					</c:if>
 					<c:if test="${not empty loginUser }">
-						<li class="">
-							<a class="btn" href="#">${loginUser.nickname } 님 환영합니다 !</a>
-						</li>
+						<li class=""><a class="btn" href="#">${loginUser.nickname } 님 환영합니다 !</a></li>
 					</c:if>
 					<c:if test="${empty loginUser }">
-						<li>
-							<a class="btn" href="m.loginPage">로그인</a>
-						</li>						
+						<li><a class="btn" href="m.loginPage">로그인</a></li>
 					</c:if>
 					<c:if test="${not empty loginUser }">
-						<li>
-							<c:if test="${apiNumber eq 2 }">
-							<a class="btn" href="kakaoLogout" id="logout">로그아웃</a>
-							</c:if>
-							<c:if test="${apiNumber ne 2 }">
-							<a class="btn" href="m.logout" id="logout">로그아웃</a>
-							</c:if>
-						</li>						
+						<li><c:if test="${apiNumber eq 2 }">
+								<a class="btn" href="kakaoLogout" id="logout">로그아웃</a>
+							</c:if> <c:if test="${apiNumber ne 2 }">
+								<a class="btn" href="m.logout" id="logout">로그아웃</a>
+							</c:if></li>
 					</c:if>
-					<li class="login_menu">
-					<a href="#" id="mypage" class="btn">
-						마이페이지</a>
-					</li>
+					<li class="login_menu"><a href="#" id="mypage" class="btn"> 마이페이지</a></li>
 				</ul>
 			</div>
 		</div>

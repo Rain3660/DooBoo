@@ -2,6 +2,7 @@ package com.koreait.dooboo.member.command;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -114,7 +115,10 @@ public class LoginCommand implements MemberCommand {
 						view="m.mapCheckLocationPage";
 					}
 				}		
+				
 				session.setAttribute("loginUser", loginUser);
+				// 최근 본 게시물의 번호를 저장할 arrayList
+				session.setAttribute("recentlyViewProductNo", new ArrayList<Long>());
 				out.println("<script>");
 				out.println("confirm('"+message+"')");
 				out.println("location.href='"+view+"'");

@@ -230,7 +230,7 @@
 			// 행이 바뀌지 않는다면 그 !! 행 안에 col을 만들어야 한다.
 			if(index % 3 == 0){
 				// 행
-				row = $('<div class="row row-cols-lg-3 row-cols-md-2 row-cols-lg-1 mt-5"></div>');
+				row = $('<div class="row row-cols-lg-3 row-cols-md-2 mt-5"></div>');
 				row.append(columnMaker(productVO.images , productVO.title , productVO.price , productVO.address , productVO.hit , productVO.likeCount , productVO.productNo))
 				.appendTo('#productList');
 			}else{
@@ -254,7 +254,7 @@
 		
 		col = '<div class="col-lg-4 col-md-6 col-sm-12  mb-5">' +
 		'<div class="card border-0 mb-3 mx-auto card_link" data-productno="' + productNo + '" style="width: 18rem;">' +
-		  '<img src="' + image + '" class="card-img-top" alt="...">' +
+		  '<img src="' + image + '" class="card-img-top" alt="..." style="height: 192px;">' +
 		  	'<div class="card-body">' +
 		  		'<p class="card-text">' +
 		  			title + '<br>' + price + '<br>' + address + '<br> <span class="text-secondary fs-6">조회' + hit + ' | 좋아요' + likecount + '</span>' 

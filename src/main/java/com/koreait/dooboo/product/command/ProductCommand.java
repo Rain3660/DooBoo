@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -172,7 +173,17 @@ public class ProductCommand {
 		long memberNo = loginUser.getMemberNo();
 		long productNo = Long.parseLong(request.getParameter("productNo"));
 		
+		List<Long> recentlyViewProductNo = (ArrayList<Long>)session.getAttribute("recentlyViewProductNo");
 		
+		if(recentlyViewProductNo.size() <= 4) {
+			if(!recentlyViewProductNo.contains(productNo)) { // 이미 최근본 목록에 없다면 리스트에 추가
+				recentlyViewProductNo.add(productNo);				
+			}
+		}else {
+			recentlyViewProductNo.remove(0);
+			recentlyViewProductNo.add(productNo);
+		}
+		/*System.out.println(recentlyViewProductNo.toString());*/
 		// 상품번호에 해당하는 상품
 		ProductVO productVO = productDAO.selectProductDetailByProductNo(productNo);
 		String strImages = productVO.getImages();
@@ -184,6 +195,7 @@ public class ProductCommand {
 				
 			}
 		}
+		
 		productVO.setImageList(imageList);
 		
 		// 그 상품을 판매자가 판매하고있는 최근 상품들
@@ -207,6 +219,7 @@ public class ProductCommand {
 		
 		// 판매자의 판매물품을 저장한다.
 		model.addAttribute("productList", productList);
+		model.addAttribute("productListSize", productList.size());
 	}
 	public Map<String, Object> iLikeThisProduct(Model model){
 		Map<String, Object> resultMap = new HashMap<>();

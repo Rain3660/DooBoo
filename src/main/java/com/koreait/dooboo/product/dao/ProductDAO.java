@@ -42,5 +42,9 @@ public interface ProductDAO {
 	public int iDontLikeThisProduct(LikeProductDTO likeProductDTO);
 	// 좋아요 여부 판단 0 : 좋아요 안함 , 1 : 좋아요 함
 	public int likeOrDislike(long memberNo , long productNo);
+	// 좋아요 누른 상품 가져오기 4개 ㅠ
+	public List<ProductVO> selectMyFavoriteProductList(long memberNo);
+	// 내가 현재 판매중인 상품 가져오기 4개
+	public List<ProductVO> selectMyOnSaleProductList(long memberNo);
 	
 }
