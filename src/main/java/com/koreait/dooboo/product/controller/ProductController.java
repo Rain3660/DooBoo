@@ -22,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.koreait.dooboo.communityboard.dto.CommunityBoardDTO;
+import com.koreait.dooboo.likeproduct.dto.LikeProductDTO;
 import com.koreait.dooboo.product.command.ProductCommand;
 import com.koreait.dooboo.product.dto.ProductDTO;
 import com.koreait.dooboo.product.dto.ProductimageDTO;
@@ -97,10 +98,15 @@ public class ProductController {
 	}
 	@PostMapping(value="p.iLikeThisProduct" , produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
-	public Map<String , Object> iLikeThisProduct(HttpSession session , @RequestParam("productNo") long productNo , Model model){
-		model.addAttribute("session", session);
-		model.addAttribute("productNo", productNo);		
+	public Map<String , Object> iLikeThisProduct(@RequestBody LikeProductDTO likeProductDTO, Model model){
+		model.addAttribute("likeProductDTO", likeProductDTO);		
 		return productCommand.iLikeThisProduct(model);
+	}
+	@PostMapping(value="p.iDontLikeThisProduct" , produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ResponseBody
+	public Map<String , Object> iDontLikeThisProduct(@RequestBody LikeProductDTO likeProductDTO, Model model){
+		model.addAttribute("likeProductDTO", likeProductDTO);		
+		return productCommand.iDontLikeThisProduct(model);
 	}
 
 	

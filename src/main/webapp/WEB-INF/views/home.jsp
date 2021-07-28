@@ -158,7 +158,11 @@
 					var productNo = $(this).data('productno');
 					
 					/* 상품 번호에 해당하는 상품 상세 페이지로 이동 */
-					location.href = 'p.selectOneProduct?productNo=' + productNo;
+					if(${loginUser eq null}){
+						openModal();
+					}else{
+						location.href = 'p.selectOneProduct?productNo=' + productNo;
+					}
 					
 				})
 
