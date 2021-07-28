@@ -2,6 +2,7 @@ package com.koreait.dooboo.product.dao;
 
 import java.util.List;
 
+import com.koreait.dooboo.likeproduct.dto.LikeProductDTO;
 import com.koreait.dooboo.map.dto.MapDTO;
 import com.koreait.dooboo.product.dto.ProductDTO;
 import com.koreait.dooboo.product.dto.ProductimageDTO;
@@ -36,6 +37,10 @@ public interface ProductDAO {
 	// 조회수 증가시키기
 	public int updateHit(long productNo);
 	// 좋아요
-	public int iLikeThisProduct(long productNo , long regNo);
+	public int iLikeThisProduct(LikeProductDTO likeProductDTO);
+	// 좋아요 취소
+	public int iDontLikeThisProduct(LikeProductDTO likeProductDTO);
+	// 좋아요 여부 판단 0 : 좋아요 안함 , 1 : 좋아요 함
+	public int likeOrDislike(long memberNo , long productNo);
 	
 }
