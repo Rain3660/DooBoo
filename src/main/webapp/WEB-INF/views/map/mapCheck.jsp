@@ -60,10 +60,10 @@
                       success : function(resultMap){
                           if(resultMap.result > 0){
                               alert('인증되었습니다');
-                             <c:if test="${firstVisit eq 1}">
+                             <c:if test="${mapSession1DTO.isChecked eq 0 && mapSession2DTO.isChecked eq 0}">
                           	window.location.assign('index');
                           	</c:if>
-                          	 <c:if test="${firstVisit eq 0}">
+                          	 <c:if test="${mapSession1DTO.isChecked eq 1 || mapSession2DTO.isChecked eq 1}">
                          	window.location.assign('mapCheck');
                          	</c:if>
                           }else{
@@ -91,10 +91,10 @@
                          success : function(resultMap){
                              if(resultMap.result > 0){
                                  alert('인증되었습니다');
-                                 <c:if test="${firstVisit eq 1}">
+                                 <c:if test="${mapSession1DTO.isChecked eq 0 && mapSession2DTO.isChecked eq 0}">
                              	window.location.assign('index');
                              	</c:if>
-                             	 <c:if test="${firstVisit eq 0}">
+                             	 <c:if test="${mapSession1DTO.isChecked eq 1 || mapSession2DTO.isChecked eq 1}">
                              	window.location.assign('mapCheck');
                              	</c:if>
                              }
@@ -191,10 +191,10 @@
 	                                success : function(resultMap){
 	                                    if(resultMap.result > 0){
 	                                        alert('인증되었습니다');
-	                                        <c:if test="${firstVisit eq 1}">
+	                                        <c:if test="${mapSession1DTO.isChecked eq 0 && mapSession2DTO.isChecked eq 0}">
 	                                    	window.location.assign('index');
 	                                    	</c:if>
-	                                        <c:if test="${firstVisit eq 0}">
+	                                        <c:if test="${mapSession1DTO.isChecked eq 1 || mapSession2DTO.isChecked eq 1}">
 	                                    	window.location.assign('mapCheck');
 	                                    	</c:if>
 	                                    }
@@ -216,10 +216,10 @@
 		                                success : function(resultMap){
 		                                    if(resultMap.result > 0){
 		                                        alert('인증되었습니다');
-		                                        <c:if test="${firstVisit eq 1}">
+		                                        <c:if test="${mapSession1DTO.isChecked eq 0 && mapSession2DTO.isChecked eq 0}">
 		                                    	window.location.assign('index');
 		                                    	</c:if>
-		                                    	 <c:if test="${firstVisit eq 0}">
+		                                    	 <c:if test="${mapSession1DTO.isChecked eq 1 || mapSession2DTO.isChecked eq 1}">
 			                                    	window.location.assign('mapCheck');
 			                                    </c:if>
 		                                    }
@@ -357,10 +357,10 @@
 	            		success : function(resultMap){
 	            			if(resultMap.result > 0){
 	            				 alert('추가되었습니다');
-                                 <c:if test="${firstVisit eq 1}">
+                                 <c:if test="${mapSession1DTO.isChecked eq 0 && mapSession2DTO.isChecked eq 0}">
                              		window.location.assign('index');
                              	 </c:if>
-                             	 <c:if test="${firstVisit eq 0}">
+                             	 <c:if test="${mapSession1DTO.isChecked eq 1 || mapSession2DTO.isChecked eq 1}">
                                  	window.location.assign('mapCheck');
                                  </c:if>
 	            			}
@@ -389,10 +389,10 @@
 	            		success : function(resultMap){
 	            			if(resultMap.result > 0){
 	            				 alert('추가되었습니다');
-                                 <c:if test="${firstVisit eq 1}">
+                                 <c:if test="${mapSession1DTO.isChecked eq 0 && mapSession2DTO.isChecked eq 0}">
                              		window.location.assign('index');
                              	 </c:if>
-                             	 <c:if test="${firstVisit eq 0}">
+                             	 <c:if test="${mapSession1DTO.isChecked eq 1 || mapSession2DTO.isChecked eq 1}">
                                  	window.location.assign('mapCheck');
                                  </c:if>
 	            			}
@@ -584,7 +584,7 @@
         </div>
     </form>
     
-    <c:if test="${firstVisit eq 0}">
+    <c:if test="${mapSession1DTO.isChecked eq 1 || mapSession2DTO.isChecked eq 1}">
     <div class="container">
 		<div class="row justify-content-center">			
 		    	<input type="button" class="col-4 btn btn-outline-secondary mx-auto mt-3" value="저장하기" onclick="reload()">
