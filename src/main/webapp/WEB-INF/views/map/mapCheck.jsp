@@ -116,7 +116,7 @@
                     		if($('#btnradio2text').text()==location){
                     			alert('이미 추가된 지역입니다 다른지역을 선택해주세요!');
                     			return;
-                    		}else if(${mapSession2DTO.isChecked eq 0}){
+                    		}else if(${mapSession2DTO.isChecked eq 0 && mapSession1DTO.isChecked eq 1}){
 	                			 alert('최소 1개의 인증지역은 필수입니다 다른지역을 수정해주세요!');
 	                			 return false;
 	                		 }else{		
@@ -142,7 +142,7 @@
                         if($('#btnradio1text').text()==location){
                         	alert('이미 추가된 지역입니다 다른지역을 선택해주세요!');
                 			return;
-                        }else if(${mapSession1DTO.isChecked eq 0}){
+                        }else if(${mapSession1DTO.isChecked eq 0 && mapSession2DTO.isChecked eq 1}){
                			 alert('최소 1개의 인증지역은 필수입니다 다른지역을 수정해주세요!');
             			 return false;
             		 }else{
