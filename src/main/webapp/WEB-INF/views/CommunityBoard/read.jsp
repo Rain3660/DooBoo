@@ -168,12 +168,18 @@
 		button {
 			margin-top: 20px;
 		}
-			#paging {
+		#paging {
 			width: 50%; 
 			margin: 0 auto;
 			display: flex;
 			justify-content: space-between;
 			text-align: center;
+		}
+		table {
+			width:70%;
+			margin-left:auto;
+			margin-right:auto;
+			margin-top: 20px;
 		}
 		#paging div {
 			width: 40px;
@@ -227,41 +233,42 @@
 			<button type="button" class="btn btn-outline-secondary btn-lg" onclick="location.href='b.list;'">목록보기</button>
 		</div>
 	</div>
-
-
-			<div>
-        <table style="border: solid 1px;width : 1000px;">
-        	  <thead>
-                 <tr>
-		            <td>글번호</td>
-		             <td>작성자</td>
-		             <td>내용</td>
-		             <td>수정자</td>
-		            <td>관리</td>
-                </tr>
-          		</thead>
-				<tbody id="replyList">
-				
-				</tbody>
-				<tfoot>
-					<tr>
-						<td colspan="6">
-							<div id="paging"></div>
-						</td>
-					</tr>
-				</tfoot>
-        	</table>
-     		<c:if test="${ not empty loginUser}">
-     		<form id="f"  method="post" action="b.insertReply">
-      			<input type="hidden"  name="memberNo" value="${loginUser.memberNo }">
-      			<input type="hidden" name="boardNo"  value="${board.boardNo }">
-      			<input type="text" name="content" required>
-                 <button>댓글입력</button>
-               
-		    </form>
-		      </c:if>
-		      	<c:if test="${ empty loginUser}"><input type="text" name="content"  value="댓글입력을 위해 로그인" readonly></c:if>
- 		</div>
+	<table class="border text-center">
+		<thead>
+			<tr>
+				<td>글번호</td>
+			    <td>작성자</td>
+			    <td>내용</td>
+			    <td>수정자</td>
+			    <td>관리</td>
+	        </tr>
+	    </thead>
+		<tbody id="replyList">
+					
+		</tbody>
+		<tfoot>
+			<tr>
+				<td colspan="6">
+					<div id="paging"></div>
+				</td>
+			</tr>
+		</tfoot>
+	</table>
+	<div style="width:70%; margin: auto; margin-top: 20px;">
+	    <c:if test="${ not empty loginUser}">
+	    	<form id="f"  method="post" action="b.insertReply">
+	    		<input type="hidden"  name="memberNo" value="${loginUser.memberNo }">
+	      		<input type="hidden" name="boardNo"  value="${board.boardNo }">
+	      		<input class="form-control" name="content" id="contents" placeholder="댓글을 입력하세요" required></input>
+	            <button class="btn btn-outline-secondary" style="float:right">댓글입력</button>
+	        </form>
+		</c:if>
+		<c:if test="${ empty loginUser}">
+			<div class="d-grid gap-2 col-3 mx-auto">
+					<button type="button" class="btn btn-outline-secondary btn-lg" onclick="location.href='m.loginPage;'">댓글입력을 위해 로그인</button>
+			</div>
+		</c:if>
+	</div>
      <!-- Footer -->
         <jsp:include page="../layout/footer.jsp"></jsp:include>
      <!-- End Footer -->
