@@ -1,9 +1,11 @@
 package com.koreait.dooboo.map.controller;
 
 import java.util.Map;
+import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -115,7 +117,10 @@ public class MapController {
 		return "map/mapInsertLocation";
 	}
 	@GetMapping(value= "m.mapCheckLocationPage")
-	public String checkLocationPage() {
+	public String checkLocationPage(HttpServletRequest request,Model model,HttpSession session) {
+		Optional<String> opt = Optional.ofNullable(request.getParameter("firstVisit"));
+		int firstVisit = Integer.parseInt(opt.orElse("0"));
+		session.setAttribute("firstVisit",firstVisit);
 		return "map/mapCheckLocation";
 	}
 

@@ -71,7 +71,7 @@ public class LoginCommand implements MemberCommand {
 						mapSessionDTO = new MapSessionDTO(mapNo, loginUserNo, midLocation, map.getLocationOrd(), result , 0);
 						session.setAttribute("mapSession"+mapSessionDTO.getLocationOrd()+"DTO", mapSessionDTO);
 						message = "지역인증을 하셔야 원활한 거래가 가능합니다 인증하시겠습니까?(확인시 인증페이지로 이동)";
-						view="m.mapChecklocationPage";
+						view="m.mapCheckLocationPage?firstVisit=1";
 					}
 				}else {
 					MapDTO map1 = list.get(0);
@@ -111,13 +111,13 @@ public class LoginCommand implements MemberCommand {
 						view="index";
 					}else{
 						message = "지역인증을 하셔야 원활한 거래가 가능합니다 인증하시겠습니까?(확인시 인증페이지로 이동)";
-						view="m.mapCheckLocationPage";
+						view="m.mapCheckLocationPage?firstVisit=1";
 					}
 				}		
 				session.setAttribute("loginUser", loginUser);
 				out.println("<script>");
-				out.println("confirm('"+message+"')");
-				out.println("location.href='"+view+"'");
+				out.println("if(confirm('"+message+"')){");
+				out.println("location.href='"+view+"'}else{location.href='m.logout'}");
 				out.println("</script>");				
 			}else{
 				out.println("<script>");

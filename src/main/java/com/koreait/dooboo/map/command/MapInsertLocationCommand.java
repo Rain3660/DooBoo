@@ -31,13 +31,25 @@ public class MapInsertLocationCommand {
 		int result1 = mapDAO.insertLocation(mapDTO); //DB에 저장해준다
 		int result2 = 0;
 		long mapNo = mapDAO.getMapNo(mapDTO); //인증유무 DTO를 만들어 0으로 저장해준다
+		int usenowCount = mapDAO.didntUseNowYet(mapSessionDTO.getMemberNo());
 		if(location.length() > 5) {
-			if(result1 > 0) {
+			if(result1 > 0 && usenowCount > 0) {
 				MapLocationCheckDTO mapLocationCheckDTO = new MapLocationCheckDTO(mapNo, 1);
 				result2 = mapDAO.CheckLocation(mapLocationCheckDTO); //DB에 저장한다
 				if(result2 > 0) { // 저장에 성공하였다면 세션에 저장
 					mapSessionDTO.setIsChecked(1);
 					mapSessionDTO.setMapNo(mapNo);
+					mapSessionDTO.setLocation(GetMidLocation.getMidLocation(mapSessionDTO.getLocation()));//인증이 끝난 지역은 풀 주소를 DB에 저장해두고 클라이언트에게는 '구'만 보여준다
+					session.setAttribute("mapSession"+mapSessionDTO.getLocationOrd()+"DTO", mapSessionDTO);//세션에 등록
+				}
+			}else if(result1 > 0 && usenowCount == 0) {
+				MapLocationCheckDTO mapLocationCheckDTO = new MapLocationCheckDTO(mapNo, 1);
+				mapLocationCheckDTO.setUsenow(1);
+				result2 = mapDAO.CheckLocation(mapLocationCheckDTO); //DB에 저장한다
+				if(result2 > 0) { // 저장에 성공하였다면 세션에 저장
+					mapSessionDTO.setIsChecked(1);
+					mapSessionDTO.setMapNo(mapNo);
+					mapSessionDTO.setUsenow(1);
 					mapSessionDTO.setLocation(GetMidLocation.getMidLocation(mapSessionDTO.getLocation()));//인증이 끝난 지역은 풀 주소를 DB에 저장해두고 클라이언트에게는 '구'만 보여준다
 					session.setAttribute("mapSession"+mapSessionDTO.getLocationOrd()+"DTO", mapSessionDTO);//세션에 등록
 				}
