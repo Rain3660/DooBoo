@@ -179,7 +179,7 @@
 		            </c:if>
 		            <br>
 		            <input class="useNow_btn btn btn-primary" type="button" value="선호지역 변경하기" id="update_usenow_location_btn">
-		            <input class="btn btn-primary" type="button" value="거래지역 수정하기" id="update_location_btn" onclick="window.open('m.mapCheckLocationPage','지역변경','width=430,height=500,location=no,status=no,scrollbars=yes');">
+		            <input class="btn btn-primary" type="button" value="거래지역 수정하기" id="update_location_btn" onclick="window.open('m.mapCheckLocationPage','지역변경','width=530,height=424,location=no,status=no,scrollbars=yes');">
 		        </div>
         	</div><br><br>
   

@@ -411,25 +411,31 @@
     </script>
 <body>
 	<form id="f">
-        <div style="text-align: center; margin-top: 34px;">
-            <button type="button" class="btn btn-outline-success btn-lg">내 동내 인증하기</button><br>
+        <div class="mt-5 px-4" style="text-align: center;">
+            <button type="button" class="btn btn-outline-success btn-lg mb-3">내 동내 인증하기</button><br>
           		 지역은 최소 1개이상 최대 2개이하 인증해야해요.
             
             <br>
-
+           <div class="container px-3 mt-3" style="margin: 0 auto;">
+			<div class="row mx-auto px-3 justify-content-center">				
 				<c:if test="${mapSession1DTO ne null }">
+					<div class="col-auto my-auto px-0"> <!-- 세션에있으면 -->
 		            <input type="radio" class="btn-check"  name="btnradio" id="btnradio1" autocomplete="off">
-		            <label class="btn btn-outline-primary mt-3" id="btnradio1text" for="btnradio1">${mapSession1DTO.location}</label>
-		            <c:if test="${mapSession1DTO.isChecked eq 1}">
-		            	인증완료
-		            </c:if>				
-		            <c:if test="${mapSession1DTO.isChecked ne 1}">
-		            	미인증
-		            </c:if>
+		            <label class="btn btn-outline-primary" id="btnradio1text" for="btnradio1">${mapSession1DTO.location}</label>
+		             </div><!-- 세션에있으면 -->
+		             <div class="col-auto my-auto  px-4"> <!-- 세션에있으면 -->
+			            <c:if test="${mapSession1DTO.isChecked eq 1}">
+			            	인증완료
+			            </c:if>				
+			            <c:if test="${mapSession1DTO.isChecked ne 1}">
+			            	미인증
+			            </c:if>
+		             </div> <!-- 세션에있으면 -->
 				</c:if>
 				<c:if test="${mapSession1DTO eq null }">
+				<div class="col my-auto"><!-- 세션에없으면 -->
 				<div class="btn-group">
-                <button type="button" class="btn btn-outline-primary mt-3" data-bs-toggle="dropdown" aria-expanded="false">
+                <button type="button" class="btn btn-outline-primary" data-bs-toggle="dropdown" aria-expanded="false">
                 	새로운 지역 선택하기
            		</button>
 	            <ul class="dropdown-menu">
@@ -461,22 +467,28 @@
 	                  <li><a class="dropdown-item" onclick="fn_insertLocation1('동대문구')">동대문구 </a></li>
 	                </ul>
               </div>
+             </div> <!-- 세션에없으면 -->
 				</c:if>
+         
 	                &nbsp;
 				<c:if test="${mapSession2DTO ne null }">
+		           	<div class="col-auto my-auto px-0"><!-- 세션에있으면 -->
 	                <input type="radio" class="btn-check"  name="btnradio" id="btnradio2" autocomplete="off">
-	                <label class="btn btn-outline-primary mt-3" id="btnradio2text" for="btnradio2">${mapSession2DTO.location}</label>
-	            
+	                <label class="btn btn-outline-primary" id="btnradio2text" for="btnradio2">${mapSession2DTO.location}</label>
+	            	</div> <!-- 세션에있으면 -->
+	            	<div class="col-auto my-auto px-4"><!-- 세션에있으면 -->
 					<c:if test="${mapSession2DTO.isChecked eq 1}">
 						인증완료						
 	                </c:if>				
 		            <c:if test="${mapSession2DTO.isChecked ne 1}">
 		            	미인증
-		            </c:if>       
+		            </c:if>
+		            </div><!-- 세션에있으면 -->       
 				</c:if>
 				<c:if test="${mapSession2DTO eq null }">
+				<div class="col my-auto"><!-- 세션에있으면 -->
 				<div class="btn-group">
-                <button type="button" class="btn btn-outline-primary mt-3" data-bs-toggle="dropdown" aria-expanded="false">
+                <button type="button" class="btn btn-outline-primary" data-bs-toggle="dropdown" aria-expanded="false">
                 	새로운 지역 선택하기
            		</button>
 	            <ul class="dropdown-menu">
@@ -508,11 +520,13 @@
 	                  <li><a class="dropdown-item" onclick="fn_insertLocation2('동대문구')">동대문구 </a></li>
 	                </ul>
               </div>
+				</div><!-- 세션에있으면 -->
 				</c:if>
               
 
-             
-
+           
+			</div>
+		</div>
             <br>
           
 	            <input type="hidden" value="${mapSession1DTO.mapNo}" name="mapNo" id="mapno1">
@@ -521,7 +535,7 @@
 	            <input type="hidden" value="${mapSession2DTO.location}" id="location2">  
 	            <input type="hidden" value="${loginUser.memberNo}" id="memberNo">              
 
-          	<input type="button" class="location_btn btn btn-outline-secondary mb-3 mt-3" value="지역인증하기" id="location_btn">
+          	<input type="button" class="location_btn btn btn-outline-secondary mb-3 " value="지역인증하기" id="location_btn">
             
             <br>
 
@@ -571,8 +585,11 @@
     </form>
     
     <c:if test="${firstVisit eq 0}">
-
-	    <input type="button" class="btn btn-outline-secondary mt-3 text-center" value="저장하기" onclick="reload()">    
+    <div class="container">
+		<div class="row justify-content-center">			
+		    	<input type="button" class="col-4 btn btn-outline-secondary mx-auto mt-3" value="저장하기" onclick="reload()">
+		</div>
+    </div>
 
     	
     </c:if>
