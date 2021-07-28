@@ -5,7 +5,7 @@
 		판매자가판매하고 있는 상품 리스트 : ${productList}  
  -->
 <style>
-	i:hover{
+	.fa-heart:hover{
 		cursor: pointer;
 	}
 	.product-link{
@@ -94,7 +94,10 @@
 				<button id="send-to-btn" class="btn btn-secondary" onclick="fn_kakoShare()">	
 					    공유하기
 			    </button>
-				<input type="button" class="btn btn-secondary" value="판매자와 채팅하기">  
+			    <!-- 자신의 게시물이 아닌경우에만 채팅 버튼이 보여진다. -->
+			    <c:if test="${productVO.regNo } != ${loginUser.memberNo}">
+					<input type="button" class="btn btn-secondary" value="판매자와 채팅하기">  
+			    </c:if>
 			</div>
 		</div>
 	</div>
@@ -103,7 +106,7 @@
 			<h3 class="text-center">판매자가 판매중인 상품</h3>
 			<div class="card-group">
 				<!-- 판매자가 판매중인 상품이 있을 때 -->
-				<c:if test="${productList ne null }">
+				<c:if test="${productListSize ne 0 }">
 					<c:forEach	var="product" items="${productList }">
 						<div class="card product-link" data-productno="${product.productNo }">
 							<c:if test="${product.images eq null }">
@@ -121,7 +124,7 @@
 					</c:forEach>
 				</c:if>
 				<!-- 판매자가 판매중인 상품이 없을 때 -->
-				<c:if test="${productList eq null }">
+				<c:if test="${productListSize eq 0 }">
 					<h3 class="text-center">등록된 상품이 없습니다.</h3>					
 				</c:if>
 			</div>
@@ -135,6 +138,12 @@
 		// <i class="fas fa-heart" id="dislike"></i> : 꽉찬하트
 		
 		$('#likeOrDislike').on('click' , '#like' , function(){
+			
+			if('${productVO.regNo}' == '${loginUser.memberNo}'){
+				alert('자신의 상품에는 좋아요를 누를 수 없습니다.');
+				return;
+			}
+			
 			var obj = {
 					productNo : ${productVO.productNo},
 					regNo : ${loginUser.memberNo}
@@ -193,13 +202,22 @@
 </script>
 <script type="text/javascript">
 function fn_kakoShare(){
+
+	var url;
+	if(${imageListSize} == 0){ // 이미지 첨부 안한 경우
+		url = 'resources/image/noimage.png';
+	}else{ // 한 경우
+		url = '${STATIC_IMAGE_ROOT}${productVO.images.split(',')[0]}';
+	}
+	console.log(url);
 	Kakao.Link.sendDefault({
 		  objectType: 'feed',
 		  content: {
 		    title: '${productVO.title}',
 		    description: '${productVO.content}',
 		    imageUrl:
-				'${STATIC_IMAGE_ROOT}${productVO.images}',
+				/* '${STATIC_IMAGE_ROOT}${productVO.images}', */
+				url,
 		    link: {
 		      mobileWebUrl: 'http://sih8859.iptime.org:9099/p.selectOneProduct?productNo=${productVO.productNo}',
 		      webUrl :'http://sih8859.iptime.org:9099/p.selectOneProduct?productNo=${productVO.productNo}',
