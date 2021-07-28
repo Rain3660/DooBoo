@@ -34,11 +34,18 @@
       
 
 </script>
-		<button type="button" class="btn btn-outline-primary">거래할 지역을 선택해주새요</button>
+<div class="container mt-5">
 
+<div class="row justify-content-center">
+		<button type="button" class="col-10 btn btn-outline-primary">거래할 지역을 선택해주새요</button>	
+</div>
+
+		<div class="row justify-content-center mt-5">
 		
+			<div class="col-4 text-center">
+			
 			 <div class="btn-group">
-                <button type="button" id="location1_text" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                <button type="button" id="location1_text" class="btn btn-success dropdown-toggle btn-lg" data-bs-toggle="dropdown" aria-expanded="false">
                	 지역 1선택
             	</button>
             <ul class="dropdown-menu">                   
@@ -69,9 +76,11 @@
                   <li><a class="dropdown-item" onclick="fn_saveLocation1('동대문구')">동대문구 </a></li>
                 </ul>
               </div>
-              
+			</div>
+			<div class="col-4 text-center">
+			
 			 <div class="btn-group">
-                <button type="button" id="location2_text" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                <button type="button" id="location2_text" class="btn btn-success dropdown-toggle btn-lg" data-bs-toggle="dropdown" aria-expanded="false">
                	 지역2 선택
             	</button>
             <ul class="dropdown-menu">                   
@@ -102,14 +111,21 @@
                   <li><a class="dropdown-item" onclick="fn_saveLocation2('동대문구')">동대문구 </a></li>
                 </ul>
               </div>
+			</div>              
+        </div>
 		
+</div>
 		
 		
         <form id="f" method="post">
             <input type="hidden" name="memberNo" value="${loginUser.memberNo}" >
             <input type="hidden" id="location1" name="location1">
             <input type="hidden" id="location2" name="location2">
-            <input type="button" class="location_btn btn btn-outline-secondary" value="저장하기" id="save_location_btn">
+            <div class="row justify-content-center mt-5">
+            	<div class=" d-grid gap-2 col-6 mx-auto">            	
+		            <input type="button" class="location_btn btn btn-outline-secondary" value="저장하기" id="save_location_btn">
+            	</div>
+            </div>
         </form>
         
         
