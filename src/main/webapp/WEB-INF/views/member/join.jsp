@@ -173,7 +173,7 @@
 	var nameCheck = false;
 	var phoneCheck = false; */
 	function fn_join() {
-		if('${apiNumber eq null}'){
+		if('${apiNumber}' == null){
 			$('#join_btn').on('click', function() {
 	
 				if(!idCheck){
@@ -233,7 +233,7 @@
 				$('#join_form').submit();
 			})
 			
-		}else if('${apiNumber eq 1}'){
+		}else if('${apiNumber}' == '1'){
 			$('#join_btn').on('click', function() {
 				
 				if(!idCheck){
@@ -262,7 +262,7 @@
 				$('#join_form').submit();
 			})
 			
-		}else if('${apiNumber eq 2}'){
+		}else if('${apiNumber}' == '2'){
 			$('#join_btn').on('click', function() {
 				
 				if(!idCheck){
