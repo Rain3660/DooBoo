@@ -181,11 +181,6 @@ public class MemberController {
 	}
 	
 
-	
-	@GetMapping(value="chatPage")
-	public String chatPage() {
-		return "char2/src/chat";
-
 	// 로그인한 유저가 상품탭을 클릭했을때 지역인증 유무를 판단한다.
 	@PostMapping(value = "m.locationCheckTest")
 	@ResponseBody
