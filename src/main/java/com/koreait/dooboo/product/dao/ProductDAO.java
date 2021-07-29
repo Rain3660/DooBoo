@@ -49,4 +49,9 @@ public interface ProductDAO {
 	// 최근 본 상품 리스트 가져오기 4개
 	public List<ProductVO> selectRecentlyViewProductList(List<Long> recentlyViewProductNo);
 	
+	// 우리동네에 해당하는 상품 갯수 출력하기
+	public int getTotalMyRegionProductListCount(String city);
+	// 검색어를 통해서 우리동네에 해당하는 상품 리스트 출력하기
+	public List<ProductVO> getMyRegionProductList(PageVO pageVO);
+	
 }

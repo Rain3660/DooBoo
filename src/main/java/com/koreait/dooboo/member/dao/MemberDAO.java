@@ -29,4 +29,7 @@ public interface MemberDAO {
 	
 	// 아이디 존재 여부 조회
 	public int searchByMemberId(String memberId);
+	
+	// 로그인 유저의 지역 인증 조회
+	public String locationCheckTest(long memberNo);
 }

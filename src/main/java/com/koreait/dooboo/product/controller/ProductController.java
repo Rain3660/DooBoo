@@ -109,5 +109,12 @@ public class ProductController {
 		return productCommand.iDontLikeThisProduct(model);
 	}
 
-	
+	@PostMapping(value="p.selectProductListByAddressAndQuery")
+	@ResponseBody
+	public Map<String, Object> selectProductListByAddressAndQuery(Model model , @RequestBody PageVO pageVO){
+		model.addAttribute("pageVO", pageVO);
+		
+		return productCommand.selectProductListByAddressAndQuery(model);
+		
+	}
 }

@@ -4,8 +4,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
 <mapper namespace="com.koreait.dooboo.member.dao.MemberDAO">
-	<insert id="join" >
-		INSERT INTO MEMBER 
+	<insert id="join">
+		INSERT INTO MEMBER
 		VALUES
 		(Member_SEQ.NEXTVAL,
 		#{name},
@@ -14,53 +14,77 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		#{password},
 		#{email},
 		#{nickname},
-		#{gender}, 
-		SYSDATE, 
-		null , 
-		0 , 
-		#{address}, 
+		#{gender},
+		SYSDATE,
+		null ,
+		0 ,
+		#{address},
 		#{birthday},
 		null,
 		#{apiNumber},
-		#{apiMemberNo}) <!-- status 0 = 정상   , 1= 삭제 -->
+		#{apiMemberNo}) <!-- status 0 = 정상 , 1= 삭제 -->
 	</insert>
 	<!-- 아이디와 비밀번호가 일치하고 status 가 0 인 회원 -->
-	<select id="login" resultType="com.koreait.dooboo.member.dto.MemberDTO">
-		SELECT * FROM MEMBER WHERE MEMBER_ID = #{memberId} AND PASSWORD= #{password} AND STATUS = 0
+	<select id="login"
+		resultType="com.koreait.dooboo.member.dto.MemberDTO">
+		SELECT * FROM MEMBER WHERE MEMBER_ID = #{memberId} AND
+		PASSWORD= #{password} AND STATUS = 0
 	</select>
 	<update id="updateInfo">
-		UPDATE MEMBER SET NAME = #{param1} , NICKNAME = #{param2} , MOD_DATE = SYSDATE WHERE MEMBER_NO = #{param3} AND STATUS = 0
+		UPDATE MEMBER SET NAME = #{param1} , NICKNAME =
+		#{param2} , MOD_DATE = SYSDATE WHERE MEMBER_NO = #{param3} AND STATUS
+		= 0
 	</update>
 
-	<select id="selectMemberByMemberNo" resultType="com.koreait.dooboo.member.dto.MemberDTO">
-		SELECT * FROM MEMBER WHERE MEMBER_NO = #{param1} AND STATUS = 0
+	<select id="selectMemberByMemberNo"
+		resultType="com.koreait.dooboo.member.dto.MemberDTO">
+		SELECT * FROM MEMBER WHERE MEMBER_NO = #{param1} AND STATUS
+		= 0
 	</select>
 
-	
-	<select id="apiLoginCheck" resultType="com.koreait.dooboo.member.dto.MemberDTO">
-		SELECT * 
-		  FROM MEMBER
-		 WHERE APINUMBER = #{apiNumber} AND APIMEMBERNO = #{apiMemberNo}
+
+	<select id="apiLoginCheck"
+		resultType="com.koreait.dooboo.member.dto.MemberDTO">
+		SELECT *
+		FROM MEMBER
+		WHERE APINUMBER = #{apiNumber} AND APIMEMBERNO = #{apiMemberNo}
 	</select>
-	
+
 	<update id="updatePassword">
-		UPDATE MEMBER SET PASSWORD = #{param1} , MOD_DATE = SYSDATE WHERE STATUS = 0 AND MEMBER_NO = #{param2}
+		UPDATE MEMBER SET PASSWORD = #{param1} , MOD_DATE =
+		SYSDATE WHERE STATUS = 0 AND MEMBER_NO = #{param2}
 	</update>
 	<update id="updateContact">
-		UPDATE MEMBER SET PHONE = #{param1} , ADDRESS = #{param2} , MOD_DATE = SYSDATE WHERE STATUS = 0 AND MEMBER_NO = #{param3} 
+		UPDATE MEMBER SET PHONE = #{param1} , ADDRESS =
+		#{param2} , MOD_DATE = SYSDATE WHERE STATUS = 0 AND MEMBER_NO =
+		#{param3}
 	</update>
 	<!-- 이름과 이메일에 해당하는 회원의 아이디 찾기 -->
-	<select id="findIdByEmailAndName" resultType="com.koreait.dooboo.member.dto.MemberDTO">
-		SELECT * FROM MEMBER WHERE NAME = #{name} AND EMAIL = #{email} AND STATUS = 0
+	<select id="findIdByEmailAndName"
+		resultType="com.koreait.dooboo.member.dto.MemberDTO">
+		SELECT * FROM MEMBER WHERE NAME = #{name} AND EMAIL =
+		#{email} AND STATUS = 0
 	</select>
 	<!-- 비밀번호를 변경하기 위해 , 아이디와 이메일에 해당하는 회원의 아이디 찾기 -->
-	<select id="selectMemberByEmailAndId" resultType="com.koreait.dooboo.member.dto.MemberDTO">
-		SELECT * FROM MEMBER WHERE MEMBER_ID = #{memberId} AND EMAIL = #{email} AND STATUS = 0
+	<select id="selectMemberByEmailAndId"
+		resultType="com.koreait.dooboo.member.dto.MemberDTO">
+		SELECT * FROM MEMBER WHERE MEMBER_ID = #{memberId} AND
+		EMAIL = #{email} AND STATUS = 0
 	</select>
-	
+
 	<!-- 입력받은 아이디에 해당하는 회원이 있는지 조회 -->
 	<select id="searchByMemberId" resultType="int">
-		SELECT COUNT(MEMBER_ID) FROM MEMBER WHERE MEMBER_ID = #{param1}
+		SELECT COUNT(MEMBER_ID)
+		FROM MEMBER WHERE MEMBER_ID = #{param1}
+	</select>
+
+	<!-- 로그인한 유저가 지역인증을 했나 안했나 + 인증했다면 인증 주소를 반환한다. -->
+	<select id="locationCheckTest" resultType="String">
+		SELECT MP.LOCATION FROM MEMBER M INNER JOIN MAP MP ON
+		M.MEMBER_NO = MP.MEMBER_NO LEFT OUTER JOIN MAPLOCATIONCHECK MAPCHECK
+		ON MP.MAP_NO = MAPCHECK.MAP_NO
+		WHERE MAPCHECK.IS_CHECKED = 1 AND mapcheck.usenow = 1 AND M.MEMBER_NO =
+		#{param1}
 	</select>
 
 </mapper>

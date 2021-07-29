@@ -12,6 +12,7 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +26,7 @@ import com.koreait.dooboo.member.command.DeleteCommand;
 import com.koreait.dooboo.member.command.FindIdCommand;
 import com.koreait.dooboo.member.command.IdCheckCommand;
 import com.koreait.dooboo.member.command.JoinCommand;
+import com.koreait.dooboo.member.command.LocationCheckCommand;
 import com.koreait.dooboo.member.command.LogOutCommand;
 import com.koreait.dooboo.member.command.LoginCommand;
 import com.koreait.dooboo.member.command.MyPageCommand;
@@ -65,6 +67,8 @@ public class MemberController {
 	private IdCheckCommand idCheckCommand;
 	@Autowired
 	private MyPageCommand selectMyFavoriteProductList;
+	@Autowired
+	private LocationCheckCommand locationCheckCommand;
 	@GetMapping("m.joinPage")
 	public String joinPage() {
 		return "member/join";
@@ -174,5 +178,18 @@ public class MemberController {
 		
 		model.addAttribute("memberDTO", memberDTO);
 		return idCheckCommand.execute(sqlSession, model);
+	}
+	
+	// 로그인한 유저가 상품탭을 클릭했을때 지역인증 유무를 판단한다.
+	@PostMapping(value = "m.locationCheckTest")
+	@ResponseBody
+	public Map<String, Object> locationCheckTest(Model model , @RequestBody MemberDTO memberDTO){
+		model.addAttribute("memberDTO", memberDTO);
+		return locationCheckCommand.execute(sqlSession, model);
+	}
+	
+	@GetMapping(value = "p.myHomeProductListPage")
+	public String myHomeProductListPage(@ModelAttribute("address") String address) {
+		return "product/myHomeProductListPage";
 	}
 }

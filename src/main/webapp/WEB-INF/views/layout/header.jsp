@@ -45,12 +45,6 @@
 					<li class="nav-item"><a class="nav-link" href="#">Popular</a></li>
 					<li class="nav-item"><a class="nav-link" href="#" id="insertProduct_btn">상품등록</a></li>
 					<li class="nav-item"><a class="nav-link" href="#" id="chat">1:1대화함</a></li>
-					<li class="nav-item">
-						<form class="d-flex">
-							<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-							<button class="btn btn-outline-success" type="submit">Search</button>
-						</form>
-					</li>
 				</ul>
 				<ul class="navbar-nav float-end">
 					<c:if test="${empty loginUser }">
@@ -125,7 +119,28 @@
 				if(${loginUser eq null}){
 					openModal();
 				}else{
-					location.href = 'chat';
+					let obj = {
+						memberNo : ${loginUser.memberNo}	
+					};
+					
+					$.ajax({
+						url : 'm.locationCheckTest',
+						type : 'post',
+						data : JSON.stringify(obj),
+						contentType : 'application/json; charset=utf-8',
+						dataType : 'json',
+						success : function(resultMap) {
+							let address = resultMap.address;
+							//console.log(resultMap.location);
+							if(address == null){ // 지역 인증이 안된 경우
+								alert('마이페이지에서 지역인증을 해주세요');
+								location.href = 'm.myPage';
+							}else{ // 지역인증이 된 경우
+								location.href = 'p.myHomeProductListPage?address=' + address;
+							}
+							
+						}
+					})
 				}
 			})
 		})
