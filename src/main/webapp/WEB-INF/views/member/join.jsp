@@ -108,8 +108,8 @@
 	function fn_isUsableNickname() {
 		$('#nickname').on('keyup' , function(){
 			var nickname = $('#nickname').val();
-			const regNickname = /^[가-힣a-zA-Z0-9]{4,10}$/;
-			const regNicknameMsg = '닉네임은 4 ~ 10글자로 구성된 한글 , 숫자 , 영문자로만 입력해 주세요';
+			const regNickname = /^[가-힣a-zA-Z0-9]{1,9}$/;
+			const regNicknameMsg = '닉네임은 최대 9글자로 구성된 한글 , 숫자 , 영문자로만 입력해 주세요';
 			const nicknamePassMsg = '멋진 닉네임 이네요 !';
 			if(!regNickname.test(nickname)){  // 닉네임 정규식 통과 못한 경우
 				$('#nicknameCheck').html(regNicknameMsg);
