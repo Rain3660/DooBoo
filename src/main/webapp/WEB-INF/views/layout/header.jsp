@@ -44,7 +44,15 @@
 					<li class="nav-item"><a class="nav-link" href="#">New</a></li>
 					<li class="nav-item"><a class="nav-link" href="#">Popular</a></li>
 					<li class="nav-item"><a class="nav-link" href="#" id="insertProduct_btn">상품등록</a></li>
-					<li class="nav-item"><a class="nav-link" href="#" id="chat">1:1대화함</a></li>
+
+					<li class="nav-item"><a class="nav-link" href="chatPage" id="chat">1:1대화함</a></li>
+					<li class="nav-item">
+						<form class="d-flex">
+							<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+							<button class="btn btn-outline-success" type="submit">Search</button>
+						</form>
+					</li>
+
 				</ul>
 				<ul class="navbar-nav float-end">
 					<c:if test="${empty loginUser }">

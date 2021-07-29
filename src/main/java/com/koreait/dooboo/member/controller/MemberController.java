@@ -180,6 +180,12 @@ public class MemberController {
 		return idCheckCommand.execute(sqlSession, model);
 	}
 	
+
+	
+	@GetMapping(value="chatPage")
+	public String chatPage() {
+		return "char2/src/chat";
+
 	// 로그인한 유저가 상품탭을 클릭했을때 지역인증 유무를 판단한다.
 	@PostMapping(value = "m.locationCheckTest")
 	@ResponseBody
@@ -191,5 +197,6 @@ public class MemberController {
 	@GetMapping(value = "p.myHomeProductListPage")
 	public String myHomeProductListPage(@ModelAttribute("address") String address) {
 		return "product/myHomeProductListPage";
+
 	}
 }

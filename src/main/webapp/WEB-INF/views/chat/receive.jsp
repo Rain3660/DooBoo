@@ -60,8 +60,8 @@
 			</div>
 		</div>
 	</div>
-
-	<script src="https://unpkg.com/peerjs@1.3.1/dist/peerjs.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/peerjs/1.3.1/peerjs.min.js" referrerpolicy="no-referrer"></script>
+	<!-- <script src="https://unpkg.com/peerjs@1.3.1/dist/peerjs.min.js"></script> -->
 	<script type="text/javascript">
             $(document).ready(function(){
             	 var lastPeerId = null;
