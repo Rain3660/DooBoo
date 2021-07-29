@@ -173,64 +173,141 @@
 	var nameCheck = false;
 	var phoneCheck = false; */
 	function fn_join() {
-		$('#join_btn').on('click', function() {
-
-			if(!idCheck){
-				alert('아이디를 확인하세요');
-				$('#memberId').focus();
-				return false;
-			}
-			if(!isUsablePassword){
-				alert('비밀번호를 확인하세요');
-				$('#password').focus();
-				return false;
-			}
-			if(!pwCheck){
-				alert('비밀번호가 맞지 않습니다.');
-				$('#passwordCheck').focus();
-				return false;
-			}
-			if(!nicknameCheck){
-				alert('닉네임을 확인하세요');
-				$('#nickname').focus();
-				return false;
-			}
-			if(!phoneCheck){
-				alert('전화번호를 확인하세요');
-				$('#phone').focus();
-				return false;
-			}
-			if(!nameCheck){
-				alert('이름을 확인하세요');
-				$('#name').focus();
-				return false;
-			}
+		if('${apiNumber eq null}'){
+			$('#join_btn').on('click', function() {
+	
+				if(!idCheck){
+					alert('아이디를 확인하세요');
+					$('#memberId').focus();
+					return false;
+				}
+				if(!isUsablePassword){
+					alert('비밀번호를 확인하세요');
+					$('#password').focus();
+					return false;
+				}
+				if(!pwCheck){
+					alert('비밀번호가 맞지 않습니다.');
+					$('#passwordCheck').focus();
+					return false;
+				}
+				if(!nicknameCheck){
+					alert('닉네임을 확인하세요');
+					$('#nickname').focus();
+					return false;
+				}
+				if(!phoneCheck){
+					alert('전화번호를 확인하세요');
+					$('#phone').focus();
+					return false;
+				}
+				if(!nameCheck){
+					alert('이름을 확인하세요');
+					$('#name').focus();
+					return false;
+				}
+				
+				if($('#birthday').val() == ''){
+					alert('생년월일을 입력해 주세요');
+					$('#birthday').focus();
+					return false;
+				}
+				if($('#address').val() == ''){
+					alert('주소를 입력해 주세요');
+					$('#address').focus();
+					return false;
+				} 
+				if ($(':radio[name="gender"]:checked').length < 1) {
+					alert('성별을 선택해 주세요');
+					return false;
+				}
+	
+				 if(!emailCheck){
+				 alert('이메일을 확인하세요');
+				 $('#email').focus();
+				 return false;
+				 }
+				 
+				
+				$('#join_form').attr('action', 'm.join');
+				$('#join_form').submit();
+			})
 			
-			if($('#birthday').val() == ''){
-				alert('생년월일을 입력해 주세요');
-				$('#birthday').focus();
-				return false;
-			}
-			if($('#address').val() == ''){
-				alert('주소를 입력해 주세요');
-				$('#address').focus();
-				return false;
-			} 
-			if ($(':radio[name="gender"]:checked').length < 1) {
-				alert('성별을 선택해 주세요');
-				return false;
-			}
-
-			 if(!emailCheck){
-			 alert('이메일을 확인하세요');
-			 $('#email').focus();
-			 return false;
-			 }
-			 
+		}else if('${apiNumber eq 1}'){
+			$('#join_btn').on('click', function() {
+				
+				if(!idCheck){
+					alert('아이디를 확인하세요');
+					$('#memberId').focus();
+					return false;
+				}
+				if(!isUsablePassword){
+					alert('비밀번호를 확인하세요');
+					$('#password').focus();
+					return false;
+				}
+				if(!pwCheck){
+					alert('비밀번호가 맞지 않습니다.');
+					$('#passwordCheck').focus();
+					return false;
+				}
+				
+				if($('#address').val() == ''){
+					alert('주소를 입력해 주세요');
+					$('#address').focus();
+					return false;
+				} 
+				 
+				$('#join_form').attr('action', 'm.join');
+				$('#join_form').submit();
+			})
 			
-			$('#join_form').attr('action', 'm.join');
-			$('#join_form').submit();
-		})
+		}else if('${apiNumber eq 2}'){
+			$('#join_btn').on('click', function() {
+				
+				if(!idCheck){
+					alert('아이디를 확인하세요');
+					$('#memberId').focus();
+					return false;
+				}
+				if(!isUsablePassword){
+					alert('비밀번호를 확인하세요');
+					$('#password').focus();
+					return false;
+				}
+				if(!pwCheck){
+					alert('비밀번호가 맞지 않습니다.');
+					$('#passwordCheck').focus();
+					return false;
+				}
+				if(!nicknameCheck){
+					alert('닉네임을 확인하세요');
+					$('#nickname').focus();
+					return false;
+				}
+				if(!phoneCheck){
+					alert('전화번호를 확인하세요');
+					$('#phone').focus();
+					return false;
+				}
+
+				
+				if($('#birthday').val() == ''){
+					alert('생년월일을 입력해 주세요');
+					$('#birthday').focus();
+					return false;
+				}
+				if($('#address').val() == ''){
+					alert('주소를 입력해 주세요');
+					$('#address').focus();
+					return false;
+				} 
+				 
+				
+				$('#join_form').attr('action', 'm.join');
+				$('#join_form').submit();
+			})
+		}
 	}
 </script>
 <style>
