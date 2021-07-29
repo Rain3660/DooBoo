@@ -40,7 +40,7 @@
 						
 						$('<tr>')
 							.append($('<td>').text(reply.replyNo))
-							.append($('<td>').text(reply.regNo))
+							.append($('<td>').text(reply.nickName))
 							.append($('<td>').text(reply.replyContent))
 							.append($('<td>').text(reply.modNo))
 							.append($('<td>').html('<input type="button" id="deleteReply"  value="삭제" ><input type="hidden" name="replyNo" id="replyNo" value="' + reply.replyNo + '">'))
