@@ -173,7 +173,7 @@
 	var nameCheck = false;
 	var phoneCheck = false; */
 	function fn_join() {
-		if('${apiNumber}' == null){
+		if('${apiNumber}' == ''){
 			$('#join_btn').on('click', function() {
 	
 				if(!idCheck){
