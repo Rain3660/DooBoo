@@ -30,7 +30,11 @@
 	<div class="row">
 		<div class="col-md-6 mx-auto border-bottom">
 			<div class="float-start"><!-- 판매자 정보 --> 
+
 				${productVO.address}
+
+				${productVO.address}<button type="button" class="btn btn-success" onclick="window.open('m.dealLocationByMap?location=${productVO.address}&image=${OneImage}','거래지역 근처 확인하기','width=432,height=355,location=no,status=no,scrollbars=yes');">거래지역 근처 확인하기</button>
+
 			</div>
 			<div class="float-end" id="likeOrDislike">
 				<!-- 좋아요 했을 때  <i class="far fa-heart"></i>-->

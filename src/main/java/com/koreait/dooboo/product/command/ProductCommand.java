@@ -174,6 +174,7 @@ public class ProductCommand {
 		ProductVO productVO = productDAO.selectProductDetailByProductNo(productNo);
 		String strImages = productVO.getImages();
 		List<String> imageList = new ArrayList<>();
+		String [] images2 = strImages.split(",");
 		if(strImages != null) {
 			for (String image : strImages.split(",")) {
 
@@ -181,6 +182,8 @@ public class ProductCommand {
 				
 			}
 		}
+		model.addAttribute("OneImage",images2[0]);
+
 		productVO.setImageList(imageList);
 		
 		// 그 상품을 판매자가 판매하고있는 최근 상품들
