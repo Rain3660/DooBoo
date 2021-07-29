@@ -165,6 +165,24 @@ public class ProductCommand {
 		resultMap.put("productList", productList);
 		return resultMap;
 	}
+	public Map<String, Object> selectProductListByAddressAndQuery(Model model) {
+		Map<String, Object> resultMap = new HashMap<>();
+		// 현재 페이지와 검색어 , 시 를 가지고 있습니다.
+		PageVO pageVO = (PageVO)model.asMap().get("pageVO");
+		
+		int page = pageVO.getPage();
+		int totalRecord = productDAO.getTotalMyRegionProductListCount(pageVO.getCity());
+		
+		// 쿼리에 사용할 PageVO
+		PageVO pageAndQueryVO = PagingUtils.getPage(totalRecord, page);
+		pageAndQueryVO.setCity(pageVO.getCity());
+		pageAndQueryVO.setQuery(pageVO.getQuery());
+		List<ProductVO> myRegionProductList = productDAO.getMyRegionProductList(pageAndQueryVO);
+		
+		resultMap.put("pageAndQueryVO", pageAndQueryVO);
+		resultMap.put("productList", myRegionProductList);
+		return resultMap;
+	}
 	
 	public void selectProductDetailByProductNo(Model model) {
 		HttpServletRequest request = (HttpServletRequest)model.asMap().get("request");
