@@ -35,8 +35,8 @@ public class UpdateLocationCommand {
 		mapDTO.setLocation(location);//불러온 지역을 업데이트하기휘해 mapDTO에 저장한다
 		mapDTO.setMapNo(mapNo); //어떤 map의 업데이트인지 알기위해 필요한 map기본키
 		int result = mapDAO.updateLocation(mapDTO); // location의 업데이트를 진행한다.
-		int usenowCount = mapDAO.didntUseNowYet(mapSessionDTO.getMemberNo());
 		if(location.length() > 5) {//location이 5이상이라는것은 현재주소를 가져와 인증까지 완료 해야한다는 뜻
+			int usenowCount = mapDAO.didntUseNowYet(mapSessionDTO.getMemberNo());
 			location = GetMidLocation.getMidLocation(location);
 			if(result > 0 && usenowCount > 0) {
 				MapLocationCheckDTO mapLocationCheckDTO = new MapLocationCheckDTO(mapNo, 1);//업데이트된 지역은 현재지역으로 수정하여 인증이 이미 된 상태이기 때문에 mapLocationCheck 테이블도  1로 업데이트 시켜준다
@@ -49,7 +49,9 @@ public class UpdateLocationCommand {
 			}else if(result > 0 && usenowCount == 0) {
 				MapLocationCheckDTO mapLocationCheckDTO = new MapLocationCheckDTO(mapNo, 1);//업데이트된 지역은 현재지역으로 수정하여 인증이 이미 된 상태이기 때문에 mapLocationCheck 테이블도  1로 업데이트 시켜준다
 				mapLocationCheckDTO.setUsenow(1);
+				mapDAO.updateUseNow(mapLocationCheckDTO);
 				result2 = mapDAO.mapUpdateResult(mapLocationCheckDTO); // 인증유무 업데이트까지 확인
+				System.out.println("테스트중;"+result2);
 				if(result2 > 0) {
 					mapSessionDTO.setIsChecked(1);//업데이트된 지역은 인증이 된상태이기때문에 dto를 수정해준다 세션업데이트임
 					mapSessionDTO.setUsenow(1);

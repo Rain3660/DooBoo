@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -72,7 +73,7 @@
                     '        </div>' + 
                     '        <div class="body">' + 
                     '            <div class="img">' +
-                    '                <img src="${STATIC_IMAGE_ROOT}${image}" width="73" height="70">' +
+                    '                <img src="<c:if test="${image eq 'resources/image/noimage.png'}">${image}</c:if><c:if test="${image ne 'resources/image/noimage.png'}">${STATIC_IMAGE_ROOT}${image}</c:if>" width="73" height="70">' +
                     '           </div>' + 
                     '            <div class="desc">' + 
                     '                <div class="ellipsis">이쪽 주변에서 거래가 가능해요!</div>' + 

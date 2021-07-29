@@ -50,6 +50,7 @@ public class MapInsertLocationCommand {
 					mapSessionDTO.setIsChecked(1);
 					mapSessionDTO.setMapNo(mapNo);
 					mapSessionDTO.setUsenow(1);
+					mapDAO.updateUseNow(mapLocationCheckDTO);
 					mapSessionDTO.setLocation(GetMidLocation.getMidLocation(mapSessionDTO.getLocation()));//인증이 끝난 지역은 풀 주소를 DB에 저장해두고 클라이언트에게는 '구'만 보여준다
 					session.setAttribute("mapSession"+mapSessionDTO.getLocationOrd()+"DTO", mapSessionDTO);//세션에 등록
 				}
