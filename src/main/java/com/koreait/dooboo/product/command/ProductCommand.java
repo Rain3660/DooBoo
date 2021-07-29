@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.koreait.dooboo.likeproduct.dto.LikeProductDTO;
 import com.koreait.dooboo.map.dto.MapDTO;
 import com.koreait.dooboo.member.dto.MemberDTO;
 import com.koreait.dooboo.product.dao.ProductDAO;
@@ -166,10 +168,22 @@ public class ProductCommand {
 	
 	public void selectProductDetailByProductNo(Model model) {
 		HttpServletRequest request = (HttpServletRequest)model.asMap().get("request");
-		
+		HttpSession session = request.getSession();
+		MemberDTO loginUser = (MemberDTO)session.getAttribute("loginUser");
+		long memberNo = loginUser.getMemberNo();
 		long productNo = Long.parseLong(request.getParameter("productNo"));
 		
+		List<Long> recentlyViewProductNo = (ArrayList<Long>)session.getAttribute("recentlyViewProductNo");
 		
+		if(recentlyViewProductNo.size() <= 4) {
+			if(!recentlyViewProductNo.contains(productNo)) { // 이미 최근본 목록에 없다면 리스트에 추가
+				recentlyViewProductNo.add(productNo);				
+			}
+		}else {
+			recentlyViewProductNo.remove(0);
+			recentlyViewProductNo.add(productNo);
+		}
+		/*System.out.println(recentlyViewProductNo.toString());*/
 		// 상품번호에 해당하는 상품
 		ProductVO productVO = productDAO.selectProductDetailByProductNo(productNo);
 		String strImages = productVO.getImages();
@@ -182,7 +196,9 @@ public class ProductCommand {
 				
 			}
 		}
+
 		model.addAttribute("OneImage",images2[0]);
+
 
 		productVO.setImageList(imageList);
 		
@@ -193,19 +209,38 @@ public class ProductCommand {
 		// 조회수 증가시키기
 		productDAO.updateHit(productNo);
 		
+		// 로그인한 유저가 해당 상품을 좋아요 했나 안했나 판단한다.
+		int likeOrDislike = productDAO.likeOrDislike(memberNo, productNo);
 		
+		// 사진을 몇개 첨부했나 저장한다.
+		model.addAttribute("imageListSize", imageList.size());
+
+		// 좋아요 여부를 저장한다.
+		model.addAttribute("likeOrDislike" , likeOrDislike);
+		
+		// 해당상품 상세정보를 저장한다.
 		model.addAttribute("productVO", productVO);
+		
+		// 판매자의 판매물품을 저장한다.
 		model.addAttribute("productList", productList);
+		model.addAttribute("productListSize", productList.size());
 	}
 	public Map<String, Object> iLikeThisProduct(Model model){
 		Map<String, Object> resultMap = new HashMap<>();
 		
-		long productNo = (long)model.asMap().get("productNo");
-		HttpSession session = (HttpSession)model.asMap().get("session");
+		LikeProductDTO likeProductDTO = (LikeProductDTO)model.asMap().get("likeProductDTO");
 		
-		long regNo = ((MemberDTO)session.getAttribute("loginUser")).getMemberNo();
+		int result = productDAO.iLikeThisProduct(likeProductDTO);
+		resultMap.put("result", result);
+		return resultMap;
 		
-		int result = productDAO.iLikeThisProduct(productNo, regNo);
+	}
+	public Map<String, Object> iDontLikeThisProduct(Model model){
+		Map<String, Object> resultMap = new HashMap<>();
+		
+		LikeProductDTO likeProductDTO = (LikeProductDTO)model.asMap().get("likeProductDTO");
+		
+		int result = productDAO.iDontLikeThisProduct(likeProductDTO);
 		resultMap.put("result", result);
 		return resultMap;
 		

@@ -27,6 +27,7 @@ import com.koreait.dooboo.member.command.IdCheckCommand;
 import com.koreait.dooboo.member.command.JoinCommand;
 import com.koreait.dooboo.member.command.LogOutCommand;
 import com.koreait.dooboo.member.command.LoginCommand;
+import com.koreait.dooboo.member.command.SelectMyFavoriteProductList;
 import com.koreait.dooboo.member.command.SendTempPasswordEmailCommand;
 import com.koreait.dooboo.member.command.UpdateContactCommand;
 import com.koreait.dooboo.member.command.UpdateInfoCommand;
@@ -62,6 +63,8 @@ public class MemberController {
 	private SendTempPasswordEmailCommand sendTempPasswordEmailCommand;
 	@Autowired
 	private IdCheckCommand idCheckCommand;
+	@Autowired
+	private SelectMyFavoriteProductList selectMyFavoriteProductList;
 	@GetMapping("m.joinPage")
 	public String joinPage() {
 		return "member/join";
@@ -75,12 +78,16 @@ public class MemberController {
 		String kakaourl = Kakao_RestApi.getRedirectURL();
 		model.addAttribute("naverurl", naverAuthUrl);
 		model.addAttribute("kakaourl", kakaourl);
+		
+		
 		return "member/login";
 
 	}
 
 	@GetMapping(value= "m.myPage")
-	public String mypage() {
+	public String mypage(Model model , HttpSession session) {
+		model.addAttribute("session", session);
+		selectMyFavoriteProductList.execute(sqlSession, model);
 		return "member/myPage";
 	}
 

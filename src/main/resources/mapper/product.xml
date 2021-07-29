@@ -299,7 +299,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				0 AND P.ADDRESS LIKE '%' || #{region} || '%'
 			</when>
 		</choose>
-		ORDER BY LIKECOUNT DESC ) A ) B WHERE B.RN BETWEEN #{beginRecord} AND
+		ORDER BY LIKECOUNT DESC , P.HIT DESC , P.MOD_DATE DESC ) A ) B WHERE B.RN BETWEEN #{beginRecord} AND
 		#{endRecord}
 	</select>
 	<select id="getOneImage" parameterType="long"
@@ -366,16 +366,80 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE P.STATUS = 1 AND P.DEL_YN = 'N' AND M.STATUS = 0 AND
 		P.REG_NO =
 		#{param1} ORDER BY P.REG_DATE DESC) A ) B WHERE B.RN BETWEEN
-		1 AND 4
+		1 AND 3
 	</select>
 
 	<!-- 좋아요 -->
-	<insert id="iLikeThisProduct">
-		INSERT INTO LIKEPRODUCT VALUES (#{param1} , #{param2}
-		, SYSDATE)
+	<insert id="iLikeThisProduct" parameterType="com.koreait.dooboo.likeproduct.dto.LikeProductDTO">
+		INSERT INTO LIKEPRODUCT VALUES (#{productNo} , #{regNo} , SYSDATE)
 	</insert>
-	<!-- 상품보기를 클릭한 유저가 해당 물품을 좋아요 했나 안했나 보기 -->
-	<select id="likeOrDislike">
-		SELECT COUNT(*) FROM LIKEPRODUCT WHERE REG_NO
+	<!-- 좋아요 취소하기 -->
+	<delete id="iDontLikeThisProduct" parameterType="com.koreait.dooboo.likeproduct.dto.LikeProductDTO">
+		DELETE FROM LIKEPRODUCT WHERE PRODUCT_NO = #{productNo} AND REG_NO = #{regNo}
+	</delete>
+	<!-- 상품보기를 클릭한 유저가 해당 물품을 좋아요 했나 안했나 여부 -->
+	<select id="likeOrDislike" resultType="int">
+		SELECT COUNT(*) FROM LIKEPRODUCT WHERE REG_NO = ${param1} AND PRODUCT_NO = ${param2}
+	</select>
+	<!-- 찜해놓은 상품을 보여준다. -->
+	<select id="selectMyFavoriteProductList" resultType="com.koreait.dooboo.vo.ProductVO">
+		SELECT B.NICKNAME AS NICKNAME , B.REG_NO AS REGNO ,
+		B.CONTENT AS
+		CONTENT , B.MOD_NO AS MODNO , B.MOD_DATE AS MODDATE ,
+		B.REG_DATE AS
+		REGDATE , B.PRODUCT_NO AS PRODUCTNO , B.TITLE AS TITLE ,
+		B.ADDRESS AS
+		ADDRESS , B.PRICE AS PRICE , B.HIT AS HIT , B.IMAGES AS
+		IMAGES
+		FROM
+		( SELECT ROWNUM AS RN , A.* FROM
+		(SELECT M.NICKNAME , P.REG_NO ,
+		P.CONTENT , P.MOD_NO , P.MOD_DATE ,
+		P.REG_DATE , P.PRODUCT_NO ,
+		P.TITLE
+		, P.ADDRESS , P.PRICE , P.HIT ,
+		NVL(I.IMAGES , '') AS IMAGES
+		FROM
+		MEMBER M INNER JOIN PRODUCT P ON M.MEMBER_NO = P.REG_NO
+        INNER JOIN LIKEPRODUCT L ON P.PRODUCT_NO = L.PRODUCT_NO
+		LEFT OUTER JOIN
+		(SELECT PRODUCT_NO AS PNO , LISTAGG(FILE_PATH , ',')
+		WITHIN GROUP (ORDER
+		BY PRODUCT_NO)IMAGES FROM PRODUCT_IMAGE GROUP BY PRODUCT_NO) I 
+        ON P.PRODUCT_NO = I.PNO
+		WHERE P.STATUS = 1 AND P.DEL_YN = 'N' AND M.STATUS = 0 AND P.PRODUCT_NO IN (SELECT PRODUCT_NO FROM LIKEPRODUCT L WHERE REG_NO = #{param1})
+        ORDER BY L.REG_DATE DESC) 
+        A ) B WHERE B.RN BETWEEN 1 AND 4
+	</select>
+	<select id="selectMyOnSaleProductList" resultType="com.koreait.dooboo.vo.ProductVO">
+		SELECT B.NICKNAME AS NICKNAME , B.REG_NO AS REGNO ,
+		B.CONTENT AS
+		CONTENT , B.MOD_NO AS MODNO , B.MOD_DATE AS MODDATE ,
+		B.REG_DATE AS
+		REGDATE , B.PRODUCT_NO AS PRODUCTNO , B.TITLE AS TITLE ,
+		B.ADDRESS AS
+		ADDRESS , B.PRICE AS PRICE , B.HIT AS HIT , B.IMAGES AS
+		IMAGES
+		FROM
+		( SELECT ROWNUM AS RN , A.* FROM
+		(SELECT M.NICKNAME , P.REG_NO ,
+		P.CONTENT , P.MOD_NO , P.MOD_DATE ,
+		P.REG_DATE , P.PRODUCT_NO ,
+		P.TITLE
+		, P.ADDRESS , P.PRICE , P.HIT ,
+		NVL(I.IMAGES , '') AS IMAGES
+		FROM
+		MEMBER M INNER JOIN PRODUCT P ON M.MEMBER_NO = P.REG_NO
+        INNER JOIN LIKEPRODUCT L ON P.PRODUCT_NO = L.PRODUCT_NO
+		LEFT OUTER JOIN
+		(SELECT PRODUCT_NO AS PNO , LISTAGG(FILE_PATH , ',')
+		WITHIN GROUP (ORDER
+		BY PRODUCT_NO)IMAGES FROM PRODUCT_IMAGE GROUP BY PRODUCT_NO) I 
+        ON P.PRODUCT_NO = I.PNO
+		WHERE P.STATUS = 1 AND P.DEL_YN = 'N' AND M.STATUS = 0 AND P.REG_NO = #{param1}
+        ORDER BY P.REG_DATE DESC) 
+        A ) B WHERE B.RN BETWEEN 1 AND 4
+	</select>
+	<select id="selectRecentlyViewProductList">
 	</select>
 </mapper>

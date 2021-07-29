@@ -30,10 +30,14 @@ import com.koreait.dooboo.member.command.IdCheckCommand;
 import com.koreait.dooboo.member.command.JoinCommand;
 import com.koreait.dooboo.member.command.LogOutCommand;
 import com.koreait.dooboo.member.command.LoginCommand;
+import com.koreait.dooboo.member.command.SelectMyFavoriteProductList;
 import com.koreait.dooboo.member.command.SendTempPasswordEmailCommand;
 import com.koreait.dooboo.member.command.UpdateContactCommand;
 import com.koreait.dooboo.member.command.UpdateInfoCommand;
 import com.koreait.dooboo.member.command.UpdatePasswordCommand;
+import com.koreait.dooboo.reply.command.DeleteReplyCommand;
+import com.koreait.dooboo.reply.command.InsertReplyCommand;
+import com.koreait.dooboo.reply.command.SelectAllReplyCommand;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
@@ -141,6 +145,24 @@ public class BeanConfiguration {
 	@Bean
 	public IdCheckCommand idCheckCommand() {
 		return new IdCheckCommand();
+	}
+	
+	@Bean
+	public InsertReplyCommand insertReplyCommand() {
+		return new InsertReplyCommand();
+	}
+	@Bean
+	public SelectAllReplyCommand selectAllReplyCommand() {
+		return new SelectAllReplyCommand();
+	}
+	
+	@Bean
+	public DeleteReplyCommand deleteReplyCommand() {
+		return new DeleteReplyCommand();
+	}
+	@Bean
+	public SelectMyFavoriteProductList selectMyFavoriteProductList() {
+		return new SelectMyFavoriteProductList();
 	}
 
 }
