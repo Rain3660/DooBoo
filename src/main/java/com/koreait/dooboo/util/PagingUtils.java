@@ -5,9 +5,9 @@ import com.koreait.dooboo.vo.PageVO;
 public class PagingUtils {
 
 	// 메인페이지에 뿌려줄 리스트의 페이지를 정의
-	// 한 페이지당 9개 , 블럭당 5페이지를 가져오겠다.
+	// 한 페이지당 12개 , 블럭당 5페이지를 가져오겠다.
 	// field
-	public static int recordPerPage = 9;
+	public static int recordPerPage = 12;
 	public static int beginRecord;
 	public static int endRecord;
 

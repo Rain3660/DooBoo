@@ -27,7 +27,7 @@ import com.koreait.dooboo.member.command.IdCheckCommand;
 import com.koreait.dooboo.member.command.JoinCommand;
 import com.koreait.dooboo.member.command.LogOutCommand;
 import com.koreait.dooboo.member.command.LoginCommand;
-import com.koreait.dooboo.member.command.SelectMyFavoriteProductList;
+import com.koreait.dooboo.member.command.MyPageCommand;
 import com.koreait.dooboo.member.command.SendTempPasswordEmailCommand;
 import com.koreait.dooboo.member.command.UpdateContactCommand;
 import com.koreait.dooboo.member.command.UpdateInfoCommand;
@@ -64,7 +64,7 @@ public class MemberController {
 	@Autowired
 	private IdCheckCommand idCheckCommand;
 	@Autowired
-	private SelectMyFavoriteProductList selectMyFavoriteProductList;
+	private MyPageCommand selectMyFavoriteProductList;
 	@GetMapping("m.joinPage")
 	public String joinPage() {
 		return "member/join";

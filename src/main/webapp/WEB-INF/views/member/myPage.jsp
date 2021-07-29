@@ -235,7 +235,7 @@
 						</c:forEach>
 						</div>
 					</c:if>
-					<!-- 판매자가 판매중인 상품이 없을 때 -->
+					<!-- 찜목록 상품이 없을 때 -->
 					<c:if test="${myFavoriteProductListSize eq 0 }">
 						<h3 class="text-center">등록된 상품이 없습니다.</h3>
 					</c:if>
@@ -244,7 +244,7 @@
 		<div class="row">
 			<div class="col-md-12 mx-auto">
 				<h3 class="text-center">판매중인 상품</h3>
-					<!-- 찜 목록한 상품이 있을 때 -->
+					<!-- 판매중인 상품이 있을 때 -->
 					<c:if test="${myOnSaleProductListSize ne 0 }">
 					<div class="card-group">
 						<c:forEach var="product" items="${myOnSaleProductList }">
@@ -270,7 +270,35 @@
 					</c:if>
 			</div>
 		</div>
-		
+		<div class="row">
+			<div class="col-md-12 mx-auto">
+				<h3 class="text-center">최근 본 게시글</h3>
+					<!-- 최근 본 게시글이 있을때 -->
+					<c:if test="${recentlyViewProductListSize ne 0 }">
+					<div class="card-group">
+						<c:forEach var="product" items="${recentlyViewProductList }">
+							<div class="card product-link" data-productno="${product.productNo }">
+								<c:if test="${product.images eq null }">
+									<img src="resources/image/noimage.png" class="card-img-top" alt="...">
+								</c:if>
+								<c:if test="${product.images ne null }">
+									<img src="${STATIC_IMAGE_ROOT}${product.images.split(',')[0]}" class="card-img-top" alt="...">
+								</c:if>
+								<div class="card-body">
+									<h5 class="card-title">${product.title }</h5>
+									<p class="card-text">${product.price }</p>
+									<p class="card-text">${product.address }</p>
+								</div>
+							</div>
+						</c:forEach>
+						</div>
+					</c:if>
+					<!--최근 본 게시글이 없을때-->
+					<c:if test="${recentlyViewProductListSize eq 0 }">
+						<h3 class="text-center">최근 본 게시글이 없습니다.</h3>
+					</c:if>
+			</div>
+		</div>
 	</div>
 </body>
 

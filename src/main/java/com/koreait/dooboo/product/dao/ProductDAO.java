@@ -46,5 +46,7 @@ public interface ProductDAO {
 	public List<ProductVO> selectMyFavoriteProductList(long memberNo);
 	// 내가 현재 판매중인 상품 가져오기 4개
 	public List<ProductVO> selectMyOnSaleProductList(long memberNo);
+	// 최근 본 상품 리스트 가져오기 4개
+	public List<ProductVO> selectRecentlyViewProductList(List<Long> recentlyViewProductNo);
 	
 }

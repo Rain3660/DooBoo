@@ -175,14 +175,16 @@ public class ProductCommand {
 		
 		List<Long> recentlyViewProductNo = (ArrayList<Long>)session.getAttribute("recentlyViewProductNo");
 		
-		if(recentlyViewProductNo.size() <= 4) {
-			if(!recentlyViewProductNo.contains(productNo)) { // 이미 최근본 목록에 없다면 리스트에 추가
-				recentlyViewProductNo.add(productNo);				
+		if(!recentlyViewProductNo.contains(productNo)) { // 이미 최근본 목록에 있으면 안되니까
+			if(recentlyViewProductNo.size() < 4) { // 4개보다 작다면
+				recentlyViewProductNo.add(productNo);
+			}else {
+				recentlyViewProductNo.remove(0);
+				recentlyViewProductNo.add(productNo);
 			}
-		}else {
-			recentlyViewProductNo.remove(0);
-			recentlyViewProductNo.add(productNo);
+			
 		}
+		System.out.println(recentlyViewProductNo.toString());
 		/*System.out.println(recentlyViewProductNo.toString());*/
 		// 상품번호에 해당하는 상품
 		ProductVO productVO = productDAO.selectProductDetailByProductNo(productNo);
