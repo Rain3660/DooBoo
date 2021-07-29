@@ -175,4 +175,10 @@ public class MemberController {
 		model.addAttribute("memberDTO", memberDTO);
 		return idCheckCommand.execute(sqlSession, model);
 	}
+	
+	
+	@GetMapping(value="chatPage")
+	public String chatPage() {
+		return "char2/src/chat";
+	}
 }
