@@ -28,9 +28,10 @@ import com.koreait.dooboo.member.command.DeleteCommand;
 import com.koreait.dooboo.member.command.FindIdCommand;
 import com.koreait.dooboo.member.command.IdCheckCommand;
 import com.koreait.dooboo.member.command.JoinCommand;
+import com.koreait.dooboo.member.command.LocationCheckCommand;
 import com.koreait.dooboo.member.command.LogOutCommand;
 import com.koreait.dooboo.member.command.LoginCommand;
-import com.koreait.dooboo.member.command.SelectMyFavoriteProductList;
+import com.koreait.dooboo.member.command.MyPageCommand;
 import com.koreait.dooboo.member.command.SendTempPasswordEmailCommand;
 import com.koreait.dooboo.member.command.UpdateContactCommand;
 import com.koreait.dooboo.member.command.UpdateInfoCommand;
@@ -161,8 +162,12 @@ public class BeanConfiguration {
 		return new DeleteReplyCommand();
 	}
 	@Bean
-	public SelectMyFavoriteProductList selectMyFavoriteProductList() {
-		return new SelectMyFavoriteProductList();
+	public MyPageCommand selectMyFavoriteProductList() {
+		return new MyPageCommand();
+	}
+	@Bean
+	public LocationCheckCommand locationCheckCommand() {
+		return new LocationCheckCommand();
 	}
 
 }

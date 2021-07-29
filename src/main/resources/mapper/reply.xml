@@ -25,12 +25,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="selectReplyListForPaging" parameterType="Map" resultType="com.koreait.dooboo.reply.dto.ReplyDTO">
-		SELECT B. REPLY_NO, B.REG_NO, B.REPLY_CONTENT, B.MOD_NO, B.DEL_YN
-		  FROM (SELECT ROWNUM AS RN, A. REPLY_NO, A. REG_NO, A.REPLY_CONTENT, A.MOD_NO, A.DEL_YN
-		          FROM (SELECT REPLY_NO, REG_NO, REPLY_CONTENT,MOD_NO, DEL_YN 
-		                  FROM REPLY WHERE BOARD_NO = #{boardNo}
-		                 ORDER BY REPLY_NO DESC) A) B
-		 WHERE B.RN BETWEEN #{beginRecord} AND #{endRecord}
+		 SELECT R.RN, M.NICKNAME, R.REPLY_NO, R.REG_NO, R.REPLY_CONTENT, R.MOD_NO, R.DEL_YN 
+      		FROM (SELECT ROWNUM AS RN, REPLY_NO, REG_NO, REPLY_CONTENT, MOD_NO, DEL_YN 
+		                  FROM REPLY
+		                WHERE BOARD_NO = #{boardNo} 
+		                ORDER BY REPLY_NO DESC) R INNER JOIN MEMBER M 
+                  ON  R.REG_NO = M.MEMBER_NO
+           WHERE R.RN BETWEEN #{beginRecord} AND #{endRecord}
+		
 	</select>
 	
 	<select id="getReplyCount"   resultType="int">

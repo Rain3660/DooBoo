@@ -19,6 +19,7 @@
 		<div class="mb-3">
 			<label for="price" class="form-label">가격</label>
 			<input type="text" class="form-control" id="price" name="price" placeholder="$" >
+			<div id="error"></div>
 		</div>
 		<div class="mb-3">
 			<label for="content" class="form-label">내용</label>
@@ -67,6 +68,7 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		fn_IdChange();
+		fn_priceNumberCheck();
 		$('#sellProduct_btn').on('click',function(){
 			if(!fn_IdChange()){
 				alert('지역이 인증되지 않았습니다. 다시확인해주세요');					
@@ -96,6 +98,8 @@
 				}
 			}
 		})
+		
+		
 	})
 	
 	
@@ -182,6 +186,7 @@
 
 				});
 			}
+			
 		});
 		
 		function removeFile(el){
@@ -208,6 +213,23 @@
 				}
 			}
 		}
+		
+		function fn_priceNumberCheck(){
+			$(document).on('keyup','#price', function(){
+				var reg = /^[1-9][0-9]*$/
+				if(!reg.test($(this).val())){
+					$(this).val('');
+					$('#error').text('숫자만 입력가능')
+					focus.on(this);
+				}else{
+					$('#error').text('');
+				}
+				
+					
+			
+			})
+		}
+		
 	
 </script>
 <jsp:include page="../layout/footer.jsp"></jsp:include>

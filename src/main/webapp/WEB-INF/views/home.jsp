@@ -228,7 +228,7 @@
 			var row;
 			// 행이 바뀌면 productList 안에 행부터 만들고 그 행 안에 col 을 만들어 준다.
 			// 행이 바뀌지 않는다면 그 !! 행 안에 col을 만들어야 한다.
-			if(index % 3 == 0){
+			if(index % 4 == 0){
 				// 행
 				row = $('<div class="row row-cols-lg-3 row-cols-md-2 mt-5"></div>');
 				row.append(columnMaker(productVO.images , productVO.title , productVO.price , productVO.address , productVO.hit , productVO.likeCount , productVO.productNo))
@@ -252,7 +252,7 @@
 			image = '${STATIC_IMAGE_ROOT }' + images.split(',')[0];
 		}
 		
-		col = '<div class="col-lg-4 col-md-6 col-sm-12  mb-5">' +
+		col = '<div class="col-lg-3 col-md-6 col-sm-12  mb-5">' +
 		'<div class="card border-0 mb-3 mx-auto card_link" data-productno="' + productNo + '" style="width: 18rem;">' +
 		  '<img src="' + image + '" class="card-img-top" alt="..." style="height: 192px;">' +
 		  	'<div class="card-body">' +

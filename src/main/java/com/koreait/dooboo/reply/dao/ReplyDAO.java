@@ -10,5 +10,5 @@ public interface ReplyDAO {
 	public List<ReplyDTO> selectAllReply(long boardNo);
 	public int deleteReply(long replyNo);
 	public int getReplyCount(long boardNo);
-	public List<ReplyDTO> selectReplyListForPaging(Map map);
+	public List<ReplyDTO> selectReplyListForPaging(Map<String, Object> map);
 }

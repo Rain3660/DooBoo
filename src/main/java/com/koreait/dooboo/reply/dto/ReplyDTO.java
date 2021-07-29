@@ -8,7 +8,16 @@ public class ReplyDTO {
 	private int page ;
 	// 댓글번호 1부터 시작
 	private long replyNo;
+	
+	public String getNickName() {
+		return nickName;
+	}
 
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
+	}
+
+	private String nickName;
 
 	public int getPage() {
 		return page;

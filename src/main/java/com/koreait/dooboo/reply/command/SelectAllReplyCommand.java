@@ -20,7 +20,7 @@ public class SelectAllReplyCommand {
 		Map<String, Object> map = model.asMap();
 		long boardNo = (long) map.get("boardNo");
 	   int page = (int) map.get("page");
-	   System.out.println(boardNo);
+	
 		
 		ReplyDAO replyDAO = session.getMapper(ReplyDAO.class);
 		
@@ -40,6 +40,7 @@ public class SelectAllReplyCommand {
 		 record.put("beginRecord", beginRecord);
 		 record.put("endRecord", endRecord);
 		 record.put("boardNo", boardNo);
+		
 		 
 	    List<ReplyDTO> list = replyDAO.selectReplyListForPaging(record);
 		
