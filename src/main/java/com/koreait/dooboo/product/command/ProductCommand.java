@@ -188,13 +188,14 @@ public class ProductCommand {
 		ProductVO productVO = productDAO.selectProductDetailByProductNo(productNo);
 		String strImages = productVO.getImages();
 		List<String> imageList = new ArrayList<>();
-		String [] images2 = strImages.split(",");
+		String [] images2 = null;
 		if(strImages != null) {
 			for (String image : strImages.split(",")) {
-
+				
 				imageList.add(image);
 				
 			}
+			images2 = strImages.split(",");
 		}
 		if(images2 != null) {
 			model.addAttribute("OneImage",images2[0]);
