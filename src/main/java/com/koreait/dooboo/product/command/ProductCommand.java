@@ -196,8 +196,12 @@ public class ProductCommand {
 				
 			}
 		}
-
-		model.addAttribute("OneImage",images2[0]);
+		if(images2 != null) {
+			model.addAttribute("OneImage",images2[0]);
+		}else {			
+			model.addAttribute("OneImage","");
+		}
+	
 
 
 		productVO.setImageList(imageList);

@@ -135,7 +135,11 @@ public class MapController {
 	@GetMapping(value="m.dealLocationByMap")
 	public String dealLocationByMap(@RequestParam("location") String location,@RequestParam("image") String image,Model model) {
 		model.addAttribute("location",location);
-		model.addAttribute("image",image);
+		if(image.equals("")) {
+			model.addAttribute("image","resources/image/noimage.png");						
+		}else {
+			model.addAttribute("image",image);			
+		}
 		return"map/dealLocationByMap";
 	}
 	
