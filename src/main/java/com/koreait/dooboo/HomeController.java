@@ -58,4 +58,12 @@ public class HomeController {
 	public String product() {
 		return "product/productList";
 	}
+	@GetMapping("p.newProductList")
+	public String newProductListPage() {
+		return "product/newProductList";
+	}
+	@GetMapping("p.popularProductList")
+	public String popularProductListPage() {
+		return "product/popularProductList";
+	}
 }

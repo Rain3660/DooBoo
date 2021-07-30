@@ -117,4 +117,18 @@ public class ProductController {
 		return productCommand.selectProductListByAddressAndQuery(model);
 		
 	}
+	@PostMapping(value="p.selectNewProductList")
+	@ResponseBody
+	public Map<String, Object> selectNewProductList(Model model , @RequestBody PageVO pageVO){
+		model.addAttribute("pageVO", pageVO);
+		
+		return productCommand.selectNewProductList(model);
+	}
+	@PostMapping(value="p.selectPopularProductList")
+	@ResponseBody
+	public Map<String, Object> selectPopularProductList(Model model , @RequestBody PageVO pageVO){
+		model.addAttribute("pageVO", pageVO);
+		
+		return productCommand.selectPopularProductList(model);
+	}
 }

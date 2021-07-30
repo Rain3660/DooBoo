@@ -165,6 +165,43 @@ public class ProductCommand {
 		resultMap.put("productList", productList);
 		return resultMap;
 	}
+	public Map<String, Object> selectNewProductList(Model model){
+		
+		// 페이지 번호( default 1 ) , city region 을 가지고있습니다.
+		PageVO pageVO = (PageVO)model.asMap().get("pageVO");
+		int page = pageVO.getPage();
+		// 총 데이터 수
+		int totalRecord = productDAO.getTotalProductListCountWithoutQuery();
+		
+		// 쿼리에 사용할 PageVO 
+		PageVO pageAndQueryVO = PagingUtils.getPage(totalRecord, page);
+		
+		List<ProductVO> productList = productDAO.selectNewProductList(pageAndQueryVO);
+		
+		Map<String, Object> resultMap = new HashMap<>();
+		resultMap.put("pageAndQueryVO", pageAndQueryVO);
+		resultMap.put("productList", productList);
+		return resultMap;
+	}
+	public Map<String, Object> selectPopularProductList(Model model){
+		
+		// 페이지 번호( default 1 ) , city region 을 가지고있습니다.
+		PageVO pageVO = (PageVO)model.asMap().get("pageVO");
+		int page = pageVO.getPage();
+		// 총 데이터 수
+		int totalRecord = productDAO.getTotalProductListCountWithoutQuery();
+		
+		// 쿼리에 사용할 PageVO 
+		PageVO pageAndQueryVO = PagingUtils.getPage(totalRecord, page);
+		
+		List<ProductVO> productList = productDAO.selectPopularProductList(pageAndQueryVO);
+		
+		Map<String, Object> resultMap = new HashMap<>();
+		resultMap.put("pageAndQueryVO", pageAndQueryVO);
+		resultMap.put("productList", productList);
+		return resultMap;
+	}
+	
 	public Map<String, Object> selectProductListByAddressAndQuery(Model model) {
 		Map<String, Object> resultMap = new HashMap<>();
 		// 현재 페이지와 검색어 , 시 를 가지고 있습니다.
