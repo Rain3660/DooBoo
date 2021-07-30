@@ -552,7 +552,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	<!-- 최신 상품 조회 -->
 	<select id="selectNewProductList" resultType="com.koreait.dooboo.vo.ProductVO">
-		 SELECT
+		SELECT
 		B.NICKNAME AS NICKNAME , B.REG_NO AS REGNO
 		, B.CONTENT AS CONTENT
 		, B.MOD_NO AS MODNO
@@ -582,6 +582,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		AS LIKECOUNT FROM LIKEPRODUCT GROUP BY
 		PRODUCT_NO) L ON P.PRODUCT_NO =
 		L.PRODUCT_NO
+		WHERE P.STATUS = 1 AND P.DEL_YN = 'N' AND M.STATUS = 0
 		ORDER BY P.MOD_DATE DESC , LIKECOUNT DESC , P.HIT DESC ) A ) B
         WHERE B.RN BETWEEN #{beginRecord} AND #{endRecord}
 	</select>
@@ -617,6 +618,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		AS LIKECOUNT FROM LIKEPRODUCT GROUP BY
 		PRODUCT_NO) L ON P.PRODUCT_NO =
 		L.PRODUCT_NO
+		WHERE P.STATUS = 1 AND P.DEL_YN = 'N' AND M.STATUS = 0
 		ORDER BY  P.HIT DESC , P.MOD_DATE DESC , LIKECOUNT DESC ) A ) B
         WHERE B.RN BETWEEN #{beginRecord} AND #{endRecord}
 	</select>
