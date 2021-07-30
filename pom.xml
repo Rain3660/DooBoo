@@ -232,6 +232,15 @@
         </dependency>
 
 
+<!-- chat 웹소캣 -->
+    <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-websocket</artifactId>
+        <version>${org.springframework-version}</version>
+    </dependency>
+
+  <!-- 여기까지 -->
+
 	</dependencies>
     <build>
         <plugins>
