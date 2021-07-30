@@ -41,8 +41,8 @@
 
 					<li class="nav-item"><a class="nav-link" aria-current="page" href="#" id="product_btn">상품</a></li>
 					<li class="nav-item"><a class="nav-link" href="b.list">자유게시판</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">New</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">Popular</a></li>
+					<li class="nav-item"><a class="nav-link" href="#" id="new">New</a></li>
+					<li class="nav-item"><a class="nav-link" href="#" id="popular">Popular</a></li>
 					<li class="nav-item"><a class="nav-link" href="#" id="insertProduct_btn">상품등록</a></li>
 					<li class="nav-item"><a class="nav-link" href="#" id="chat">1:1대화함</a></li>
 				</ul>
@@ -104,6 +104,20 @@
 					openModal();
 				}else{
 					location.href = 'm.myPage';
+				}
+			})
+			$('#new').on('click' , function(){
+				if(${loginUser eq null}){
+					openModal();
+				}else{
+					location.href = 'p.newProductList';
+				}
+			})
+			$('#popular').on('click' , function(){
+				if(${loginUser eq null}){
+					openModal();
+				}else{
+					location.href = 'p.popularProductList';
 				}
 			})
 			$('#communityBoard_btn').on('click' , function(){
