@@ -30,11 +30,11 @@
 	<input type="text" id="msg">
 	<button id="msg_process">전송</button>
 
-	<script src="http://sih8859.iptime.org:9099/socket.io/socket.io.js"></script>
+	<script src="http://sih8859.iptime.org:82/socket.io/socket.io.js"></script>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 	<script>
 		$(document).ready(function() {
-			const socket = io("http://sih8859.iptime.org:9099");
+			const socket = io("http://sih8859.iptime.org:82");
 			
 
 			//msg에서 키를 누를떄
