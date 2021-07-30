@@ -20,7 +20,7 @@
 		$('#message').val('')
 	});
 
-	let sock = new SockJS("http://localhost:9090/ROOT/echo");
+	let sock = new SockJS("http://sih8859.iptime.org:9099/echo");
 	sock.onmessage = onMessage;
 	sock.onclose = onClose;
 	// 메시지 전송
