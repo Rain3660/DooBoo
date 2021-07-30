@@ -194,4 +194,10 @@ public class MemberController {
 		return "product/myHomeProductListPage";
 
 	}
+	
+	
+	@GetMapping(value="chatPage")
+	public String chatPage() {
+		return "";
+	}
 }
