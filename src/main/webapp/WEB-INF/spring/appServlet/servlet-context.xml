@@ -31,8 +31,8 @@
 		<websocket:mapping handler="echoHandler" path="/echo" />
 		<websocket:sockjs />
 	</websocket:handlers>
+	<beans:bean id="echoHandler" class="com.koreait.dooboo.chat.SocketHandler"></beans:bean>
     
-	<beans:bean id="echoHandler" class="com.koreait.dooboo.chat.EchoHandler"></beans:bean>
 	
 	
 </beans:beans>

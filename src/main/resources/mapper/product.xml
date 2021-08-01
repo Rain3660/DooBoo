@@ -622,4 +622,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		ORDER BY  P.HIT DESC , P.MOD_DATE DESC , LIKECOUNT DESC ) A ) B
         WHERE B.RN BETWEEN #{beginRecord} AND #{endRecord}
 	</select>
+	
+	
+	<select id="getMemberNo" parameterType="long" resultType="long">
+		SELECT REG_NO
+		  FROM PRODUCT
+		 WHERE PRODUCT_NO = #{param1}
+	</select>
 </mapper>

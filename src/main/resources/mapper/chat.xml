@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.koreait.dooboo.chat.dao.ChatDAO">	
+	<select id="getRoom" parameterType="com.koreait.dooboo.chat.vo.RoomDTO" resultType="com.koreait.dooboo.chat.vo.RoomDTO">
+		SELECT ROOM_NO,BUYER_NO,SELLER_NO,TEXT_PATH,LAST_MOD_DATE,REG_DATE
+		  FROM ROOM
+		 WHERE BUYER_NO = #{buyerNo} AND SELLER_NO = #{sellerNo}
+	</select>
+	
+	<insert id="insertRoom">
+		INSERT INTO ROOM (ROOM_NO,BUYER_NO,SELLER_NO,TEXT_PATH,LAST_MOD_DATE,REG_DATE)
+		 VALUES(ROOM_SEQ.NEXTVAL,#{buyerNo},#{sellerNo},#{textPath},SYSDATE,SYSDATE)
+	</insert>
+	
+	<update id="messageTitle">
+		UPDATE ROOM 
+		   SET LAST_MESSAGE=#{param1},LAST_MOD_DATE = SYSDATE
+		 WHERE ROOM_NO = #{param2} 
+	</update>
+	
+	
+	<select id="selectChatList" parameterType="long" resultType="com.koreait.dooboo.chat.vo.RoomDTO">
+		SELECT ROOM_NO,BUYER_NO,SELLER_NO,TEXT_PATH,LAST_MESSAGE,LAST_MOD_DATE,REG_DATE 
+		  FROM ROOM
+		 WHERE BUYER_NO = #{memberNo} OR SELLER_NO = #{memberNo}
+		 ORDER BY LAST_MOD_DATE DESC
+	</select>
+	
+</mapper>
