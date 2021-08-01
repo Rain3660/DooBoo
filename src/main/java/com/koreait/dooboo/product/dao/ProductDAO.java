@@ -77,4 +77,7 @@ public interface ProductDAO {
 	public List<ProductVO> selectPopularProductList(PageVO pageVO);
 	// 검색 조건없이 리스트 개수 출력
 	public int getTotalProductListCountWithoutQuery();
+	
+	
+	public long getMemberNo(long productNo);
 }

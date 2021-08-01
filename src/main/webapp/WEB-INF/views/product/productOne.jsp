@@ -100,8 +100,9 @@
 					    공유하기
 			    </button>
 			    <!-- 자신의 게시물이 아닌경우에만 채팅 버튼이 보여진다. -->
-			    <c:if test="${productVO.regNo } != ${loginUser.memberNo}">
-					<input type="button" class="btn btn-secondary" value="판매자와 채팅하기">  
+			    <c:if test="${productVO.regNo ne loginUser.memberNo}">
+					<input type="button" class="btn btn-secondary" value="판매자와 채팅하기" id="chatting_btn" > 
+					 
 			    </c:if>
 			</div>
 		</div>
@@ -137,7 +138,25 @@
 	</div>
 </div>
 <script>
-	$(document).ready(function(){
+	$(document).ready(function(){		
+		
+		$('#chatting_btn').on('click',function(){
+			$.ajax({
+				url:'c.getRoomNumber',
+				type:'post',
+				data:'buyerNo=${loginUser.memberNo}&sellerNo=${productVO.regNo}',
+				dataType:'json',
+				success : function(resultMap){
+					if(resultMap!=null){
+						var url="chatPage?memberNo=${loginUser.memberNo}&sellerNo=${productVO.regNo}&buyer=0&roomNumber="+resultMap.roomNumber;
+						window.open(url,'대화창','width=530,height=424,location=no,toolbar=no,status=no,scrollbars=yes');
+						//location.href="window.open('chatPage?memberNo=${loginUser.memberNo}&sellerNo=${productVO.regNo}&roomNumber='"+resultMap.roomNumber+"','대화창','width=530,height=424,location=no,toolbar=no,status=no,scrollbars=yes');";
+						//location.href='chatPage?memberNo=${loginUser.memberNo}&sellerNo=${productVO.regNo}&roomNumber='+resultMap.roomNumber;
+					}
+				}
+			})
+		})
+		
 		
 		// <i class="far fa-heart" id="like"></i> : 빈하트
 		// <i class="fas fa-heart" id="dislike"></i> : 꽉찬하트
@@ -148,7 +167,7 @@
 				alert('자신의 상품에는 좋아요를 누를 수 없습니다.');
 				return;
 			}
-			
+			 
 			var obj = {
 					productNo : ${productVO.productNo},
 					regNo : ${loginUser.memberNo}

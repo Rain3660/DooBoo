@@ -195,9 +195,4 @@ public class MemberController {
 
 	}
 	
-	
-	@GetMapping(value="chatPage")
-	public String chatPage() {
-		return "chat/chat2/chat";
-	}
 }
