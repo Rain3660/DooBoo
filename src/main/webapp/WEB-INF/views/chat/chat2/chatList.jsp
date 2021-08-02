@@ -10,6 +10,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </head>
+
 <body>
    <div class="row mx-auto">
             <button type="button" class="btn btn-outline-primary btn-lg">메세지함</button>
@@ -17,6 +18,7 @@
 	 <c:if test="${list ne null}">
 	    <div class="list-group mx-auto mt-5" style="width: 500px;">
 	      <c:forEach var="chat" items="${list}">
+	      <c:if test="${chat.lastMessage ne '메세지가없습니다' }">
 	      <c:if test="${loginUser.memberNo eq chat.buyerNo }">
 	        <a href="chatPage?memberNo=${chat.buyerNo}&sellerNo=${chat.sellerNo}&roomNumber=${chat.roomNo}&buyer=1" class="list-group-item list-group-item-action" aria-current="true">
 	      </c:if>
@@ -32,6 +34,7 @@
 	          	<p class="mb-1">${chat.lastMessage}</p>
 	          <small>3일전</small>
 	        </a>
+	        </c:if>
 	      </c:forEach> 
         </div>
      </c:if>   
