@@ -63,7 +63,7 @@ public class SocketHandler extends TextWebSocketHandler {
 					try {
 						
 						//String DIR = "C:\\Users\\온석태\\Desktop\\chat";
-						String DIR = "http://sih8859.iptime.org:8081/dooboo";
+						String DIR = "http://sih8859.iptime.org:8081/dooboo/";
 						String fileName = (String) obj.get("fileName");
 						File file = new File(DIR,fileName);
 						MemberDAO memberDAO = sqlSession.getMapper(MemberDAO.class);
