@@ -19,8 +19,9 @@
 	wsOpen();
 	function wsOpen(){
 		//웹소켓 전송시 현재 방의 번호를 넘겨서 보낸다.
-		ws = new WebSocket("ws://sih8859.iptime.org:9099/chating/"+'${roomNumber}');
-		//ws = new WebSocket("ws://localhost:9090/ROOT/chating/"+'${roomNumber}');
+		//ws = http를의미 wss = https를 의미
+		//ws = new WebSocket("ws://sih8859.iptime.org:9099/chating/"+'${roomNumber}');
+		ws = new WebSocket("ws://localhost:9090/ROOT/chating/"+'${roomNumber}');
 		wsEvt();
 	}
 		
@@ -61,19 +62,7 @@
 		});
 	}
 
-/* 	function chatName(){
-		var userName = $("#userName").val();
-		if(userName == null || userName.trim() == ""){
-			alert("사용자 이름을 입력해주세요.");
-			$("#userName").focus();
-		}else{
-			wsOpen();
-			$("#yourName").hide();
-			$("#yourMsg").show();
-		}
-	} */
-
-	function send() {
+	function send() { //데이터를  서버로 전송할때
 		let today = new Date();  
 		let day = today.toLocaleDateString();
 		let time = today.toLocaleTimeString();
