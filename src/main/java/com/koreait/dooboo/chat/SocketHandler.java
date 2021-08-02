@@ -60,19 +60,7 @@ public class SocketHandler extends TextWebSocketHandler {
 				//그리고 세션정보를 가져와 해당되는 sessionId에게먼 메세지를 다시 전송해준다.				
 				if(wss != null) { //해당방에 한명이라도 존재한다면~
 					
-					try {
-						
-						//String DIR = "C:\\Users\\온석태\\Desktop\\chat";
-						String DIR = "http://sih8859.iptime.org:8081/dooboo/";
-						String fileName = (String) obj.get("fileName");
-						File file = new File(DIR,fileName);
-						MemberDAO memberDAO = sqlSession.getMapper(MemberDAO.class);
-						long memberNo = Long.parseLong((String) obj.get("memberNo"));
-						MemberDTO memberDTO = memberDAO.selectMemberByMemberNo(memberNo);
-						FileWriterAndReader.getFileWriter(file, (String)obj.get("userName"), (String)obj.get("msg"),(String)obj.get("day"),(String)obj.get("time"));														
-						
-						
-						
+					try {	
 						ChatDAO chatDAO = sqlSession.getMapper(ChatDAO.class);
 						chatDAO.messageTitle((String)obj.get("msg"), Long.parseLong(rN));
 						
@@ -81,6 +69,19 @@ public class SocketHandler extends TextWebSocketHandler {
 						e.printStackTrace();
 					}
 				}
+			}
+
+			try {
+			//String DIR = "C:\\Users\\온석태\\Desktop\\chat";
+			String DIR = "C:\\chat";
+			String fileName = (String) obj.get("fileName");
+			File file = new File(DIR,fileName);
+			MemberDAO memberDAO = sqlSession.getMapper(MemberDAO.class);
+			long memberNo = Long.parseLong((String) obj.get("memberNo"));
+			MemberDTO memberDTO = memberDAO.selectMemberByMemberNo(memberNo);
+			FileWriterAndReader.getFileWriter(file, (String)obj.get("userName"), (String)obj.get("msg"),(String)obj.get("day"),(String)obj.get("time"));
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
 		}
 	}
