@@ -142,8 +142,6 @@
 			$('#chatList_btn').on('click' , function(){
 				if(${loginUser eq null}){
 					openModal();
-				}else{
-					location.href = 'chat';
 				}
 			})
 			$('#product_btn').on('click' , function(){
