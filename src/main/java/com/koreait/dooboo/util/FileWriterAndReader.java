@@ -18,13 +18,9 @@ import com.koreait.dooboo.chat.vo.ChatDTO;
 public class FileWriterAndReader {
 
 	
-	public static void getFileWriter(File file,String nickname,String content,String day,String time) throws IOException, ParseException {
+	public static void getFileWriter(File file,String nickname,String content,String day,String time) throws IOException {
 		FileWriter fw = null;
 		BufferedWriter bw = null;
-		List<ChatDTO> list =  getReadFile(file);
-		int lastIndex = list.size()-1;
-		ChatDTO checkDTO = list.get(lastIndex);
-		if(!checkDTO.getTime().equals(time)) {
 		try {
 				
 			 fw = new FileWriter(file,true);
@@ -49,7 +45,7 @@ public class FileWriterAndReader {
 			}
 		}
 	  }
-	}
+	
 	
 	public static List<ChatDTO> getReadFile(File file) throws IOException, ParseException {
 		List<ChatDTO> list = new ArrayList<ChatDTO>();

@@ -42,7 +42,7 @@ public class ChatController {
 	List<Room> roomList = new ArrayList<Room>();
 	static int roomNumber = 0;
 	//final static String PATH = "C:\\Users\\온석태\\Desktop\\chat"; //이거바꿔야함
-	final static String PATH = "http://sih8859.iptime.org:8081/dooboo/"; //이거바꿔야함
+	final static String PATH = "C:\\chat"; //이거바꿔야함
 	
 	@PostMapping(value="c.getRoomNumber")
 	@ResponseBody
