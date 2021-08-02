@@ -41,8 +41,8 @@ public class ChatController {
 	
 	List<Room> roomList = new ArrayList<Room>();
 	static int roomNumber = 0;
-	final static String PATH = "C:\\Users\\온석태\\Desktop\\chat"; //local서버에 text저장경로
-	//final static String PATH = "C:\\chat"; //메인서버text 저장경로
+	//final static String PATH = "C:\\Users\\온석태\\Desktop\\chat"; //local서버에 text저장경로
+	final static String PATH = "C:\\chat"; //메인서버text 저장경로
 	
 	@PostMapping(value="c.getRoomNumber") //메세지함에 들어갔을때 
 	@ResponseBody

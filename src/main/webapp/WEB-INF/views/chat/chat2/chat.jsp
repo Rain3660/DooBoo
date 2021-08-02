@@ -20,8 +20,8 @@
 	function wsOpen(){
 		//웹소켓 전송시 현재 방의 번호를 넘겨서 보낸다.
 		//ws = http를의미 wss = https를 의미
-		//ws = new WebSocket("ws://sih8859.iptime.org:9099/chating/"+'${roomNumber}');
-		ws = new WebSocket("ws://localhost:9090/ROOT/chating/"+'${roomNumber}');
+		ws = new WebSocket("ws://sih8859.iptime.org:9099/chating/"+'${roomNumber}');
+		//ws = new WebSocket("ws://localhost:9090/ROOT/chating/"+'${roomNumber}');
 		wsEvt();
 	}
 		

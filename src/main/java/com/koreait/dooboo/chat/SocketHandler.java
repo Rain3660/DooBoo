@@ -76,8 +76,8 @@ public class SocketHandler extends TextWebSocketHandler {
 			}
 
 			try {
-			String DIR = "C:\\Users\\온석태\\Desktop\\chat";
-			//String DIR = "C:\\chat";     //파일을 저장하려는 경로
+			//String DIR = "C:\\Users\\온석태\\Desktop\\chat";
+			String DIR = "C:\\chat";     //파일을 저장하려는 경로
 			String fileName = (String) obj.get("fileName"); //서버로 메세지가 넘어왔을때는 이미 파일이 만들어저있는 상태이다.
 			File file = new File(DIR,fileName); //경로와 파일이름을 넣어서 새로은 file을 생성한다
 			FileWriterAndReader.getFileWriter(file, (String)obj.get("userName"), (String)obj.get("msg"),(String)obj.get("day"),(String)obj.get("time"));
