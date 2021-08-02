@@ -44,7 +44,12 @@
 					<li class="nav-item"><a class="nav-link" href="#" id="new">New</a></li>
 					<li class="nav-item"><a class="nav-link" href="#" id="popular">Popular</a></li>
 					<li class="nav-item"><a class="nav-link" href="#" id="insertProduct_btn">상품등록</a></li>
-					<li class="nav-item"><a class="nav-link" onclick="window.open('c.selectChatList?memberNo=${loginUser.memberNo }','메세지함','width=530,height=424,location=no,toolbar=no,status=no,scrollbars=yes');">메세지함</a></li>
+					<c:if test="${empty loginUser }">
+						<li class="nav-item"><a class="nav-link" id="chatList_btn" href="#">메세지함</a></li>
+					</c:if>
+					<c:if test="${not empty loginUser }">
+						<li class="nav-item"><a class="nav-link" href="#" onclick="window.open('c.selectChatList?memberNo=${loginUser.memberNo }','메세지함','width=530,height=424,location=no,toolbar=no,status=no,scrollbars=yes');">메세지함</a></li>
+					</c:if>
 				</ul>
 				<ul class="navbar-nav float-end">
 					<c:if test="${empty loginUser }">
@@ -134,11 +139,9 @@
 					location.href = 'p.insertSellProductPage';
 				}
 			})
-			$('#chat').on('click' , function(){
+			$('#chatList_btn').on('click' , function(){
 				if(${loginUser eq null}){
 					openModal();
-				}else{
-					location.href = 'chat';
 				}
 			})
 			$('#product_btn').on('click' , function(){
