@@ -222,75 +222,74 @@ public class ProductCommand {
 	}
 	
 	public void selectProductDetailByProductNo(Model model) {
-		HttpServletRequest request = (HttpServletRequest)model.asMap().get("request");
-		HttpSession session = request.getSession();
-		MemberDTO loginUser = (MemberDTO)session.getAttribute("loginUser");
-		long memberNo = 0;
-		if(loginUser != null) {
-			memberNo = loginUser.getMemberNo();
-		}
-		
-		long productNo = Long.parseLong(request.getParameter("productNo"));
-		
-		List<Long> recentlyViewProductNo = (ArrayList<Long>)session.getAttribute("recentlyViewProductNo");
-		
-		if(!recentlyViewProductNo.contains(productNo)) { // 이미 최근본 목록에 있으면 안되니까
-			if(recentlyViewProductNo.size() < 4) { // 4개보다 작다면
-				recentlyViewProductNo.add(productNo);
-			}else {
-				recentlyViewProductNo.remove(0);
-				recentlyViewProductNo.add(productNo);
-			}
-			
-		}
-		System.out.println(recentlyViewProductNo.toString());
-		/*System.out.println(recentlyViewProductNo.toString());*/
-		// 상품번호에 해당하는 상품
-		ProductVO productVO = productDAO.selectProductDetailByProductNo(productNo);
-		String strImages = productVO.getImages();
-		List<String> imageList = new ArrayList<>();
-		String [] images2 = null;
-		if(strImages != null) {
-			for (String image : strImages.split(",")) {
-				
-				imageList.add(image);
-				
-			}
-			images2 = strImages.split(",");
-		}
-		if(images2 != null) {
-			model.addAttribute("OneImage",images2[0]);
-		}else {			
-			model.addAttribute("OneImage","");
-		}
-	
+	      HttpServletRequest request = (HttpServletRequest)model.asMap().get("request");
+	      HttpSession session = request.getSession();
+	      MemberDTO loginUser = (MemberDTO)session.getAttribute("loginUser");
+	      long memberNo;
+	      long productNo = Long.parseLong(request.getParameter("productNo"));
+	      
+	      if(loginUser != null) {
+	         memberNo = loginUser.getMemberNo();
+	         List<Long> recentlyViewProductNo = (ArrayList<Long>)session.getAttribute("recentlyViewProductNo");
+	         
+	         if(!recentlyViewProductNo.contains(productNo)) { // 이미 최근본 목록에 있으면 안되니까
+	            if(recentlyViewProductNo.size() < 4) { // 4개보다 작다면
+	               recentlyViewProductNo.add(productNo);
+	            }else {
+	               recentlyViewProductNo.remove(0);
+	               recentlyViewProductNo.add(productNo);
+	            }
+	         }
+	      }else {
+	         memberNo = 0;
+	      }
+	      /*System.out.println(recentlyViewProductNo.toString());*/
+	      // 상품번호에 해당하는 상품
+	      ProductVO productVO = productDAO.selectProductDetailByProductNo(productNo);
+	      String strImages = productVO.getImages();
+	      List<String> imageList = new ArrayList<>();
+	      String [] images2 = null;
+	      if(strImages != null) {
+	         for (String image : strImages.split(",")) {
+	            
+	            imageList.add(image);
+	            
+	         }
+	         images2 = strImages.split(",");
+	      }
+	      if(images2 != null) {
+	         model.addAttribute("OneImage",images2[0]);
+	      }else {         
+	         model.addAttribute("OneImage","");
+	      }
+	   
 
 
-		productVO.setImageList(imageList);
-		
-		// 그 상품을 판매자가 판매하고있는 최근 상품들
-		long regNo = productVO.getRegNo();
-		List<ProductVO> productList = productDAO.getProductListOfSeller(regNo);
-		
-		// 조회수 증가시키기
-		productDAO.updateHit(productNo);
-		
-		// 로그인한 유저가 해당 상품을 좋아요 했나 안했나 판단한다.
-		int likeOrDislike = productDAO.likeOrDislike(memberNo, productNo);
-		
-		// 사진을 몇개 첨부했나 저장한다.
-		model.addAttribute("imageListSize", imageList.size());
+	      productVO.setImageList(imageList);
+	      
+	      // 그 상품을 판매자가 판매하고있는 최근 상품들
+	      long regNo = productVO.getRegNo();
+	      List<ProductVO> productList = productDAO.getProductListOfSeller(regNo);
+	      
+	      // 조회수 증가시키기
+	      productDAO.updateHit(productNo);
+	      
+	      // 로그인한 유저가 해당 상품을 좋아요 했나 안했나 판단한다.
+	      int likeOrDislike = productDAO.likeOrDislike(memberNo, productNo);
+	      
+	      // 사진을 몇개 첨부했나 저장한다.
+	      model.addAttribute("imageListSize", imageList.size());
 
-		// 좋아요 여부를 저장한다.
-		model.addAttribute("likeOrDislike" , likeOrDislike);
-		
-		// 해당상품 상세정보를 저장한다.
-		model.addAttribute("productVO", productVO);
-		
-		// 판매자의 판매물품을 저장한다.
-		model.addAttribute("productList", productList);
-		model.addAttribute("productListSize", productList.size());
-	}
+	      // 좋아요 여부를 저장한다.
+	      model.addAttribute("likeOrDislike" , likeOrDislike);
+	      
+	      // 해당상품 상세정보를 저장한다.
+	      model.addAttribute("productVO", productVO);
+	      
+	      // 판매자의 판매물품을 저장한다.
+	      model.addAttribute("productList", productList);
+	      model.addAttribute("productListSize", productList.size());
+	   }
 	public Map<String, Object> iLikeThisProduct(Model model){
 		Map<String, Object> resultMap = new HashMap<>();
 		
