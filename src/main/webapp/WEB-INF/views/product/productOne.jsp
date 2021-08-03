@@ -99,10 +99,9 @@
 				<button id="send-to-btn" class="btn btn-secondary" onclick="fn_kakoShare()">	
 					    공유하기
 			    </button>
-			    <!-- 자신의 게시물이 아닌경우에만 채팅 버튼이 보여진다. -->
-			    <c:if test="${productVO.regNo ne loginUser.memberNo}">
-					<input type="button" class="btn btn-secondary" value="판매자와 채팅하기" id="chatting_btn" > 
-					 
+			    <!-- 자신의 게시물이 아닌경우에만 채팅 버튼이 보여진다.+로그인했을시만 보인다 -->
+			    <c:if test="${loginUser ne null && productVO.regNo ne loginUser.memberNo}">
+					<input type="button" class="btn btn-secondary" value="판매자와 채팅하기" id="chatting_btn" > 		 
 			    </c:if>
 			</div>
 		</div>

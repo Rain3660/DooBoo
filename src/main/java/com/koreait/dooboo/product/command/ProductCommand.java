@@ -225,7 +225,11 @@ public class ProductCommand {
 		HttpServletRequest request = (HttpServletRequest)model.asMap().get("request");
 		HttpSession session = request.getSession();
 		MemberDTO loginUser = (MemberDTO)session.getAttribute("loginUser");
-		long memberNo = loginUser.getMemberNo();
+		long memberNo = 0;
+		if(loginUser != null) {
+			memberNo = loginUser.getMemberNo();
+		}
+		
 		long productNo = Long.parseLong(request.getParameter("productNo"));
 		
 		List<Long> recentlyViewProductNo = (ArrayList<Long>)session.getAttribute("recentlyViewProductNo");

@@ -39,36 +39,52 @@ import com.koreait.dooboo.member.dto.MemberDTO;
 @Controller
 public class MemberController {
 
-	@Autowired
 	private SqlSession sqlSession;
-	@Autowired
 	private JoinCommand joinCommand;
-	@Autowired
 	private LoginCommand loginCommand;
-	@Autowired
 	private LogOutCommand logOutCommand;
-	@Autowired
 	private DeleteCommand deleteCommand;
-	@Autowired
 	private NaverLoginBO naverLoginBO;
-	@Autowired
 	private UpdateInfoCommand updateInfoCommand;
-	@Autowired
 	private CurrentPasswordCheckCommand currentPasswordCheckCommand;
-	@Autowired
 	private UpdatePasswordCommand updatePasswordCommand;
-	@Autowired
 	private UpdateContactCommand updateContactCommand;
-	@Autowired
 	private FindIdCommand findIdCommand;
-	@Autowired
 	private SendTempPasswordEmailCommand sendTempPasswordEmailCommand;
-	@Autowired
 	private IdCheckCommand idCheckCommand;
-	@Autowired
 	private MyPageCommand selectMyFavoriteProductList;
-	@Autowired
 	private LocationCheckCommand locationCheckCommand;
+	
+	
+	
+	@Autowired
+	public MemberController(SqlSession sqlSession, JoinCommand joinCommand, LoginCommand loginCommand,
+			LogOutCommand logOutCommand, DeleteCommand deleteCommand, NaverLoginBO naverLoginBO,
+			UpdateInfoCommand updateInfoCommand, CurrentPasswordCheckCommand currentPasswordCheckCommand,
+			UpdatePasswordCommand updatePasswordCommand, UpdateContactCommand updateContactCommand,
+			FindIdCommand findIdCommand, SendTempPasswordEmailCommand sendTempPasswordEmailCommand,
+			IdCheckCommand idCheckCommand, MyPageCommand selectMyFavoriteProductList,
+			LocationCheckCommand locationCheckCommand) {
+		super();
+		this.sqlSession = sqlSession;
+		this.joinCommand = joinCommand;
+		this.loginCommand = loginCommand;
+		this.logOutCommand = logOutCommand;
+		this.deleteCommand = deleteCommand;
+		this.naverLoginBO = naverLoginBO;
+		this.updateInfoCommand = updateInfoCommand;
+		this.currentPasswordCheckCommand = currentPasswordCheckCommand;
+		this.updatePasswordCommand = updatePasswordCommand;
+		this.updateContactCommand = updateContactCommand;
+		this.findIdCommand = findIdCommand;
+		this.sendTempPasswordEmailCommand = sendTempPasswordEmailCommand;
+		this.idCheckCommand = idCheckCommand;
+		this.selectMyFavoriteProductList = selectMyFavoriteProductList;
+		this.locationCheckCommand = locationCheckCommand;
+	}
+	
+	
+
 	@GetMapping("m.joinPage")
 	public String joinPage() {
 		return "member/join";
