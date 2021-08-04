@@ -24,7 +24,7 @@ public class NaverLoginBO {
 		private final static String CLIENT_SECRET = "L056DR2t_L";
 		//private final static String REDIRECT_URI = "http://localhost:9090/callback";
 		private final static String SESSION_STATE = "oauth_state";
-		private final static String REDIRECT_URI_MainServer = "http://sih8859.iptime.org:9099/callback";
+		private final static String REDIRECT_URI_MainServer = "http://sih8859.iptime.org:8081/callback";
 		/* 프로필 조회 API URL */
 		private final static String PROFILE_API_URL = "https://openapi.naver.com/v1/nid/me";
 		/* 네이버 아이디로 인증 URL 생성 Method */

@@ -23,7 +23,7 @@ public class Kakao_RestApi {
 	private final static String client_id ="d5a58c13cc435c23f765c015c6b775d2";
 	//private final static String redirect_uri ="http://localhost:9090/kakao";
 	//private final static String client_id_MainServer ="a085a1ba1dcb932b236d6fc2bb10b05a";
-	private final static String redirect_uri_MainServer ="http://sih8859.iptime.org:9099/kakao";
+	private final static String redirect_uri_MainServer ="http://sih8859.iptime.org:8081/kakao";
 	
 	public static String getRedirectURL() {
 		return"https://kauth.kakao.com/oauth/authorize?client_id="+client_id+"&redirect_uri="+redirect_uri_MainServer+"&response_type=code";
