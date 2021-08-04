@@ -115,10 +115,10 @@
 					<c:forEach	var="product" items="${productList }">
 						<div class="card product-link" data-productno="${product.productNo }">
 							<c:if test="${product.images eq null }">
-								<img src="resources/image/noimage.png" class="card-img-top" alt="...">
+								<img src="resources/image/noimage.png" class="card-img-top" alt="..." style="height: 120px;">
 							</c:if>
 							<c:if test="${product.images ne null }">
-								<img src="${STATIC_IMAGE_ROOT}${product.images.split(',')[0]}" class="card-img-top" alt="...">
+								<img src="${STATIC_IMAGE_ROOT}${product.images.split(',')[0]}" class="card-img-top" alt="..." style="height: 120px;">
 							</c:if>
 							<div class="card-body">
 								<h5 class="card-title">${product.title }</h5>
