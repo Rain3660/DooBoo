@@ -172,7 +172,7 @@
 			width: 50%; 
 			margin: 0 auto;
 			display: flex;
-			justify-content: space-between;
+			justify-content: center;
 			text-align: center;
 		}
 		table {
